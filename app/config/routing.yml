@@ -1,0 +1,5 @@
+waldo_open_id_connect_provider:
+    resource: "@WaldoOpenIdConnectProviderBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
