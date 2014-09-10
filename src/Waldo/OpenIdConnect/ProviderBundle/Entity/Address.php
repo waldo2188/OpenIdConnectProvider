@@ -56,12 +56,12 @@ class Address
     /**
      * Address
      * 
-     * @param type $formatted
-     * @param type $streetAddress
-     * @param type $locality
-     * @param type $region
-     * @param type $postalCode
-     * @param type $country
+     * @param string $formatted
+     * @param string $streetAddress
+     * @param string $locality
+     * @param string $region
+     * @param string $postalCode
+     * @param string $country
      */
     public function __construct($formatted = null, $streetAddress = null,
             $locality = null, $region = null, $postalCode = null, $country = null)
