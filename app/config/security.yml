@@ -1,4 +1,9 @@
 security:
+    encoders:
+        Waldo\OpenIdConnect\ProviderBundle\Entity\Account: 
+            algorithm: bcrypt
+            cost: 12
+        
     providers:
         in_memory:
             memory: ~
