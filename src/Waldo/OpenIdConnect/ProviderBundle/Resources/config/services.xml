@@ -4,17 +4,28 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
+    
     <parameters>
-        <parameter key="waldo_open_id_connect_provider.example.class">Waldo\OpenIdConnect\ProviderBundle\Example</parameter>
+        <!--  Endpoint  -->
+        <parameter key="waldo_oic_p.endpoint.authorization.class">Waldo\OpenIdConnect\ProviderBundle\Services\AuthorizationEndpoint</parameter>
+        
+        <!--  Validation  -->
+        <parameter key="waldo_oic_p.validator.authentication.class">Waldo\OpenIdConnect\ProviderBundle\Constraints\AuthenticationRequestValidator</parameter>
+        
     </parameters>
 
     <services>
-        <service id="waldo_open_id_connect_provider.example" class="%waldo_open_id_connect_provider.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        
+        <service id="waldo_oic_p.endpoint.authorization" class="%waldo_oic_p.endpoint.authorization.class%">
+            <argument type="service" id="security.context" />
+            <argument type="service" id="session" />
+            <argument type="service" id="waldo_oic_p.validator.authentication" />
         </service>
+        
+        <service id="waldo_oic_p.validator.authentication" class="%waldo_oic_p.validator.authentication.class%">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+        </service>
+        
     </services>
-    -->
+    
 </container>

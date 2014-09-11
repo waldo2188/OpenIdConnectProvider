@@ -25,4 +25,13 @@ class WaldoOpenIdConnectProviderExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getAlias()
+    {
+        return 'waldo_oic_p';
+    }
+    
 }
