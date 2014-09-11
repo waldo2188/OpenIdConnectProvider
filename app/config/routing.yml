@@ -1,3 +1,6 @@
+waldo_open_id_connect_provider_login_check:
+    resource: "@WaldoOpenIdConnectProviderBundle/Resources/config/routing/routing.xml"
+
 waldo_open_id_connect_provider:
     resource: "@WaldoOpenIdConnectProviderBundle/Controller/"
     type:     annotation

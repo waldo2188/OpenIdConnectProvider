@@ -4,14 +4,26 @@ security:
             algorithm: bcrypt
             cost: 12
         
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
+
     providers:
-        in_memory:
-            memory: ~
+        accounts:
+            entity: { class: WaldoOpenIdConnectProviderBundle:Account, property: username }
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        default:
+        authenticationArea:
+            pattern:   ^/authentication/
             anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login_check
+                
+    access_control:
+        - { path: ^/authentication/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/authentication/, roles: ROLE_USER }

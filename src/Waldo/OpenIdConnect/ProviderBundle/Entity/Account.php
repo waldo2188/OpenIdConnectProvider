@@ -5,6 +5,7 @@ namespace Waldo\OpenIdConnect\ProviderBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * Account implement standard Claims
@@ -16,7 +17,7 @@ use Doctrine\Common\Collections\Collection;
  * @ORM\Table(name="account")
  * @ORM\HasLifecycleCallbacks
  */
-class Account
+class Account implements AdvancedUserInterface, \Serializable
 {
 
     /**
@@ -39,6 +40,20 @@ class Account
      * @var string $username Username used by enduser to log in
      */
     protected $username;
+
+    /**
+     * @ORM\Column(name="salt", type="string", length=255, nullable=true)
+     * 
+     * @var string $salt Salt for use for encode password
+     */
+    protected $salt;
+
+    /**
+     * @ORM\Column(name="roles", type="array", nullable=true)
+     * 
+     * @var string $roles Roles defined for enduser
+     */
+    protected $roles;
 
     /**
      * @ORM\Column(name="password", type="string", length=255, nullable=true)
@@ -242,7 +257,7 @@ class Account
 
     public function __construct()
     {
-        
+        $this->roles = array();
     }
 
     /**
@@ -834,7 +849,7 @@ class Account
             }
         } elseif ($items instanceof Token) {
             $this->addToken($items);
-        } elseif($items === null) {
+        } elseif ($items === null) {
             $this->tokenList = new ArrayCollection();
         } else {
             throw new \Exception('$items must be an instance of Token or Collection');
@@ -852,9 +867,129 @@ class Account
         return $this->tokenList;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function eraseCredentials()
+    {
+        
+    }
+
+    /**
+     * setRoles
+     * 
+     * @param array $roles
+     * @return \Waldo\OpenIdConnect\ProviderBundle\Entity\Account
+     */
+    public function setRoles(array $roles)
+    {
+        $this->roles = $roles;
+        return $this;
+    }
+
+    /**
+     * addRole
+     * 
+     * @param string $role
+     * @return \Waldo\OpenIdConnect\ProviderBundle\Entity\Account
+     */
+    public function addRole($role)
+    {
+        if (!in_array($role, $this->roles)) {
+            $this->roles[] = $role;
+        }
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * setSalt
+     * 
+     * @param string $salt
+     * @return \Waldo\OpenIdConnect\ProviderBundle\Entity\Account
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isAccountNonExpired()
+    {
+        return $this->expiration < new \DateTime('now');
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isAccountNonLocked()
+    {
+        return !$this->locked;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
     public function __toString()
     {
         return $this->username;
+    }
+
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->enabled,
+            $this->locked
+        ));
+    }
+
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list (
+                $this->id,
+                $this->username,
+                $this->enabled,
+                $this->locked
+                ) = unserialize($serialized);
     }
 
 }

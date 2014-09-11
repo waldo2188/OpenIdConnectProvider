@@ -1,0 +1,27 @@
+{% extends "WaldoOpenIdConnectProviderBundle::base.html.twig" %}
+
+{% block title %}{% trans %}Login{% endtrans %}{% endblock title %}
+
+{% block bodyContent %}
+    {% if error %}
+        <div>{{ error.message|trans }}</div>
+    {% endif %}
+    
+    <div>
+        <h2>{% trans %}APPLICATION NAME required you to be authenticated{% endtrans %}</h2>
+        {# reliyng Partiy's logo #}
+        {# reliyng Partiy's name #}
+        {# reliyng Partiy's tos #}
+        {# reliyng Partiy's policy #}
+    </div>
+    
+    <form action="{{ path('login_check') }}" method="post">
+        <label for="username">{% trans %}Username:{% endtrans %}</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+        <label for="password">{% trans %}Password:{% endtrans %}</label>
+        <input type="password" id="password" name="_password" />
+
+        <input type="submit" name="login" />
+    </form>
+{% endblock bodyContent %}

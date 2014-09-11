@@ -51,6 +51,7 @@ class UserAccountData extends ContainerAware implements FixtureInterface
                         )
                         ->setEnabled(true)
                         ->setLocked(false)
+                        ->setRoles(array("ROLE_USER"))
                 ;
                 
                 $this->encodePassword($user);
