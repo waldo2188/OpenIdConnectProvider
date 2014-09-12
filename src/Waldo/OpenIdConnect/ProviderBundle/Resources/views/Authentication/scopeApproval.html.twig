@@ -1,0 +1,25 @@
+{% extends "WaldoOpenIdConnectProviderBundle::base.html.twig" %}
+
+{% block title %}{% trans %}Scope Approval{% endtrans %}{% endblock title %}
+
+{% block bodyContent %}
+    <h2>{{ client.clientName }}</h2>
+    
+    <h3>Information claimed</h3>
+    <ul>
+    {% for key, info in userinfos %}
+        {% if key == 'updateAt' or key == 'birthdate' %}
+        <li>{{ key }}: {{ info|date("m/d/Y") }}</li>
+        {% else %}
+        <li>{{ key }}: {{ info }}</li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+
+    {{ form_start(form) }}
+        {{ form_row(form.cancel) }}
+        {{ form_row(form.accept) }}
+    {{ form_end(form) }}
+
+
+{% endblock bodyContent %}

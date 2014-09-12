@@ -20,6 +20,11 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 class Account implements AdvancedUserInterface, \Serializable
 {
 
+    const SCOPE_PROFILE = 'profile';
+    const SCOPE_EMAIL = 'email';
+    const SCOPE_ADDRESS = 'address';
+    const SCOPE_PHONE = 'phone';
+    
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -255,6 +260,32 @@ class Account implements AdvancedUserInterface, \Serializable
      */
     protected $address;
 
+    public static $scopeProfile = array(
+                'name',
+                'givenName',
+                'familyName',
+                'middleName',
+                'nickname',
+                'preferedUsername',
+                'profile',
+                'picture',
+                'website',
+                'gender',
+                'birthdate',
+                'zoneInfo',
+                'locale',
+                'updateAt'
+                );
+            
+    public static  $scopeEmail = array(
+                'email',
+                'emailVerified'
+            );
+    
+    public static  $scopePhone = array('phoneNumber', 'phoneNumberVerified');
+    
+    public static  $scopeAddress = array('address');
+    
     public function __construct()
     {
         $this->roles = array();

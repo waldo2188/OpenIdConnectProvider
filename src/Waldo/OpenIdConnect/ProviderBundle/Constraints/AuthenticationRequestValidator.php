@@ -57,9 +57,9 @@ class AuthenticationRequestValidator
         if($client === null) {
             throw new AuthenticationRequestException('client_id not found', 'unauthorized_client');
         }
-
+        
         // Check if redirect_uri is a valide one
-        if(in_array($authentication->getRedirectUri(), $client->getRedirectUris())) {
+        if(!in_array($authentication->getRedirectUri(), $client->getRedirectUris())) {
             throw new AuthenticationRequestException('no matching request_uri', 'invalid_request');
         }
         

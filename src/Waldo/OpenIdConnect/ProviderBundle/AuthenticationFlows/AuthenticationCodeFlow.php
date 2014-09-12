@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Http\HttpUtils;
 use Doctrine\ORM\EntityManager;
 
 /**
@@ -32,25 +33,31 @@ class AuthenticationCodeFlow
      */
     protected $em;
 
-    public function __construct(SecurityContext $securityContext, Session $session, EntityManager $em)
+    /**
+     * @var HttpUtils 
+     */
+    protected $httpUtils;
+
+    public function __construct(SecurityContext $securityContext,
+            Session $session, EntityManager $em,
+            HttpUtils $httpUtils)
     {
         $this->securityContext = $securityContext;
         $this->session = $session;
         $this->em = $em;
+        $this->httpUtils = $httpUtils;
     }
 
     public function handle(Authentication $authentication)
     {
         
-        $this->checkUser($authentication);
+        $result = $this->checkUser($authentication);
         
-        echo "<pre>AuthenticationCodeFlow handle:";
-        var_dump($authentication);
-        echo "</pre>";
+        if($result instanceof RedirectResponse){
+            return $result;
+        }
 
-
-
-        exit;
+        //TODO generate code and redirect to OIC RP
         
     }
 
@@ -62,12 +69,11 @@ class AuthenticationCodeFlow
         if($this->securityContext->getToken() == null)
         {
             $needAuthent = true;
-        // TODO need to authent enduser    
         }
         
+        // Check if user is well authenticated
         if(!$this->securityContext->getToken()->isAuthenticated()) {
             $needAuthent = true;
-        // TODO need to authent enduser    
         }
        
         // Check max_age
@@ -79,31 +85,33 @@ class AuthenticationCodeFlow
             
             if($diff->s > $authentication->getMaxAge()) {
                 $needAuthent = true;
-                // TODO need to authent enduser
             }
         }
         
+        
         if($authentication->getPrompt() === Authentication::PROMPT_NONE && $needAuthent === true) {
-            //TODO throw error code will typically be login_required, interaction_required, or another code defined 
+            throw new AuthenticationRequestException('enduser need to login', 'login_required');    
         }
         
         if($authentication->getPrompt() === Authentication::PROMPT_LOGIN) {
             $needAuthent = true;
         }
-        
-        if($authentication->getPrompt() === Authentication::PROMPT_CONSENT && $needAuthent === false) {
-            //TODO redirect to the scope page
+                
+        if($authentication->getPrompt() === Authentication::PROMPT_SELECT_ACCOUNT) {
+            throw new AuthenticationRequestException('enduser need to select an account', 'account_selection_required');
         }
         
-        if($authentication->getPrompt() === Authentication::PROMPT_SELECT_ACCOUNT) {
-            //TODO throw return an error, typically account_selection_required. 
+        if($authentication->getPrompt() === Authentication::PROMPT_CONSENT && $needAuthent === false) {
+            return $this->httpUtils->createRedirectResponse(new Request(), "oicp_authentication_scope");
         }
         
         if($needAuthent === true) {
             $this->securityContext->setToken(null);
+            $this->session->set('oicp.authentication.flow.code', $authentication);
+            return $this->httpUtils->createRedirectResponse(new Request(), "login");            
         }
         
-        
+        return true;
     }
     
 }

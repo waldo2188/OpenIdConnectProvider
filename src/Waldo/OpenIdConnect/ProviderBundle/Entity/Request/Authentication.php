@@ -6,17 +6,17 @@ namespace Waldo\OpenIdConnect\ProviderBundle\Entity\Request;
  * 
  * @see http://openid.net/specs/openid-connect-core-1_0.html#AuthRequest
  */
-class Authentication
+class Authentication implements \Serializable
 {
 
     const AUTHORISATION_CODE_FLOW = "Authorization Code Flow";    
     const IMPLICIT_FLOW = "Implicit Flow";
     const HYBRID_FLOW = "Hybrid Flow";
     
-    const PROMPT_NONE = "prompt none";
-    const PROMPT_LOGIN = "prompt login";
-    const PROMPT_CONSENT = "prompt consent";
-    const PROMPT_SELECT_ACCOUNT = "prompt select_account";
+    const PROMPT_NONE = "none";
+    const PROMPT_LOGIN = "login";
+    const PROMPT_CONSENT = "consent";
+    const PROMPT_SELECT_ACCOUNT = "select_account";
 
 
     /**
@@ -516,4 +516,49 @@ class Authentication
         
         return null;
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->clientId,
+            $this->display,
+            $this->idTokenHint,
+            $this->loginHint,
+            $this->maxAge,
+            $this->nonce,
+            $this->prompt,
+            $this->redirectUri,
+            $this->responseMode,
+            $this->responseType,
+            $this->scope,
+            $this->state,
+            $this->uiLocales
+        ));
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function unserialize($serialized)
+    {
+        list (
+                $this->clientId,
+            $this->display,
+            $this->idTokenHint,
+            $this->loginHint,
+            $this->maxAge,
+            $this->nonce,
+            $this->prompt,
+            $this->redirectUri,
+            $this->responseMode,
+            $this->responseType,
+            $this->scope,
+            $this->state,
+            $this->uiLocales
+                ) = unserialize($serialized);
+    }
+
 }

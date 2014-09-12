@@ -18,6 +18,9 @@
         <!--  Listener  -->
         <parameter key="waldo_oic_p.listener.login.class">Waldo\OpenIdConnect\ProviderBundle\EventListener\LoginListener</parameter>
         
+        <!--  Utils  -->
+        <parameter key="waldo_oic_p.utils.scope.class">Waldo\OpenIdConnect\ProviderBundle\Services\ScopeUtils</parameter>
+        
     </parameters>
 
     <services>
@@ -31,6 +34,7 @@
             <argument type="service" id="security.context" />
             <argument type="service" id="session" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="security.http_utils" />
         </service>
         
         <service id="waldo_oic_p.validator.authentication" class="%waldo_oic_p.validator.authentication.class%">
@@ -40,6 +44,9 @@
         
         <service id="waldo_oic_p.listener.login" class="%waldo_oic_p.listener.login.class%">
             <tag name="kernel.event_subscriber" />
+        </service>
+        
+        <service id="waldo_oic_p.utils.scope" class="%waldo_oic_p.utils.scope.class%">
         </service>
         
     </services>

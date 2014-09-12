@@ -2,6 +2,7 @@
 
 namespace Waldo\OpenIdConnect\ProviderBundle\Controller;
 
+use Waldo\OpenIdConnect\ProviderBundle\Form\Type\ScopeApprovalType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -47,16 +48,24 @@ class AuthenticationController extends Controller
      * @Route("/scope", name="oicp_authentication_scope")
      * @Template()
      */
-    public function scopeAppovalAction(Request $request)
+    public function scopeApprovalAction(Request $request)
     {
+        $user = $this->get('security.context')->getToken()->getUser();
+        $authentication = $request->getSession()->get('oicp.authentication.flow.code');
         
+        $client = $this->getDoctrine()->getManager()->getRepository("WaldoOpenIdConnectProviderBundle:Client")
+                ->findOneByClientId($authentication->getClientId());
         
+        $userInfo = $this->get('waldo_oic_p.utils.scope')
+                ->getUserinfoForScopes($user, $authentication);
         
-        echo "<pre>:";
-        var_dump("secured");
-        var_dump($this->get('security.context')->getToken());
-        echo "</pre>";
-            
+        $form = $this->createForm(new ScopeApprovalType());
+               
+        return array(
+            'userinfos' => $userInfo,
+            'client' => $client,
+            'form' => $form->createView()
+        );
     }
 
 }
