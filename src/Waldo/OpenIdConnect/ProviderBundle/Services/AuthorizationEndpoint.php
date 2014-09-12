@@ -5,10 +5,9 @@ namespace Waldo\OpenIdConnect\ProviderBundle\Services;
 use Waldo\OpenIdConnect\ProviderBundle\Entity\Request\Authentication;
 use Waldo\OpenIdConnect\ProviderBundle\Constraints\AuthenticationRequestValidator;
 use Waldo\OpenIdConnect\ProviderBundle\Exception\AuthenticationRequestException;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Waldo\OpenIdConnect\ProviderBundle\AuthenticationFlows\AuthenticationCodeFlow;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Security\Core\SecurityContext;
 
 /**
  * AuthorizationEndpoint
@@ -19,31 +18,21 @@ class AuthorizationEndpoint
 {
 
     /**
-     * @var SecurityContext 
-     */
-    protected $securityContext;
-
-    /**
-     * @var Session 
-     */
-    protected $session;
-
-    /**
      * @var AuthenticationRequestValidator 
      */
     protected $authenticationRequestValidator;
-
+    
     /**
-     * 
-     * @param \Symfony\Component\Security\Core\SecurityContext $securityContext
-     * @param \Symfony\Component\HttpFoundation\Session\Session $session
+     * @var AuthenticationCodeFlow 
      */
-    public function __construct(SecurityContext $securityContext, Session $session,
-            AuthenticationRequestValidator $authenticationRequestValidator)
+    protected $authenticationCodeFlow;
+
+
+    public function __construct(AuthenticationRequestValidator $authenticationRequestValidator,
+            AuthenticationCodeFlow $authenticationCodeFlow)
     {
-        $this->securityContext = $securityContext;
-        $this->session = $session;
         $this->authenticationRequestValidator = $authenticationRequestValidator;
+        $this->authenticationCodeFlow = $authenticationCodeFlow;
     }
 
     public function handleRequest(Request $request)
@@ -52,6 +41,20 @@ class AuthorizationEndpoint
         
         try{
             $this->authenticationRequestValidator->validate($authentication);
+            
+            switch ($authentication->getFlowType()) {
+                case Authentication::AUTHORISATION_CODE_FLOW:
+                    return $this->authenticationCodeFlow->handle($authentication);
+                    break;
+                case Authentication::IMPLICIT_FLOW:
+                case Authentication::HYBRID_FLOW:
+                    throw new AuthenticationRequestException("authentication flow is not yet implemented", "invalid_request");
+                    break;
+                default :
+                    throw new AuthenticationRequestException("unknow authentication flow", "invalid_request");
+                    break;
+            }
+            
         } catch (AuthenticationRequestException $ex) {
             
             if($authentication->getRedirectUri() != null) {             
@@ -63,9 +66,9 @@ class AuthorizationEndpoint
             
             throw $ex;
         }
-        
-        
+                
     }
+    
     
     /**
      * Extract Authentication parameters set in the query
@@ -82,9 +85,10 @@ class AuthorizationEndpoint
      */
     protected function extractAutenticationFromRequest(Request $request)
     {
+        // TODO add a default Max Age if not set
         $fieldMap = array(
             'scope' => 'scope',
-            'response_type' => 'responseRype',
+            'response_type' => 'responseType',
             'client_id' => 'clientId',
             'redirect_uri' => 'redirectUri',
             'state' => 'state',

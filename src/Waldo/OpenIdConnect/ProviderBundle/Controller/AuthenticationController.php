@@ -50,9 +50,12 @@ class AuthenticationController extends Controller
     public function scopeAppovalAction(Request $request)
     {
         
+        
+        
         echo "<pre>:";
         var_dump("secured");
-        echo "</pre>";exit;
+        var_dump($this->get('security.context')->getToken());
+        echo "</pre>";
             
     }
 

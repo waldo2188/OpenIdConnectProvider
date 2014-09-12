@@ -69,6 +69,10 @@ class AuthenticationRequestValidator
                     'invalid_response_type');
         }
         
+        if($authentication->getFlowType() === null) {
+            throw new AuthenticationRequestException("unknow authentication flow", "invalid_request");
+        }
+        
         // if no nonce and response_type contain token or id_token
         if( ($authentication->getNonce() == null || $authentication->getNonce() == "") 
                 && (in_array('token', $authentication->getResponseType()) 

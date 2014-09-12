@@ -18,7 +18,7 @@ security:
             security: false
 
         authenticationArea:
-            pattern:   ^/authentication/
+            pattern:   ^/
             anonymous: ~
             form_login:
                 login_path: login
@@ -26,4 +26,5 @@ security:
                 
     access_control:
         - { path: ^/authentication/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/authorize, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/authentication/, roles: ROLE_USER }

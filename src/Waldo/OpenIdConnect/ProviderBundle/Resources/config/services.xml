@@ -9,21 +9,37 @@
         <!--  Endpoint  -->
         <parameter key="waldo_oic_p.endpoint.authorization.class">Waldo\OpenIdConnect\ProviderBundle\Services\AuthorizationEndpoint</parameter>
         
+        <!--  Authentication Flows  -->
+        <parameter key="waldo_oic_p.authflow.code.class">Waldo\OpenIdConnect\ProviderBundle\AuthenticationFlows\AuthenticationCodeFlow</parameter>
+        
         <!--  Validation  -->
         <parameter key="waldo_oic_p.validator.authentication.class">Waldo\OpenIdConnect\ProviderBundle\Constraints\AuthenticationRequestValidator</parameter>
+        
+        <!--  Listener  -->
+        <parameter key="waldo_oic_p.listener.login.class">Waldo\OpenIdConnect\ProviderBundle\EventListener\LoginListener</parameter>
         
     </parameters>
 
     <services>
         
         <service id="waldo_oic_p.endpoint.authorization" class="%waldo_oic_p.endpoint.authorization.class%">
+            <argument type="service" id="waldo_oic_p.validator.authentication" />
+            <argument type="service" id="waldo_oic_p.authflow.code" />
+        </service>
+        
+        <service id="waldo_oic_p.authflow.code" class="%waldo_oic_p.authflow.code.class%">
             <argument type="service" id="security.context" />
             <argument type="service" id="session" />
-            <argument type="service" id="waldo_oic_p.validator.authentication" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
         </service>
         
         <service id="waldo_oic_p.validator.authentication" class="%waldo_oic_p.validator.authentication.class%">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
+        </service>
+        
+        
+        <service id="waldo_oic_p.listener.login" class="%waldo_oic_p.listener.login.class%">
+            <tag name="kernel.event_subscriber" />
         </service>
         
     </services>

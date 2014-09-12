@@ -9,6 +9,16 @@ namespace Waldo\OpenIdConnect\ProviderBundle\Entity\Request;
 class Authentication
 {
 
+    const AUTHORISATION_CODE_FLOW = "Authorization Code Flow";    
+    const IMPLICIT_FLOW = "Implicit Flow";
+    const HYBRID_FLOW = "Hybrid Flow";
+    
+    const PROMPT_NONE = "prompt none";
+    const PROMPT_LOGIN = "prompt login";
+    const PROMPT_CONSENT = "prompt consent";
+    const PROMPT_SELECT_ACCOUNT = "prompt select_account";
+
+
     /**
      * REQUIRED. OpenID Connect requests MUST contain the openid scope value.
      * If the openid scope value is not present, the behavior is entirely unspecified.
@@ -212,12 +222,19 @@ class Authentication
     }
 
     /**
-     * 
-     * @return boolean
+     * Return true if valid, string with unknown response type otherwise
+     * @return boolean | string
      */
     public function isResponseTypeValid()
     {
-        return in_array($this->responseType, $this->knowResponseTypes);
+        $valid = null;
+        foreach ($this->responseType as $responsType) {
+            if(!in_array($responsType, $this->knowResponseTypes)) {
+                $valid .= $responsType . " ";
+            }
+        }
+        
+        return $valid === null ? true : $valid;
     }
 
     /**
@@ -459,5 +476,44 @@ class Authentication
     {
         $this->loginHint = $loginHint;
         return $this;
+    }
+    
+    /**
+     * Get the flow type: Authorization Code Flow, Implicit Flow, Hybrid Flow
+     * 
+     * @see http://openid.net/specs/openid-connect-core-1_0.html#Authentication
+     * @return null | string
+     */
+    public function getFlowType()
+    {       
+        if(count($this->responseType) == 1 && in_array('code', $this->responseType)) {
+            return self::AUTHORISATION_CODE_FLOW;
+        }
+        
+        if(count($this->responseType) == 1 && in_array('id_token', $this->responseType)) {
+            return self::IMPLICIT_FLOW;
+        }
+        
+        if(count($this->responseType) == 2
+                && in_array('id_token', $this->responseType)
+                && in_array('token', $this->responseType)) {
+            return self::IMPLICIT_FLOW;
+        }
+        
+        if(count($this->responseType) == 2
+                && in_array('code', $this->responseType)
+                && (in_array('id_token', $this->responseType) 
+                        || in_array('token', $this->responseType))) {
+            return self::HYBRID_FLOW;
+        }
+        
+        if(count($this->responseType) == 3
+                && in_array('code', $this->responseType)
+                && in_array('id_token', $this->responseType) 
+                && in_array('token', $this->responseType)) {
+            return self::HYBRID_FLOW;
+        }
+        
+        return null;
     }
 }

@@ -528,10 +528,10 @@ class Client
     /**
      * setClientIdIssedAt
      * 
-     * @param \DtaeTime $clientIdIssedAt
+     * @param \DateTime $clientIdIssedAt
      * @return \Waldo\OpenIdConnect\ProviderBundle\Entity\Client
      */
-    public function setClientIdIssedAt(\DtaeTime $clientIdIssedAt)
+    public function setClientIdIssedAt(\DateTime $clientIdIssedAt)
     {
         $this->clientIdIssedAt = $clientIdIssedAt;
         return $this;
