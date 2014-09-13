@@ -3,6 +3,7 @@ security:
         Waldo\OpenIdConnect\ProviderBundle\Entity\Account: 
             algorithm: bcrypt
             cost: 12
+        Waldo\OpenIdConnect\ProviderBundle\Entity\Client: plaintext
         
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
@@ -11,11 +12,20 @@ security:
     providers:
         accounts:
             entity: { class: WaldoOpenIdConnectProviderBundle:Account, property: username }
+        clients:
+            entity: { class: WaldoOpenIdConnectProviderBundle:Client, property: clientId }
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        tokenArea:
+            pattern:   ^/token
+            anonymous: ~
+            provider: clients
+            http_basic:
+                realm: "Secured Area"
 
         authenticationArea:
             pattern:   ^/
@@ -27,6 +37,7 @@ security:
                 default_target_path: /authentication/scope
                 
     access_control:
+        - { path: ^/token, roles: ROLE_OIC_CLIENT }
         - { path: ^/authentication/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/authorize, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/authentication/, roles: ROLE_USER }

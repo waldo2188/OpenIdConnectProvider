@@ -5,7 +5,7 @@ namespace Waldo\OpenIdConnect\ProviderBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Waldo\OpenIdConnect\ProviderBundle\Entity\AccountInterface;
 
 /**
  * Account implement standard Claims
@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  * @ORM\Table(name="account")
  * @ORM\HasLifecycleCallbacks
  */
-class Account implements AdvancedUserInterface, \Serializable
+class Account implements AccountInterface, \Serializable
 {
 
     const SCOPE_PROFILE = 'profile';
@@ -213,6 +213,15 @@ class Account implements AdvancedUserInterface, \Serializable
      * @var \DateTime $updateAt
      */
     protected $updateAt;
+    
+    /**
+     * Scope: profile
+     * 
+     * @ORM\Column(name="last_login_at", type="datetime", nullable=true)
+     * 
+     * @var \DateTime $lastLoginAt
+     */
+    protected $lastLoginAt;
 
     /**
      * Scope: email
@@ -550,6 +559,15 @@ class Account implements AdvancedUserInterface, \Serializable
     }
 
     /**
+     * 
+     * @return \DateTime
+     */
+    public function getLastLoginAt()
+    {
+        return $this->lastLoginAt;
+    }
+
+    /**
      * setId
      * 
      * @param integer $id
@@ -846,6 +864,17 @@ class Account implements AdvancedUserInterface, \Serializable
     public function setUpdateAt(\DateTime $updateAt)
     {
         $this->updateAt = $updateAt;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param \DateTime $lastLoginAt
+     * @return \Waldo\OpenIdConnect\ProviderBundle\Entity\Account
+     */
+    public function setLastLoginAt(\DateTime $lastLoginAt)
+    {
+        $this->lastLoginAt = $lastLoginAt;
         return $this;
     }
 

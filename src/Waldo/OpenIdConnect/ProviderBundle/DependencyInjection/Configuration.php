@@ -18,11 +18,17 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('waldo_open_id_connect_provider');
+        $rootNode = $treeBuilder->root('waldo_oic_p');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->children()
+                ->scalarNode('base_url')->end()
+                // issuer is the URL of the OpenId Connect Provider
+                // This is needed for validate response of the OpenId Connect Provider
+                ->scalarNode('issuer')->cannotBeEmpty()->end()
+                
+        ;
+                                    
 
         return $treeBuilder;
     }

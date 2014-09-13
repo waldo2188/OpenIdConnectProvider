@@ -51,7 +51,12 @@ class AuthenticationController extends Controller
     public function scopeApprovalAction(Request $request)
     {
         $user = $this->get('security.context')->getToken()->getUser();
-        $authentication = $request->getSession()->get('oicp.authentication.flow.code');
+
+        $authenticationFlowManager = $this->get(
+                $request->getSession()->get('oicp.authentication.flow.manager')
+                );
+        
+        $authentication = $authenticationFlowManager->getAuthentication();
         
         $client = $this->getDoctrine()->getManager()->getRepository("WaldoOpenIdConnectProviderBundle:Client")
                 ->findOneByClientId($authentication->getClientId());
@@ -60,7 +65,22 @@ class AuthenticationController extends Controller
                 ->getUserinfoForScopes($user, $authentication);
         
         $form = $this->createForm(new ScopeApprovalType());
-               
+
+        if($request->isMethod("POST")) {
+            
+            $form->handleRequest($request);
+
+            if($form->get('cancel')->isClicked()) {
+                
+                return $authenticationFlowManager->handleCancel($authentication);
+                
+            } elseif ($form->get('accept')->isClicked()){
+                
+                return $authenticationFlowManager->handleAccept($authentication);
+                
+            }                   
+        }
+        
         return array(
             'userinfos' => $userInfo,
             'client' => $client,

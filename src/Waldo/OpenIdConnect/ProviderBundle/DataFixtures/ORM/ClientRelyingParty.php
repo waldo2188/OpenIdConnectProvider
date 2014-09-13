@@ -30,7 +30,7 @@ class ClientRelyingParty extends ContainerAware implements FixtureInterface
         $client
                 ->setClientId('my_client_id')
                 ->setClientName('My application name')
-                ->setClientSecret('my_client_secrtet')
+                ->setClientSecret('my_client_secret')
                 ->setRedirectUris(array('http://localhost/OIC-RP/web/app_dev.php/login_check'))
                 ->setContacts(array('contact@exemple.com <contactName contact>'))
                 ->setApplicationType("web")

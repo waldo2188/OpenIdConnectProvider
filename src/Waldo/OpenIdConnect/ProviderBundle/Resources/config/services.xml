@@ -8,6 +8,8 @@
     <parameters>
         <!--  Endpoint  -->
         <parameter key="waldo_oic_p.endpoint.authorization.class">Waldo\OpenIdConnect\ProviderBundle\Services\AuthorizationEndpoint</parameter>
+        <parameter key="waldo_oic_p.endpoint.token.class">Waldo\OpenIdConnect\ProviderBundle\Services\TokenEndpoint</parameter>
+        <parameter key="waldo_oic_p.endpoint.userinfo.class">Waldo\OpenIdConnect\ProviderBundle\Services\UserinfoEndpoint</parameter>
         
         <!--  Authentication Flows  -->
         <parameter key="waldo_oic_p.authflow.code.class">Waldo\OpenIdConnect\ProviderBundle\AuthenticationFlows\AuthenticationCodeFlow</parameter>
@@ -20,6 +22,8 @@
         
         <!--  Utils  -->
         <parameter key="waldo_oic_p.utils.scope.class">Waldo\OpenIdConnect\ProviderBundle\Services\ScopeUtils</parameter>
+        <parameter key="waldo_oic_p.helper.idtoken.class">Waldo\OpenIdConnect\ProviderBundle\Services\IdTokenHelper</parameter>
+        <parameter key="waldo_oic_p.helper.userinfo.class">Waldo\OpenIdConnect\ProviderBundle\Services\UserinfoHelper</parameter>
         
     </parameters>
 
@@ -28,6 +32,17 @@
         <service id="waldo_oic_p.endpoint.authorization" class="%waldo_oic_p.endpoint.authorization.class%">
             <argument type="service" id="waldo_oic_p.validator.authentication" />
             <argument type="service" id="waldo_oic_p.authflow.code" />
+        </service>
+        
+        <service id="waldo_oic_p.endpoint.token" class="%waldo_oic_p.endpoint.token.class%">
+            <argument type="service" id="security.context" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="waldo_oic_p.helper.idtoken" />
+        </service>
+        
+        <service id="waldo_oic_p.endpoint.userinfo" class="%waldo_oic_p.endpoint.userinfo.class%">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="waldo_oic_p.helper.userinfo" />
         </service>
         
         <service id="waldo_oic_p.authflow.code" class="%waldo_oic_p.authflow.code.class%">
@@ -43,10 +58,18 @@
         
         
         <service id="waldo_oic_p.listener.login" class="%waldo_oic_p.listener.login.class%">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
             <tag name="kernel.event_subscriber" />
         </service>
         
-        <service id="waldo_oic_p.utils.scope" class="%waldo_oic_p.utils.scope.class%">
+        <service id="waldo_oic_p.utils.scope" class="%waldo_oic_p.utils.scope.class%"></service>
+        
+        <service id="waldo_oic_p.helper.idtoken" class="%waldo_oic_p.helper.idtoken.class%">
+            <argument />
+        </service>
+        
+        <service id="waldo_oic_p.helper.userinfo" class="%waldo_oic_p.helper.userinfo.class%">
+            <argument />
         </service>
         
     </services>

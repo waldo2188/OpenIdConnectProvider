@@ -3,13 +3,14 @@
 namespace Waldo\OpenIdConnect\ProviderBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity() 
+ * @ORM\Entity(repositoryClass="Waldo\OpenIdConnect\ProviderBundle\EntityRepository\ClientRepository")
  * @ORM\Table(name="client")
  * @ORM\HasLifecycleCallbacks
  */
-class Client
+class Client implements UserInterface
 {
 
     /**
@@ -116,7 +117,7 @@ class Client
      * 
      * @var string $tokenEndpointAuthMethod (client_secret_basic, client_secret_post)
      */
-    protected $tokenEndpointAuthMethod;
+    protected $tokenEndpointAuthMethod = 'client_secret_basic';
 
     /**
      * @ORM\Column(name="token_endpoint_auth_signing_alg", type="string", length=255, nullable=true)
@@ -886,4 +887,29 @@ class Client
         return $this->tokenList;
     }
     
+    
+    public function eraseCredentials()
+    {    
+    }
+
+    public function getPassword()
+    {
+        return $this->getClientSecret();
+    }
+
+    public function getRoles()
+    {
+        return array('ROLE_OIC_CLIENT');
+    }
+
+    public function getSalt()
+    {
+        return '';
+    }
+
+    public function getUsername()
+    {
+        return $this->getClientId();
+    }
+
 }

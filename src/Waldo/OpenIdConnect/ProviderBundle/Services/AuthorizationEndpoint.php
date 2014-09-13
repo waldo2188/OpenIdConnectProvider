@@ -57,8 +57,11 @@ class AuthorizationEndpoint
             
         } catch (AuthenticationRequestException $ex) {
             
-            if($authentication->getRedirectUri() != null) {             
+            if($authentication->getRedirectUri() != null) {
                 $parameters = array('error' => $ex->getError(), 'error_description' => $ex->getMessage());
+                if($authentication->getState() != null) {
+                    $parameters['state'] = $authentication->getState();
+                }
                 $uri = Request::create($authentication->getRedirectUri(), 'GET', $parameters)->getUri();
                
                 return new RedirectResponse($uri);

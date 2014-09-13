@@ -5,7 +5,7 @@ namespace Waldo\OpenIdConnect\ProviderBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity() 
+ * @ORM\Entity(repositoryClass="Waldo\OpenIdConnect\ProviderBundle\EntityRepository\TokenRepository")
  * @ORM\Table(name="token")
  * @ORM\HasLifecycleCallbacks
  */
@@ -35,35 +35,56 @@ class Token
     protected $client;
 
     /**
-     * @ORM\Column(name="codeToken", type="string", length=255, nullable=true)
+     * @ORM\Column(name="code_token", type="string", length=255, nullable=true)
      * 
      * @var string $codeToken
      */
     protected $codeToken;
 
     /**
-     * @ORM\Column(name="accessToken", type="string", length=255, nullable=true)
+     * @ORM\Column(name="access_token", type="string", length=255, nullable=true)
      * 
      * @var string $accessToken
      */
     protected $accessToken;
 
     /**
-     * @ORM\Column(name="refreshToken", type="string", length=255, nullable=true)
+     * @ORM\Column(name="refresht_token", type="string", length=255, nullable=true)
      * 
      * @var string $refreshToken
      */
     protected $refreshToken;
 
     /**
-     * @ORM\Column(name="issedAt", type="datetime", length=255, nullable=true)
+     * @ORM\Column(name="scope", type="array", nullable=true)
      * 
-     * @var \DateTime $issedAt
+     * @var string $scope
      */
-    protected $issedAt;
+    protected $scope;
 
     /**
-     * @ORM\Column(name="expirationAt", type="datetime", length=255, nullable=true)
+     * @ORM\Column(name="redirect_uri", type="string", nullable=true)
+     * 
+     * @var string $redirectUri
+     */
+    protected $redirectUri;
+
+    /**
+     * @ORM\Column(name="nonce", type="string", nullable=true)
+     * 
+     * @var string $nonce
+     */
+    protected $nonce;
+
+    /**
+     * @ORM\Column(name="issued_at", type="datetime", length=255, nullable=true)
+     * 
+     * @var \DateTime $issuedAt
+     */
+    protected $issuedAt;
+
+    /**
+     * @ORM\Column(name="expiration_at", type="datetime", length=255, nullable=true)
      * 
      * @var \DateTime $expirationAt
      */
@@ -124,9 +145,9 @@ class Token
      * 
      * @return \DateTime 
      */
-    public function getIssedAt()
+    public function getIssuedAt()
     {
-        return $this->issedAt;
+        return $this->issuedAt;
     }
 
     /**
@@ -137,6 +158,33 @@ class Token
     public function getExpirationAt()
     {
         return $this->expirationAt;
+    }
+
+    /**
+     * 
+     * @return array
+     */
+    public function getScope()
+    {
+        return $this->scope;
+    }
+
+    /**
+     * 
+     * @return string
+     */
+    public function getRedirectUri()
+    {
+        return $this->redirectUri;
+    }
+
+    /**
+     * 
+     * @return string
+     */
+    public function getNonce()
+    {
+        return $this->nonce;
     }
 
     /**
@@ -169,7 +217,7 @@ class Token
      * @param string $codeToken
      * @return \Waldo\OpenIdConnect\ProviderBundle\Entity\Token
      */
-    public function setCodeToken($codeToken)
+    public function setCodeToken($codeToken = null)
     {
         $this->codeToken = $codeToken;
         return $this;
@@ -181,7 +229,7 @@ class Token
      * @param string $accessToken
      * @return \Waldo\OpenIdConnect\ProviderBundle\Entity\Token
      */
-    public function setAccessToken($accessToken)
+    public function setAccessToken($accessToken = null)
     {
         $this->accessToken = $accessToken;
         return $this;
@@ -193,7 +241,7 @@ class Token
      * @param string $refreshToken
      * @return \Waldo\OpenIdConnect\ProviderBundle\Entity\Token
      */
-    public function setRefreshToken($refreshToken)
+    public function setRefreshToken($refreshToken = null)
     {
         $this->refreshToken = $refreshToken;
         return $this;
@@ -205,9 +253,9 @@ class Token
      * @param \DateTime $issedAt
      * @return \Waldo\OpenIdConnect\ProviderBundle\Entity\Token
      */
-    public function setIssedAt(\DateTime $issedAt)
+    public function setIssuedAt(\DateTime $issedAt)
     {
-        $this->issedAt = $issedAt;
+        $this->issuedAt = $issedAt;
         return $this;
     }
 
@@ -223,5 +271,37 @@ class Token
         return $this;
     }
 
-}
+    /**
+     * 
+     * @param array $scope
+     * @return \Waldo\OpenIdConnect\ProviderBundle\Entity\Token
+     */
+    public function setScope(array $scope)
+    {
+        $this->scope = $scope;
+        return $this;
+    }
 
+    /**
+     * 
+     * @param string $redirectUri
+     * @return \Waldo\OpenIdConnect\ProviderBundle\Entity\Token
+     */
+    public function setRedirectUri($redirectUri)
+    {
+        $this->redirectUri = $redirectUri;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param string $nonce
+     * @return \Waldo\OpenIdConnect\ProviderBundle\Entity\Token
+     */
+    public function setNonce($nonce)
+    {
+        $this->nonce = $nonce;
+        return $this;
+    }
+
+}

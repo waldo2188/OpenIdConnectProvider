@@ -67,3 +67,7 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+waldo_oic_p:
+    base_url: http://localhost/OIC-P/web/app_dev.php
+    issuer: http://localhost/OIC-P/web/app_dev.php

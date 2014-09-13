@@ -5,6 +5,7 @@ namespace Waldo\OpenIdConnect\ProviderBundle\EventListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\SecurityEvents;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Description of LoginListener
@@ -13,7 +14,16 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
  */
 class LoginListener implements EventSubscriberInterface
 {
+    /**
+     * @var EntityManager
+     */
+    protected $em;
 
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
+    
     public static function getSubscribedEvents()
     {
         return array(
@@ -28,6 +38,12 @@ class LoginListener implements EventSubscriberInterface
             $event
                     ->getAuthenticationToken()
                     ->setAttribute("ioc.token.issuedAt", new \DateTime('now'));
+            
+            $user = $event->getAuthenticationToken()->getUser();
+            $user->setLastLoginAt(new \DateTime('now'));
+            
+            $this->em->persist($user);
+            $this->em->flush();                    
         }
     }
 
