@@ -2,6 +2,8 @@
 
 namespace Waldo\OpenIdConnect\ProviderBundle\Services;
 
+use Waldo\OpenIdConnect\ProviderBundle\Provider\JWKProvider;
+
 /**
  * AbstractTokenHelper
  *
@@ -12,14 +14,31 @@ class AbstractTokenHelper
     
     protected $options;
     
-    public function __construct($option)
+    /**
+     * @var JWKProvider
+     */
+    protected $jWKProvider;
+    
+    
+    public function __construct($option, JWKProvider $jWKProvider)
     {
         $this->options = $option;
+        $this->jWKProvider = $jWKProvider;
     }
     
     public function genererateSub($username)
     {
         return hash("sha256", $this->options['issuer'] . "#" . $username);
     }
-   
+
+    protected function sign($alg, $content)
+    {      
+        $jwt = new \JOSE_JWT($content);
+        $jws = $jwt->sign(
+                $this->jWKProvider->getPrivateKey(),
+                $alg
+                );
+        
+        return $jws->toString();
+    }
 }

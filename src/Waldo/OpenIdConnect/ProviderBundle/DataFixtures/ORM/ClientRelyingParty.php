@@ -34,6 +34,8 @@ class ClientRelyingParty extends ContainerAware implements FixtureInterface
                 ->setRedirectUris(array('http://localhost/OIC-RP/web/app_dev.php/login_check'))
                 ->setContacts(array('contact@exemple.com <contactName contact>'))
                 ->setApplicationType("web")
+                ->setUserinfoEncryptedResponseAlg("RS256")
+                ->setIdTokenEncryptedResponseAlg("RS512")
                 ;
         
         $manager->persist($client);

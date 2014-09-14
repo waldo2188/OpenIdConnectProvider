@@ -22,9 +22,12 @@
         
         <!--  Utils  -->
         <parameter key="waldo_oic_p.utils.scope.class">Waldo\OpenIdConnect\ProviderBundle\Services\ScopeUtils</parameter>
+        <parameter key="waldo_oic_p.helper.abstracttoken.class">Waldo\OpenIdConnect\ProviderBundle\Services\AbstractTokenHelper</parameter>
         <parameter key="waldo_oic_p.helper.idtoken.class">Waldo\OpenIdConnect\ProviderBundle\Services\IdTokenHelper</parameter>
         <parameter key="waldo_oic_p.helper.userinfo.class">Waldo\OpenIdConnect\ProviderBundle\Services\UserinfoHelper</parameter>
         
+        <!--  Provider  -->
+        <parameter key="waldo_oic_p.provider.jwk.class">Waldo\OpenIdConnect\ProviderBundle\Provider\JWKProvider</parameter>
     </parameters>
 
     <services>
@@ -64,12 +67,19 @@
         
         <service id="waldo_oic_p.utils.scope" class="%waldo_oic_p.utils.scope.class%"></service>
         
-        <service id="waldo_oic_p.helper.idtoken" class="%waldo_oic_p.helper.idtoken.class%">
+        <service id="waldo_oic_p.helper.abstracttoken" class="%waldo_oic_p.helper.abstracttoken.class%" abstract="true" >
             <argument />
+            <argument type="service" id="waldo_oic_p.provider.jwk" />
         </service>
         
-        <service id="waldo_oic_p.helper.userinfo" class="%waldo_oic_p.helper.userinfo.class%">
+        <service id="waldo_oic_p.helper.idtoken" class="%waldo_oic_p.helper.idtoken.class%" parent="waldo_oic_p.helper.abstracttoken" />
+        
+        <service id="waldo_oic_p.helper.userinfo" class="%waldo_oic_p.helper.userinfo.class%" parent="waldo_oic_p.helper.abstracttoken" />
+        
+        
+        <service id="waldo_oic_p.provider.jwk" class="%waldo_oic_p.provider.jwk.class%">
             <argument />
+            <argument type="string">%kernel.cache_dir%</argument>
         </service>
         
     </services>

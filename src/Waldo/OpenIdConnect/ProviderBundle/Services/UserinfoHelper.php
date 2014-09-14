@@ -40,10 +40,13 @@ class UserinfoHelper extends AbstractTokenHelper
                 
             }
         }
-        
-        
-        //TODO sign an crypt
-        
+
+        if($token->getClient()->getUserinfoEncryptedResponseAlg() !== null) {
+            return $this->sign(
+                    $token->getClient()->getUserinfoEncryptedResponseAlg(),
+                    $claimedValues
+                    );
+        }       
 
         return $claimedValues;
     }

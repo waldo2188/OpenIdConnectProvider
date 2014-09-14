@@ -54,11 +54,13 @@ class TokenEndpoint
                 
                 $accessToken = CodeHelper::generateUniqueCode(
                                 $this->em->getRepository("WaldoOpenIdConnectProviderBundle:Token"),
-                                'accessToken'
+                                'accessToken',
+                                true
                             );
                 $refreshToken = CodeHelper::generateUniqueCode(
                                 $this->em->getRepository("WaldoOpenIdConnectProviderBundle:Token"),
-                                'refreshToken'
+                                'refreshToken',
+                                true
                             );
 
                 $token->setCodeToken(null)
@@ -131,17 +133,25 @@ class TokenEndpoint
             throw new TokenRequestException('no such grant_type', 'invalid_request');
         }
         
-        if($request->request->get('grant_type') != 'authorization_code') {
+        if(!in_array($request->request->get('grant_type'), array('authorization_code', 'refresh_token'))) {
             throw new TokenRequestException(
                     $request->request->get('grant_type') . ' is not supported',
                     'unsupported_grant_type');
         }
         
+        if($request->request->get('grant_type') == 'authorization_code') {
+            $requestMethod = "getClientTokenByCode";
+            $requestCodeToken = $request->request->get('code');
+        } elseif ($request->request->get('grant_type') == 'refresh_token') {
+            $requestMethod = "getClientTokenByRefreshToken";
+            $requestCodeToken = $request->request->get('refresh_token');
+        }
+        
         /* @var $token Token */
         $token = $this->em->getRepository("Waldo\OpenIdConnect\ProviderBundle\Entity\Token")
-                ->getClientTokenByCode(
+                ->$requestMethod(
                         $client,
-                        $request->request->get('code')
+                        $requestCodeToken
                         );
         
         if($token === null) {

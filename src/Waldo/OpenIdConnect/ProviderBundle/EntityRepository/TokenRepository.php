@@ -10,6 +10,7 @@ class TokenRepository extends EntityRepository
 {
 
     /**
+     * Save a relation between a client and an account
      * 
      * @param string $accountId
      * @param string $clientId
@@ -65,18 +66,36 @@ class TokenRepository extends EntityRepository
      */
     public function getClientTokenByCode(Client $client, $code)
     {
+        return $this->getClientToken($client, $code, 'codeToken');
+    }
+    
+    /**
+     * Check if the code token is valid for a client
+     * 
+     * @param Client $client
+     * @param type $refreshToken
+     * @return boolean
+     */
+    public function getClientTokenByRefreshToken(Client $client, $refreshToken)
+    {
+        return $this->getClientToken($client, $refreshToken, 'refreshToken');
+    }
+    
+    protected function getClientToken(Client $client, $token, $type)
+    {
         $qb = $this->createQueryBuilder("Token");
             
         $qb->select("Token")
                 ->where($qb->expr()->andX(
                         $qb->expr()->eq("Token.client", ":client"),
-                        $qb->expr()->eq("Token.codeToken", ":codeToken")
+                        $qb->expr()->eq("Token." . $type, ":" . $type)
                         ))
                 ->setParameter("client", $client)
-                ->setParameter("codeToken", $code)
+                ->setParameter($type, $token)
                 ;
         
         return $qb->getQuery()->getOneOrNullResult();
     }
+    
 
 }

@@ -26,7 +26,7 @@ class Configuration implements ConfigurationInterface
                 // issuer is the URL of the OpenId Connect Provider
                 // This is needed for validate response of the OpenId Connect Provider
                 ->scalarNode('issuer')->cannotBeEmpty()->end()
-                
+                ->scalarNode('private_key')->end()
         ;
                                     
 

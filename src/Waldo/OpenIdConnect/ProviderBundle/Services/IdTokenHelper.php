@@ -5,6 +5,7 @@ namespace Waldo\OpenIdConnect\ProviderBundle\Services;
 use Waldo\OpenIdConnect\ProviderBundle\Entity\Token;
 use Waldo\OpenIdConnect\ProviderBundle\Entity\IdToken;
 use Waldo\OpenIdConnect\ProviderBundle\Services\AbstractTokenHelper;
+
 /**
  * IdTokenHelper
  *
@@ -12,7 +13,6 @@ use Waldo\OpenIdConnect\ProviderBundle\Services\AbstractTokenHelper;
  */
 class IdTokenHelper extends AbstractTokenHelper
 {
-
     public function makeIdToken(Token $token)
     {
         $idToken = new IdToken();
@@ -33,14 +33,19 @@ class IdTokenHelper extends AbstractTokenHelper
         
         //TODO add function for sign and encrypt idToken
         
-        $idTokenEncode = json_encode($idToken->__toArray());
+        if($token->getClient()->getIdTokenEncryptedResponseAlg() !== null) {
+            return $this->sign(
+                    $token->getClient()->getIdTokenEncryptedResponseAlg(),
+                    $idToken->__toArray()
+                    );
+        }
         
-        return $idTokenEncode;
+        return json_encode($idToken->__toArray());
     }
-    
+        
     public function genererateSub($username)
     {
         return hash("sha256", $this->options['issuer'] . "#" . $username);
     }
-   
+       
 }

@@ -52,7 +52,12 @@ class UserinfoEndpoint
                 "Pragma" => "no-cache"
             );
 
-            return new JsonResponse($responseParam, Response::HTTP_OK, $header);
+            if(is_array($responseParam)) {
+                return new JsonResponse($responseParam, Response::HTTP_OK, $header);
+            }
+            
+            $header["Content-Type"] = "application/jwt";
+            return new Response($responseParam, Response::HTTP_OK, $header);
             
         } catch (UserinfoException $ex) {
             return new JsonResponse(array(

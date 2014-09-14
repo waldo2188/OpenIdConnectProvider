@@ -15,7 +15,7 @@ class UserinfoEndpointController extends Controller
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function tokenEndpointAction(Request $request)
-    {        
+    {
         return $this->get('waldo_oic_p.endpoint.userinfo')->handle($request);
     }
 

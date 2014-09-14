@@ -3,6 +3,8 @@ imports:
     - { resource: security.yml }
 
 framework:
+    session:
+        name: "oic-p"
     #esi:             ~
     #translator:      { fallback: "%locale%" }
     secret:          "%secret%"
@@ -71,3 +73,4 @@ swiftmailer:
 waldo_oic_p:
     base_url: http://localhost/OIC-P/web/app_dev.php
     issuer: http://localhost/OIC-P/web/app_dev.php
+    private_key: "%kernel.root_dir%/Resources/key/private_key"
