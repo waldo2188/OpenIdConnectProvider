@@ -141,6 +141,12 @@ class AuthenticationCodeFlow
         return new RedirectResponse($uri);
     }
     
+    /**
+     * 
+     * @param \Waldo\OpenIdConnect\ProviderBundle\Entity\Request\Authentication $authentication
+     * @return boolean
+     * @throws AuthenticationRequestException
+     */
     protected function checkUser(Authentication $authentication)
     {
 

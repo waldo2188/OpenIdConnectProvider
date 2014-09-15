@@ -63,7 +63,7 @@ class UserinfoEndpoint
             return new JsonResponse(array(
                 'error' => $ex->getError(),
                 'error_description' => $ex->getMessage()
-            ));
+            ), Response::HTTP_FOUND);
         }
         
     }

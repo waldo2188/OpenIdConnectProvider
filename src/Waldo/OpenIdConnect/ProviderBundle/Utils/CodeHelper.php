@@ -2,6 +2,9 @@
 
 namespace Waldo\OpenIdConnect\ProviderBundle\Utils;
 
+use Doctrine\ORM\EntityRepository;
+
+//TODO mus be rename in Token Code Generator
 /**
  * CodeeHelper
  *
@@ -17,7 +20,9 @@ class CodeHelper
      * @param boolean $isBearer if the code is for an access_token ou refresh_token
      * @return string
      */
-    public static function generateUniqueCode($entityRepository, $propertyName, $isBearer = false)
+    public static function generateUniqueCode(
+            EntityRepository $entityRepository,
+            $propertyName, $isBearer = false)
     {
         do {
             

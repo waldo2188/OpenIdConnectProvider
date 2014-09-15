@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ae9a3d58df7d1fdb53d54f2309713bd1",
+    "hash": "f88bf70541f9adbb341547e3cf1aa4e2",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -631,11 +631,11 @@
         },
         {
             "name": "gree/jose",
-            "version": "0.1.7",
+            "version": "0.1.8",
             "source": {
                 "type": "git",
                 "url": "git@github.com:waldo2188/jose.git",
-                "reference": "111a6930d798115ce793d3580aa34d79b6252bba"
+                "reference": "52a1b04665858325bb52b734cf1e9f1206194ab3"
             },
             "require": {
                 "phpseclib/phpseclib": ">=0.3.5"
@@ -675,7 +675,7 @@
                 "JWT",
                 "OpenID Connect"
             ],
-            "time": "2014-09-06 15:50:31"
+            "time": "2014-09-15 09:48:14"
         },
         {
             "name": "incenteev/composer-parameter-handler",

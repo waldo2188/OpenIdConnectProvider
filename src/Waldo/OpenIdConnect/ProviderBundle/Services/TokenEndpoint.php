@@ -7,7 +7,7 @@ use Waldo\OpenIdConnect\ProviderBundle\Entity\Token;
 use Waldo\OpenIdConnect\ProviderBundle\Services\IdTokenHelper;
 use Waldo\OpenIdConnect\ProviderBundle\Utils\CodeHelper;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManager;
@@ -34,7 +34,7 @@ class TokenEndpoint
      */
     protected $idTokenHelper;
     
-    public function __construct(SecurityContext $securityContext,
+    public function __construct(SecurityContextInterface $securityContext,
             EntityManager $em, IdTokenHelper $idTokenHelper)
     {
         $this->securityContext = $securityContext;
@@ -91,7 +91,7 @@ class TokenEndpoint
             return new JsonResponse(array(
                 'error' => $ex->getError(),
                 'error_description' => $ex->getMessage()
-            ));
+            ),Response::HTTP_FOUND);
             
         }
 

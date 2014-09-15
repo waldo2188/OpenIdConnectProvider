@@ -45,7 +45,7 @@ class ScopeUtils
 
             foreach($parametersNeeded as $param) {
                 $method = 'get' . ucfirst($param);
-                if(($value = $user->$method()) != null) {
+                if(($value = $user->$method()) !== null) {
                     $claims[$param] = $value;
                 }
             }

@@ -342,7 +342,12 @@ class Authentication implements \Serializable
      */
     public function setScope($scope)
     {
-        $this->scope = explode(' ', $scope);
+        if(is_string($scope)) {
+            $this->scope = explode(' ', $scope);
+        }elseif(is_array($scope)) {
+            $this->scope = $scope;
+        }
+        
         return $this;
     }
 

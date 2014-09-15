@@ -21,16 +21,19 @@ class IdTokenHelper extends AbstractTokenHelper
         $expire->modify("+300 seconds");
         
         $iat = new \DateTime('now');
-        
+               
         $idToken->setIss($this->options['issuer'])
                 ->setSub($this->genererateSub($token->getAccount()->getUsername()))
                 ->setAud($token->getClient()->getClientId())
                 ->setExp($expire->getTimestamp())
                 ->setIat($iat->getTimestamp())
-                ->setAuth_time($token->getAccount()->getLastLoginAt()->getTimestamp())
                 ->setNonce($token->getNonce())
                 ;
         
+        if($token->getAccount()->getLastLoginAt() !== null) {
+            $idToken->setAuth_time($token->getAccount()->getLastLoginAt()->getTimestamp());
+        }
+                
         //TODO add function for sign and encrypt idToken
         
         if($token->getClient()->getIdTokenEncryptedResponseAlg() !== null) {
