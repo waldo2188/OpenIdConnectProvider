@@ -40,13 +40,13 @@ class JWKProvider
             $headers = array(
                     "Cache-Control" => "no-store",
                     "Pragma" => "no-cache",
-                    'Content-Type'=> 'application/json'
+                    'Content-Type'=> 'application/jwk'
                 );
             
             return new Response($jwkContent, Response::HTTP_OK, $headers);
         }
         
-        // TODO return error
+        return new Response("No key found", Response::HTTP_NOT_FOUND);
     }
     
     public function hasJwk()

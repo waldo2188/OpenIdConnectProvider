@@ -34,12 +34,15 @@ class IdTokenHelperTest extends \PHPUnit_Framework_TestCase
         
         $idTokenDecode = json_decode($idToken);
 
+        $iat = new \DateTime();
+        $iat->modify("-3 seconds");
+        
         $this->assertEquals($idTokenDecode->iss, "anIssuer");
         $this->assertEquals($idTokenDecode->sub, '7a1e9db5a4629cf6867eb58f50ddfc5df79d1992672d028bed2053c02e5cc337');
         $this->assertEquals($idTokenDecode->aud, "a_client_id");
         $this->assertEquals($idTokenDecode->auth_time, (new \DateTime("2014-02-14"))->getTimestamp());
         $this->assertGreaterThan((new \DateTime())->getTimestamp(), $idTokenDecode->exp);
-        $this->assertGreaterThanOrEqual((new \DateTime())->getTimestamp(), $idTokenDecode->iat);
+        $this->assertGreaterThanOrEqual($iat->getTimestamp(), $idTokenDecode->iat);
     }
     
     public function testShouldMakeIdTokenAndSign()

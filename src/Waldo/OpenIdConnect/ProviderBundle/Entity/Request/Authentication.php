@@ -466,7 +466,7 @@ class Authentication implements \Serializable
      * @param string $idTokenHint
      * @return \Waldo\OpenIdConnect\ProviderBundle\Entity\Request\Authentication
      */
-    public function setIdTokenHint(type $idTokenHint)
+    public function setIdTokenHint($idTokenHint)
     {
         $this->idTokenHint = $idTokenHint;
         return $this;
@@ -477,7 +477,7 @@ class Authentication implements \Serializable
      * @param string $loginHint
      * @return \Waldo\OpenIdConnect\ProviderBundle\Entity\Request\Authentication
      */
-    public function setLoginHint(type $loginHint)
+    public function setLoginHint($loginHint)
     {
         $this->loginHint = $loginHint;
         return $this;
