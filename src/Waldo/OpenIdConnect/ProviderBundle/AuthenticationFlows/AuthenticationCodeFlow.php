@@ -168,12 +168,14 @@ class AuthenticationCodeFlow
 
         // Check max_age
         if($this->securityContext->getToken()->hasAttribute("ioc.token.issuedAt")) {
+
+            /* @var $issuedAt \DateTime */
+            $issuedAt = $this->securityContext->getToken()
+                    ->getAttribute("ioc.token.issuedAt");
+
+            $issuedAt->modify( sprintf("+%d seconds", $authentication->getMaxAge()));
             
-            $diff = $this->securityContext->getToken()
-                    ->getAttribute("ioc.token.issuedAt")
-                    ->diff(new \DateTime('now'));
-            
-            if($diff->s > $authentication->getMaxAge()) {
+            if(new \DateTime('now') > $issuedAt) {
                 $needAuthent = true;
             }
         }
