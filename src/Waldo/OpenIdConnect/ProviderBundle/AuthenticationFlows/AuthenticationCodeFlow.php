@@ -4,11 +4,13 @@ namespace Waldo\OpenIdConnect\ProviderBundle\AuthenticationFlows;
 
 use Waldo\OpenIdConnect\ProviderBundle\Entity\Request\Authentication;
 use Waldo\OpenIdConnect\ProviderBundle\Utils\CodeHelper;
+use Waldo\OpenIdConnect\ProviderBundle\Exception\AuthenticationRequestException;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Http\HttpUtils;
+use Symfony\Component\Security\Core\Authorization\Voter\AuthenticatedVoter;
 use Doctrine\ORM\EntityManager;
 
 /**
@@ -39,7 +41,7 @@ class AuthenticationCodeFlow
      */
     protected $httpUtils;
 
-    public function __construct(SecurityContext $securityContext,
+    public function __construct(SecurityContextInterface $securityContext,
             Session $session, EntityManager $em,
             HttpUtils $httpUtils)
     {
@@ -154,13 +156,13 @@ class AuthenticationCodeFlow
         
         if($this->securityContext->getToken() == null)
         {
-            $needAuthent = true;
+            return $this->needAuthRequest($authentication);
         }
         
         // Check if user is well authenticated
         if(!$this->securityContext->getToken()->isAuthenticated() 
-                || !$this->securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
-            $needAuthent = true;
+                || !$this->securityContext->isGranted(AuthenticatedVoter::IS_AUTHENTICATED_FULLY)) {
+            return $this->needAuthRequest($authentication);
         }
         
 
@@ -194,13 +196,24 @@ class AuthenticationCodeFlow
         }
         
         if($needAuthent === true) {
-            $this->securityContext->setToken(null);
-            $this->session->set('oicp.authentication.flow.code', $authentication);
-            $this->session->set('oicp.authentication.flow.manager', $this->getName());
-            return $this->httpUtils->createRedirectResponse(new Request(), "login");            
+            return $this->needAuthRequest($authentication);
         }
-        
+
         return true;
     }
-   
+
+    /**
+     * Create a redirect response to the login form
+     * 
+     * @param \Waldo\OpenIdConnect\ProviderBundle\Entity\Request\Authentication $authentication
+     * @return RedirectResponse
+     */
+    private function needAuthRequest(Authentication $authentication)
+    {
+        $this->securityContext->setToken(null);
+        $this->session->set('oicp.authentication.flow.code', $authentication);
+        $this->session->set('oicp.authentication.flow.manager', $this->getName());
+        return $this->httpUtils->createRedirectResponse(new Request(), "login");
+    }
+
 }

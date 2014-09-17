@@ -63,9 +63,10 @@ class AuthenticationRequestValidator
             throw new AuthenticationRequestException('no matching request_uri', 'invalid_request');
         }
         
-        if(!$authentication->isResponseTypeValid()) {
+
+        if($authentication->isResponseTypeValid() !== true) {
             throw new AuthenticationRequestException(
-                    "Unknown response_type " . $authentication->getResponseType(),
+                    "Unknown response_type " . implode(' ,', $authentication->getResponseType()),
                     'invalid_response_type');
         }
         
