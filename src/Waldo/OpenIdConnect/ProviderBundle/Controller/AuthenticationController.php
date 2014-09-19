@@ -37,8 +37,21 @@ class AuthenticationController extends Controller
         // last username entered by the user
         $lastUsername = (null === $session) ? '' : $session->get(SecurityContextInterface::LAST_USERNAME);
 
+        $client = null;
+        
+        if($request->getSession()->has('oicp.authentication.flow.manager')) {
+            $clientId = $authenticationFlowManager = $this->get(
+                    $request->getSession()->get('oicp.authentication.flow.manager')
+            )->getAuthentication()
+                    ->getClientId();
+
+            $client = $this->getDoctrine()->getRepository("WaldoOpenIdConnectProviderBundle:Client")
+                    ->findOneByClientId($clientId);
+        }
+
         return array(
             // last username entered by the user
+            'client' => $client,
             'last_username' => $lastUsername,
             'error' => $error,
         );

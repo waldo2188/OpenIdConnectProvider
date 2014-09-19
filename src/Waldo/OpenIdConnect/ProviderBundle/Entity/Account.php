@@ -111,7 +111,7 @@ class Account implements AccountInterface, \Serializable
      * 
      * @ORM\Column(name="family_name", type="string", length=255, nullable=true)
      * 
-     * @var string $familyName Surname(s) or last name(
+     * @var string $familyName Surname(s) or last name(s)
      */
     protected $familyName;
 

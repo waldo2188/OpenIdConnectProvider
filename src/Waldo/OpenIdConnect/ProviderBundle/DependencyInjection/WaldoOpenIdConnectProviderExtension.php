@@ -24,6 +24,7 @@ class WaldoOpenIdConnectProviderExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+        $loader->load('registration.xml');
         
         $tokenHelper = $container->getDefinition('waldo_oic_p.helper.abstracttoken');
         $tokenHelper->replaceArgument(0, $config);
