@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Waldo\OpenIdConnect\ProviderBundle\Entity\AccountInterface;
+use Waldo\OpenIdConnect\ProviderBundle\Validator\Constraints\ConstraintUserPassword;
 
 /**
  * Account implement standard Claims
@@ -62,6 +63,14 @@ class Account implements AccountInterface, \Serializable
 
     /**
      * @ORM\Column(name="password", type="string", length=255, nullable=true)
+     * 
+     * @ConstraintUserPassword (
+     *      passwordMinLength = 8,
+     *      minUpperCase = 1,
+     *      minLowerCase = 1,
+     *      minNumber = 1,
+     *      minSpecialChar = 1
+     * )
      * 
      * @var string $password Password used by enduser to log in
      */
@@ -789,7 +798,7 @@ class Account implements AccountInterface, \Serializable
      * @param \DateTime $birthdate
      * @return \Cnerta\OpenIdConnect\ProviderBundle\Entity\Account
      */
-    public function setBirthdate(\DateTime $birthdate)
+    public function setBirthdate(\DateTime $birthdate = null)
     {
         $this->birthdate = $birthdate;
         return $this;
