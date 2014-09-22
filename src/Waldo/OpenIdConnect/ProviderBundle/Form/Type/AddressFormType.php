@@ -52,8 +52,9 @@ class AddressFormType extends AbstractType
                         'placeholder' => "NW1 6XE",
                         )
                     ))
-                ->add('country', 'text', array(
+                ->add('country', 'country', array(
                     'label' => 'Country', 
+                    'empty_value' => 'Choose an option',
                     'required' => false,
                     'attr' => array(
                         'placeholder' => "England",

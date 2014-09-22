@@ -29,8 +29,8 @@ class RegistrationFormType extends AbstractType
                 ->add('password', 'repeated', array(
                     'type' => 'password',
                     'invalid_message' => 'The password fields must match.',
-                    'first_options' => array('label' => 'Password'),
-                    'second_options' => array('label' => 'Repeat Password'),
+                    'first_options' => array('label' => 'Create a password'),
+                    'second_options' => array('label' => 'Confirm your Password'),
                     'required' => true
                 ))
                 ->add('name', 'text', array(
@@ -57,28 +57,36 @@ class RegistrationFormType extends AbstractType
                     'label' => 'Prefered username',
                     'required' => false
                     ))
-                ->add('picture', 'text', array(
+                ->add('picture', 'url', array(
                     'label' => 'Picture', 
                     'required' => false
                     ))
-                ->add('website', 'text', array(
+                ->add('website', 'url', array(
                     'label' => 'Website', 
                     'required' => false
                     ))
-                ->add('gender', 'text', array(
+                ->add('gender', 'choice', array(
                     'label' => 'Gender', 
+                    'empty_value' => 'Choose an option',
+                    'choices' => array(
+                        'Female',
+                        'Male',
+                        'Other...'
+                    ),
                     'required' => false
                     ))
                 ->add('birthdate', 'date', array(
                     'label' => 'Birthdate', 
                     'required' => false
                     ))
-                ->add('zoneInfo', 'text', array(
-                    'label' => 'Time zone (France/Paris)', 
+                ->add('zoneInfo', 'timezone', array(
+                    'label' => 'Time zone', 
+                    'empty_value' => 'Choose an option',
                     'required' => false
                     ))
-                ->add('locale', 'text', array(
-                    'label' => 'Local (en, fr, fr_ca)', 
+                ->add('locale', 'locale', array(
+                    'label' => 'Local', 
+                    'empty_value' => 'Choose an option',
                     'required' => false
                     ))
                 ->add('phoneNumber', 'text', array(
