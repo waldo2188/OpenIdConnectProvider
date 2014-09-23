@@ -37,12 +37,6 @@ class ConstraintUserPasswordValidator extends ConstraintValidator
             );
         }
         
-        echo "<pre>";
-        var_dump($this->countSpecialChar($value));
-        echo "</pre>";
-
-
-
         if($this->countSpecialChar($value) < $constraint->minSpecialChar) {
             $this->context->addViolation(
                     $constraint->messageSpecialChar, array('%length%' => $constraint->minSpecialChar)
