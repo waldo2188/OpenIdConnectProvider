@@ -1,0 +1,14 @@
+{% extends "WaldoOpenIdConnectProviderBundle::base.html.twig" %}
+
+{% block title %}{% trans %}Find Your Account{% endtrans %}{% endblock title %}
+
+{% block bodyContent %}
+    <h1>{% trans %}Find Your Account{% endtrans %}</h1>
+    
+{% if isFound == false %}
+    {% trans %}Sorry, we can not found your account with the given username or email.{% endtrans %}
+{% endif %}    
+
+{{ form(form) }}
+
+{% endblock bodyContent %}

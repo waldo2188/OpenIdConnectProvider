@@ -1,0 +1,17 @@
+{% extends "WaldoOpenIdConnectProviderBundle::base.html.twig" %}
+
+{% block title %}{% trans %}Account validation{% endtrans %}{% endblock title %}
+
+{% block bodyContent %}
+
+{% if isValid %}
+{% trans %}Your email is valid.{% endtrans %}<br/>
+{% trans %}An administrator will soon activate your account. 
+    An email will be sent after the validation or revocation of your account.{% endtrans %}<br/>
+{% trans %}Please, remember to check your Spam box.{% endtrans %}<br />
+{% else %}
+{% trans %}Sorry, the link you have used to validate your account is invalid.{% endtrans %}<br />
+{% trans %}maybe you have waiting too much time to validate your account. Please, try to create another account or feel free to contact an administrator.{% endtrans %}<br />
+{% endif %}
+    
+{% endblock bodyContent %}

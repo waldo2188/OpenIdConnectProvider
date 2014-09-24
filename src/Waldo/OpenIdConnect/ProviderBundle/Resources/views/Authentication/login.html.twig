@@ -5,6 +5,10 @@
 {% block bodyContent %}
     {% if error %}
         <div>{{ error.message|trans }}</div>
+        {% if error.message == "User account is disabled." %}
+            {% trans %}Maybe your account have not been yet validated by an administrator ?{% endtrans %}
+            {% trans %}Please, wait until you receive a confirmation email.{% endtrans %}
+        {% endif %}
     {% endif %}
 
     <div>
@@ -40,7 +44,7 @@
     </form>
 
     <div>
-        <a href="">{% trans %}Lost your account ?{% endtrans %}</a>
+        <a href="{{ path("oicp_lost_account_search") }}">{% trans %}Forgot your password ?{% endtrans %}</a>
         <a href="{{ path("oicp_registration_new_account") }}">{% trans %}Create an account{% endtrans %}</a>
     </div>
 

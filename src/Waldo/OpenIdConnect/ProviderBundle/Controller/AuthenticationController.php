@@ -63,6 +63,10 @@ class AuthenticationController extends Controller
      */
     public function scopeApprovalAction(Request $request)
     {
+        if($request->getSession()->has('oicp.authentication.flow.manager') === false){
+            return $this->redirect($this->generateUrl("oicp_account_index"));
+        }
+        
         $user = $this->get('security.context')->getToken()->getUser();
 
         $authenticationFlowManager = $this->get(

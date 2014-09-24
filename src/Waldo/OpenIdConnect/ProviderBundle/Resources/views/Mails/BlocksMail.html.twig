@@ -1,0 +1,21 @@
+{% block registration_confirmation_object %}Welcome to OIC{% endblock %}
+{% block registration_confirmation_body %}
+Hey there !<br />
+Thanks for signing up.<br />
+<br />
+To complete your registration, you must use the link below to verify your account :<br />
+<a href="{{ link }}">{{ link }}</a><br />
+<br />
+This link is valid for 1 hour. Beyond this time, you need to recreate an account.
+{% endblock %}
+
+
+{% block lost_account_object %}Someone requested a new password for your account{% endblock %}
+{% block lost_account_body %}
+Someone recently asked to reset your password.<br />
+Use the link below to reset your password : <br />
+<a href="{{ link }}">{{ link }}</a><br />
+<br />
+<strong>You did not ask for this change ?</strong><br />
+<strong>Please forget this email. Your account is safe !</strong>
+{% endblock %}

@@ -4,6 +4,9 @@ namespace Waldo\OpenIdConnect\ProviderBundle\Tests\Utils;
 
 use Waldo\OpenIdConnect\ProviderBundle\Utils\CodeHelper;
 
+/**
+ * @group codeHelper
+ */
 class CodeHelperTest extends \PHPUnit_Framework_TestCase
 {
 

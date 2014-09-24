@@ -12,27 +12,16 @@ use Waldo\OpenIdConnect\ProviderBundle\Form\Type\AddressFormType;
  *
  * @author valérian Girard <valerian.girard@educagri.fr>
  */
-class RegistrationFormType extends AbstractType
+class AccountFormType extends AbstractType
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('username', 'text', array(
-                    'label' => 'Username',
-                    'required' => true
-                    ))
                 ->add('email', 'email', array(
                     'label' => 'Email',
                     'required' => false
                     ))
-                ->add('password', 'repeated', array(
-                    'type' => 'password',
-                    'invalid_message' => 'The password fields must match.',
-                    'first_options' => array('label' => 'Create a password'),
-                    'second_options' => array('label' => 'Confirm your Password'),
-                    'required' => true
-                ))
                 ->add('name', 'text', array(
                     'label' => 'Name',
                     'required' => false
@@ -100,12 +89,36 @@ class RegistrationFormType extends AbstractType
                 
                 ->add('save', 'submit')
             ;
+        
+        if($options['hasUsernameField'] === true) {
+            $builder
+                    ->add('password', 'repeated', array(
+                    'type' => 'password',
+                    'invalid_message' => 'The password fields must match.',
+                    'first_options' => array('label' => 'Create a password'),
+                    'second_options' => array('label' => 'Confirm your Password'),
+                    'required' => true
+                ))
+                    ;
+        }
+        
+        if($options['hasPasswordField'] === true) {
+            $builder
+                    ->add('username', 'text', array(
+                    'label' => 'Username',
+                    'required' => true
+                    ))
+                    ;
+        }
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => "\Waldo\OpenIdConnect\ProviderBundle\Entity\Account"
+            'data_class' => "\Waldo\OpenIdConnect\ProviderBundle\Entity\Account",
+            'validation_groups' => array('registration'),
+            'hasUsernameField' => true,
+            'hasPasswordField' => true
         ));
     }
     

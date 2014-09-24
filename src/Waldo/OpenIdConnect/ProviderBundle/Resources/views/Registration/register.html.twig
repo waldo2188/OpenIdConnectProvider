@@ -3,31 +3,7 @@
 {% block title %}{% trans %}Register{% endtrans %}{% endblock title %}
 
 {% block bodyContent %}
-{{ form_start(form) }}
 
-
-{{ form_row(form.username) }}
-{{ form_row(form.email) }}
-{{ form_row(form.password) }}
-{{ form_row(form.name) }}
-{{ form_row(form.givenName) }}
-{{ form_row(form.familyName) }}
-{{ form_row(form.middleName) }}
-{{ form_row(form.nickname) }}
-{{ form_row(form.preferedUsername) }}
-{{ form_row(form.picture) }}
-{{ form_row(form.website) }}
-{{ form_row(form.gender) }}
-{{ form_row(form.birthdate) }}
-{{ form_row(form.zoneInfo) }}
-{{ form_row(form.locale) }}
-{{ form_row(form.phoneNumber) }}
-{{ form_row(form.address.formatted) }}
-{{ form_row(form.address.streetAddress) }}
-{{ form_row(form.address.locality) }}
-{{ form_row(form.address.region) }}
-{{ form_row(form.address.postalCode) }}
-{{ form_row(form.address.country) }}
-
-{{ form_end(form) }}
+    {% include "WaldoOpenIdConnectProviderBundle:Account:accountEditForm.html.twig" with { form: form } %}
+    
 {% endblock bodyContent %}

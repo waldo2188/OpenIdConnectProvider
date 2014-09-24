@@ -3,9 +3,12 @@
 namespace Waldo\OpenIdConnect\ProviderBundle\Services;
 
 use Waldo\OpenIdConnect\ProviderBundle\Entity\Account;
-use Waldo\OpenIdConnect\ProviderBundle\Form\Type\RegistrationFormType;
+use Waldo\OpenIdConnect\ProviderBundle\Entity\AccountAction;
+use Waldo\OpenIdConnect\ProviderBundle\Form\Type\AccountFormType;
+use Waldo\OpenIdConnect\ProviderBundle\Utils\CodeHelper;
 use Doctrine\ORM\EntityManager;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 /**
  * RegistrationUserService
@@ -21,13 +24,21 @@ class RegistrationUserService
     protected $em;
     
     /**
+     *
+     * @var Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface
+     */
+    protected $encoderFactory;
+    
+    /**
      * @var Psr\Log\LoggerInterface 
      */
     protected $logger;
     
-    public function __construct(EntityManager $em, LoggerInterface $logger = null)
+    public function __construct(EntityManager $em, EncoderFactoryInterface $encoderFactory,
+            LoggerInterface $logger = null)
     {
         $this->em = $em;
+        $this->encoderFactory = $encoderFactory;
         $this->logger = $logger;
     }
 
@@ -39,6 +50,46 @@ class RegistrationUserService
     
     public function getFormType()
     {
-        return new RegistrationFormType();
+        return new AccountFormType();
+    }
+    
+    public function encodePassword(Account $account)
+    {
+        $encoder = $this->encoderFactory->getEncoder($account);
+        
+        $account->setSalt(CodeHelper::generateCode());
+        
+        $password = $encoder->encodePassword($account->getPassword(), $account->getSalt());
+        $account->setPassword($password);
+    }
+    
+    public function handleValidationToken($token)
+    {
+        /* @var $token AccountAction */
+        $token = $this->em->getRepository("WaldoOpenIdConnectProviderBundle:AccountAction")
+                ->findOneBy(array('token' => $token, 'type' => AccountAction::ACTION_EMAIL_VALIDATION));
+        
+        if($token === null)
+        {
+            return false;
+        }
+
+        $token->getIssuedAt()->modify("+1 hour");
+        
+        $isValid = false;
+        
+        if($token->getIssuedAt() < new \DateTime('now')) {
+            $token->getAccount()
+                    ->setEmailVerified(true)
+                    ->setRoles(array("USER_ROLE"))
+                    ;
+            $this->em->persist($token->getAccount());
+            return true;
+        }
+        
+        $this->em->remove($token);
+        
+        $this->em->flush();
+        return $isValid;    
     }
 }

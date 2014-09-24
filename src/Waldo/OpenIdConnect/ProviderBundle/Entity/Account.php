@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Waldo\OpenIdConnect\ProviderBundle\Entity\AccountInterface;
-use Waldo\OpenIdConnect\ProviderBundle\Validator\Constraints\ConstraintUserPassword;
+use Waldo\OpenIdConnect\ProviderBundle\Validator\Constraints as OICConstraint;
 
 /**
  * Account implement standard Claims
@@ -14,9 +14,11 @@ use Waldo\OpenIdConnect\ProviderBundle\Validator\Constraints\ConstraintUserPassw
  * 
  * @see http://openid.net/specs/openid-connect-core-1_0.html#StandardClaims
  * 
- * @ORM\Entity() 
+ * @ORM\Entity(repositoryClass="Waldo\OpenIdConnect\ProviderBundle\EntityRepository\AccountRepository")
  * @ORM\Table(name="account")
  * @ORM\HasLifecycleCallbacks
+ * @OICConstraint\ConstraintAccount(groups={"registration", "edit"})
+ * @OICConstraint\ConstraintAccountPassword(groups={"registration", "change_password"})
  */
 class Account implements AccountInterface, \Serializable
 {
@@ -64,12 +66,13 @@ class Account implements AccountInterface, \Serializable
     /**
      * @ORM\Column(name="password", type="string", length=255, nullable=true)
      * 
-     * @ConstraintUserPassword (
+     * @OICConstraint\ConstraintUserPassword (
      *      passwordMinLength = 8,
      *      minUpperCase = 1,
      *      minLowerCase = 1,
      *      minNumber = 1,
-     *      minSpecialChar = 1
+     *      minSpecialChar = 1,
+     *      groups={"registration", "change_password"}
      * )
      * 
      * @var string $password Password used by enduser to log in
@@ -277,6 +280,13 @@ class Account implements AccountInterface, \Serializable
      * @var Address $address Preferred postal address 
      */
     protected $address;
+
+    /**
+     * @ORM\OneToOne(targetEntity="AccountAction", mappedBy="account") 
+     * @var AccountAction 
+     */
+    protected $accountAction;
+
 
     public static $scopeProfile = array(
                 'name',
@@ -1030,6 +1040,25 @@ class Account implements AccountInterface, \Serializable
         return $this->enabled;
     }
 
+    /**
+     * 
+     * @return AccountAction
+     */
+    public function getAccountAction()
+    {
+        return $this->accountAction;
+    }
+
+    /**
+     * @param \Waldo\OpenIdConnect\ProviderBundle\Entity\AccountAction $accountAction
+     * @return \Waldo\OpenIdConnect\ProviderBundle\Entity\Account
+     */
+    public function setAccountAction(AccountAction $accountAction)
+    {
+        $this->accountAction = $accountAction;
+        return $this;
+    }
+    
     public function __toString()
     {
         return $this->username;

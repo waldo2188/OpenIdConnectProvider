@@ -41,15 +41,9 @@ class CodeHelper
      */
     public static function generateCode($isBearer = false)
     {
-        $size = mcrypt_get_iv_size(MCRYPT_CAST_256, MCRYPT_MODE_CFB);
-        $hash = bin2hex(mcrypt_create_iv($size, MCRYPT_DEV_URANDOM));
+        $size = mcrypt_get_iv_size(MCRYPT_CAST_256, MCRYPT_MODE_CFB) * mt_rand(10, 30);
+        $hash = base64_encode(mcrypt_create_iv($size, MCRYPT_DEV_URANDOM));
                 
-        for($x = mt_rand(2, 10); $x > 0; $x--) {
-            $hash = hash('sha512', $hash);
-        }
-       
-        $hash = base64_encode($hash);
-        
         $replaceBy = array('-','_',',');
         
         if($isBearer) {
@@ -63,8 +57,8 @@ class CodeHelper
             $pos = mt_rand(1, strlen($hash) - 1);
             $hash[$pos] = $replaceBy[array_rand($replaceBy, 1)];
         }
-        
-        $nonceEnc = strtolower(substr($hash, 0, mt_rand(42, 100)));
+        $nonceEnc = substr($hash, 0, mt_rand(42, 100));
+
 
         return $nonceEnc;
     }
