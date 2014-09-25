@@ -2,7 +2,7 @@
 
 namespace Waldo\OpenIdConnect\ProviderBundle\Constraints;
 
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Request\Authentication;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Request\Authentication;
 use Waldo\OpenIdConnect\ProviderBundle\Exception\AuthenticationRequestException;
 use Doctrine\ORM\EntityManager;
 
@@ -49,8 +49,8 @@ class AuthenticationRequestValidator
             throw new AuthenticationRequestException('openid scope is missing', 'invalid_scope');
         }
         
-        /* @var $client \Waldo\OpenIdConnect\ProviderBundle\Entity\Client */
-        $client = $this->em->getRepository("WaldoOpenIdConnectProviderBundle:Client")
+        /* @var $client \Waldo\OpenIdConnect\ModelBundle\Entity\Client */
+        $client = $this->em->getRepository("WaldoOpenIdConnectModelBundle:Client")
                 ->findOneByClientId($authentication->getClientId());
         
         // Check if the client exist

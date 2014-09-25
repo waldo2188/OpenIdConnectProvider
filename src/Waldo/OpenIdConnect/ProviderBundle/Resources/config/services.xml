@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     
     <parameters>
@@ -27,12 +27,7 @@
         <parameter key="waldo_oic_p.helper.userinfo.class">Waldo\OpenIdConnect\ProviderBundle\Services\UserinfoHelper</parameter>
         
         <!--  Provider  -->
-        <parameter key="waldo_oic_p.provider.jwk.class">Waldo\OpenIdConnect\ProviderBundle\Provider\JWKProvider</parameter>
-        
-        <parameter key="waldo_oic_p.mailing.class">Waldo\OpenIdConnect\ProviderBundle\Services\Mailing\MailingService</parameter>
-        
-        <parameter key="waldo_oic_p.account_actions.class">Waldo\OpenIdConnect\ProviderBundle\Services\AccountActionsService</parameter>
-        
+        <parameter key="waldo_oic_p.provider.jwk.class">Waldo\OpenIdConnect\ProviderBundle\Provider\JWKProvider</parameter>       
         
     </parameters>
 
@@ -87,22 +82,7 @@
             <argument />
             <argument type="string">%kernel.cache_dir%</argument>
         </service>
-        
-        
-        <service id="waldo_oic_p.mailing" class="%waldo_oic_p.mailing.class%">
-            <argument />
-            <argument type="service" id="twig" />
-            <argument type="service" id="mailer" />
-            <argument type="service" id="logger" on-invalid="null" />
-        </service>
-        
-        <service id="waldo_oic_p.account_actions" class="%waldo_oic_p.account_actions.class%">
-            <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument type="service" id="security.http_utils" />
-            <argument type="service" id="waldo_oic_p.mailing" />
-            <argument type="service" id="logger" on-invalid="null" />
-        </service>
-        
+                
     </services>
     
 </container>

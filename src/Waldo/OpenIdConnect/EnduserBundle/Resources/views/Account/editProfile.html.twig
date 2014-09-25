@@ -1,0 +1,17 @@
+{% extends "WaldoOpenIdConnectEnduserBundle:Account:index.html.twig" %}
+
+{% block title %}{{ parent() }} - {% trans %}Edit your profile{% endtrans %}{% endblock title %}
+
+{% block accountContent %}
+
+    <h1>{% trans %}Edit your profile{% endtrans %}</h1>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="flash-notice">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    
+    {% include "WaldoOpenIdConnectEnduserBundle:Account:accountEditForm.html.twig" with { form: form } %}
+    
+{% endblock accountContent %}

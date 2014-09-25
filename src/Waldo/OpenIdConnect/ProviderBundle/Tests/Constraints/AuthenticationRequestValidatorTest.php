@@ -2,8 +2,8 @@
 
 namespace Waldo\OpenIdConnect\ProviderBundle\Tests\Constraints;
 
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Request\Authentication;
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Client;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Request\Authentication;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Client;
 use Waldo\OpenIdConnect\ProviderBundle\Exception\AuthenticationRequestException;
 use Waldo\OpenIdConnect\ProviderBundle\Constraints\AuthenticationRequestValidator;
 

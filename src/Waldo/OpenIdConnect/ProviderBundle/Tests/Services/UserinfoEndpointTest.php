@@ -4,7 +4,7 @@ namespace Waldo\OpenIdConnect\ProviderBundle\Tests\Services;
 
 use Waldo\OpenIdConnect\ProviderBundle\Services\UserinfoEndpoint;
 use Symfony\Component\HttpFoundation\Request;
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Token;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Token;
 
 /**
  * UserinfoEndpointTest

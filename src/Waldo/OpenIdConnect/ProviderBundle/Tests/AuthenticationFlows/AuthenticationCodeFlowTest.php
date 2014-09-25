@@ -4,8 +4,8 @@ namespace Waldo\OpenIdConnect\ProviderBundle\AuthenticationFlows;
 
 use Waldo\OpenIdConnect\ProviderBundle\AuthenticationFlows\AuthenticationCodeFlow;
 use Waldo\OpenIdConnect\ProviderBundle\Exception\AuthenticationRequestException;
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Request\Authentication;
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Account;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Request\Authentication;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Account;
 use Symfony\Component\Security\Core\Authorization\Voter\AuthenticatedVoter;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -276,7 +276,7 @@ class AuthenticationCodeFlowTest extends \PHPUnit_Framework_TestCase
     
     private function mockEntityRepository()
     {
-        return $this->getMockBuilder("Waldo\OpenIdConnect\ProviderBundle\EntityRepository\TokenRepository")
+        return $this->getMockBuilder("Waldo\OpenIdConnect\ModelBundle\EntityRepository\TokenRepository")
                 ->disableOriginalConstructor()
                 ->disableOriginalClone()
                 ->setMethods(array("findOneBy"))

@@ -3,9 +3,9 @@
 namespace Waldo\OpenIdConnect\ProviderBundle\Services;
 
 use Waldo\OpenIdConnect\ProviderBundle\Exception\TokenRequestException;
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Token;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Token;
 use Waldo\OpenIdConnect\ProviderBundle\Services\IdTokenHelper;
-use Waldo\OpenIdConnect\ProviderBundle\Utils\CodeHelper;
+use Waldo\OpenIdConnect\ProviderBundle\Utils\TokenCodeGenerator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -42,7 +42,7 @@ class TokenEndpoint
         $this->securityContext = $securityContext;
         $this->em = $em;
         $this->idTokenHelper = $idTokenHelper;
-        $this->tokenRepository = $this->em->getRepository("WaldoOpenIdConnectProviderBundle:Token");
+        $this->tokenRepository = $this->em->getRepository("WaldoOpenIdConnectModelBundle:Token");
     }
 
     public function handle(Request $request)
@@ -60,10 +60,10 @@ class TokenEndpoint
                     ), Response::HTTP_FOUND);
         }
 
-        $accessToken = CodeHelper::generateUniqueCode(
+        $accessToken = TokenCodeGenerator::generateUniqueCode(
                         $this->tokenRepository, 'accessToken', true
         );
-        $refreshToken = CodeHelper::generateUniqueCode(
+        $refreshToken = TokenCodeGenerator::generateUniqueCode(
                         $this->tokenRepository, 'refreshToken', true
         );
 
@@ -93,7 +93,7 @@ class TokenEndpoint
     /**
      * 
      * @param Request $request
-     * @return Waldo\OpenIdConnect\ProviderBundle\Entity\Token
+     * @return Waldo\OpenIdConnect\ModelBundle\Entity\Token
      * @throws TokenRequestException
      */
     protected function isValidRequest(Request $request)
@@ -107,7 +107,7 @@ class TokenEndpoint
             throw new TokenRequestException('invalid client', 'invalid_request');
         }
 
-        /* @var $client \Waldo\OpenIdConnect\ProviderBundle\Entity\Client */
+        /* @var $client \Waldo\OpenIdConnect\ModelBundle\Entity\Client */
         $client = $this->securityContext->getToken()->getUser();
 
 

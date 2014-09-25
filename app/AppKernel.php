@@ -17,6 +17,9 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Waldo\OpenIdConnect\ProviderBundle\WaldoOpenIdConnectProviderBundle(),
+            new Waldo\OpenIdConnect\EnduserBundle\WaldoOpenIdConnectEnduserBundle(),
+            new Waldo\OpenIdConnect\MailingBundle\WaldoOpenIdConnectMailingBundle(),
+            new Waldo\OpenIdConnect\ModelBundle\WaldoOpenIdConnectModelBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

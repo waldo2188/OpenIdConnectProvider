@@ -32,10 +32,10 @@ class AuthorizationEndpointTest extends \PHPUnit_Framework_TestCase
         $this->authenticationRequestValidator
                 ->expects($this->once())
                 ->method("validate")
-                /* @var $o Waldo\OpenIdConnect\ProviderBundle\Entity\Request\Authentication; */
+                /* @var $o Waldo\OpenIdConnect\ModelBundle\Entity\Request\Authentication; */
                 ->with($this->callback(function($o) {
                     $test = true;
-                    $test &= $o instanceof \Waldo\OpenIdConnect\ProviderBundle\Entity\Request\Authentication;
+                    $test &= $o instanceof \Waldo\OpenIdConnect\ModelBundle\Entity\Request\Authentication;
                     $test &= count($o->getScope()) == 3;
                     $test &= in_array('openid', $o->getScope());
                     $test &= in_array('scope1', $o->getScope());
@@ -60,7 +60,7 @@ class AuthorizationEndpointTest extends \PHPUnit_Framework_TestCase
                 ->expects($this->once())
                 ->method("handle")
                 ->with($this->callback(function($o){
-                    return $o instanceof \Waldo\OpenIdConnect\ProviderBundle\Entity\Request\Authentication;
+                    return $o instanceof \Waldo\OpenIdConnect\ModelBundle\Entity\Request\Authentication;
                 }))
                 ->will($this->returnValue("good"));
                 

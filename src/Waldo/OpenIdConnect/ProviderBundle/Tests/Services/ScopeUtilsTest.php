@@ -2,9 +2,9 @@
 
 namespace Waldo\OpenIdConnect\ProviderBundle\Tests\Services;
 
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Address;
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Account;
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Request\Authentication;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Address;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Account;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Request\Authentication;
 use Waldo\OpenIdConnect\ProviderBundle\Services\ScopeUtils;
 
 /**

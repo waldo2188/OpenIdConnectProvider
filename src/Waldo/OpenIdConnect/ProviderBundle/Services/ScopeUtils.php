@@ -2,8 +2,8 @@
 
 namespace Waldo\OpenIdConnect\ProviderBundle\Services;
 
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Account;
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Request\Authentication;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Account;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Request\Authentication;
 
 /**
  * ScopeUtils

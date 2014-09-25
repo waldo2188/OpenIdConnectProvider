@@ -4,7 +4,7 @@ namespace Waldo\OpenIdConnect\ProviderBundle\Tests\EventListener;
 
 use Waldo\OpenIdConnect\ProviderBundle\EventListener\LoginListener;
 use Symfony\Component\Security\Http\SecurityEvents;
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Account;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Account;
 
 /**
  * Description of LoginListener

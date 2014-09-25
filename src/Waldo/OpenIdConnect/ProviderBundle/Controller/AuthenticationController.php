@@ -45,7 +45,7 @@ class AuthenticationController extends Controller
             )->getAuthentication()
                     ->getClientId();
 
-            $client = $this->getDoctrine()->getRepository("WaldoOpenIdConnectProviderBundle:Client")
+            $client = $this->getDoctrine()->getRepository("WaldoOpenIdConnectModelBundle:Client")
                     ->findOneByClientId($clientId);
         }
 
@@ -75,7 +75,7 @@ class AuthenticationController extends Controller
         
         $authentication = $authenticationFlowManager->getAuthentication();
         
-        $client = $this->getDoctrine()->getManager()->getRepository("WaldoOpenIdConnectProviderBundle:Client")
+        $client = $this->getDoctrine()->getManager()->getRepository("WaldoOpenIdConnectModelBundle:Client")
                 ->findOneByClientId($authentication->getClientId());
         
         $userInfo = $this->get('waldo_oic_p.utils.scope')

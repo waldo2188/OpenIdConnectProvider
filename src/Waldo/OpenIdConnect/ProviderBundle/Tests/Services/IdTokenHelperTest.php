@@ -3,9 +3,9 @@
 namespace Waldo\OpenIdConnect\ProviderBundle\Tests\Services;
 
 use Waldo\OpenIdConnect\ProviderBundle\Services\IdTokenHelper;
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Account;
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Token;
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Client;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Account;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Token;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Client;
 
 /**
  * IdTokenHelperTest

@@ -2,7 +2,7 @@
 
 namespace Waldo\OpenIdConnect\ProviderBundle\Services;
 
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Request\Authentication;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Request\Authentication;
 use Waldo\OpenIdConnect\ProviderBundle\Constraints\AuthenticationRequestValidator;
 use Waldo\OpenIdConnect\ProviderBundle\Exception\AuthenticationRequestException;
 use Waldo\OpenIdConnect\ProviderBundle\AuthenticationFlows\AuthenticationCodeFlow;
@@ -84,7 +84,7 @@ class AuthorizationEndpoint
      * but not somethingelse
      * 
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \Waldo\OpenIdConnect\ProviderBundle\Entity\Request\Authentication
+     * @return \Waldo\OpenIdConnect\ModelBundle\Entity\Request\Authentication
      */
     protected function extractAutenticationFromRequest(Request $request)
     {

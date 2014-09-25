@@ -2,8 +2,8 @@
 
 namespace Waldo\OpenIdConnect\ProviderBundle\Services;
 
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Token;
-use Waldo\OpenIdConnect\ProviderBundle\Entity\IdToken;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Token;
+use Waldo\OpenIdConnect\ModelBundle\Entity\IdToken;
 use Waldo\OpenIdConnect\ProviderBundle\Services\AbstractTokenHelper;
 
 /**

@@ -5,8 +5,8 @@ namespace Waldo\OpenIdConnect\ProviderBundle\Tests\Services;
 use Waldo\OpenIdConnect\ProviderBundle\Services\TokenEndpoint;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\Voter\AuthenticatedVoter;
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Token;
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Client;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Token;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Client;
 
 /**
  * TokenEndpointTest
@@ -393,7 +393,7 @@ class TokenEndpointTest extends \PHPUnit_Framework_TestCase
     }
     private function mockEntityRepository()
     {
-        return $this->getMockBuilder("Waldo\OpenIdConnect\ProviderBundle\EntityRepository\TokenRepository")
+        return $this->getMockBuilder("Waldo\OpenIdConnect\ModelBundle\EntityRepository\TokenRepository")
                 ->disableOriginalConstructor()
                 ->disableOriginalClone()
                 ->setMethods(array("getClientTokenByCode", "getClientTokenByRefreshToken", "findOneBy"))

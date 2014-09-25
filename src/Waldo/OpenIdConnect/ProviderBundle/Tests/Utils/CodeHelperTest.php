@@ -2,19 +2,19 @@
 
 namespace Waldo\OpenIdConnect\ProviderBundle\Tests\Utils;
 
-use Waldo\OpenIdConnect\ProviderBundle\Utils\CodeHelper;
+use Waldo\OpenIdConnect\ProviderBundle\Utils\TokenCodeGenerator;
 
 /**
- * @group codeHelper
+ * @group TokenCodeGenerator
  */
-class CodeHelperTest extends \PHPUnit_Framework_TestCase
+class TokenCodeGeneratorTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testShouldGenereateAValidHTTPParameter()
     {
         $value = "";
         for($x = 10; $x >= 0; $x--) {
-            $value .= CodeHelper::generateCode();
+            $value .= TokenCodeGenerator::generateCode();
         }
 
         foreach(array('.', '+', '~', '/') as $mustNotExist) {
@@ -27,7 +27,7 @@ class CodeHelperTest extends \PHPUnit_Framework_TestCase
     {
         $value = "";
         for($x = 10; $x >= 0; $x--) {
-            $value .= CodeHelper::generateCode(true);
+            $value .= TokenCodeGenerator::generateCode(true);
         }
 
         $test = false;
@@ -57,7 +57,7 @@ class CodeHelperTest extends \PHPUnit_Framework_TestCase
                         ));
         
 
-        $value = CodeHelper::generateUniqueCode($entityRepo, "aPropertyName");
+        $value = TokenCodeGenerator::generateUniqueCode($entityRepo, "aPropertyName");
         
         foreach(array('.', '+', '~', '/') as $mustNotExist) {
             $this->assertFalse(stripos($value, $mustNotExist));

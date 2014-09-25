@@ -2,7 +2,7 @@
 
 namespace Waldo\OpenIdConnect\ProviderBundle\Services;
 
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Token;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Token;
 use Waldo\OpenIdConnect\ProviderBundle\Exception\UserinfoException;
 use Waldo\OpenIdConnect\ProviderBundle\Services\UserinfoHelper;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,7 +71,7 @@ class UserinfoEndpoint
     /**
      * 
      * @param Request $request
-     * @return Waldo\OpenIdConnect\ProviderBundle\Entity\Token
+     * @return Waldo\OpenIdConnect\ModelBundle\Entity\Token
      * @throws UserinfoException
      */
     protected function isValid(Request $request)
@@ -91,7 +91,7 @@ class UserinfoEndpoint
         }
         
         /* @var $token Token */
-        $token = $this->em->getRepository("Waldo\OpenIdConnect\ProviderBundle\Entity\Token")
+        $token = $this->em->getRepository("Waldo\OpenIdConnect\ModelBundle\Entity\Token")
                 ->findOneByAccessToken($matches[1]);
         
         if($token === null) {

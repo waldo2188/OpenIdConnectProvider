@@ -1,9 +1,9 @@
 security:
     encoders:
-        Waldo\OpenIdConnect\ProviderBundle\Entity\Account: 
+        Waldo\OpenIdConnect\ModelBundle\Entity\Account: 
             algorithm: bcrypt
             cost: 12
-        Waldo\OpenIdConnect\ProviderBundle\Entity\Client: plaintext
+        Waldo\OpenIdConnect\ModelBundle\Entity\Client: plaintext
         
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
@@ -11,9 +11,9 @@ security:
 
     providers:
         accounts:
-            entity: { class: WaldoOpenIdConnectProviderBundle:Account, property: username }
+            entity: { class: WaldoOpenIdConnectModelBundle:Account, property: username }
         clients:
-            entity: { class: WaldoOpenIdConnectProviderBundle:Client, property: clientId }
+            entity: { class: WaldoOpenIdConnectModelBundle:Client, property: clientId }
 
     firewalls:
         dev:

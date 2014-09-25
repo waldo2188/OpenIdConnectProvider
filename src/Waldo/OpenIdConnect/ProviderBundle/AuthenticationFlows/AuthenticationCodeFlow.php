@@ -2,8 +2,8 @@
 
 namespace Waldo\OpenIdConnect\ProviderBundle\AuthenticationFlows;
 
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Request\Authentication;
-use Waldo\OpenIdConnect\ProviderBundle\Utils\CodeHelper;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Request\Authentication;
+use Waldo\OpenIdConnect\ProviderBundle\Utils\TokenCodeGenerator;
 use Waldo\OpenIdConnect\ProviderBundle\Exception\AuthenticationRequestException;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
@@ -88,12 +88,12 @@ class AuthenticationCodeFlow
      */
     public function handleAccept(Authentication $authentication)
     {
-        $code = CodeHelper::generateUniqueCode(
-                $this->em->getRepository("WaldoOpenIdConnectProviderBundle:Token"),
+        $code = TokenCodeGenerator::generateUniqueCode(
+                $this->em->getRepository("WaldoOpenIdConnectModelBundle:Token"),
                 'codeToken'
                 );
         
-        $this->em->getRepository("WaldoOpenIdConnectProviderBundle:Token")
+        $this->em->getRepository("WaldoOpenIdConnectModelBundle:Token")
                 ->setCode(
                         $this->securityContext->getToken()->getUser()->getId(),
                         $authentication->getClientId(),
@@ -145,7 +145,7 @@ class AuthenticationCodeFlow
     
     /**
      * 
-     * @param \Waldo\OpenIdConnect\ProviderBundle\Entity\Request\Authentication $authentication
+     * @param \Waldo\OpenIdConnect\ModelBundle\Entity\Request\Authentication $authentication
      * @return boolean
      * @throws AuthenticationRequestException
      */
@@ -207,7 +207,7 @@ class AuthenticationCodeFlow
     /**
      * Create a redirect response to the login form
      * 
-     * @param \Waldo\OpenIdConnect\ProviderBundle\Entity\Request\Authentication $authentication
+     * @param \Waldo\OpenIdConnect\ModelBundle\Entity\Request\Authentication $authentication
      * @return RedirectResponse
      */
     private function needAuthRequest(Authentication $authentication)

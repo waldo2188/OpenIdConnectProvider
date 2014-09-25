@@ -2,8 +2,8 @@
 
 namespace Waldo\OpenIdConnect\ProviderBundle\Services;
 
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Token;
-use Waldo\OpenIdConnect\ProviderBundle\Entity\Account;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Token;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Account;
 use Waldo\OpenIdConnect\ProviderBundle\Services\AbstractTokenHelper;
 use Symfony\Component\DependencyInjection\Container;
 
@@ -24,7 +24,7 @@ class UserinfoHelper extends AbstractTokenHelper
         
         foreach ($token->getScope() as $scope) {
             $propertyName = 'scope' . ucfirst($scope);
-            if(property_exists("Waldo\OpenIdConnect\ProviderBundle\Entity\Account", $propertyName)) {
+            if(property_exists("Waldo\OpenIdConnect\ModelBundle\Entity\Account", $propertyName)) {
                 
                 foreach(Account::$$propertyName as $accountProperty) {
                     
