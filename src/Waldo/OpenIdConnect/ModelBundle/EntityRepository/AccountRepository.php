@@ -62,4 +62,21 @@ class AccountRepository extends EntityRepository
         
         return $qb->getQuery()->getOneOrNullResult();
     }
+    
+    public function isSameEmailForThisAccount($email, Account $account)
+    {
+        $qb = $this->createQueryBuilder("Account");
+        $qb->where(
+                $qb->expr()->andX(
+                        $qb->expr()->eq("Account.email", ":email"),
+                        $qb->expr()->eq("Account", ":account")
+                    )
+                )
+            ->setParameter("email", $email)
+            ->setParameter("account", $account)
+            ;
+                
+        return $qb->getQuery()->getOneOrNullResult() !== null ? true : false;
+    }
+    
 }

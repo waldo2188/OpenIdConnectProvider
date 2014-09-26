@@ -9,6 +9,15 @@ To complete your registration, you must use the link below to verify your accoun
 This link is valid for 1 hour. Beyond this time, you need to recreate an account.
 {% endblock %}
 
+{% block email_verification_object %}You have change your email{% endblock %}
+{% block email_verification_body %}
+Hey there !<br />
+You recently changed your email.<br />
+<br />
+Please, follow the link below to verify this new email :<br />
+<a href="{{ link }}">{{ link }}</a><br />
+{% endblock %}
+
 
 {% block lost_account_object %}Someone requested a new password for your account{% endblock %}
 {% block lost_account_body %}

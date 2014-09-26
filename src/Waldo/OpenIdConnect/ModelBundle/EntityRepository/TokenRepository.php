@@ -45,10 +45,13 @@ class TokenRepository extends EntityRepository
                     ->findOneByClientId($clientId));
         }
         
+        //TODO set Expiration date
         $token->setCodeToken($code)
                 ->setScope($scope)
                 ->setNonce($nonce)
-                ->setRedirectUri($redirectUri);
+                ->setRedirectUri($redirectUri)
+                ->setIssuedAt(new \DateTime('now'))
+                ;
         
         $this->_em->persist($token);
         $this->_em->flush();

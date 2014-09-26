@@ -92,7 +92,7 @@ class AccountActionsService
     /**
      * Check if the token is a valid one
      * 
-     * @param AccountAction $accountAction
+     * @param string $token
      * @return false|Account
      */
     public function isValidLostPasswordToken($token)
@@ -117,6 +117,24 @@ class AccountActionsService
         return $isValid;    
     }
     
+    /**
+     * Handle account after modification.
+     * 
+     * @param \Waldo\OpenIdConnect\ModelBundle\Entity\Account $account
+     */
+    public function handleEditProfile(Account $account)
+    {
+        $isSameEmail = $this->em->getRepository("WaldoOpenIdConnectModelBundle:Account")
+                ->isSameEmailForThisAccount($account->getEmail(), $account);
+
+        if ($isSameEmail === false) {
+            $account->setEmailVerified(false);
+            $this->sendMailWithToken(
+                    $account, "oicp_registration_account_new_email", AccountAction::ACTION_EMAIL_CHANGE_VALIDATION, "email_verification"
+            );
+        }
+    }
+
     /**
      * Generic method for handleLostPassword and sendMailRegistrationConfirmation
      * 

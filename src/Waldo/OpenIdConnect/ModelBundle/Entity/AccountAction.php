@@ -16,7 +16,8 @@ class AccountAction
 {
 
     const ACTION_EMAIL_VALIDATION = 1;
-    const ACTION_ACCOUNT_LOST = 2;
+    const ACTION_EMAIL_CHANGE_VALIDATION = 2;
+    const ACTION_ACCOUNT_LOST = 3;
 
     /**
      * @ORM\Id

@@ -69,9 +69,25 @@ class RegistrationController extends Controller
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @Template
      */
-    public function accountValidationAction(Request $request, $token)
+    public function accountValidationAction($token)
     {
         $isValid = $this->get("waldo_oic_enduser.registration")->handleValidationToken($token);
+        
+        return array("isValid" => $isValid);
+    }
+
+    /**
+     * @Route("/valid-new-email/{token}", name="oicp_registration_account_new_email")
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @Template
+     */
+    public function accountNewEmailAction($token)
+    {
+        $isValid = $this->get("waldo_oic_enduser.registration")->handleNewEmailToken($token);
+        
+        if($isValid === false) {
+            throw $this->createNotFoundException();
+        }
         
         return array("isValid" => $isValid);
     }

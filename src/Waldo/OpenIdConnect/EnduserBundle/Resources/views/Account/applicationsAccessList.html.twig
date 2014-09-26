@@ -1,0 +1,29 @@
+{% extends "WaldoOpenIdConnectEnduserBundle:Account:index.html.twig" %}
+
+{% block title %}{{ parent() }} - {% trans %}Applications access list{% endtrans %}{% endblock title %}
+
+{% macro scopes(scopes) %}
+    {% for scope in scopes %}
+        {% if scope != "openid" %}
+        {{ scope }}{% if loop.last != true %},{% endif %}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+
+{% block accountContent %}
+
+    <h1>{% trans %}Applications access list{% endtrans %}</h1>
+    
+    <p>{% trans %}You have granted the following applications access to your account.{% endtrans %}</p>
+
+    <ul>
+        {% for token in tokenList %}
+            <li>
+                {{ token.client.clientName }} -- {{ _self.scopes(token.scope) }}  -- {% trans %}Last used on{% endtrans %} {{ token.issuedAt|date() }}
+            </li>
+        {% endfor %}
+    </ul>
+    
+    
+{% endblock accountContent %}

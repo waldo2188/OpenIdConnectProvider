@@ -53,6 +53,11 @@ class RegistrationUserService
         return new AccountFormType();
     }
     
+    /**
+     * Helper for encoding password
+     * 
+     * @param \Waldo\OpenIdConnect\ModelBundle\Entity\Account $account
+     */
     public function encodePassword(Account $account)
     {
         $encoder = $this->encoderFactory->getEncoder($account);
@@ -63,6 +68,12 @@ class RegistrationUserService
         $account->setPassword($password);
     }
     
+    /**
+     * Handle the token for validate an account
+     * 
+     * @param \Waldo\OpenIdConnect\ModelBundle\Entity\AccountAction $token
+     * @return boolean
+     */
     public function handleValidationToken($token)
     {
         /* @var $token AccountAction */
@@ -92,4 +103,33 @@ class RegistrationUserService
         $this->em->flush();
         return $isValid;    
     }
+    
+    /**
+     * Handle the token for validate enduser's new email
+     * 
+     * @param \Waldo\OpenIdConnect\ModelBundle\Entity\AccountAction $token
+     * @return boolean
+     */
+    public function handleNewEmailToken($token)
+    {
+        /* @var $token AccountAction */
+        $token = $this->em->getRepository("WaldoOpenIdConnectModelBundle:AccountAction")
+                ->findOneBy(array('token' => $token, 'type' => AccountAction::ACTION_EMAIL_CHANGE_VALIDATION));
+        
+        if($token === null) {
+            return false;
+        }
+        
+        $token->getAccount()
+                ->setEmailVerified(true)
+        ;
+        $this->em->persist($token->getAccount());
+
+        $this->em->remove($token);
+
+        $this->em->flush();
+        
+        return true;
+    }
+
 }
