@@ -3,49 +3,51 @@
 {% block title %}{% trans %}Login{% endtrans %}{% endblock title %}
 
 {% block bodyContent %}
-    {% if error %}
-        <div>{{ error.message|trans }}</div>
-        {% if error.message == "User account is disabled." %}
-            {% trans %}Maybe your account have not been yet validated by an administrator ?{% endtrans %}
-            {% trans %}Please, wait until you receive a confirmation email.{% endtrans %}
-        {% endif %}
-    {% endif %}
-
-    <div>
-        <h1>{% trans %}Welcom to the OIC login page{% endtrans %}</h1>
-        {% if client is null %}
-            <h2>{% trans %}Sign in with your OIC account{% endtrans %}</h2>
-        {% else %}
-            <h2>{% trans with {'%appname%': client.clientName} %}%appname% required you to be authenticated{% endtrans %}</h2>
-            {% if client.logoUri is not null %}
-                <img src="{{ client.logoUri }}" alt="{% trans %}logo of application{% endtrans %}" />
-            {% endif %}
-            {% if client.tosUri is not null %}
-                <a href="{{ client.tosUri }}">
-                    {% trans with {'%appname%': client.clientName} %}Term of service for %appname%{% endtrans %}
-                </a>
-            {% endif %}
-            {% if client.policyUri is not null %}
-                <a href="{{ client.policyUri }}">
-                    {% trans with {'%appname%': client.clientName} %}Policy %appname%{% endtrans %}
-                </a>
+    <div class="auth-page">
+        {% if error %}
+            <div>{{ error.message|trans }}</div>
+            {% if error.message == "User account is disabled." %}
+                {% trans %}Maybe your account have not been yet validated by an administrator ?{% endtrans %}
+                {% trans %}Please, wait until you receive a confirmation email.{% endtrans %}
             {% endif %}
         {% endif %}
+
+        <div>
+            <h1>{% trans %}Welcom to the OIC login page{% endtrans %}</h1>
+            {% if client is null %}
+                <h2>{% trans %}Sign in with your OIC account{% endtrans %}</h2>
+            {% else %}
+                {% if client.logoUri is not null %}
+                    <img class="logo" src="{{ client.logoUri }}" alt="{% trans %}logo of application{% endtrans %}" />
+                {% endif %}
+                <h2>{% trans with {'%appname%': client.clientName} %}%appname% required you to be authenticated{% endtrans %}</h2>
+                {% if client.tosUri is not null %}
+                    <a href="{{ client.tosUri }}">
+                        {% trans with {'%appname%': client.clientName} %}Term of service for %appname%{% endtrans %}
+                    </a>
+                {% endif %}
+                {% if client.policyUri is not null %}
+                    <a href="{{ client.policyUri }}">
+                        {% trans with {'%appname%': client.clientName} %}Policy %appname%{% endtrans %}
+                    </a>
+                {% endif %}
+            {% endif %}
+        </div>
+
+        <form class="form-signin" action="{{ path('login_check') }}" method="post" role="form">
+
+            <input class="form-control" type="text" id="username" placeholder="{% trans %}Username{% endtrans %}" name="_username" value="{{ last_username }}" />
+
+            <input class="form-control" type="password" id="password" placeholder="{% trans %}Password{% endtrans %}" name="_password" />
+            <br />
+            <button class="btn btn-lg btn-primary btn-block" type="submit" name="signin">Sign in</button>
+
+        </form>
+        <div class="actions-link">
+            <a href="{{ path("oicp_lost_account_search") }}">{% trans %}Forgot your password ?{% endtrans %}</a>
+            <a class="pull-right" href="{{ path("oicp_registration_new_account") }}">{% trans %}Create an account{% endtrans %}</a>
+        </div>
+
+        
     </div>
-
-    <form action="{{ path('login_check') }}" method="post">
-        <label for="username">{% trans %}Username:{% endtrans %}</label>
-        <input type="text" id="username" placeholder="Username" name="_username" value="{{ last_username }}" />
-
-        <label for="password">{% trans %}Password:{% endtrans %}</label>
-        <input type="password" id="password" placeholder="Password" name="_password" />
-
-        <button type="submit" name="signin">Sign in</button>
-    </form>
-
-    <div>
-        <a href="{{ path("oicp_lost_account_search") }}">{% trans %}Forgot your password ?{% endtrans %}</a>
-        <a href="{{ path("oicp_registration_new_account") }}">{% trans %}Create an account{% endtrans %}</a>
-    </div>
-
 {% endblock bodyContent %}

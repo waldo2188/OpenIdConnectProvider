@@ -3,7 +3,6 @@
     <head>
         <meta charset='utf-8' />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Content-Language" content="{{ app.request.locale }}" />
         <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noodp" />
         <title>{% block title %}{% endblock title %}</title>
         
@@ -12,22 +11,15 @@
         <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
             {% endstylesheets %}
         {% endblock %}
-{#        <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">#}
     </head>
     <body> 
+        <div class="container">
 {% block bodyContent %}{% endblock bodyContent %}
-
+        </div>
 {% block javascripts %}
     {% javascripts '@jquery' '@bootstrap_js' combine=true filter='?yui_js' %}
     <script src="{{ asset_url }}" type="text/javascript"></script>
     {% endjavascripts %}
 {% endblock %}
-
-{#{% block javascripts %}
-    
-    <script src="{{ asset('js/jquery.js') }}"></script>
-    
-    <script src="{{ asset('js/bootstrap.js') }}"></script>
-{% endblock javascripts %}#}
     </body>
 </html>

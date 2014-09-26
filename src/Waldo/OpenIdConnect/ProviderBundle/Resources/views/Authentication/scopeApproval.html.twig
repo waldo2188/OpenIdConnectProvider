@@ -3,23 +3,24 @@
 {% block title %}{% trans %}Scope Approval{% endtrans %}{% endblock title %}
 
 {% block bodyContent %}
-    <h2>{{ client.clientName }}</h2>
-    
-    <h3>Information claimed</h3>
-    <ul>
-    {% for key, info in userinfos %}
-        {% if key == 'updateAt' or key == 'birthdate' %}
-        <li>{{ key }}: {{ info|date("m/d/Y") }}</li>
-        {% else %}
-        <li>{{ key }}: {{ info }}</li>
+    <div class="auth-page">
+        
+        {% if client.logoUri is not null %}
+            <img src="{{ client.logoUri }}" alt="{% trans %}logo of application{% endtrans %}" />
         {% endif %}
-    {% endfor %}
-    </ul>
+        <h2 {% if client.logoUri is not null %}class="logo-align"{% endif %}>{{ client.clientName }}</h2>
+        
+        <h3>Informations claimed</h3>
+        <ul>
+            {% for key, info in userinfos %}
+                    <li>{{ key|trans }}: {% if key == 'updateAt' or key == 'birthdate' %}{{ info|date("m/d/Y") }}{% else %}{{ info }}{% endif %}</li>
+                {% endfor %}
+        </ul>
 
-    {{ form_start(form) }}
-        {{ form_row(form.cancel) }}
-        {{ form_row(form.accept) }}
-    {{ form_end(form) }}
+        {{ form_start(form) }}
+            {{ form_row(form.cancel, {'attr' :{'class' : 'btn btn-warning'}}) }}
+            {{ form_row(form.accept) }}
+        {{ form_end(form) }}
 
-
+    </div>
 {% endblock bodyContent %}
