@@ -2,96 +2,138 @@
 
 {% block title %}{% trans %}Your account{% endtrans %}{% endblock title %}
 
-{% block bodyContent %}
+{% macro is_active(route) %}
+    {% if app.request.attributes.get('_route') == route %}active{% endif %}
+{% endmacro %}
 
-    <h1>{% trans with {'%username%' : app.user.username } %}Dear %username%, this is your account{% endtrans %}</h1>
-    
-    <nav>
-        <ul>
-            <li><a href="{{ path("oicp_account_index") }}">{% trans %}Profile{% endtrans %}</a></li>
-            <li><a href="{{ path("oicp_account_edit_profile") }}">{% trans %}Edit your profile{% endtrans %}</a></li>
-            <li><a href="{{ path("oicp_account_change_password") }}">{% trans %}Change password{% endtrans %}</a></li>
-            <li><a href="{{ path("oicp_account_application_access_list") }}">{% trans %}Applications access list{% endtrans %}</a></li>
+{% block bodyContent %}
+    <div class="enduser-account-page">
+        <h1>{% trans with {'%username%' : app.user.username } %}Dear %username%, this is your account{% endtrans %}</h1>
+
+        <div class="row">
+            <div class="col-md-3">
+                <nav>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="{{ _self.is_active("oicp_account_index") }}"><a href="{{ path("oicp_account_index") }}">{% trans %}Profile{% endtrans %}</a></li>
+                        <li class="{{ _self.is_active("oicp_account_edit_profile") }}"><a href="{{ path("oicp_account_edit_profile") }}">{% trans %}Edit your profile{% endtrans %}</a></li>
+                        <li class="{{ _self.is_active("oicp_account_change_password") }}"><a href="{{ path("oicp_account_change_password") }}">{% trans %}Change password{% endtrans %}</a></li>
+                        <li class="{{ _self.is_active("oicp_account_application_access_list") }}"><a href="{{ path("oicp_account_application_access_list") }}">{% trans %}Applications access list{% endtrans %}</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="col-md-9">
+        {% block accountContent %}
+        <h2>{% trans %}Your profile data{% endtrans %}</h2>
+
+        <ul class="nav nav-tabs" role="tablist">
+            <li><a href="#account" role="tab" data-toggle="tab">{% trans %}Account{% endtrans %}</a></li>
+            <li><a href="#profile" role="tab" data-toggle="tab">{% trans %}Profile{% endtrans %}</a></li>
+            <li><a href="#address" role="tab" data-toggle="tab">{% trans %}Address{% endtrans %}</a></li>
         </ul>
-    </nav>
-    
-    {% block accountContent %}
-    <h2>{% trans %}Your data{% endtrans %}</h2>
-    <div>
-        <dl>
-            <dt>{% trans %}Username{% endtrans %}</dt>
-                <dd>{{ app.user.username }}</dd>
-            
-            {% if app.user.name %}<dt>{% trans %}Name{% endtrans %}</dt>
-                <dd>{{ app.user.name }}</dd>{% endif %}
-                
-            {% if app.user.givenName %}<dt>{% trans %}First name{% endtrans %}</dt>
-                <dd>{{ app.user.givenName }}</dd>{% endif %}
-                
-            {% if app.user.familyName %}<dt>{% trans %}Last name{% endtrans %}</dt>
-                <dd>{{ app.user.familyName }}</dd>{% endif %}
-                
-            {% if app.user.middleName %}<dt>{% trans %}Middle name{% endtrans %}</dt>
-                <dd>{{ app.user.middleName }}</dd>{% endif %}
-                
-            {% if app.user.nickname %}<dt>{% trans %}Nickname, casual name{% endtrans %}</dt>
-                <dd>{{ app.user.nickname }}</dd>{% endif %}
-                
-            {% if app.user.preferedUsername %}<dt>{% trans %}Prefered username{% endtrans %}</dt>
-                <dd>{{ app.user.preferedUsername }}</dd>{% endif %}
-                
-            {% if app.user.profile %}<dt>{% trans %}Profile{% endtrans %}</dt>
-                <dd>{{ app.user.profile }}</dd>{% endif %}
-                
-            {% if app.user.picture %}<dt>{% trans %}Picture{% endtrans %}</dt>
-                <dd>{{ app.user.picture }}</dd>{% endif %}
-                
-            {% if app.user.website %}<dt>{% trans %}Web site{% endtrans %}</dt>
-                <dd>{{ app.user.website }}</dd>{% endif %}
-                
-            {% if app.user.gender %}<dt>{% trans %}Gender{% endtrans %}</dt>
-                <dd>{{ app.user.gender }}</dd>{% endif %}
-                
-            {% if app.user.birthdate %}<dt>{% trans %}birthdate{% endtrans %}</dt>
-                <dd>{{ app.user.birthdate|date() }}</dd>{% endif %}
-                
-            {% if app.user.zoneInfo %}<dt>{% trans %}Time zone{% endtrans %}</dt>
-                <dd>{{ app.user.zoneInfo }}</dd>{% endif %}
-                
-            {% if app.user.locale %}<dt>{% trans %}Locale{% endtrans %}</dt>
-                <dd>{{ app.user.locale }}</dd>{% endif %}
-                
-            {% if app.user.lastLoginAt %}<dt>{% trans %}Last login at{% endtrans %}</dt>
-                <dd>{{ app.user.lastLoginAt|date() }}</dd>{% endif %}
-                
-            {% if app.user.email %}<dt>{% trans %}Email{% endtrans %}</dt>
-                <dd>{{ app.user.email }}</dd>{% endif %}
-                
-            {% if app.user.phoneNumber %}<dt>{% trans %}Telephone number{% endtrans %}</dt>
-                <dd>{{ app.user.phoneNumber }}</dd>{% endif %}
-        
-        </dl>
-        
-        {% if app.user.address %}Address
-        <dl>        
-            {% if app.user.address.formatted %}<dt>{% trans %}Full mailing address{% endtrans %}</dt>
-                <dd>{{ app.user.address.formatted }}</dd>{% endif %}
-                
-            {% if app.user.address.streetAddress %}<dt>{% trans %}Full street address{% endtrans %}</dt>
-                <dd>{{ app.user.address.streetAddress }}</dd>{% endif %}
-                
-            {% if app.user.address.locality %}<dt>{% trans %}City or locality{% endtrans %}</dt>
-                <dd>{{ app.user.address.locality }}</dd>{% endif %}
-                
-            {% if app.user.address.region %}<dt>{% trans %}State, province, prefecture, or region{% endtrans %}</dt>
-                <dd>{{ app.user.address.region }}</dd>{% endif %}
-                
-            {% if app.user.address.postalCode %}<dt>{% trans %}Zip code or postal code{% endtrans %}</dt>
-                <dd>{{ app.user.address.postalCode }}</dd>{% endif %}
-                
-            {% if app.user.address.country %}<dt>{% trans %}Country name{% endtrans %}</dt>
-                <dd>{{ app.user.address.country }}</dd>{% endif %}
-        </dl>{% endif %}
+
+        <div class="tab-content">
+            <div class="tab-pane" id="account">
+                {% if app.user.picture %}<img class="pull-right" src="{{ app.user.picture }}" alt="{% trans %}Account picture{% endtrans %}" />{% endif %}
+                <dl>
+                    <dt>{% trans %}Username{% endtrans %}</dt>
+                        <dd>{{ app.user.username }}</dd>
+
+
+                    {% if app.user.email %}<dt>{% trans %}Email{% endtrans %}</dt>
+                        <dd>{{ app.user.email }}</dd>{% endif %}
+
+
+                    {% if app.user.lastLoginAt %}<dt>{% trans %}Last login at{% endtrans %}</dt>
+                        <dd>{{ app.user.lastLoginAt|date() }}</dd>{% endif %}
+                </dl>
+            </div>
+
+            <div class="tab-pane" id="profile">
+                <dl>
+                    {% if app.user.name %}<dt>{% trans %}Name{% endtrans %}</dt>
+                        <dd>{{ app.user.name }}</dd>{% endif %}
+
+                    {% if app.user.givenName %}<dt>{% trans %}First name{% endtrans %}</dt>
+                        <dd>{{ app.user.givenName }}</dd>{% endif %}
+
+                    {% if app.user.familyName %}<dt>{% trans %}Last name{% endtrans %}</dt>
+                        <dd>{{ app.user.familyName }}</dd>{% endif %}
+
+                    {% if app.user.middleName %}<dt>{% trans %}Middle name{% endtrans %}</dt>
+                        <dd>{{ app.user.middleName }}</dd>{% endif %}
+
+                    {% if app.user.nickname %}<dt>{% trans %}Nickname, casual name{% endtrans %}</dt>
+                        <dd>{{ app.user.nickname }}</dd>{% endif %}
+
+                    {% if app.user.preferedUsername %}<dt>{% trans %}Prefered username{% endtrans %}</dt>
+                        <dd>{{ app.user.preferedUsername }}</dd>{% endif %}
+
+                    {% if app.user.profile %}<dt>{% trans %}Profile{% endtrans %}</dt>
+                        <dd>{{ app.user.profile }}</dd>{% endif %}
+
+                    {% if app.user.website %}<dt>{% trans %}Web site{% endtrans %}</dt>
+                        <dd>{{ app.user.website }}</dd>{% endif %}
+
+                    {% if app.user.gender %}<dt>{% trans %}Gender{% endtrans %}</dt>
+                        <dd>{{ app.user.gender }}</dd>{% endif %}
+
+                    {% if app.user.birthdate %}<dt>{% trans %}birthdate{% endtrans %}</dt>
+                        <dd>{{ app.user.birthdate|date() }}</dd>{% endif %}
+
+                    {% if app.user.zoneInfo %}<dt>{% trans %}Time zone{% endtrans %}</dt>
+                        <dd>{{ app.user.zoneInfo }}</dd>{% endif %}
+
+                    {% if app.user.locale %}<dt>{% trans %}Locale{% endtrans %}</dt>
+                        <dd>{{ app.user.locale }}</dd>{% endif %}
+
+
+                    {% if app.user.phoneNumber %}<dt>{% trans %}Telephone number{% endtrans %}</dt>
+                        <dd>{{ app.user.phoneNumber }}</dd>{% endif %}
+
+                </dl>
+            </div>
+
+            <div class="tab-pane" id="address">
+                {% if app.user.address %}
+                <dl>        
+                    {% if app.user.address.formatted %}<dt>{% trans %}Full mailing address{% endtrans %}</dt>
+                        <dd>{{ app.user.address.formatted|nl2br }}</dd>{% endif %}
+
+                    {% if app.user.address.streetAddress %}<dt>{% trans %}Full street address{% endtrans %}</dt>
+                        <dd>{{ app.user.address.streetAddress }}</dd>{% endif %}
+
+                    {% if app.user.address.locality %}<dt>{% trans %}City or locality{% endtrans %}</dt>
+                        <dd>{{ app.user.address.locality }}</dd>{% endif %}
+
+                    {% if app.user.address.region %}<dt>{% trans %}State, province, prefecture, or region{% endtrans %}</dt>
+                        <dd>{{ app.user.address.region }}</dd>{% endif %}
+
+                    {% if app.user.address.postalCode %}<dt>{% trans %}Zip code or postal code{% endtrans %}</dt>
+                        <dd>{{ app.user.address.postalCode }}</dd>{% endif %}
+
+                    {% if app.user.address.country %}<dt>{% trans %}Country name{% endtrans %}</dt>
+                        <dd>{{ app.user.address.country }}</dd>{% endif %}
+                </dl>{% endif %}
+            </div>
+        </div>
+            {% endblock accountContent %}
+
+            </div>
+        </div>
     </div>
-    {% endblock accountContent %}
 {% endblock bodyContent %}
+    
+{% block javascripts %}
+    {{ parent() }}
+<script type="text/javascript">
+$(document).ready(function() {
+    if(window.location.hash) {
+        $('a[href="' + window.location.hash + '"]').tab('show');
+    } else {
+        $('a[href="#account"]').tab('show');
+    }
+});
+</script>
+{% endblock %}
+    

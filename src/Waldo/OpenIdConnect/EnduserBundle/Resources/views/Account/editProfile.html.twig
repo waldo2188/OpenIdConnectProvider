@@ -2,16 +2,93 @@
 
 {% block title %}{{ parent() }} - {% trans %}Edit your profile{% endtrans %}{% endblock title %}
 
+{% macro has_errors_in_tab(form, form_fields) %}
+    {% set errors_count = 0 %}
+    {% for field in form_fields %}
+        {% if form[field].vars.errors.count > 0 %}{% set errors_count = errors_count + form[field].vars.errors.count %}{% endif %}
+    {% endfor %}
+    {% if errors_count > 0 %}<span class="text-danger">{{ badge(errors_count) }} {% trans %}Error(s){% endtrans %}</span>{% endif %}
+{% endmacro %}
+
 {% block accountContent %}
 
     <h1>{% trans %}Edit your profile{% endtrans %}</h1>
 
     {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="flash-notice">
+        <div class="alert alert-success" role="alert">
             {{ flashMessage }}
         </div>
     {% endfor %}
+
+    <ul class="nav nav-tabs" role="tablist">
+        {% set form_fields_account = ['email', 'picture'] %}
+        <li class="active"><a href="#account" role="tab" data-toggle="tab">{% trans %}Account{% endtrans %}{{ _self.has_errors_in_tab(form, form_fields_account) }}</a></li>
+        {% set form_fields_profile = ['name', 'givenName', 'familyName', 'middleName', 'nickname', 'preferedUsername', 'gender', 'birthdate', 'zoneInfo', 'locale', 'website', 'phoneNumber'] %}
+        <li><a href="#profile" role="tab" data-toggle="tab">{% trans %}Profile{% endtrans %}{{ _self.has_errors_in_tab(form, form_fields_profile) }}</a></li>
+        {% set form_fields_address = ['formatted', 'streetAddress', 'locality', 'region', 'postalCode', 'country'] %}
+        <li><a href="#address" role="tab" data-toggle="tab">{% trans %}Address{% endtrans %}{{ _self.has_errors_in_tab(form.address, form_fields_address) }}</a></li>
+    </ul>
+
+    {{ form_start(form, { 'style': 'horizontal' }) }}
+    <div class="tab-content">
+        <p class="mandatory">{% trans %}All fields marked with the little red stars are mandatory{% endtrans %}</p>
+        
+        <div class="tab-pane active" id="account">
+            <div class="row">
+                <div class="col-md-8">
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.picture) }}
+                </div>
+                <div class="col-md-4">
+                    <img src="" id="user_picture" />
+                </div>
+            </div>
+        </div>
+            
+        <div class="tab-pane" id="profile">
+            {{ form_row(form.name) }}
+            {{ form_row(form.givenName) }}
+            {{ form_row(form.familyName) }}
+            {{ form_row(form.middleName) }}
+            {{ form_row(form.nickname) }}
+            {{ form_row(form.preferedUsername) }}
+            {{ form_row(form.gender) }}
+            {{ form_row(form.birthdate) }}
+            {{ form_row(form.zoneInfo) }}
+            {{ form_row(form.locale) }}
+            {{ form_row(form.website) }}
+            {{ form_row(form.phoneNumber) }}
+        </div>
+            
+        <div class="tab-pane" id="address">
+            {{ form_row(form.address.formatted) }}
+            {{ form_row(form.address.streetAddress) }}
+            {{ form_row(form.address.locality) }}
+            {{ form_row(form.address.region) }}
+            {{ form_row(form.address.postalCode) }}
+            {{ form_row(form.address.country) }}
+        </div>
+
+        {{ form_widget(form.save) }}
+    </div>
+        {{ form_end(form) }}
+
+    {% endblock accountContent %}
+
+{% block javascripts %}
+    {{ parent() }}
+<script type="text/javascript">   
+$(document).ready(function() {
     
-    {% include "WaldoOpenIdConnectEnduserBundle:Account:accountEditForm.html.twig" with { form: form } %}
+    var picture = $('#{{ form.picture.vars.id }}');
+
+    $(picture).on('change', function(event) {
+        $('#user_picture').attr('src', $(event.currentTarget).val());
+    });
+
+    $(picture).trigger('change');
+
+});
+</script>
+{% endblock %}
     
-{% endblock accountContent %}

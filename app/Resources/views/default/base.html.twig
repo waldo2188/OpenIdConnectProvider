@@ -17,7 +17,7 @@
 {% block bodyContent %}{% endblock bodyContent %}
         </div>
 {% block javascripts %}
-    {% javascripts '@jquery' '@bootstrap_js' combine=true filter='?yui_js' %}
+    {% javascripts '@jquery' '@bootstrap_js' '@other_js' combine=true filter='?yui_js' %}
     <script src="{{ asset_url }}" type="text/javascript"></script>
     {% endjavascripts %}
 {% endblock %}

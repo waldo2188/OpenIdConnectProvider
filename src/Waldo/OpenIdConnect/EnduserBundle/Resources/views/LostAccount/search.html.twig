@@ -3,12 +3,19 @@
 {% block title %}{% trans %}Find Your Account{% endtrans %}{% endblock title %}
 
 {% block bodyContent %}
-    <h1>{% trans %}Find Your Account{% endtrans %}</h1>
-    
-{% if isFound == false %}
-    {% trans %}Sorry, we can not found your account with the given username or email.{% endtrans %}
-{% endif %}    
+    <div class="auth-page">
+        <h1>{% trans %}Find Your Account{% endtrans %}</h1>
 
-{{ form(form) }}
+        {% if isFound is not null and isFound == false %}
+            <div class="alert alert-danger" role="alert">
+            {% trans %}Sorry, we can not found your account with the given username or email.{% endtrans %}
+            </div>
+        {% endif %}    
 
+        {{ form_start(form) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.search) }}
+        {{ form_row(form.cancel) }}
+        {{ form_end(form) }}
+    </div>
 {% endblock bodyContent %}

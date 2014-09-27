@@ -27,7 +27,7 @@ class RegistrationController extends Controller
 
         $user = $userRegistration->getBlankUser();
 
-        $form = $this->createForm($userRegistration->getFormType(), $user);
+        $form = $this->createForm($userRegistration->getFormType(), $user, array('hasProfileField' => false));
 
         $form->handleRequest($request);
 

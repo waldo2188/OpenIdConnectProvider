@@ -1,0 +1,52 @@
+
+div.register-page {
+    width: 510px;
+    margin: 0 auto;
+    
+    .mandatory {
+        font-weight: bold;
+    }
+}
+
+div.enduser-account-page {
+    .tab-content {
+        margin: 1em 0 0 1em;
+        
+        dl dd {
+            margin-bottom: 1.2em;
+            padding-left: 1em;
+        }
+        
+    }
+    
+    ul.token-list {
+        list-style-type: none;
+        padding: 0px;
+        margin: 0px;
+        
+        li {
+            padding: 0.3em 0.2em;
+            border-bottom: 1px solid #D7E2EA;
+            
+            &:first-child {
+                border-top: 1px solid #D7E2EA;
+            }
+            
+            .scope {
+                
+                a {
+                    color: #ADADAD;
+                }
+                
+                font-style: italic;
+                font-weight: lighter;
+            }
+        }
+    }
+}
+
+.form-group label.required:after {
+  content: " *";
+  color: red;
+}
+

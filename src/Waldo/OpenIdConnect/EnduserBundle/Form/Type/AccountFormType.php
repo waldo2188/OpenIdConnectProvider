@@ -20,9 +20,15 @@ class AccountFormType extends AbstractType
         $builder
                 ->add('email', 'email', array(
                     'label' => 'Email',
-                    'required' => false
+                    'required' => true
                     ))
-                ->add('name', 'text', array(
+                
+                ->add('save', 'submit')
+            ;
+        
+        if($options['hasProfileField'] === true) {
+            $builder
+                    ->add('name', 'text', array(
                     'label' => 'Name',
                     'required' => false
                     ))
@@ -88,9 +94,8 @@ class AccountFormType extends AbstractType
                     'label' => 'Address', 
                     'required' => false
                     ))
-                
-                ->add('save', 'submit')
-            ;
+                ;
+        }
         
         if($options['hasUsernameField'] === true) {
             $builder
@@ -120,7 +125,8 @@ class AccountFormType extends AbstractType
             'data_class' => "\Waldo\OpenIdConnect\ModelBundle\Entity\Account",
             'validation_groups' => array('registration'),
             'hasUsernameField' => true,
-            'hasPasswordField' => true
+            'hasPasswordField' => true,
+            'hasProfileField' => true
         ));
     }
     

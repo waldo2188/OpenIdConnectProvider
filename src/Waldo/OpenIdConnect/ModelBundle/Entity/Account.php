@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Waldo\OpenIdConnect\ModelBundle\Entity\AccountInterface;
 use Waldo\OpenIdConnect\ModelBundle\Validator\Constraints as OICConstraint;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Account implement standard Claims
@@ -237,7 +238,11 @@ class Account implements AccountInterface, \Serializable
 
     /**
      * Scope: email
-     * 
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = false,
+     *     groups={"registration", "edit"}
+     * )
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
      * 
      * @var string $email Preferred e-mail address 

@@ -61,6 +61,13 @@ class Client implements UserInterface
      * @var string $clientName
      */
     protected $clientName;
+    
+    /**
+     * @ORM\Column(name="client_uri", type="string", length=255, nullable=true)
+     * 
+     * @var string $clientUri
+     */
+    protected $clientUri;
 
     /**
      * @ORM\Column(name="contacts", type="array", length=255, nullable=true)
@@ -280,6 +287,14 @@ class Client implements UserInterface
     public function getClientName()
     {
         return $this->clientName;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getClientUri()
+    {
+        return $this->clientUri;
     }
 
     /**
@@ -571,6 +586,18 @@ class Client implements UserInterface
     public function setClientName($clientName)
     {
         $this->clientName = $clientName;
+        return $this;
+    }
+    
+    /**
+     * setClientUri
+     * 
+     * @param string $clientUri
+     * @return \Waldo\OpenIdConnect\ModelBundle\Entity\Client
+     */
+    public function setClientUri($clientUri)
+    {
+        $this->clientUri = $clientUri;
         return $this;
     }
 

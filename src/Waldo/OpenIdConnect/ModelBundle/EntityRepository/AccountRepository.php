@@ -31,8 +31,8 @@ class AccountRepository extends EntityRepository
                 )
             ->setParameter("username", $username)
             ;
-        
-        if($accountExcluded !== null) {
+            
+            if($accountExcluded !== null && $accountExcluded->getId() !== null) {
             $qb->andWhere(
                     $qb->expr()->neq("Account", ":accout")
                     )
@@ -52,7 +52,7 @@ class AccountRepository extends EntityRepository
             ->setParameter("email", $email)
             ;
         
-        if($accountExcluded !== null) {
+        if($accountExcluded !== null && $accountExcluded->getId() !== null) {
             $qb->andWhere(
                     $qb->expr()->neq("Account", ":accout")
                     )

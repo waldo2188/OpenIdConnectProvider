@@ -2,10 +2,24 @@
 
 {% block title %}{{ parent() }} - {% trans %}Applications access list{% endtrans %}{% endblock title %}
 
+{% macro clientName(client) %}
+    {% if client.clientUri is not null %}
+        <a href="{{ client.clientUri }}" title="{% trans with {'%clientName%': client.clientName}%}Go to %clientName%'s web site{% endtrans %}">{{ client.clientName }}</a>
+    {% else %}
+        {{ client.clientName }}
+    {% endif %}
+{% endmacro %}
+
 {% macro scopes(scopes) %}
+    {% set scope_meaning = {
+        'profile' : {link: 'profile', title: 'profile data'},
+        'email' :  {link: 'account', title: 'email'},
+        'address' :  {link: 'address', title: 'address'},
+        'phone' :  {link: 'profile', title: 'phone number'}
+    } %}
     {% for scope in scopes %}
         {% if scope != "openid" %}
-        {{ scope }}{% if loop.last != true %},{% endif %}
+        <a href="{{ path("oicp_account_index") }}#{{ scope_meaning[scope].link }}" title="{% trans with {'%scope%': scope_meaning[scope].title} %}Read your %scope%{% endtrans %}" data-toggle="tooltip">{{ scope }}</a>{% if loop.last != true %},{% endif %}
         {% endif %}
     {% endfor %}
 {% endmacro %}
@@ -15,15 +29,26 @@
 
     <h1>{% trans %}Applications access list{% endtrans %}</h1>
     
-    <p>{% trans %}You have granted the following applications access to your account.{% endtrans %}</p>
+    <p>{% trans %}You have granted the following applications to access to your account informations.{% endtrans %}</p>
 
-    <ul>
+    <ul class="token-list">
         {% for token in tokenList %}
             <li>
-                {{ token.client.clientName }} -- {{ _self.scopes(token.scope) }}  -- {% trans %}Last used on{% endtrans %} {{ token.issuedAt|date() }}
+                {{ _self.clientName(token.client) }} — <span class="scope">{{ _self.scopes(token.scope) }}</span> <span class="update-on pull-right">{% trans %}Last used on{% endtrans %} {{ token.issuedAt|date() }}</span>
             </li>
+        {% else %}
+            <li>{% trans %}Nothing for the moment{% endtrans %}</li>
         {% endfor %}
     </ul>
     
     
 {% endblock accountContent %}
+
+{% block javascripts %}
+    {{ parent() }}
+<script type="text/javascript">   
+$(document).ready(function(){
+    $('ul.token-list li a[data-toggle="tooltip"]').tooltip({placement:'bottom'});
+});
+</script>
+{% endblock %}

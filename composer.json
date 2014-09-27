@@ -70,6 +70,10 @@
             "type": "git",
             "url": "git@github.com:waldo2188/jose.git"
         },
+        {
+            "type": "git",
+            "url": "git@github.com:waldo2188/bootstrap-datetimepicker.git"
+        },
          {
             "type": "package",
             "package": {

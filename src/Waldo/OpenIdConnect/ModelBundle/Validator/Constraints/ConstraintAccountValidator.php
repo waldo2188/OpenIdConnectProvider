@@ -24,7 +24,6 @@ class ConstraintAccountValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint)
     {
-
         $username = $this->em->getRepository(get_class($value))
                 ->findOneByUsername($value->getUsername(), $value);
 

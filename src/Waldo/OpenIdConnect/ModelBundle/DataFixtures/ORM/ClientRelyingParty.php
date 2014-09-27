@@ -37,6 +37,7 @@ class ClientRelyingParty extends ContainerAware implements FixtureInterface
                 ->setUserinfoEncryptedResponseAlg("RS256")
                 ->setIdTokenEncryptedResponseAlg("RS512")
                 ->setLogoUri("http://www.gravatar.com/avatar/9529e3f30dbf81d584eed66b2183cc9d?s=128")
+                ->setClientUri("https://github.com/waldo2188")
                 ;
         
         $manager->persist($client);
