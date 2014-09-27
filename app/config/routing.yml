@@ -11,3 +11,6 @@ waldo_open_id_connect_provider:
     type:     annotation
     prefix:   /
 
+welcome:
+    path: /
+    defaults:  { _controller: WaldoOpenIdConnectProviderBundle:Authentication:login }

@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>givenName</source>
+                <target>First name</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>familyName</source>
+                <target>Family name</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>middleName</source>
+                <target>Middle name</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>nickname</source>
+                <target>Nickname</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>preferedUsername</source>
+                <target>Prefered username</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>profile</source>
+                <target>Profile</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>picture</source>
+                <target>Picture</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>website</source>
+                <target>Web site</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>gender</source>
+                <target>Gender</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>birthdate</source>
+                <target>Birthdate</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>zoneInfo</source>
+                <target>Zone info</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>locale</source>
+                <target>Locale</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>updateAt</source>
+                <target>Update at</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>phoneNumber</source>
+                <target>Phone number</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>Login</source>
+                <target>Login</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>Maybe your account have not been yet validated by an administrator ?</source>
+                <target></target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>Please, wait until you receive a confirmation email.</source>
+                <target>Please, wait until you receive a confirmation email.</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>Welcom to the OIC login page</source>
+                <target>Welcom to the OIC login page</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>Sign in with your OIC account</source>
+                <target>Sign in with your OIC account</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>logo of application</source>
+                <target>logo of application</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>%appname% required you to be authenticated</source>
+                <target>%appname% required you to be authenticated</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>Term of service for %appname%</source>
+                <target>Term of service for %appname%</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>Policy %appname%</source>
+                <target>Policy %appname%</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>Username</source>
+                <target>Username</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>Password</source>
+                <target>Password</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>Forgot your password ?</source>
+                <target>Forgot your password ?</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>Create an account</source>
+                <target>Create an account</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>Scope Approval</source>
+                <target>Scope Approval</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>Informations claimed</source>
+                <target>Informations claimed</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>Account picture</source>
+                <target>Account picture</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

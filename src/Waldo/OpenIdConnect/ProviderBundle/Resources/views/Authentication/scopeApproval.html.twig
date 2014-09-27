@@ -10,13 +10,20 @@
         {% endif %}
         <h2 {% if client.logoUri is not null %}class="logo-align"{% endif %}>{{ client.clientName }}</h2>
         
-        <h3>Informations claimed</h3>
-        <ul>
+        <h3>{% trans %}Informations claimed{% endtrans %}</h3>
+        {% if userinfos.picture is defined and userinfos.picture is not null  %}
+            <img class="pull-right" alt="{% trans %}Account picture{% endtrans %}" src="{{ userinfos.picture }}" />
+        {% endif %}
+        <ul class="claims">
             {% for key, info in userinfos %}
-                    <li>{{ key|trans }}: {% if key == 'updateAt' or key == 'birthdate' %}{{ info|date("m/d/Y") }}{% else %}{{ info }}{% endif %}</li>
-                {% endfor %}
+                {% if key != 'picture' and key != 'emailVerified' and key != 'phoneNumberVerified' %}
+                    <li><span class="claim-name">{{ key|trans }} :</span> {% if key == 'updateAt' or key == 'birthdate' %}{{ info|date("m/d/Y") }}{% else %}{{ info }}{% endif %}</li>
+                {% endif %}
+            {% endfor %}
         </ul>
-
+        
+        <br />
+        
         {{ form_start(form) }}
             {{ form_row(form.cancel, {'attr' :{'class' : 'btn btn-warning'}}) }}
             {{ form_row(form.accept) }}

@@ -21,13 +21,14 @@
         "gree/jose": ">=0.1.8",
         "braincrafted/bootstrap-bundle": "~2.1",
         "twbs/bootstrap": "3.0.*",
-        "jquery/jquery":  "1.11.*",
-        "scribe/cssembed-library": "~0.4"
+        "jquery/jquery":  "1.11.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
-        "phpunit/phpunit": "~4.2"
+        "phpunit/phpunit": "~4.2",
+        "scribe/cssembed-library": "~0.4",
+        "nervo/yuicompressor": "~2.4"
     },
     "scripts": {
         "post-root-package-install": [

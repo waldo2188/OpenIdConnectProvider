@@ -12,7 +12,8 @@
             {% endstylesheets %}
         {% endblock %}
     </head>
-    <body> 
+    <body>
+        {% block bodyHeader %}{% endblock bodyHeader %}
         <div class="container">
 {% block bodyContent %}{% endblock bodyContent %}
         </div>

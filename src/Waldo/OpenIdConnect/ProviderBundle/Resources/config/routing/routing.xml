@@ -5,4 +5,6 @@
         http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <route id="login_check" path="/authentication/login-check" />
+    
+    <route id="logout" path="/authentication/logout" />
 </routes>
