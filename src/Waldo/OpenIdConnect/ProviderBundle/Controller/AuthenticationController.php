@@ -3,11 +3,13 @@
 namespace Waldo\OpenIdConnect\ProviderBundle\Controller;
 
 use Waldo\OpenIdConnect\ProviderBundle\Form\Type\ScopeApprovalType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Authorization\Voter\AuthenticatedVoter;
 
 /**
  * @Route("/authentication", name="oicp_authentication")
@@ -15,11 +17,12 @@ use Symfony\Component\HttpFoundation\Request;
 class AuthenticationController extends Controller
 {
     /** 
-     * @Route("/login/{clientName}", name="login", defaults={"clientName": null})
+     * @Route("/login/{clientId}", name="login", defaults={"clientId": null})
      * @Template()
      */
-    public function loginAction(Request $request, $clientName = null)
+    public function loginAction(Request $request, $clientId = null)
     {
+        $token = null;
         $session = $request->getSession();
 
         // get the login error if there is one
@@ -34,17 +37,26 @@ class AuthenticationController extends Controller
             $error = '';
         }
 
+                
+        if ($this->get('security.context')->getToken() !== null) {
+            if ($this->get('security.context')->isGranted(AuthenticatedVoter::IS_AUTHENTICATED_FULLY)
+                || $this->get('security.context')->isGranted(AuthenticatedVoter::IS_AUTHENTICATED_REMEMBERED)) {
+                
+                $token = $this->get('security.context')->getToken();
+                
+            }
+        }
+
         // last username entered by the user
         $lastUsername = (null === $session) ? '' : $session->get(SecurityContextInterface::LAST_USERNAME);
-
-        $client = null;
-        
-        $authFlowManager = 'oicp.authentication.flow.manager.' . $clientName;
+  
+        $client = null;        
+        $authFlowManager = 'oicp.authentication.flow.manager.' . $clientId;
         
         if($request->getSession()->has($authFlowManager)) {
             $clientId = $authenticationFlowManager = $this->get(
                     $request->getSession()->get($authFlowManager)
-            )->getAuthentication($clientName)
+            )->getAuthentication($clientId)
                     ->getClientId();
 
             $client = $this->getDoctrine()->getRepository("WaldoOpenIdConnectModelBundle:Client")
@@ -54,28 +66,29 @@ class AuthenticationController extends Controller
         return array(
             // last username entered by the user
             'client' => $client,
+            'token' => $token,
             'last_username' => $lastUsername,
             'error' => $error,
         );
     }
     
     /**
-     * @Route("/scope", name="oicp_authentication_scope")
+     * @Route("/scope/{clientId}", name="oicp_authentication_scope")
      * @Template()
      */
-    public function scopeApprovalAction(Request $request)
+    public function scopeApprovalAction(Request $request, $clientId)
     {
-        if($request->getSession()->has('oicp.authentication.flow.manager') === false){
-            return $this->redirect($this->generateUrl("oicp_account_index"));
-        }
-        
         $user = $this->get('security.context')->getToken()->getUser();
 
+        if(!$request->getSession()->has('oicp.authentication.flow.manager.' . $clientId)) {
+            throw new NotFoundHttpException();
+        }
+        
         $authenticationFlowManager = $this->get(
-                $request->getSession()->get('oicp.authentication.flow.manager')
+                $request->getSession()->get('oicp.authentication.flow.manager.' . $clientId)
                 );
         
-        $authentication = $authenticationFlowManager->getAuthentication();
+        $authentication = $authenticationFlowManager->getAuthentication($clientId);
         
         $client = $this->getDoctrine()->getManager()->getRepository("WaldoOpenIdConnectModelBundle:Client")
                 ->findOneByClientId($authentication->getClientId());

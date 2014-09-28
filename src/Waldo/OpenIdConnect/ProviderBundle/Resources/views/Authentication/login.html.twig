@@ -34,18 +34,32 @@
             {% endif %}
         </div>
 
-        <form class="form-signin" action="{{ path('login_check') }}" method="post" role="form">
+        <form class="form-signin" action="{{ path('login_check') }}{% if client is not null %}?client_id={{ client.clientId }}{% endif %}" method="post" role="form">
 
+            {% if token is not null %}
+                {% if token.user.picture is not null %}
+                    <div class="user-profile">
+                        <img class="user-picture" src="{{ token.user.picture }}" alt="" />
+                        <span class="user-name">{{ token.user.username }}</span>
+                        <span class="user-email">{{ token.user.email }}</span>
+                    </div>
+                {% endif %}
+                <input type="hidden" id="username" name="_username" value="{{ token.user.username }}" />
+            {% else %}
             <input class="form-control" type="text" id="username" placeholder="{% trans %}Username{% endtrans %}" name="_username" value="{{ last_username }}" />
-
+            {% endif %}
             <input class="form-control" type="password" id="password" placeholder="{% trans %}Password{% endtrans %}" name="_password" />
             <br />
             <button class="btn btn-lg btn-primary btn-block" type="submit" name="signin">Sign in</button>
 
         </form>
         <div class="actions-link">
+            {% if token is not null %}
+                <a class="logout" href="{{ path("logout") }}">{% trans %}Sign in with a different account{% endtrans %}</a>
+            {% else %}
             <a href="{{ path("oicp_lost_account_search") }}">{% trans %}Forgot your password ?{% endtrans %}</a>
             <a class="pull-right" href="{{ path("oicp_registration_new_account") }}">{% trans %}Create an account{% endtrans %}</a>
+            {% endif %}
         </div>
 
         

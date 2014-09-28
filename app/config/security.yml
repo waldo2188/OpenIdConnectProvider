@@ -33,8 +33,7 @@ security:
             form_login:
                 login_path: login
                 check_path: login_check
-                always_use_default_target_path: true
-                default_target_path: /authentication/scope
+                success_handler: waldo_oic_p.success_handler
             logout:
                 path: logout
                 

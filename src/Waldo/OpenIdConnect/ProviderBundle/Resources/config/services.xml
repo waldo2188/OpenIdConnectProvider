@@ -27,7 +27,10 @@
         <parameter key="waldo_oic_p.helper.userinfo.class">Waldo\OpenIdConnect\ProviderBundle\Services\UserinfoHelper</parameter>
         
         <!--  Provider  -->
-        <parameter key="waldo_oic_p.provider.jwk.class">Waldo\OpenIdConnect\ProviderBundle\Provider\JWKProvider</parameter>       
+        <parameter key="waldo_oic_p.provider.jwk.class">Waldo\OpenIdConnect\ProviderBundle\Provider\JWKProvider</parameter>
+        
+        
+        <parameter key="waldo_oic_p.success_handler.class">Waldo\OpenIdConnect\ProviderBundle\Handler\AuthenticationSuccessHandler</parameter>
         
     </parameters>
 
@@ -81,6 +84,10 @@
         <service id="waldo_oic_p.provider.jwk" class="%waldo_oic_p.provider.jwk.class%">
             <argument />
             <argument type="string">%kernel.cache_dir%</argument>
+        </service>
+        
+        <service id="waldo_oic_p.success_handler" class="%waldo_oic_p.success_handler.class%">
+            <argument type="service" id="security.http_utils" />
         </service>
                 
     </services>
