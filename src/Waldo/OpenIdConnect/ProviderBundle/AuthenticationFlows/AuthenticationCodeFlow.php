@@ -103,8 +103,8 @@ class AuthenticationCodeFlow
                         $authentication->getRedirectUri()
                         );
         
-        $this->session->remove('oicp.authentication.flow.code');
-        $this->session->remove('oicp.authentication.flow.manager');
+        $this->session->remove('oicp.authentication.flow.code.' . $authentication->getClientId());
+        $this->session->remove('oicp.authentication.flow.manager.' . $authentication->getClientId());
         
         $parameters = array('code' => $code);
 
@@ -112,9 +112,17 @@ class AuthenticationCodeFlow
     }
 
 
-    public function getAuthentication()
+    /**
+     * 
+     * @param string $clientName
+     * @return Waldo\OpenIdConnect\ModelBundle\Entity\Request\Authentication
+     */
+    public function getAuthentication($clientName)
     {
-        return $this->session->get('oicp.authentication.flow.code');
+        if($this->session->has('oicp.authentication.flow.code.' . $clientName)) {
+            return $this->session->get('oicp.authentication.flow.code.' . $clientName);
+        }
+        return null;
     }
     
     public function getName()
@@ -213,9 +221,12 @@ class AuthenticationCodeFlow
     private function needAuthRequest(Authentication $authentication)
     {
         $this->securityContext->setToken(null);
-        $this->session->set('oicp.authentication.flow.code', $authentication);
-        $this->session->set('oicp.authentication.flow.manager', $this->getName());
-        return $this->httpUtils->createRedirectResponse(new Request(), "login");
+        
+        $this->session->set('oicp.authentication.flow.code.' . $authentication->getClientId(), $authentication);
+        $this->session->set('oicp.authentication.flow.manager.' . $authentication->getClientId(), $this->getName());
+        
+        $request = new Request(array(), array(), array('clientName' => $authentication->getClientId()));
+        return $this->httpUtils->createRedirectResponse($request, "login");
     }
 
 }

@@ -180,11 +180,16 @@ class AuthenticationCodeFlowTest extends \PHPUnit_Framework_TestCase
         $acf = $this->getAuthenticationCodeFlow();
         
         $this->session->expects($this->once())
+                    ->method('has')
+                    ->with($this->equalTo("oicp.authentication.flow.code.client_id"))
+                    ->will($this->returnValue(true));
+        
+        $this->session->expects($this->once())
                     ->method('get')
-                    ->with($this->equalTo("oicp.authentication.flow.code"))
+                    ->with($this->equalTo("oicp.authentication.flow.code.client_id"))
                     ->will($this->returnValue("ok"));
         
-        $this->assertEquals('ok', $acf->getAuthentication());
+        $this->assertEquals('ok', $acf->getAuthentication("client_id"));
     }
     
     public function testShouldHandleCancel()

@@ -14,11 +14,11 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class AuthenticationController extends Controller
 {
-    /**
-     * @Route("/login", name="login")
+    /** 
+     * @Route("/login/{clientName}", name="login", defaults={"clientName": null})
      * @Template()
      */
-    public function loginAction(Request $request)
+    public function loginAction(Request $request, $clientName = null)
     {
         $session = $request->getSession();
 
@@ -39,10 +39,12 @@ class AuthenticationController extends Controller
 
         $client = null;
         
-        if($request->getSession()->has('oicp.authentication.flow.manager')) {
+        $authFlowManager = 'oicp.authentication.flow.manager.' . $clientName;
+        
+        if($request->getSession()->has($authFlowManager)) {
             $clientId = $authenticationFlowManager = $this->get(
-                    $request->getSession()->get('oicp.authentication.flow.manager')
-            )->getAuthentication()
+                    $request->getSession()->get($authFlowManager)
+            )->getAuthentication($clientName)
                     ->getClientId();
 
             $client = $this->getDoctrine()->getRepository("WaldoOpenIdConnectModelBundle:Client")
