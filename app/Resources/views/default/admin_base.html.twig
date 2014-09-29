@@ -21,7 +21,7 @@
                 </ul>
                 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{% if is_granted('ROLE_PREVIOUS_ADMIN') %}?_switch_user=_exit{% else %}{{ path("logout") }}{% endif %}"><i class="glyphicon glyphicon-log-out"></i> {% trans %}Logout{% endtrans %}</a></li>
+                    <li><a href="{% if is_granted('ROLE_PREVIOUS_ADMIN') %}?_switch_user=_exit{% else %}{{ path("logout") }}{% endif %}"><i class="glyphicon glyphicon-log-out"></i> {% if is_granted('ROLE_PREVIOUS_ADMIN') %}{% trans %}Un switch{% endtrans %}{% else %}{% trans %}Logout{% endtrans %}{% endif %}</a></li>
                 </ul>
             </div>
         </div>
