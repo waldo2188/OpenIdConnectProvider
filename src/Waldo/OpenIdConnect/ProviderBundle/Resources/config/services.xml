@@ -87,6 +87,7 @@
         </service>
         
         <service id="waldo_oic_p.success_handler" class="%waldo_oic_p.success_handler.class%">
+            <argument type="service" id="security.context" />
             <argument type="service" id="security.http_utils" />
         </service>
                 

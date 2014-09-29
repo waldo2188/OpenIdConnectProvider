@@ -1,3 +1,8 @@
+waldo_open_id_connect_admin:
+    resource: "@WaldoOpenIdConnectAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /admin
+
 waldo_open_id_connect_enduser:
     resource: "@WaldoOpenIdConnectEnduserBundle/Controller/"
     type:     annotation

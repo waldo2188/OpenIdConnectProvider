@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Waldo\OpenIdConnect\MailingBundle\WaldoOpenIdConnectMailingBundle(),
             new Waldo\OpenIdConnect\ModelBundle\WaldoOpenIdConnectModelBundle(),
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
+            new Waldo\OpenIdConnect\AdminBundle\WaldoOpenIdConnectAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

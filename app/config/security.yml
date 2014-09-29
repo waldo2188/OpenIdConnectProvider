@@ -36,6 +36,7 @@ security:
                 success_handler: waldo_oic_p.success_handler
             logout:
                 path: logout
+            switch_user: ~
                 
     access_control:
         - { path: ^/token, roles: ROLE_OIC_CLIENT }
@@ -43,3 +44,4 @@ security:
         - { path: ^/authorize, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/authentication/, roles: ROLE_USER }
         - { path: ^/account/, roles: ROLE_USER }
+        - { path: ^/admin/, roles: ROLE_ADMIN }
