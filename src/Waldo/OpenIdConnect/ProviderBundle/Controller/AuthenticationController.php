@@ -22,7 +22,6 @@ class AuthenticationController extends Controller
      */
     public function loginAction(Request $request, $clientId = null)
     {
-        $token = null;
         $session = $request->getSession();
 
         // get the login error if there is one
@@ -35,16 +34,6 @@ class AuthenticationController extends Controller
             $session->remove(SecurityContextInterface::AUTHENTICATION_ERROR);
         } else {
             $error = '';
-        }
-
-                
-        if ($this->get('security.context')->getToken() !== null) {
-            if ($this->get('security.context')->isGranted(AuthenticatedVoter::IS_AUTHENTICATED_FULLY)
-                || $this->get('security.context')->isGranted(AuthenticatedVoter::IS_AUTHENTICATED_REMEMBERED)) {
-                
-                $token = $this->get('security.context')->getToken();
-                
-            }
         }
 
         // last username entered by the user
@@ -66,10 +55,33 @@ class AuthenticationController extends Controller
         return array(
             // last username entered by the user
             'client' => $client,
-            'token' => $token,
+            'user' => $this->getTokenUser(),
             'last_username' => $lastUsername,
             'error' => $error,
         );
+    }
+    
+    private function getTokenUser()
+    {
+        if ($this->get('security.context')->getToken() !== null) {
+            if ($this->get('security.context')->isGranted(AuthenticatedVoter::IS_AUTHENTICATED_FULLY)
+                || $this->get('security.context')->isGranted(AuthenticatedVoter::IS_AUTHENTICATED_REMEMBERED)) {
+                
+                $user = $this->get('security.context')->getToken()->getUser();
+                
+                $this->get('session')->set('oic.login.auth.user', $user->getId());
+                
+                return $user;
+            }
+        }
+        
+        if($this->get('session')->has('oic.login.auth.user')) {
+                        
+            return $this->getDoctrine()->getManager()->getRepository("WaldoOpenIdConnectModelBundle:Account")
+                    ->findOneById($this->get('session')->get('oic.login.auth.user'));
+        }
+        
+        return null;
     }
     
     /**

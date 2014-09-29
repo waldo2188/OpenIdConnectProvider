@@ -23,6 +23,7 @@
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ path("oicp_account_index") }}">{% trans with {'%username%' : app.user.username } %}Dear %username%{% endtrans %}</a></li>
+                    {% if app.user.picture is not null %}<li class="user-picture"><img src="{{ app.user.picture }}" alt="" /></li>{% endif %}
                 </ul>
                 
                 <ul class="nav navbar-nav navbar-right">

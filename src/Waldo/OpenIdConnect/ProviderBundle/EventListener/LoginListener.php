@@ -43,7 +43,9 @@ class LoginListener implements EventSubscriberInterface
             $user->setLastLoginAt(new \DateTime('now'));
             
             $this->em->persist($user);
-            $this->em->flush();                    
+            $this->em->flush();
+            
+            $event->getRequest()->getSession()->remove("oic.login.auth.user");
         }
     }
 

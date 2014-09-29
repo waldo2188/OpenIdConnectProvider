@@ -4,14 +4,6 @@
 
 {% block bodyContent %}
     <div class="auth-page">
-        {% if error %}
-            <div>{{ error.message|trans }}</div>
-            {% if error.message == "User account is disabled." %}
-                {% trans %}Maybe your account have not been yet validated by an administrator ?{% endtrans %}
-                {% trans %}Please, wait until you receive a confirmation email.{% endtrans %}
-            {% endif %}
-        {% endif %}
-
         <div>
             <h1>{% trans %}Welcom to the OIC login page{% endtrans %}</h1>
             {% if client is null %}
@@ -36,25 +28,36 @@
 
         <form class="form-signin" action="{{ path('login_check') }}{% if client is not null %}?client_id={{ client.clientId }}{% endif %}" method="post" role="form">
 
-            {% if token is not null %}
-                {% if token.user.picture is not null %}
-                    <div class="user-profile">
-                        <img class="user-picture" src="{{ token.user.picture }}" alt="" />
-                        <span class="user-name">{{ token.user.username }}</span>
-                        <span class="user-email">{{ token.user.email }}</span>
-                    </div>
+            
+            {% if user is not null %}
+                <div class="user-profile">
+                {% if user.picture is not null %}
+                    <img class="user-picture" src="{{ user.picture }}" alt="" />
                 {% endif %}
-                <input type="hidden" id="username" name="_username" value="{{ token.user.username }}" />
+                    <span class="user-name">{{ user.username }}</span>
+                    <span class="user-email">{{ user.email }}</span>
+                </div>
+                <input type="hidden" id="username" name="_username" value="{{ user.username }}" />
             {% else %}
             <input class="form-control" type="text" id="username" placeholder="{% trans %}Username{% endtrans %}" name="_username" value="{{ last_username }}" />
             {% endif %}
             <input class="form-control" type="password" id="password" placeholder="{% trans %}Password{% endtrans %}" name="_password" />
+            
+            {% if error %}
+                <div class="alert alert-danger">{{ error.message|trans }}
+                {% if error.message == "User account is disabled." %}
+                    {% trans %}Maybe your account have not been yet validated by an administrator ?{% endtrans %}
+                    {% trans %}Please, wait until you receive a confirmation email.{% endtrans %}
+                {% endif %}
+                </div>
+            {% endif %}
+            
             <br />
             <button class="btn btn-lg btn-primary btn-block" type="submit" name="signin">Sign in</button>
 
         </form>
         <div class="actions-link">
-            {% if token is not null %}
+            {% if user is not null %}
                 <a class="logout" href="{{ path("logout") }}">{% trans %}Sign in with a different account{% endtrans %}</a>
             {% else %}
             <a href="{{ path("oicp_lost_account_search") }}">{% trans %}Forgot your password ?{% endtrans %}</a>
