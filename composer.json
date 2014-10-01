@@ -18,10 +18,12 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "gree/jose": ">=0.1.8",
+        "gree/jose": "~0.2",
         "braincrafted/bootstrap-bundle": "~2.1",
         "twbs/bootstrap": "3.0.*",
-        "jquery/jquery":  "1.11.*"
+        "jquery/jquery":  "1.11.*",
+        "datatables/datatables": "dev-master",
+        "ali/datatable": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
@@ -41,7 +43,9 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
-            "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install"
+            "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install",
+            "cp -R vendor/datatables/datatables/media/* app/Resources/public/datatable",
+            "rm -rf app/Resources/public/datatable/unit_testing"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -50,7 +54,9 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
-            "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install"
+            "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install",
+            "cp -R vendor/datatables/datatables/media/* app/Resources/public/datatable",
+            "rm -rf app/Resources/public/datatable/unit_testing"
         ]
     },
     "config": {
@@ -67,6 +73,10 @@
         }
     },
     "repositories": [
+        {
+            "type": "git",
+            "url": "git@github.com:wtfred/AliDatatableBundle.git"
+        },
         {
             "type": "git",
             "url": "git@github.com:waldo2188/jose.git"
