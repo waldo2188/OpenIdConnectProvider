@@ -4,8 +4,47 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d46c6fe56f308856d3df3ad6685a4548",
+    "hash": "60d62734b470feca885fd3c5c46f7d0b",
     "packages": [
+        {
+            "name": "ali/datatable",
+            "version": "dev-master",
+            "target-dir": "Ali/DatatableBundle",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:wtfred/AliDatatableBundle.git",
+                "reference": "c9adccf600fba072bf400ffd9194d5055af610e5"
+            },
+            "require": {
+                "doctrine/common": ">=2.1,<2.4.x-dev",
+                "php": ">=5.3.0",
+                "twig/twig": ">=1.8,<2.0-dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Ali\\DatatableBundle": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ali hichem",
+                    "email": "ali.hichem@mail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Symfony2 Ajax Datagrid Bundle for doctrine2 entities",
+            "homepage": "https://github.com/AliHichem/AliDatatableBundle",
+            "keywords": [
+                "datatable",
+                "jquery",
+                "symfony2"
+            ],
+            "time": "2014-09-30 15:09:38"
+        },
         {
             "name": "braincrafted/bootstrap-bundle",
             "version": "v2.1.0",
@@ -65,6 +104,29 @@
                 "bootstrap"
             ],
             "time": "2014-08-31 10:47:30"
+        },
+        {
+            "name": "datatables/datatables",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DataTables/DataTables.git",
+                "reference": "bc06f16e43a5fb82a80129432586846ab53b53d8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DataTables/DataTables/zipball/bc06f16e43a5fb82a80129432586846ab53b53d8",
+                "reference": "bc06f16e43a5fb82a80129432586846ab53b53d8",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, which will add advanced interaction controls to any HTML table.",
+            "homepage": "http://www.datatables.net/",
+            "time": "2014-09-22 15:41:41"
         },
         {
             "name": "doctrine/annotations",
@@ -678,11 +740,11 @@
         },
         {
             "name": "gree/jose",
-            "version": "0.1.9",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:waldo2188/jose.git",
-                "reference": "df63d16a55f3118b3ec9833df5a8af6e83b9eb36"
+                "reference": "4d2952c42fc261d5da7885b836243e47e483c79a"
             },
             "require": {
                 "phpseclib/phpseclib": ">=0.3.5"
@@ -722,7 +784,7 @@
                 "JWT",
                 "OpenID Connect"
             ],
-            "time": "2014-09-24 08:38:23"
+            "time": "2014-10-01 08:53:23"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -910,21 +972,24 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.10.0",
+            "version": "1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "25b16e801979098cb2f120e697bfce454b18bf23"
+                "reference": "ec3961874c43840e96da3a8a1ed20d8c73d7e5aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/25b16e801979098cb2f120e697bfce454b18bf23",
-                "reference": "25b16e801979098cb2f120e697bfce454b18bf23",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/ec3961874c43840e96da3a8a1ed20d8c73d7e5aa",
+                "reference": "ec3961874c43840e96da3a8a1ed20d8c73d7e5aa",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0",
                 "psr/log": "~1.0"
+            },
+            "provide": {
+                "psr/log-implementation": "1.0.0"
             },
             "require-dev": {
                 "aws/aws-sdk-php": "~2.4, >2.4.8",
@@ -932,7 +997,8 @@
                 "graylog2/gelf-php": "~1.0",
                 "phpunit/phpunit": "~3.7.0",
                 "raven/raven": "~0.5",
-                "ruflin/elastica": "0.90.*"
+                "ruflin/elastica": "0.90.*",
+                "videlalvaro/php-amqplib": "~2.4"
             },
             "suggest": {
                 "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
@@ -942,12 +1008,13 @@
                 "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
                 "raven/raven": "Allow sending log messages to a Sentry server",
                 "rollbar/rollbar": "Allow sending log messages to Rollbar",
-                "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
+                "videlalvaro/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.10.x-dev"
+                    "dev-master": "1.11.x-dev"
                 }
             },
             "autoload": {
@@ -963,8 +1030,7 @@
                 {
                     "name": "Jordi Boggiano",
                     "email": "j.boggiano@seld.be",
-                    "homepage": "http://seld.be",
-                    "role": "Developer"
+                    "homepage": "http://seld.be"
                 }
             ],
             "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
@@ -974,7 +1040,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-06-04 16:30:04"
+            "time": "2014-09-30 13:30:58"
         },
         {
             "name": "phpseclib/phpseclib",
@@ -2808,9 +2874,10 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "datatables/datatables": 20,
+        "ali/datatable": 20
+    },
     "prefer-stable": false,
     "platform": {
         "php": ">=5.3.3"
