@@ -73,9 +73,12 @@ class IdTokenHelperTest extends \PHPUnit_Framework_TestCase
         $jws = new \JOSE_JWS($jwt);
         try {
 
-            $jws->verify($jwkSet);
+            $jwk = $jwkSet->filterJwk('use', \JOSE_JWK::JWK_USE_SIG);
+            
+            $jws->verify($jwk);
 
         } catch (\Exception $e) {
+
             $this->assertTrue(false, "fail at asserting that IdToken is properly signed");
         }
         
