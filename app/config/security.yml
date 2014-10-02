@@ -33,9 +33,10 @@ security:
             form_login:
                 login_path: login
                 check_path: login_check
-                success_handler: waldo_oic_p.success_handler
+                success_handler: waldo_oic_p.success_handler.auth
             logout:
                 path: logout
+                success_handler: waldo_oic_p.success_handler.logout
             switch_user: ~
                 
     access_control:

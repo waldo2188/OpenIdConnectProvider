@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    
+    <parameters>
+                
+        <parameter key="waldo_oic_model.voter.account.class">Waldo\OpenIdConnect\ModelBundle\Security\Authorization\Voter\AccountVoter</parameter>
+        
+    </parameters>
+
+    <services>
+        
+        <service id="waldo_oic_model.voter.account" class="%waldo_oic_model.voter.account.class%" public="false">
+            <tag name="security.voter" />
+        </service>
+        
+    </services>
+    
+</container>

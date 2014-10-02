@@ -1,0 +1,5 @@
+{% if dt_item == true %}
+<button type="button" data-identifier="{{ dt_obj.id }}" data-ref="{{ ref|default("boolean") }}" data-value="true" title="Yes"><i class="glyphicon glyphicon-ok-circle"></i></button>
+{% else %}
+<button type="button" data-identifier="{{ dt_obj.id }}" data-ref="{{ ref|default("boolean") }}" data-value="false" title="No"><i class=" glyphicon glyphicon-ban-circle"></i></button>
+{% endif %}

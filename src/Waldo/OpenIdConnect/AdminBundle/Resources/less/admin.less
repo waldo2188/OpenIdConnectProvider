@@ -1,0 +1,15 @@
+// Large screen / wide desktop
+// Note: Deprecated @screen-lg and @screen-lg-desktop as of v3.0.1
+@screen-ulg:                  1800px;
+@screen-ulg-min:              @screen-ulg;
+@screen-ulg-desktop:          @screen-ulg-min;
+
+// Large screen / wide desktop
+@container-utltra-large-desktop:      @screen-ulg;
+@container-ulg:                 @container-utltra-large-desktop;
+
+.container {
+    @media (min-width: @screen-ulg-min) {
+        width: @container-ulg;
+    }
+}

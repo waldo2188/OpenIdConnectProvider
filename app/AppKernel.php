@@ -16,12 +16,15 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
+            new Ali\DatatableBundle\AliDatatableBundle(),
             new Waldo\OpenIdConnect\ProviderBundle\WaldoOpenIdConnectProviderBundle(),
             new Waldo\OpenIdConnect\EnduserBundle\WaldoOpenIdConnectEnduserBundle(),
             new Waldo\OpenIdConnect\MailingBundle\WaldoOpenIdConnectMailingBundle(),
             new Waldo\OpenIdConnect\ModelBundle\WaldoOpenIdConnectModelBundle(),
-            new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Waldo\OpenIdConnect\AdminBundle\WaldoOpenIdConnectAdminBundle(),
+            new Cnerta\BreadcrumbBundle\CnertaBreadcrumbBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

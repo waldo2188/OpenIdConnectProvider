@@ -7,12 +7,13 @@
         <title>{% block title %}{% endblock title %}</title>
         
         {% block stylesheets %}
-            {% stylesheets '@bootstrap_css' '@other_css' combine=true filter='cssembed, ?yui_css' %}
+            {% stylesheets '@bootstrap_css' '@other_less' '@other_css' combine=true filter='cssembed, ?yui_css' %}
         <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
             {% endstylesheets %}
         {% endblock %}
     </head>
     <body>
+        {% block modals %}{% endblock modals %}
         {% block bodyHeader %}{% endblock bodyHeader %}
         <div class="container">
 {% block bodyContent %}{% endblock bodyContent %}

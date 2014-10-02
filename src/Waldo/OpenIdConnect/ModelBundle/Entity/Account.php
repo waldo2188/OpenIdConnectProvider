@@ -219,6 +219,14 @@ class Account implements AccountInterface, \Serializable
     protected $locale;
 
     /**
+     * 
+     * @ORM\Column(name="create_at", type="datetime", nullable=true)
+     * 
+     * @var \DateTime $createAt
+     */
+    protected $createAt;
+
+    /**
      * Scope: profile
      * 
      * @ORM\Column(name="update_at", type="datetime", nullable=true)
@@ -329,7 +337,16 @@ class Account implements AccountInterface, \Serializable
      */
     public function prePersit()
     {
-        $this->updateDate = new \DateTime('now');
+        $this->createAt = new \DateTime('now');
+        $this->updateAt = new \DateTime('now');
+    }
+    
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate()
+    {
+        $this->updateAt = new \DateTime('now');
     }
 
     /**
@@ -572,6 +589,15 @@ class Account implements AccountInterface, \Serializable
         return $this->address;
     }
 
+    /**
+     * 
+     * @return \DateTime
+     */
+    function getCreateAt()
+    {
+        return $this->createAt;
+    }
+   
     /**
      * getUpdateAt
      * 
@@ -878,7 +904,20 @@ class Account implements AccountInterface, \Serializable
         $this->address = $address;
         return $this;
     }
+    
+    /**
+     * setCreateAt
+     * 
+     * @param \DateTime $createAt
+     * @return \Cnerta\OpenIdConnect\ModelBundle\Entity\Account
+     */
+    function setCreateAt(\DateTime $createAt)
+    {
+        $this->createAt = $createAt;
+        return $this;
+    }
 
+        
     /**
      * setUpdateAt
      * 

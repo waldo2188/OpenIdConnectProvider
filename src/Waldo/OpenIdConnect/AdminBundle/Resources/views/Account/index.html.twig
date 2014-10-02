@@ -1,0 +1,99 @@
+{% extends "WaldoOpenIdConnectAdminBundle::base.html.twig" %}
+
+{% block pageTitle %}Enduser{% endblock pageTitle %}
+{% block pageTitleSub %}Account management{% endblock pageTitleSub %}
+
+{% block modals %}
+{% include "WaldoOpenIdConnectAdminBundle:Bootstrap:modal.html.twig" with {
+id: "disabledAccount", 
+title: "Disabled Account", 
+body:"Are you sure you want to disabled this account ?",
+hasNo: false } %}
+{% endblock modals %}
+
+{% block content %}  
+
+    <div class="box">
+
+        <div class="box-header">
+            <h3 class="box-title">{% trans %}Enduser account{% endtrans %}</h3>
+        </div>
+
+        <div class="box-body">
+
+            <div role="alert-box"></div>
+
+            <div class="box-body table-responsive">
+                {{ datatable_html({
+                id : 'dta-account',
+                class : 'table table-bordered table-striped dataTable'
+            })
+                }}
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ datatable_js({
+            id : 'dta-account',
+            js : {
+            "sDom":"<'row'<'col-xs-6'l><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",                
+                sAjaxSource : path('oicp_admin_index_list')
+            }
+        })
+    }}
+    
+{% include "WaldoOpenIdConnectAdminBundle:Bootstrap:alert.js.twig" with {
+id:"alert-disabled-account", alert: "danger", content: "You can not __type__ this account. Maybe it's your ?"|trans } %}
+{% include "WaldoOpenIdConnectAdminBundle:Bootstrap:alert.js.twig" with {
+id:"success-disabled-account", alert: "success", content: "This account has been __type__"|trans } %}
+    
+    
+<script type="text/javascript">
+    $(document).ready(function(){
+                
+        $('#dta-account_wrapper').on('click', 'button[data-ref="enabled"]',function(event) {
+                       
+            if($(event.currentTarget).data('value') === true) {
+                $("#disabledAccount").modal('show');
+                $("#disabledAccount").data('identifier', $(event.currentTarget).data('identifier'));
+            } else {
+                $.post('{{ path("oicp_admin_account_enabled") }}', {account:$(event.currentTarget).data('identifier')})
+                .done(function() {
+                   $('#dta-account').dataTable().fnDraw();
+                   $('div[role="alert-box"]').append($('#tpl-success-disabled-account').template({type:'{% trans %}enabled{% endtrans %}'}));
+                   $("#disabledAccount").modal('hide');
+               })
+               .fail(function() {
+                   $('div[role="alert-box"]').append($('#tpl-alert-disabled-account').template({type:'{% trans %}enabled{% endtrans %}'}));
+                   $("#disabledAccount").modal('hide');
+               });
+               
+            }
+            
+        });
+        
+        $('button[data-modal-action-yes="disabledAccount"]').on('click', function() {
+            $('div[role="alert-box"]').empty();
+            
+            $.post('{{ path("oicp_admin_account_disabled") }}', {account:$("#disabledAccount").data('identifier')})
+             .done(function() {
+                $('#dta-account').dataTable().fnDraw();
+                $('div[role="alert-box"]').append($('#tpl-success-disabled-account').template({type:'{% trans %}disabled{% endtrans %}'}));
+                $("#disabledAccount").modal('hide');
+        
+            })
+            .fail(function() {
+                
+                $('div[role="alert-box"]').append(jQuery('#tpl-alert-disabled-account').template({type:'{% trans %}disabled{% endtrans %}'}));
+                $("#disabledAccount").modal('hide');
+            });
+
+        });
+                
+    });
+</script>
+{% endblock javascripts %}

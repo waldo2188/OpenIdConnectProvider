@@ -6,6 +6,7 @@ use Waldo\OpenIdConnect\ModelBundle\Entity\Client;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\Process\Process;
 
 /**
  * UserAccount
@@ -25,13 +26,23 @@ class ClientRelyingParty extends ContainerAware implements FixtureInterface
      */
     public function load(ObjectManager $manager)
     {
+        
+        $process = new Process("ifconfig eth0 | grep 'inet addr' | awk -F':' {'print $2'} | awk -F' ' {'print $1'}");
+        $process->run();       
+        $hostsipaddress = str_replace("\n","",$process->getOutput());
+
         $client = new Client();
 
         $client
                 ->setClientId('my_client_id')
                 ->setClientName('My application name')
                 ->setClientSecret('my_client_secret')
-                ->setRedirectUris(array('http://localhost/OIC-RP/web/app_dev.php/login_check'))
+                ->setRedirectUris(
+                        array(
+                            'http://localhost/OIC-RP/web/app_dev.php/login_check',
+                            sprintf('http://%s/OIC-RP/web/app_dev.php/login_check', $hostsipaddress)
+                            )
+                        )
                 ->setContacts(array('contact@exemple.com <contactName contact>'))
                 ->setApplicationType("web")
                 ->setUserinfoEncryptedResponseAlg("RS256")
