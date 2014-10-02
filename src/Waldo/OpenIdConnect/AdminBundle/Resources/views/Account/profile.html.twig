@@ -1,0 +1,124 @@
+{% extends "WaldoOpenIdConnectAdminBundle::base.html.twig" %}
+
+{% block pageTitle %}Enduser{% endblock pageTitle %}
+{% block pageTitleSub %}Profil{% endblock pageTitleSub %}
+
+{% block content %}  
+
+    <div class="box">
+
+        <div class="box-header">
+            <h3 class="box-title">{{ account.username }}</h3>
+        </div>
+
+        <div class="box-body nav-tabs-custom">
+
+
+        <ul class="nav nav-tabs" role="tablist">
+            <li><a href="#account" role="tab" data-toggle="tab">{% trans %}Account{% endtrans %}</a></li>
+            <li><a href="#profile" role="tab" data-toggle="tab">{% trans %}Profile{% endtrans %}</a></li>
+            <li><a href="#address" role="tab" data-toggle="tab">{% trans %}Address{% endtrans %}</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane" id="account">
+                {% if account.picture %}<img class="pull-right" src="{{ account.picture }}" alt="{% trans %}Account picture{% endtrans %}" />{% endif %}
+                <dl>
+                    <dt>{% trans %}Username{% endtrans %}</dt>
+                        <dd>{{ account.username }}</dd>
+
+
+                    {% if account.email %}<dt>{% trans %}Email{% endtrans %}</dt>
+                        <dd>{{ account.email }}</dd>{% endif %}
+
+
+                    {% if account.lastLoginAt %}<dt>{% trans %}Last login at{% endtrans %}</dt>
+                        <dd>{{ account.lastLoginAt|date() }}</dd>{% endif %}
+                </dl>
+            </div>
+
+            <div class="tab-pane" id="profile">
+                <dl>
+                    {% if account.name %}<dt>{% trans %}Name{% endtrans %}</dt>
+                        <dd>{{ account.name }}</dd>{% endif %}
+
+                    {% if account.givenName %}<dt>{% trans %}First name{% endtrans %}</dt>
+                        <dd>{{ account.givenName }}</dd>{% endif %}
+
+                    {% if account.familyName %}<dt>{% trans %}Last name{% endtrans %}</dt>
+                        <dd>{{ account.familyName }}</dd>{% endif %}
+
+                    {% if account.middleName %}<dt>{% trans %}Middle name{% endtrans %}</dt>
+                        <dd>{{ account.middleName }}</dd>{% endif %}
+
+                    {% if account.nickname %}<dt>{% trans %}Nickname, casual name{% endtrans %}</dt>
+                        <dd>{{ account.nickname }}</dd>{% endif %}
+
+                    {% if account.preferedUsername %}<dt>{% trans %}Prefered username{% endtrans %}</dt>
+                        <dd>{{ account.preferedUsername }}</dd>{% endif %}
+
+                    {% if account.profile %}<dt>{% trans %}Profile{% endtrans %}</dt>
+                        <dd>{{ account.profile }}</dd>{% endif %}
+
+                    {% if account.website %}<dt>{% trans %}Web site{% endtrans %}</dt>
+                        <dd>{{ account.website }}</dd>{% endif %}
+
+                    {% if account.gender %}<dt>{% trans %}Gender{% endtrans %}</dt>
+                        <dd>{{ account.gender }}</dd>{% endif %}
+
+                    {% if account.birthdate %}<dt>{% trans %}birthdate{% endtrans %}</dt>
+                        <dd>{{ account.birthdate|date() }}</dd>{% endif %}
+
+                    {% if account.zoneInfo %}<dt>{% trans %}Time zone{% endtrans %}</dt>
+                        <dd>{{ account.zoneInfo }}</dd>{% endif %}
+
+                    {% if account.locale %}<dt>{% trans %}Locale{% endtrans %}</dt>
+                        <dd>{{ account.locale }}</dd>{% endif %}
+
+
+                    {% if account.phoneNumber %}<dt>{% trans %}Telephone number{% endtrans %}</dt>
+                        <dd>{{ account.phoneNumber }}</dd>{% endif %}
+
+                </dl>
+            </div>
+
+            <div class="tab-pane" id="address">
+                {% if account.address %}
+                <dl>        
+                    {% if account.address.formatted %}<dt>{% trans %}Full mailing address{% endtrans %}</dt>
+                        <dd>{{ account.address.formatted|nl2br }}</dd>{% endif %}
+
+                    {% if account.address.streetAddress %}<dt>{% trans %}Full street address{% endtrans %}</dt>
+                        <dd>{{ account.address.streetAddress }}</dd>{% endif %}
+
+                    {% if account.address.locality %}<dt>{% trans %}City or locality{% endtrans %}</dt>
+                        <dd>{{ account.address.locality }}</dd>{% endif %}
+
+                    {% if account.address.region %}<dt>{% trans %}State, province, prefecture, or region{% endtrans %}</dt>
+                        <dd>{{ account.address.region }}</dd>{% endif %}
+
+                    {% if account.address.postalCode %}<dt>{% trans %}Zip code or postal code{% endtrans %}</dt>
+                        <dd>{{ account.address.postalCode }}</dd>{% endif %}
+
+                    {% if account.address.country %}<dt>{% trans %}Country name{% endtrans %}</dt>
+                        <dd>{{ account.address.country }}</dd>{% endif %}
+                </dl>{% endif %}
+            </div>
+        </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+<script type="text/javascript">
+$(document).ready(function() {
+    if(window.location.hash) {
+        $('a[href="' + window.location.hash + '"]').tab('show');
+    } else {
+        $('a[href="#account"]').tab('show');
+    }
+});
+</script>
+{% endblock %}

@@ -19,6 +19,8 @@ class Builder extends ContainerAware
         $menu->addChild('Account')
                 ->setLabelAttribute('icon', 'fa fa-fw fa-group');
         $menu['Account']->addChild('Enduser', array('route' => 'oicp_admin_account_index'));
+        $menu['Account']['Enduser']->addChild('Profile', array('route' => 'oicp_admin_account_profile'))
+                        ->setDisplay(false);
         
         return $menu;
     }

@@ -1,4 +1,5 @@
 {% block root %}
+    
 <ol class="breadcrumb"> 
 {% for item in items %}
     {% if not loop.last %}<li><a href="{{ item.uri }}">{{ item.label }}</a></li>
