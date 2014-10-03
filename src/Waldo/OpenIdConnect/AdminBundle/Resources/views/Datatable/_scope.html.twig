@@ -1,0 +1,11 @@
+{% set scope_meaning = {
+    'profile' : 'profile data',
+    'email' :  'email',
+    'address' : 'address',
+    'phone' : 'phone number'
+} %}
+{% for scope in dt_item %}
+{% if scope != "openid" %}
+<span title="{% trans with {'%scope%': scope_meaning[scope]} %}Read your %scope%{% endtrans %}" data-toggle="tooltip">{{ scope }}</span>{% if loop.last != true %}, {% endif %}
+{% endif %}
+{% endfor %}

@@ -30,7 +30,7 @@ class AccountController extends Controller
     }
 
     /**
-     * @Route("/list", name="oicp_admin_index_list")
+     * @Route("/list", name="oicp_admin_account_list")
      */
     public function accountListAction()
     {

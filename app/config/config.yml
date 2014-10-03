@@ -62,7 +62,6 @@ assetic:
             inputs:
                 - @WaldoOpenIdConnectProviderBundle/Resources/less/provider.less
                 - @WaldoOpenIdConnectEnduserBundle/Resources/less/enduser.less
-                - @WaldoOpenIdConnectAdminBundle/Resources/less/admin.less
             filters:
                 - less
                 - cssrewrite
@@ -70,9 +69,10 @@ assetic:
             inputs: ~
         admin_css:
             inputs:
-#                - %kernel.root_dir%/Resources/public/datatable/css/jquery.dataTables.css
+                - @WaldoOpenIdConnectAdminBundle/Resources/less/admin.less
                 - %kernel.root_dir%/../vendor/almasaeed2010/AdminLTE/css/AdminLTE.css
                 - %kernel.root_dir%/../vendor/DataTables/Plugins/integration/bootstrap/3/dataTables.bootstrap.css
+                
         bootstrap_js:
             inputs:
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/js/transition.js

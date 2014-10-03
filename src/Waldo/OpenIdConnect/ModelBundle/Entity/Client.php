@@ -19,7 +19,7 @@ class Client implements UserInterface
      * @ORM\Column(name="id", type="integer", nullable=false, unique=true)
      */
     protected $id;
-        
+
     /**
      * @ORM\OneToMany(targetEntity="Token", mappedBy="client", cascade={"persist", "remove", "merge"})
      * 
@@ -35,11 +35,11 @@ class Client implements UserInterface
     protected $clientId;
 
     /**
-     * @ORM\Column(name="client_id_issed_at", type="string", length=255, nullable=true)
+     * @ORM\Column(name="client_id_issued_at", type="datetime", nullable=true)
      * 
-     * @var string $clientIdIssedAt
+     * @var string $clientIdIssuedAt
      */
-    protected $clientIdIssedAt;
+    protected $clientIdIssuedAt;
 
     /**
      * @ORM\Column(name="client_secret", type="string", length=255, nullable=true)
@@ -61,7 +61,7 @@ class Client implements UserInterface
      * @var string $clientName
      */
     protected $clientName;
-    
+
     /**
      * @ORM\Column(name="client_uri", type="string", length=255, nullable=true)
      * 
@@ -224,11 +224,26 @@ class Client implements UserInterface
      */
     protected $requireAuthTime = false;
 
+    /**
+     * @ORM\Column(name="scope", type="array", nullable=true)
+     * 
+     * @var string $scope
+     */
+    protected $scope;
+
     public function __construct()
     {
         
     }
 
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersit()
+    {
+        $this->clientIdIssuedAt = new \DateTime('now');
+    }
+    
     /**
      * getId
      * 
@@ -250,13 +265,13 @@ class Client implements UserInterface
     }
 
     /**
-     * getClientIdIssedAt
+     * getClientIdIssuedAt
      * 
      * @return \DateTime
      */
-    public function getClientIdIssedAt()
+    public function getClientIdIssuedAt()
     {
-        return $this->clientIdIssedAt;
+        return $this->clientIdIssuedAt;
     }
 
     /**
@@ -288,7 +303,7 @@ class Client implements UserInterface
     {
         return $this->clientName;
     }
-    
+
     /**
      * @return string
      */
@@ -518,6 +533,16 @@ class Client implements UserInterface
     }
 
     /**
+     * getScope
+     * 
+     * @return array
+     */
+    public function getScope()
+    {
+        return $this->scope;
+    }
+
+    /**
      * setId
      * 
      * @param type $id
@@ -542,14 +567,14 @@ class Client implements UserInterface
     }
 
     /**
-     * setClientIdIssedAt
+     * setClientIdIssuedAt
      * 
-     * @param \DateTime $clientIdIssedAt
+     * @param \DateTime $clientIdIssuedAt
      * @return \Waldo\OpenIdConnect\ModelBundle\Entity\Client
      */
-    public function setClientIdIssedAt(\DateTime $clientIdIssedAt)
+    public function setClientIdIssuedAt(\DateTime $clientIdIssuedAt)
     {
-        $this->clientIdIssedAt = $clientIdIssedAt;
+        $this->clientIdIssuedAt = $clientIdIssuedAt;
         return $this;
     }
 
@@ -588,7 +613,7 @@ class Client implements UserInterface
         $this->clientName = $clientName;
         return $this;
     }
-    
+
     /**
      * setClientUri
      * 
@@ -896,11 +921,23 @@ class Client implements UserInterface
             }
         } elseif ($items instanceof Token) {
             $this->addToken($items);
-        } elseif($items === null) {
+        } elseif ($items === null) {
             $this->tokenList = new ArrayCollection();
         } else {
             throw new \Exception('$items must be an instance of Token or Collection');
         }
+        return $this;
+    }
+
+    /**
+     * setScope
+     * 
+     * @param array $scope
+     * @return \Waldo\OpenIdConnect\ModelBundle\Entity\Client
+     */
+    public function setScope($scope)
+    {
+        $this->scope = $scope;
         return $this;
     }
 
@@ -913,10 +950,10 @@ class Client implements UserInterface
     {
         return $this->tokenList;
     }
-    
-    
+
     public function eraseCredentials()
-    {    
+    {
+        
     }
 
     public function getPassword()

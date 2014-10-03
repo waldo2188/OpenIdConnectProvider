@@ -1,0 +1,160 @@
+{% extends "WaldoOpenIdConnectAdminBundle::base.html.twig" %}
+
+{% block pageTitle %}Client{% endblock pageTitle %}
+{% block pageTitleSub %}Client management{% endblock pageTitleSub %}
+
+
+{% block content %}  
+
+    
+        
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">{% trans %}Client ID{% endtrans %}</h3>
+                </div>
+                <div class="box-body">
+                    {% if client.logoUri %}<img class="pull-right" src="{{ client.logoUri }}" alt="{% trans %}Client logo{% endtrans %}" />{% endif %}
+                    <dl>
+                        <dt>{% trans %}Client Name{% endtrans %}</dt>
+                            <dd>{{ client.clientName }}</dd>
+
+                        <dt>{% trans %}Client ID{% endtrans %}</dt>
+                            <dd>{{ client.clientID }}</dd>
+
+                        <dt>{% trans %}Client URI{% endtrans %}</dt>
+                            <dd>{{ client.clientUri }}</dd>
+
+                        <dt>{% trans %}Issued at{% endtrans %}</dt>
+                            <dd>{{ client.clientIdIssuedAt|date() }}</dd>              
+                                                    
+                        {% if client.tosUri %}<dt>{% trans %}Term of Service{% endtrans %}</dt>
+                            <dd><a href="{{ client.tosUri }}">{{ client.tosUri }}</a></dd>{% endif %}
+                            
+                        {% if client.policyUri %}<dt>{% trans %}Polyci{% endtrans %}</dt>
+                            <dd><a href="{{ client.policyUri }}">{{ client.policyUri }}</a></dd>{% endif %}
+                    </dl>
+                    <b>{% trans %}Scopes{% endtrans %}</b>
+                    <ul>
+                        {% for scope in client.scope %}
+                            <li>{{ scope }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">{% trans %}Client record{% endtrans %}</h3>
+                </div>
+                <div class="box-body">
+                    
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="active"><a href="#secret" role="tab" data-toggle="tab">{% trans %}Secret{% endtrans %}</a></li>
+                            <li><a href="#uris" role="tab" data-toggle="tab">{% trans %}URIs{% endtrans %}</a></li>
+                            <li><a href="#contact" role="tab" data-toggle="tab">{% trans %}Contacts{% endtrans %}</a></li>
+                            <li><a href="#security" role="tab" data-toggle="tab">{% trans %}Security{% endtrans %}</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="secret">
+                                <dl>
+                                    <dt>{% trans %}Client secret{% endtrans %}</dt>
+                                    <dd>{{ client.clientSecret }}</dd>
+
+                                    {% if client.clientSecretExpiresAt %}<dt>{% trans %}Client secret{% endtrans %}</dt>
+                                        <dd>{{ client.clientSecret }}</dd>{% endif %}
+                                </dl>
+                            </div>
+                            <div class="tab-pane" id="uris">
+                                <b>{% trans %}Redirect URIs{% endtrans %}</b>
+                                <ul>
+                                    {% for uri in client.redirectUris %}
+                                        <li>{{ uri }}</li>
+                                    {% endfor %}
+                                </ul>
+
+                                <dl>
+                                {% if client.postLogoutRedirectUri %}<dt>{% trans %}Post logout redirect URI{% endtrans %}</dt>
+                                    <dd>{{ client.postLogoutRedirectUri }}</dd>{% endif %}
+
+                                {% if client.jwksUri %}<dt>{% trans %}JWKS URI{% endtrans %}</dt>
+                                    <dd>{{ client.jwksUri }}</dd>{% endif %}
+
+                                {% if client.jwkEncryptionUri %}<dt>{% trans %}JWKS encryption URI{% endtrans %}</dt>
+                                    <dd>{{ client.jwkEncryptionUri }}</dd>{% endif %}
+
+                                {% if client.x509Uri %}<dt>{% trans %}x509 certificat URI{% endtrans %}</dt>
+                                    <dd>{{ client.x509Uri }}</dd>{% endif %}
+
+                                {% if client.x509EncryptionUri %}<dt>{% trans %}x509 encryption certificat URI{% endtrans %}</dt>
+                                    <dd>{{ client.x509EncryptionUri }}</dd>{% endif %}
+
+                                </dl>
+                            </div>
+                            <div class="tab-pane" id="contact">
+                                <ul>
+                                    {% for contact in client.contacts %}
+                                        <li>{{ contact }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="tab-pane" id="security">
+                                <dl>
+                                    {% if client.tokenEndpointAuthMethod %}<dt>{% trans %}Token endpoint authentication method{% endtrans %}</dt>
+                                        <dd>{{ client.tokenEndpointAuthMethod }}</dd>{% endif %}
+
+                                    {% if client.tokenEndpointAuthSigningAlg %}<dt>{% trans %}Token endpoint signing algorithm{% endtrans %}</dt>
+                                        <dd>{{ client.tokenEndpointAuthMethod }}</dd>{% endif %}
+
+                                    {% if client.requestObjectSigningAlg %}<dt>{% trans %}Request object signing algorithm{% endtrans %}</dt>
+                                        <dd>{{ client.requestObjectSigningAlg }}</dd>{% endif %}
+
+                                    {% if client.idTokenSignedResponseAlg %}<dt>{% trans %}ID Token response signing algorithm{% endtrans %}</dt>
+                                        <dd>{{ client.idTokenSignedResponseAlg }}</dd>{% endif %}
+
+                                    {% if client.idTokenEncryptedResponseAlg %}<dt>{% trans %}ID Token response encryption algorithm{% endtrans %}</dt>
+                                        <dd>{{ client.idTokenEncryptedResponseAlg }}</dd>{% endif %}
+
+                                    {% if client.idTokenEncryptedResponseEnc %}<dt>{% trans %}ID Token response encryption encoder{% endtrans %}</dt>
+                                        <dd>{{ client.idTokenEncryptedResponseEnc }}</dd>{% endif %}
+
+                                    {% if client.userinfoSignedResponseAlg %}<dt>{% trans %}Userinfo response signing algorithm{% endtrans %}</dt>
+                                        <dd>{{ client.userinfoSignedResponseAlg }}</dd>{% endif %}
+
+                                    {% if client.userinfoEncryptedResponseAlg %}<dt>{% trans %}Userinfo response encryption algorithm{% endtrans %}</dt>
+                                        <dd>{{ client.userinfoEncryptedResponseAlg }}</dd>{% endif %}
+
+                                    {% if client.userinfoEncryptedResponseEnc %}<dt>{% trans %}Userinfo response encryption encoder{% endtrans %}</dt>
+                                        <dd>{{ client.userinfoEncryptedResponseEnc }}</dd>{% endif %}
+
+                                    {% if client.defaultMaxAge %}<dt>{% trans %}Default max age{% endtrans %}</dt>
+                                        <dd>{{ client.defaultMaxAge }}</dd>{% endif %}
+
+                                    {% if client.requireAuthTime %}<dt>{% trans %}Require authentication time{% endtrans %}</dt>
+                                        <dd>{{ client.requireAuthTime }}</dd>{% endif %}
+                                </dl>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+           
+
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+<script type="text/javascript">
+
+</script>
+{% endblock javascripts %}

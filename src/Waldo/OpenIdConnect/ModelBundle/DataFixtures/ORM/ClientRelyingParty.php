@@ -44,7 +44,7 @@ class ClientRelyingParty extends ContainerAware implements FixtureInterface
                             sprintf('http://%s/OIC-RP/web/app_dev.php/login_check', $hostsipaddress)
                             )
                         )
-                ->setContacts(array('contact@exemple.com <contactName contact>'))
+                ->setContacts(array('Rory Williams <rory.williams@exemple.org>'))
                 ->setApplicationType("web")
                 ->setUserinfoEncryptedResponseAlg("RS256")
                 ->setIdTokenEncryptedResponseAlg("RS512")

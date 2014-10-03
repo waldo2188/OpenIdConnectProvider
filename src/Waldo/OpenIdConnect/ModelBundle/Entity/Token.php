@@ -141,7 +141,7 @@ class Token
     }
 
     /**
-     * getIssedAt
+     * getIssuedAt
      * 
      * @return \DateTime 
      */
@@ -248,14 +248,14 @@ class Token
     }
 
     /**
-     * setIssedAt
+     * setIssuedAt
      * 
-     * @param \DateTime $issedAt
+     * @param \DateTime $issuedAt
      * @return \Waldo\OpenIdConnect\ModelBundle\Entity\Token
      */
-    public function setIssuedAt(\DateTime $issedAt)
+    public function setIssuedAt(\DateTime $issuedAt)
     {
-        $this->issuedAt = $issedAt;
+        $this->issuedAt = $issuedAt;
         return $this;
     }
 

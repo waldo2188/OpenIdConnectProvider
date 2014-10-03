@@ -39,7 +39,7 @@ hasNo: false } %}
             id : 'dta-account',
             js : {
             "sDom":"<'row'<'col-xs-6'l><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",                
-                sAjaxSource : path('oicp_admin_index_list')
+                sAjaxSource : path('oicp_admin_account_list')
             }
         })
     }}
@@ -51,47 +51,45 @@ id:"success-disabled-account", alert: "success", content: "This account has been
     
     
 <script type="text/javascript">
-    $(document).ready(function(){
-                
-        $('#dta-account_wrapper').on('click', 'button[data-ref="enabled"]',function(event) {
-                       
-            if($(event.currentTarget).data('value') === true) {
-                $("#disabledAccount").modal('show');
-                $("#disabledAccount").data('identifier', $(event.currentTarget).data('identifier'));
-            } else {
-                $.post('{{ path("oicp_admin_account_enabled") }}', {account:$(event.currentTarget).data('identifier')})
-                .done(function() {
-                   $('#dta-account').dataTable().fnDraw();
-                   $('div[role="alert-box"]').append($('#tpl-success-disabled-account').template({type:'{% trans %}enabled{% endtrans %}'}));
-                   $("#disabledAccount").modal('hide');
-               })
-               .fail(function() {
-                   $('div[role="alert-box"]').append($('#tpl-alert-disabled-account').template({type:'{% trans %}enabled{% endtrans %}'}));
-                   $("#disabledAccount").modal('hide');
-               });
-               
-            }
-            
-        });
-        
-        $('button[data-modal-action-yes="disabledAccount"]').on('click', function() {
-            $('div[role="alert-box"]').empty();
-            
-            $.post('{{ path("oicp_admin_account_disabled") }}', {account:$("#disabledAccount").data('identifier')})
-             .done(function() {
-                $('#dta-account').dataTable().fnDraw();
-                $('div[role="alert-box"]').append($('#tpl-success-disabled-account').template({type:'{% trans %}disabled{% endtrans %}'}));
-                $("#disabledAccount").modal('hide');
-        
-            })
-            .fail(function() {
-                
-                $('div[role="alert-box"]').append(jQuery('#tpl-alert-disabled-account').template({type:'{% trans %}disabled{% endtrans %}'}));
-                $("#disabledAccount").modal('hide');
-            });
+$(document).ready(function(){
 
-        });
-                
+    $('#dta-account_wrapper').on('click', 'button[data-ref="enabled"]',function(event) {
+
+        if($(event.currentTarget).data('value') === true) {
+            $("#disabledAccount").modal('show');
+            $("#disabledAccount").data('identifier', $(event.currentTarget).data('identifier'));
+        } else {
+            $.post('{{ path("oicp_admin_account_enabled") }}', {account:$(event.currentTarget).data('identifier')})
+            .done(function() {
+               $('#dta-account').dataTable().fnDraw();
+               $('div[role="alert-box"]').append($('#tpl-success-disabled-account').template({type:'{% trans %}enabled{% endtrans %}'}));
+               $("#disabledAccount").modal('hide');
+           })
+           .fail(function() {
+               $('div[role="alert-box"]').append($('#tpl-alert-disabled-account').template({type:'{% trans %}enabled{% endtrans %}'}));
+               $("#disabledAccount").modal('hide');
+           });
+        }
+
     });
+
+    $('button[data-modal-action-yes="disabledAccount"]').on('click', function() {
+        $('div[role="alert-box"]').empty();
+
+        $.post('{{ path("oicp_admin_account_disabled") }}', {account:$("#disabledAccount").data('identifier')})
+         .done(function() {
+            $('#dta-account').dataTable().fnDraw();
+            $('div[role="alert-box"]').append($('#tpl-success-disabled-account').template({type:'{% trans %}disabled{% endtrans %}'}));
+            $("#disabledAccount").modal('hide');
+
+        })
+        .fail(function() {
+
+            $('div[role="alert-box"]').append(jQuery('#tpl-alert-disabled-account').template({type:'{% trans %}disabled{% endtrans %}'}));
+            $("#disabledAccount").modal('hide');
+        });
+    });
+
+});
 </script>
 {% endblock javascripts %}
