@@ -3,6 +3,7 @@
 namespace Waldo\OpenIdConnect\ModelBundle\DataFixtures\ORM;
 
 use Waldo\OpenIdConnect\ModelBundle\Entity\Client;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Account;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAware;
@@ -49,6 +50,7 @@ class ClientRelyingParty extends ContainerAware implements FixtureInterface
                 ->setIdTokenEncryptedResponseAlg("RS512")
                 ->setLogoUri("http://www.gravatar.com/avatar/9529e3f30dbf81d584eed66b2183cc9d?s=128")
                 ->setClientUri("https://github.com/waldo2188")
+                ->setScope(array(Account::SCOPE_PROFILE, Account::SCOPE_PHONE, Account::SCOPE_EMAIL, Account::SCOPE_ADDRESS))
                 ;
         
         $manager->persist($client);
