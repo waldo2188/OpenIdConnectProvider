@@ -6,9 +6,6 @@
 
 {% block content %}  
 
-    
-        
-
     <div class="row">
         <div class="col-md-6">
             <div class="box">
@@ -17,29 +14,27 @@
                 </div>
                 <div class="box-body">
                     {% if client.logoUri %}<img class="pull-right" src="{{ client.logoUri }}" alt="{% trans %}Client logo{% endtrans %}" />{% endif %}
-                    <dl>
-                        <dt>{% trans %}Client Name{% endtrans %}</dt>
-                            <dd>{{ client.clientName }}</dd>
+                    
+                    <p><span class="param-label">{% trans %}Client Name{% endtrans %} :</span> <span class="param-value">{{ client.clientName }}</span></p>
 
-                        <dt>{% trans %}Client ID{% endtrans %}</dt>
-                            <dd>{{ client.clientID }}</dd>
+                    <p><span class="param-label">{% trans %}Client ID{% endtrans %} :</span> <span class="param-value">{{ client.clientID }}</span></p>
 
-                        <dt>{% trans %}Client URI{% endtrans %}</dt>
-                            <dd>{{ client.clientUri }}</dd>
+                    <p><span class="param-label">{% trans %}Client URI{% endtrans %} :</span> <span class="param-value">{{ client.clientUri }}</span></p>
 
-                        <dt>{% trans %}Issued at{% endtrans %}</dt>
-                            <dd>{{ client.clientIdIssuedAt|date() }}</dd>              
-                                                    
-                        {% if client.tosUri %}<dt>{% trans %}Term of Service{% endtrans %}</dt>
-                            <dd><a href="{{ client.tosUri }}">{{ client.tosUri }}</a></dd>{% endif %}
-                            
-                        {% if client.policyUri %}<dt>{% trans %}Polyci{% endtrans %}</dt>
-                            <dd><a href="{{ client.policyUri }}">{{ client.policyUri }}</a></dd>{% endif %}
-                    </dl>
-                    <b>{% trans %}Scopes{% endtrans %}</b>
-                    <ul>
+                    <p><span class="param-label">{% trans %}Issued at{% endtrans %} :</span> <span class="param-value">{{ client.clientIdIssuedAt|date() }}</span></p>
+
+                    {% if client.tosUri %}
+                    <p><span class="param-label">{% trans %}Term of Service{% endtrans %} :</span> <span class="param-value"><a href="{{ client.tosUri }}">{{ client.tosUri }}</a></span></p>
+                    {% endif %}
+
+                    {% if client.policyUri %}
+                    <p><span class="param-label">{% trans %}Polyci{% endtrans %} :</span> <span class="param-value"><a href="{{ client.policyUri }}">{{ client.policyUri }}</a></span></p>
+                    {% endif %}
+                    
+                    <ul class="list-inline">
+                        <li><span class="param-label">{% trans %}Scopes{% endtrans %} :</span></li>
                         {% for scope in client.scope %}
-                            <li>{{ scope }}</li>
+                            <li><span class="param-value">{{ scope }}</span></li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -62,82 +57,93 @@
 
                         <div class="tab-content">
                             <div class="tab-pane active" id="secret">
-                                <dl>
-                                    <dt>{% trans %}Client secret{% endtrans %}</dt>
-                                    <dd>{{ client.clientSecret }}</dd>
+                                
+                                <p><span class="param-label">{% trans %}Client secret{% endtrans %} :</span> <span class="param-value">{{ client.clientSecret }}</span></p>
 
-                                    {% if client.clientSecretExpiresAt %}<dt>{% trans %}Client secret{% endtrans %}</dt>
-                                        <dd>{{ client.clientSecret }}</dd>{% endif %}
-                                </dl>
+                                {% if client.clientSecretExpiresAt %}
+                                    <p><span class="param-label">{% trans %}Client secret{% endtrans %} :</span> <span class="param-value">{{ client.clientSecret }}</span></p>
+                                {% endif %}
+
                             </div>
                             <div class="tab-pane" id="uris">
-                                <b>{% trans %}Redirect URIs{% endtrans %}</b>
-                                <ul>
+                                <span class="param-label">{% trans %}Redirect URIs{% endtrans %} :</span>
+                                <ul>                                   
                                     {% for uri in client.redirectUris %}
-                                        <li>{{ uri }}</li>
+                                    <li><span class="param-value">{{ uri }}</span></li>
                                     {% endfor %}
                                 </ul>
 
-                                <dl>
-                                {% if client.postLogoutRedirectUri %}<dt>{% trans %}Post logout redirect URI{% endtrans %}</dt>
-                                    <dd>{{ client.postLogoutRedirectUri }}</dd>{% endif %}
+                                {% if client.postLogoutRedirectUri %}
+                                    <p><span class="param-label">{% trans %}Post logout redirect URI{% endtrans %} :</span> <span class="param-value">{{ client.postLogoutRedirectUri }}</span></p>
+                                {% endif %}
 
-                                {% if client.jwksUri %}<dt>{% trans %}JWKS URI{% endtrans %}</dt>
-                                    <dd>{{ client.jwksUri }}</dd>{% endif %}
+                                {% if client.jwksUri %}
+                                    <p><span class="param-label">{% trans %}JWKS URI{% endtrans %} :</span> <span class="param-value">{{ client.jwksUri }}</span></p>
+                                {% endif %}
 
-                                {% if client.jwkEncryptionUri %}<dt>{% trans %}JWKS encryption URI{% endtrans %}</dt>
-                                    <dd>{{ client.jwkEncryptionUri }}</dd>{% endif %}
+                                {% if client.jwkEncryptionUri %}
+                                    <p><span class="param-label">{% trans %}JWKS encryption URI{% endtrans %} :</span> <span class="param-value">{{ client.jwkEncryptionUri }}</span></p>
+                                {% endif %}
 
-                                {% if client.x509Uri %}<dt>{% trans %}x509 certificat URI{% endtrans %}</dt>
-                                    <dd>{{ client.x509Uri }}</dd>{% endif %}
+                                {% if client.x509Uri %}
+                                    <p><span class="param-label">{% trans %}x509 certificat URI{% endtrans %} :</span> <span class="param-value">{{ client.x509Uri }}</span></p>
+                                {% endif %}
 
-                                {% if client.x509EncryptionUri %}<dt>{% trans %}x509 encryption certificat URI{% endtrans %}</dt>
-                                    <dd>{{ client.x509EncryptionUri }}</dd>{% endif %}
-
-                                </dl>
+                                {% if client.x509EncryptionUri %}
+                                    <p><span class="param-label">{% trans %}x509 encryption certificat URI{% endtrans %} :</span> <span class="param-value">{{ client.x509EncryptionUri }}</span></p>
+                                {% endif %}
                             </div>
                             <div class="tab-pane" id="contact">
                                 <ul>
                                     {% for contact in client.contacts %}
-                                        <li>{{ contact }}</li>
+                                        <li><span class="param-value">{{ contact }}</span></li>
                                     {% endfor %}
                                 </ul>
                             </div>
                             <div class="tab-pane" id="security">
-                                <dl>
-                                    {% if client.tokenEndpointAuthMethod %}<dt>{% trans %}Token endpoint authentication method{% endtrans %}</dt>
-                                        <dd>{{ client.tokenEndpointAuthMethod }}</dd>{% endif %}
+                                {% if client.tokenEndpointAuthMethod %}
+                                    <p><span class="param-label">{% trans %}Token endpoint authentication method{% endtrans %} :</span> <span class="param-value">{{ client.tokenEndpointAuthMethod }}</span></p>
+                                {% endif %}
 
-                                    {% if client.tokenEndpointAuthSigningAlg %}<dt>{% trans %}Token endpoint signing algorithm{% endtrans %}</dt>
-                                        <dd>{{ client.tokenEndpointAuthMethod }}</dd>{% endif %}
+                                {% if client.tokenEndpointAuthSigningAlg %}
+                                    <p><span class="param-label">{% trans %}Token endpoint signing algorithm{% endtrans %} :</span> <span class="param-value">{{ client.tokenEndpointAuthMethod }}</span></p>
+                                {% endif %}
 
-                                    {% if client.requestObjectSigningAlg %}<dt>{% trans %}Request object signing algorithm{% endtrans %}</dt>
-                                        <dd>{{ client.requestObjectSigningAlg }}</dd>{% endif %}
+                                {% if client.requestObjectSigningAlg %}
+                                    <p><span class="param-label">{% trans %}Request object signing algorithm{% endtrans %} :</span> <span class="param-value">{{ client.requestObjectSigningAlg }}</span></p>
+                                {% endif %}
 
-                                    {% if client.idTokenSignedResponseAlg %}<dt>{% trans %}ID Token response signing algorithm{% endtrans %}</dt>
-                                        <dd>{{ client.idTokenSignedResponseAlg }}</dd>{% endif %}
+                                {% if client.idTokenSignedResponseAlg %}
+                                    <p><span class="param-label">{% trans %}ID Token response signing algorithm{% endtrans %} :</span> <span class="param-value">{{ client.idTokenSignedResponseAlg }}</span></p>
+                                {% endif %}
 
-                                    {% if client.idTokenEncryptedResponseAlg %}<dt>{% trans %}ID Token response encryption algorithm{% endtrans %}</dt>
-                                        <dd>{{ client.idTokenEncryptedResponseAlg }}</dd>{% endif %}
+                                {% if client.idTokenEncryptedResponseAlg %}
+                                    <p><span class="param-label">{% trans %}ID Token response encryption algorithm{% endtrans %} :</span> <span class="param-value">{{ client.idTokenEncryptedResponseAlg }}</span></p>
+                                {% endif %}
 
-                                    {% if client.idTokenEncryptedResponseEnc %}<dt>{% trans %}ID Token response encryption encoder{% endtrans %}</dt>
-                                        <dd>{{ client.idTokenEncryptedResponseEnc }}</dd>{% endif %}
+                                {% if client.idTokenEncryptedResponseEnc %}
+                                    <p><span class="param-label">{% trans %}ID Token response encryption encoder{% endtrans %} :</span> <span class="param-value">{{ client.idTokenEncryptedResponseEnc }}</span></p>
+                                {% endif %}
 
-                                    {% if client.userinfoSignedResponseAlg %}<dt>{% trans %}Userinfo response signing algorithm{% endtrans %}</dt>
-                                        <dd>{{ client.userinfoSignedResponseAlg }}</dd>{% endif %}
+                                {% if client.userinfoSignedResponseAlg %}
+                                    <p><span class="param-label">{% trans %}Userinfo response signing algorithm{% endtrans %} :</span> <span class="param-value">{{ client.userinfoSignedResponseAlg }}</span></p>
+                                {% endif %}
 
-                                    {% if client.userinfoEncryptedResponseAlg %}<dt>{% trans %}Userinfo response encryption algorithm{% endtrans %}</dt>
-                                        <dd>{{ client.userinfoEncryptedResponseAlg }}</dd>{% endif %}
+                                {% if client.userinfoEncryptedResponseAlg %}
+                                    <p><span class="param-label">{% trans %}Userinfo response encryption algorithm{% endtrans %} :</span> <span class="param-value">{{ client.userinfoEncryptedResponseAlg }}</span></p>
+                                {% endif %}
 
-                                    {% if client.userinfoEncryptedResponseEnc %}<dt>{% trans %}Userinfo response encryption encoder{% endtrans %}</dt>
-                                        <dd>{{ client.userinfoEncryptedResponseEnc }}</dd>{% endif %}
+                                {% if client.userinfoEncryptedResponseEnc %}
+                                    <p><span class="param-label">{% trans %}Userinfo response encryption encoder{% endtrans %} :</span> <span class="param-value">{{ client.userinfoEncryptedResponseEnc }}</span></p>
+                                {% endif %}
 
-                                    {% if client.defaultMaxAge %}<dt>{% trans %}Default max age{% endtrans %}</dt>
-                                        <dd>{{ client.defaultMaxAge }}</dd>{% endif %}
+                                {% if client.defaultMaxAge %}
+                                    <p><span class="param-label">{% trans %}Default max age{% endtrans %} :</span> <span class="param-value">{{ client.defaultMaxAge }}</span></p>
+                                {% endif %}
 
-                                    {% if client.requireAuthTime %}<dt>{% trans %}Require authentication time{% endtrans %}</dt>
-                                        <dd>{{ client.requireAuthTime }}</dd>{% endif %}
-                                </dl>
+                                {% if client.requireAuthTime %}
+                                    <p><span class="param-label">{% trans %}Require authentication time{% endtrans %} :</span> <span class="param-value">{{ client.requireAuthTime }}</span></p>
+                                {% endif %}
                             </div>
 
                         </div>
