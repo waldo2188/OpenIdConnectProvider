@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new Waldo\OpenIdConnect\AdminBundle\WaldoOpenIdConnectAdminBundle(),
             new Cnerta\BreadcrumbBundle\CnertaBreadcrumbBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -3,15 +3,24 @@
 namespace Waldo\OpenIdConnect\ModelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+    
 /**
  * @ORM\Entity(repositoryClass="Waldo\OpenIdConnect\ModelBundle\EntityRepository\ClientRepository")
  * @ORM\Table(name="client")
  * @ORM\HasLifecycleCallbacks
+ * 
  */
 class Client implements UserInterface
 {
+
+    const CLIENT_DISPLAY_PAGE = 'page';
+    const CLIENT_DISPLAY_POPUP = 'popup';
+    const CLIENT_DISPLAY_TOUCH = 'touch';
+    const CLIENT_DISPLAY_WAP = 'wap';
 
     /**
      * @ORM\Id
@@ -26,6 +35,13 @@ class Client implements UserInterface
      * @var ArrayCollection<Token> $tokenList
      */
     protected $tokenList;
+
+    /**
+     * @ORM\OneToMany(targetEntity="UserRolesRules", mappedBy="client", cascade={"persist", "remove", "merge"})
+     * 
+     * @var ArrayCollection<UserRolesRules> $userRolesRulesList
+     */
+    protected $userRolesRulesList;
 
     /**
      * @ORM\Column(name="client_id", type="string", length=255, nullable=true)
@@ -57,6 +73,7 @@ class Client implements UserInterface
 
     /**
      * @ORM\Column(name="client_name", type="string", length=255, nullable=true)
+     * @Assert\NotBlank()
      * 
      * @var string $clientName
      */
@@ -64,6 +81,7 @@ class Client implements UserInterface
 
     /**
      * @ORM\Column(name="client_uri", type="string", length=255, nullable=true)
+     * @Assert\NotBlank()
      * 
      * @var string $clientUri
      */
@@ -82,7 +100,21 @@ class Client implements UserInterface
      * @see openid.net/specs/openid-connect-registration-1_0.html#ClientMetadata
      * @var string $applicationType (native, web)
      */
-    protected $applicationType;
+    protected $applicationType = 'web';
+
+    /**
+     * @ORM\Column(name="bearer", type="string", length=50, nullable=true)
+     * 
+     * @var string $bearer Bearer Token Transmission Method [bearer, post, get]
+     */
+    protected $bearer = 'bearer';
+
+    /**
+     * @ORM\Column(name="display", type="string", length=50, nullable=true)
+     * 
+     * @var string $display
+     */
+    protected $display = self::CLIENT_DISPLAY_PAGE;
 
     /**
      * @ORM\Column(name="logo_uri", type="string", length=2048, nullable=true)
@@ -100,13 +132,14 @@ class Client implements UserInterface
 
     /**
      * @ORM\Column(name="policy_uri", type="string", length=2048, nullable=true)
-     * 
+     *  
      * @var string $policyUri
      */
     protected $policyUri;
 
     /**
      * @ORM\Column(name="redirect_uris", type="array", nullable=true)
+     * @Assert\NotBlank(message = "You should set one Redirect URI at least")
      * 
      * @var string $redirectUris
      */
@@ -132,6 +165,27 @@ class Client implements UserInterface
      * @var string $tokenEndpointAuthSigningAlg RS256, RS512, ...
      */
     protected $tokenEndpointAuthSigningAlg;
+
+    /**
+     * @ORM\Column(name="request_object_signing_alg", type="string", length=255, nullable=true)
+     * 
+     * @var string $requestObjectSigningAlg RS256, RS512, ...
+     */
+    protected $requestObjectSigningAlg;
+
+    /**
+     * @ORM\Column(name="request_object_encryption_alg", type="string", length=255, nullable=true)
+     * 
+     * @var string $requestObjectSigningAlg RSA1_5, RSA-OAEP, ...
+     */
+    protected $requestObjectEncryptionAlg;
+
+    /**
+     * @ORM\Column(name="request_object_encryption_enc", type="string", length=255, nullable=true)
+     * 
+     * @var string $requestObjectSigningAlg A128GCM, A256GCM, ...
+     */
+    protected $requestObjectEncryptionEnc;
 
     /**
      * @ORM\Column(name="jwks_uri", type="string", length=2048, nullable=true)
@@ -160,13 +214,6 @@ class Client implements UserInterface
      * @var string $x509EncryptionUri
      */
     protected $x509EncryptionUri;
-
-    /**
-     * @ORM\Column(name="request_object_signing_alg", type="string", length=255, nullable=true)
-     * 
-     * @var string $requestObjectSigningAlg RS256, RS512, ...
-     */
-    protected $requestObjectSigningAlg;
 
     /**
      * @ORM\Column(name="userinfo_signed_response_alg", type="string", length=255, nullable=true)
@@ -233,7 +280,8 @@ class Client implements UserInterface
 
     public function __construct()
     {
-        
+        $this->tokenList = new ArrayCollection();
+        $this->userRolesRulesList = new ArrayCollection();
     }
 
     /**
@@ -243,7 +291,7 @@ class Client implements UserInterface
     {
         $this->clientIdIssuedAt = new \DateTime('now');
     }
-    
+
     /**
      * getId
      * 
@@ -330,6 +378,26 @@ class Client implements UserInterface
     public function getApplicationType()
     {
         return $this->applicationType;
+    }
+
+    /**
+     * getApplicationType
+     * 
+     * @return string
+     */
+    public function getBearer()
+    {
+        return $this->bearer;
+    }
+
+    /**
+     * getApplicationType
+     * 
+     * @return string
+     */
+    public function getDisplay()
+    {
+        return $this->display;
     }
 
     /**
@@ -450,6 +518,26 @@ class Client implements UserInterface
     public function getRequestObjectSigningAlg()
     {
         return $this->requestObjectSigningAlg;
+    }
+
+    /**
+     * getRequestObjectSigningAlg
+     * 
+     * @return string
+     */
+    public function getRequestObjectEncryptionAlg()
+    {
+        return $this->requestObjectEncryptionAlg;
+    }
+
+    /**
+     * getRequestObjectSigningAlg
+     * 
+     * @return string
+     */
+    public function getRequestObjectEncryptionEnc()
+    {
+        return $this->requestObjectEncryptionEnc;
     }
 
     /**
@@ -651,6 +739,30 @@ class Client implements UserInterface
     }
 
     /**
+     * setBearer
+     * 
+     * @param string $bearer
+     * @return \Waldo\OpenIdConnect\ModelBundle\Entity\Client
+     */
+    public function setBearer($bearer)
+    {
+        $this->bearer = $bearer;
+        return $this;
+    }
+
+    /**
+     * setDisplay
+     * 
+     * @param string $display
+     * @return \Waldo\OpenIdConnect\ModelBundle\Entity\Client
+     */
+    public function setDisplay($display)
+    {
+        $this->display = $display;
+        return $this;
+    }
+
+    /**
      * setLogoUri
      * 
      * @param string $logoUri
@@ -795,6 +907,30 @@ class Client implements UserInterface
     }
 
     /**
+     * setRequestObjectEncryptionAlg
+     * 
+     * @param string $requestObjectEncryptionAlg
+     * @return \Waldo\OpenIdConnect\ModelBundle\Entity\Client
+     */
+    public function setRequestObjectEncryptionAlg($requestObjectEncryptionAlg)
+    {
+        $this->requestObjectEncryptionAlg = $requestObjectEncryptionAlg;
+        return $this;
+    }
+
+    /**
+     * setRequestObjectEncryptionEnc
+     * 
+     * @param string $requestObjectEncryptionEnc
+     * @return \Waldo\OpenIdConnect\ModelBundle\Entity\Client
+     */
+    public function setRequestObjectEncryptionEnc($requestObjectEncryptionEnc)
+    {
+        $this->requestObjectEncryptionEnc = $requestObjectEncryptionEnc;
+        return $this;
+    }
+
+    /**
      * setUserinfoSignedResponseAlg
      * 
      * @param string $userinfoSignedResponseAlg
@@ -930,6 +1066,76 @@ class Client implements UserInterface
     }
 
     /**
+     * getTokenList
+     * 
+     * @return ArrayCollection<Token> $tokenList 
+     */
+    public function getTokenList()
+    {
+        return $this->tokenList;
+    }
+    
+    /**
+     * addUserRolesRules
+     * 
+     * @param UserRolesRules $userRolesRules
+     * @return \Cnerta\OpenIdConnect\ModelBundle\Entity\Client
+     */
+    public function addUserRolesRules(UserRolesRules $userRolesRules)
+    {
+        // if the object isn't in the list
+        if (!$this->userRolesRulesList->contains($userRolesRules)) {
+            $this->userRolesRulesList->add($userRolesRules);
+            $userRolesRules->setClient($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * setUserRolesRules
+     * 
+     * @param Mix (Collection|UserRolesRules) $items
+     * @return \Cnerta\OpenIdConnect\ModelBundle\Entity\Client
+     */
+    public function setUserRolesRules($items = null)
+    {
+        if ($items instanceof Collection) {
+            foreach ($items as $item) {
+                $this->addUserRolesRules($item);
+            }
+        } elseif ($items instanceof UserRolesRules) {
+            $this->addUserRolesRules($items);
+        } elseif ($items === null) {
+            $this->userRolesRulesList = new ArrayCollection();
+        } else {
+            throw new \Exception('$items must be an instance of UserRolesRules or Collection');
+        }
+        return $this;
+    }
+    
+    /**
+     * setUserRolesRulesList alias setUserRolesRules
+     * @param ArrayCollection $userRolesRulesList
+     * @return type
+     */
+    public function setUserRolesRulesList(Collection $userRolesRulesList)
+    {
+        return $this->setUserRolesRules($userRolesRulesList);
+    }
+
+    /**
+     * getUserRolesRulesList
+     * 
+     * @return ArrayCollection<UserRolesRules> $userRolesRulesList 
+     */
+    public function getUserRolesRulesList()
+    {
+        return $this->userRolesRulesList;
+    }
+
+    
+    /**
      * setScope
      * 
      * @param array $scope
@@ -940,17 +1146,7 @@ class Client implements UserInterface
         $this->scope = $scope;
         return $this;
     }
-
-    /**
-     * getTokenList
-     * 
-     * @return ArrayCollection<Token> $tokenList 
-     */
-    public function getTokenList()
-    {
-        return $this->tokenList;
-    }
-
+    
     public function eraseCredentials()
     {
         

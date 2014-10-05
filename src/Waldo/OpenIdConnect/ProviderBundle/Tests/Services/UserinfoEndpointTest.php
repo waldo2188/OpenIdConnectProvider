@@ -34,7 +34,7 @@ class UserinfoEndpointTest extends \PHPUnit_Framework_TestCase
                 ->method('makeUserinfo')
                 ->will($this->returnValue(array("avalue")));
 
-        $userinforEndpoint = new UserinfoEndpoint($this->em, $this->userinfoHelper);
+        $userinforEndpoint = $this->getUserinfoEndpoint();
 
         $request = new Request();
         $request->headers->set("authorization", "Bearer azerttyuiop");
@@ -56,7 +56,7 @@ class UserinfoEndpointTest extends \PHPUnit_Framework_TestCase
                 ->method('makeUserinfo')
                 ->will($this->returnValue("someJWTstring"));
 
-        $userinforEndpoint = new UserinfoEndpoint($this->em, $this->userinfoHelper);
+        $userinforEndpoint = $this->getUserinfoEndpoint();
 
         $request = new Request();
         $request->headers->set("authorization", "Bearer azerttyuiop");
@@ -73,7 +73,7 @@ class UserinfoEndpointTest extends \PHPUnit_Framework_TestCase
     {
         $this->prepareValue();
 
-        $userinforEndpoint = new UserinfoEndpoint($this->em, $this->userinfoHelper);
+        $userinforEndpoint = $this->getUserinfoEndpoint();
 
         $request = new Request();
         
@@ -89,7 +89,7 @@ class UserinfoEndpointTest extends \PHPUnit_Framework_TestCase
     {
         $this->prepareValue();
 
-        $userinforEndpoint = new UserinfoEndpoint($this->em, $this->userinfoHelper);
+        $userinforEndpoint = $this->getUserinfoEndpoint();
 
         $request = new Request();
         $request->headers->set("authorization", "azerttyuiop");
@@ -106,7 +106,7 @@ class UserinfoEndpointTest extends \PHPUnit_Framework_TestCase
     {
         $this->prepareValue();
 
-        $userinforEndpoint = new UserinfoEndpoint($this->em, $this->userinfoHelper);
+        $userinforEndpoint = $this->getUserinfoEndpoint();
 
         $request = new Request();
         $request->headers->set("authorization", "Bearer");
@@ -128,7 +128,7 @@ class UserinfoEndpointTest extends \PHPUnit_Framework_TestCase
                 ->with($this->equalTo("azerttyuiop"))
                 ->will($this->returnValue(null));
 
-        $userinforEndpoint = new UserinfoEndpoint($this->em, $this->userinfoHelper);
+        $userinforEndpoint = $this->getUserinfoEndpoint();
 
         $request = new Request();
         $request->headers->set("authorization", "Bearer azerttyuiop");
@@ -139,6 +139,11 @@ class UserinfoEndpointTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("application/json", $response->headers->get("content-type"));
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertEquals('{"error":"access_denied","error_description":"invalid bearer code"}', $response->getContent());
+    }
+    
+    private function getUserinfoEndpoint()
+    {
+        return new UserinfoEndpoint($this->em, $this->userinfoHelper);
     }
     
     private function prepareValue($findOneByAccessToken = false, $getRepository = false, $persist = false)

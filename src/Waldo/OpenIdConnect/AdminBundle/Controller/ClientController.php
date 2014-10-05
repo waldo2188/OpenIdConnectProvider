@@ -4,13 +4,10 @@ namespace Waldo\OpenIdConnect\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Waldo\OpenIdConnect\ModelBundle\Security\Authorization\Voter\AccountVoter;
 use Waldo\OpenIdConnect\ModelBundle\Entity\Client;
+use Waldo\OpenIdConnect\AdminBundle\Form\Type\ClientFormType;
 
 /**
  * @Route("/client")
@@ -38,17 +35,38 @@ class ClientController extends Controller
     }
 
     /**
+     * @Route("/edit", name="oicp_admin_client_new", defaults={"client":null})
      * @Route("/edit/{client}", name="oicp_admin_client_edit", defaults={"client":null})
      * 
      * @Template()
      */
-    public function profileAction(Client $client)
+    public function editAction(Request $request, Client $client = null)
     {
+        $client = $client === null ? new Client() : $client;
         
-        return array("client" => $client);
+        $form = $this->createForm(new ClientFormType(), $client);
+        
+        $form->handleRequest($request);
+        
+        if($request->isMethod('POST')) {
+            if($form->isValid()) {
+                
+                $this->get('waldo_oic_p.admin.client_application')->handleClient($client);
+                
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($client);
+                $em->flush();
+                
+                return $this->redirect($this->generateUrl('oicp_admin_client_edit', array('client' => $client->getId())));
+            }
+        }
+        
+        return array(
+            "form" => $form->createView(),
+            "client" => $client
+                );
     }
-
-    
+        
     /**
      * @Route("/record/{client}", name="oicp_admin_client_record", defaults={"client":null})
      * @Template()

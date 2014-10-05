@@ -28,6 +28,7 @@ class UserinfoEndpoint
      */
     protected $userinfoHelper;
     
+
     public function __construct(EntityManager $em, UserinfoHelper $userinfoHelper)
     {
         $this->em = $em;
@@ -44,7 +45,7 @@ class UserinfoEndpoint
             
             $this->em->persist($token);
             $this->em->flush();
-
+            
             $responseParam = $this->userinfoHelper->makeUserinfo($token);
 
             $header = array(

@@ -78,5 +78,5 @@ class AccountRepository extends EntityRepository
                 
         return $qb->getQuery()->getOneOrNullResult() !== null ? true : false;
     }
-    
+
 }

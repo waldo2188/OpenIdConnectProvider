@@ -36,9 +36,9 @@ class IdTokenHelper extends AbstractTokenHelper
                 
         //TODO add function for sign and encrypt idToken
         
-        if($token->getClient()->getIdTokenEncryptedResponseAlg() !== null) {
+        if($token->getClient()->getIdTokenSignedResponseAlg() !== null) {
             return $this->sign(
-                    $token->getClient()->getIdTokenEncryptedResponseAlg(),
+                    $token->getClient()->getIdTokenSignedResponseAlg(),
                     $idToken->__toArray()
                     );
         }

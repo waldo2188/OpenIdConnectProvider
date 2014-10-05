@@ -79,7 +79,9 @@
         
         <service id="waldo_oic_p.helper.idtoken" class="%waldo_oic_p.helper.idtoken.class%" parent="waldo_oic_p.helper.abstracttoken" />
         
-        <service id="waldo_oic_p.helper.userinfo" class="%waldo_oic_p.helper.userinfo.class%" parent="waldo_oic_p.helper.abstracttoken" />
+        <service id="waldo_oic_p.helper.userinfo" class="%waldo_oic_p.helper.userinfo.class%" parent="waldo_oic_p.helper.abstracttoken">
+            <call method="setUserinfoExtension"><argument type="service" id="waldo_oic_p.extension.userinfo" /></call>
+        </service>
         
         
         <service id="waldo_oic_p.provider.jwk" class="%waldo_oic_p.provider.jwk.class%">

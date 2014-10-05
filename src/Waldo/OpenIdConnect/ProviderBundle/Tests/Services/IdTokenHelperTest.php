@@ -27,7 +27,7 @@ class IdTokenHelperTest extends \PHPUnit_Framework_TestCase
         $idTokenHelper = new IdTokenHelper(array("issuer" => "anIssuer"), $jwkProvider);
         
         $token = $this->getToken();
-        $token->getClient()->setIdTokenEncryptedResponseAlg(null);
+        $token->getClient()->setIdTokenSignedResponseAlg(null);
                 
         $idToken = $idTokenHelper->makeIdToken($token);
         
@@ -106,7 +106,7 @@ class IdTokenHelperTest extends \PHPUnit_Framework_TestCase
                 ;
         
         $client = new Client();
-        $client->setIdTokenEncryptedResponseAlg('RS256')
+        $client->setIdTokenSignedResponseAlg('RS256')
                ->setClientId("a_client_id");
                 ;
         

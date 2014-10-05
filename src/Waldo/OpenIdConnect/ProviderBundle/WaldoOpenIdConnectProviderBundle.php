@@ -3,11 +3,23 @@
 namespace Waldo\OpenIdConnect\ProviderBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Waldo\OpenIdConnect\ProviderBundle\DependencyInjection\WaldoOpenIdConnectProviderExtension;
+use Waldo\OpenIdConnect\ProviderBundle\DependencyInjection\Compiler\UserinfoCompilerPass;
 
 class WaldoOpenIdConnectProviderBundle extends Bundle
 {
-    
+
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new UserinfoCompilerPass());
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -20,4 +32,5 @@ class WaldoOpenIdConnectProviderBundle extends Bundle
         }
         return $this->extension;
     }
+
 }

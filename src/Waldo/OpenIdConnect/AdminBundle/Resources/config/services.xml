@@ -1,16 +1,28 @@
 <?xml version="1.0" ?>
-
 <container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
+    <parameters>
+        
+        <parameter key="waldo_oic_p.admin.client_application.class">Waldo\OpenIdConnect\AdminBundle\Services\ClientApplicationService</parameter>
+        
+        <parameter key="waldo_oic_p.admin.extension.userinfo.class">Waldo\OpenIdConnect\AdminBundle\Extension\UserInfoExtension</parameter>
+        
+    </parameters>
+    
     <services>
-        <service id="waldo_open_id_connect_admin.example" class="Waldo\OpenIdConnect\AdminBundle\Example">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+                
+        <service id="waldo_oic_p.admin.client_application" class="%waldo_oic_p.admin.client_application.class%">
+            <argument type="service" id="security.context" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="cocur_slugify" />
         </service>
+                
+        <service id="waldo_oic_p.admin.extension.userinfo" class="%waldo_oic_p.admin.extension.userinfo.class%">
+            <tag name="waldo_oic_p.extension.userinfo" />
+        </service>
+        
     </services>
-    -->
+
 </container>

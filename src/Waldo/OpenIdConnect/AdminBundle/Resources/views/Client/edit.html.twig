@@ -1,0 +1,162 @@
+{% extends "WaldoOpenIdConnectAdminBundle::base.html.twig" %}
+
+{% block pageTitle %}Client{% endblock pageTitle %}
+{% block pageTitleSub %}Client management{% endblock pageTitleSub %}
+
+{% macro has_errors_in_userrolesrules(form, form_fields) %}
+    {% set errors_count = 0 %}
+    {% if form.children %}
+        {% for children in form.children %}
+            {% if children.vars.valid == false %}{% set errors_count = errors_count + 1 %}{% endif %}
+        {% endfor %}
+        {% if errors_count > 0 %}<span class="text-danger">{{ badge(errors_count) }} {% trans %}Error(s){% endtrans %}</span>{% endif %}
+    {% endif %}
+{% endmacro %}
+
+{% block content %}  
+
+    <h2 class="page-header">{% trans %}Edit client application{% endtrans %}</h2>
+    
+    <div class="box">
+
+        <div class="box-body">
+            {{ form_start(form) }}
+            
+            {% if form.vars.errors.count > 0 %}
+                <div class="alert alert-danger alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    {{ form_errors(form) }}
+                </div>
+            {% endif %}
+            
+            <div class="box-body nav-tabs-custom">
+
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#application" role="tab" data-toggle="tab">{% trans %}Application{% endtrans %}</a></li>
+                    <li><a href="#request" role="tab" data-toggle="tab">{% trans %}Request options{% endtrans %}</a></li>
+                    <li><a href="#response" role="tab" data-toggle="tab">{% trans %}Response options{% endtrans %}</a></li>
+                    <li><a href="#contact" role="tab" data-toggle="tab">{% trans %}Contacts{% endtrans %}</a></li>
+                    <li><a href="#userroles" role="tab" data-toggle="tab">{% trans %}User roles{% endtrans %} {{ _self.has_errors_in_userrolesrules(form.userRolesRulesList, ['expression']) }}</a></li>
+                </ul>
+                
+                <div class="tab-content">
+                    <div class="tab-pane active" id="application">
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_row(form.clientName) }}
+                                {{ form_row(form.clientUri) }}
+                                {{ form_row(form.redirectUris) }}
+                                {{ form_row(form.postLogoutRedirectUri) }}
+                            </div>
+                            <div class="col-md-offset-1 col-md-5">
+                                {{ form_row(form.logoUri) }}
+                                {{ form_row(form.scope) }}
+                                {{ form_row(form.applicationType) }}
+                            </div>
+                        </div>
+                            <hr />
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_row(form.tosUri) }}
+                                {{ form_row(form.policyUri) }}
+                            </div>
+                            <div class="col-md-offset-1 col-md-5">
+                                {{ form_row(form.defaultMaxAge) }}
+                                {{ form_row(form.requireAuthTime) }}
+                            </div>
+                        </div>
+                            
+                    </div>
+                    <div class="tab-pane" id="request">
+                        <div class="row">
+                            <div class="col-md-5">
+                                {{ form_row(form.tokenEndpointAuthMethod) }}
+                                {{ form_row(form.tokenEndpointAuthSigningAlg) }}
+                            </div>
+                            <div class="col-md-offset-2 col-md-5">
+                                {{ form_row(form.requestObjectSigningAlg) }}
+                                {{ form_row(form.requestObjectEncryptionAlg) }}
+                                {{ form_row(form.requestObjectEncryptionEnc) }}
+                            </div>
+                        </div>
+                            <hr />
+                        <div class="row">
+                            <div class="col-md-5">
+                                {{ form_row(form.jwksUri) }}
+                                {{ form_row(form.jwkEncryptionUri) }}
+                            </div>
+                            <div class="col-md-offset-2 col-md-5">
+                                {{ form_row(form.x509Uri) }}
+                                {{ form_row(form.x509EncryptionUri) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="response">
+                        <div class="row">
+                            <div class="col-md-5">
+                            {{ form_row(form.idTokenSignedResponseAlg) }}
+                            {{ form_row(form.idTokenEncryptedResponseAlg) }}
+                            {{ form_row(form.idTokenEncryptedResponseEnc) }}
+                            </div>
+                            <div class="col-md-offset-2 col-md-5">
+                            {{ form_row(form.userinfoSignedResponseAlg) }}
+                            {{ form_row(form.userinfoEncryptedResponseAlg) }}
+                            {{ form_row(form.userinfoEncryptedResponseEnc) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="contact">
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_row(form.contacts) }}                        
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="userroles">
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                            {{ form_row(form.userRolesRulesList) }}
+                            </div>
+                            <div class="col-md-offset-1 col-md-5">
+                                <div class="callout callout-info">
+                                    <p>{% trans %}Available user properties :{% endtrans %}</p>
+                                    <ul>
+                                        <li>username</li>
+                                        <li>email</li>
+                                        <li>name</li>
+                                        <li>given_name</li>
+                                        <li>family_name</li>
+                                        <li>middle_name</li>
+                                        <li>nickname</li>
+                                        <li>prefered_username</li>
+                                    </ul>
+                                </div>
+                                <div class="callout callout-info">
+                                    <p>{% trans %}Filter exemple : username == "amy.pond"{% endtrans %}</p>
+                                </div>
+                                <div class="callout callout-info">
+                                    <p>{% trans %}Separate the roles with commas ","{% endtrans %}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+            
+                {{ form_widget(form.save) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+});
+</script>
+{% endblock javascripts %}

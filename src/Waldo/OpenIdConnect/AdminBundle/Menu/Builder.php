@@ -27,7 +27,9 @@ class Builder extends ContainerAware
         $menu['Client']->addChild('Manage', array('route' => 'oicp_admin_client_index'));
         $menu['Client']['Manage']->addChild('Client record', array('route' => 'oicp_admin_client_record'))
                 ->setDisplay(false);
-        $menu['Client']->addChild('New', array('route' => 'oicp_admin_client_edit'));
+        $menu['Client']['Manage']->addChild('New', array('route' => 'oicp_admin_client_new'));
+        $menu['Client']['Manage']->addChild('Edit', array('route' => 'oicp_admin_client_edit'))
+                ->setDisplay(false);
         return $menu;
     }
 
