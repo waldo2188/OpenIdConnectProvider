@@ -9,7 +9,14 @@
         <div class="col-md-6">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">{% trans %}Account{% endtrans %}</h3>
+                    <h3 class="box-title">
+                        {% trans %}Account{% endtrans %}
+                        {% if account.enabled %}
+                            <i class="text-green glyphicon glyphicon-check" title="{% trans %}Enabled{% endtrans %}"></i>
+                        {% else %}
+                            <i class="text-red glyphicon glyphicon-ban-circle" title="{% trans %}Disabled{% endtrans %}"></i>
+                        {% endif %}
+                    </h3>
                 </div>
                 <div class="box-body">
                     {% if account.picture %}<img class="pull-right" src="{{ account.picture }}" alt="{% trans %}Account picture{% endtrans %}" />{% endif %}
@@ -17,7 +24,15 @@
                     <p><span class="param-label">{% trans %}Username{% endtrans %} :</span> <span class="param-value">{{ account.username }}</span></p>
 
                     {% if account.email %}
-                        <p><span class="param-label">{% trans %}Email{% endtrans %} :</span> <span class="param-value">{{ account.email }}</span></p>
+                        <p>
+                            <span class="param-label">{% trans %}Email{% endtrans %} :</span>
+                            {% if account.emailVerified %}
+                                <i class="text-green glyphicon glyphicon-check" title="{% trans %}Email verified{% endtrans %}"></i>
+                            {% else %}
+                                <i class="text-red glyphicon glyphicon-ban-circle" title="{% trans %}Email not verified{% endtrans %}"></i>
+                            {% endif %}
+                             <span class="param-value">{{ account.email }}</span>
+                        </p>
                     {% endif %}
 
                     {% if account.lastLoginAt %}

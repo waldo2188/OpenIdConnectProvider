@@ -4,8 +4,11 @@ namespace Waldo\OpenIdConnect\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Waldo\OpenIdConnect\ModelBundle\Entity\Client;
 use Waldo\OpenIdConnect\AdminBundle\Form\Type\ClientFormType;
 
@@ -78,6 +81,23 @@ class ClientController extends Controller
         }
         
         return array("client" => $client);
+    }
+        
+    /**
+     * @Route("/delete/{client}", name="oicp_admin_client_delete", defaults={"client":null})
+     * @Method({"POST"})
+     */
+    public function deleteClientAction(Client $client)
+    {   
+        if($client === null) {
+            return new JsonResponse(array("errors" => "This client does not exist"), Response::HTTP_NOT_FOUND);
+        }
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($client);
+        $em->flush();
+        
+        return new JsonResponse("ok");
     }
     
     private function buildAccountDatatable()

@@ -87,14 +87,16 @@ class AccountController extends Controller
                     "Name" => "Account.name",
                     "Create" => "Account.createAt",
                     "Update" => "Account.updateAt",
-                    "_identifier_" => 'Account.id',
+                    "Actions" => 'Account.id',
+                    "_identifier_" => 'Account.id'
                 ))
                 ->setRenderers(array(
                     0 => array('view' => "WaldoOpenIdConnectAdminBundle:Datatable:_boolean.html.twig",
                         "params" => array("ref" => "enabled")),
                     1 => array('view' => "WaldoOpenIdConnectAdminBundle:Datatable:_link_profile.html.twig"),
                     4 => array('view' => "WaldoOpenIdConnectAdminBundle:Datatable:_datetime.html.twig"),
-                    5 => array('view' => "WaldoOpenIdConnectAdminBundle:Datatable:_datetime.html.twig")
+                    5 => array('view' => "WaldoOpenIdConnectAdminBundle:Datatable:_datetime.html.twig"),
+                    6 => array('view' => "WaldoOpenIdConnectAdminBundle:Datatable:_actions_account.html.twig")
                 ))
                 ->setOrder("Account.username", "asc")
                 ->setSearch(false)

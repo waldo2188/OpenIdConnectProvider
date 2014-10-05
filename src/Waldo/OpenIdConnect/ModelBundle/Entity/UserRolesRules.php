@@ -99,6 +99,14 @@ class UserRolesRules
     }
 
     /**
+     * @return boolean
+     */
+    public function isEnabled()
+    {
+        return $this->enabled === true;
+    }
+
+    /**
      * @param \Waldo\OpenIdConnect\ModelBundle\Entity\Client $client
      * @return \Waldo\OpenIdConnect\ModelBundle\Entity\UserRolesRules
      */

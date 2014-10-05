@@ -38,6 +38,7 @@ class UserAccountData extends ContainerAware implements FixtureInterface
                         ->setFamilyName(sprintf('user family name %s', $this->getSuffix($x)))
                         ->setMiddleName(sprintf('user middle name %s', $this->getSuffix($x)))
                         ->setEmail(sprintf('user%s@exemple.com', $this->getSuffix($x)))
+                        ->setEmailVerified(true)
                         ->setPhoneNumber(sprintf('user phone number %s', $this->getSuffix($x)))
                         ->setBirthdate(\DateTime::createFromFormat('Y/m/d', '1982/02/' . (11 + $x) ))
                         ->setAddress(

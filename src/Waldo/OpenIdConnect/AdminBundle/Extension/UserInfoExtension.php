@@ -26,10 +26,12 @@ class UserInfoExtension implements UserinfoExtensionInterface
         /* @var $rule \Waldo\OpenIdConnect\ModelBundle\Entity\UserRolesRules */
         foreach($token->getClient()->getUserRolesRulesList() as $rule) {
             
-            $userModel = (array) new UserModel($token->getAccount());
-            
-            if($expression->evaluate($rule->getExpression(), $userModel)) {
-                $roles = array_merge($roles, $rule->getRoles());
+            if($rule->isEnabled()) {
+                $userModel = (array) new UserModel($token->getAccount());
+
+                if($expression->evaluate($rule->getExpression(), $userModel)) {
+                    $roles = array_merge($roles, $rule->getRoles());
+                }
             }
         }
 
