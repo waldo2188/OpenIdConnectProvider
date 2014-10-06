@@ -27,7 +27,9 @@ class UserinfoExtension
         $claims = array();
         
         foreach($this->extensions as $extension) {
-            $claims = array_merge($claims, $extension->handle($token));
+            if(($extentionClaim = $extension->handle($token)) !== null) {
+                $claims = array_merge($claims, $extentionClaim);
+            }
         }
         
         return $claims;

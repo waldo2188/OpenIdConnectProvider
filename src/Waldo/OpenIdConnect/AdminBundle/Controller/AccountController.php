@@ -72,8 +72,37 @@ class AccountController extends Controller
      */
     public function profileAction(Account $account)
     {
-        
         return array("account" => $account);
+    }
+    
+    /**
+     * @Route("/active-account-email/{account}", name="oicp_admin_account_active_account_email", defaults={"account":null})
+     * @Method({"POST"})
+     */
+    public function activeAccountEmailAction(Account $account)
+    {
+        if ($account === null) {
+            return new JsonResponse(array("message" => "Account not found"), Response::HTTP_NOT_FOUND);
+        }
+        
+        $this->get('waldo_oic_p.account_actions')->sendMailRegistrationConfirmation($account);
+        
+        return new JsonResponse("ok");
+    }
+    
+    /**
+     * @Route("/retrieve-password-email/{account}", name="oicp_admin_account_retrieve_password_email", defaults={"account":null})
+     * @Method({"POST"})
+     */
+    public function retrievePasswordEmailAction(Account $account)
+    {
+        if ($account === null) {
+            return new JsonResponse(array("message" => "Account not found"), Response::HTTP_NOT_FOUND);
+        }
+        
+        $this->get('waldo_oic_p.account_actions')->handleLostPassword($account->getUsername());
+        
+        return new JsonResponse("ok");
     }
 
     private function buildAccountDatatable()

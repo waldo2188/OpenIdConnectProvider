@@ -9,6 +9,16 @@ id: "disabledAccount",
 title: "Disabled Account", 
 body:"Are you sure you want to disabled this account ?",
 hasNo: false } %}
+{% include "WaldoOpenIdConnectAdminBundle:Bootstrap:modal.html.twig" with {
+id: "activeAccountEmail", 
+title: "Send email", 
+body:"Are you sure you want to send the email for validating account ?",
+hasNo: false } %}
+{% include "WaldoOpenIdConnectAdminBundle:Bootstrap:modal.html.twig" with {
+id: "retrievePasswordEmail", 
+title: "Send email", 
+body:"Are you sure you want to send the email for retrieving passord ?",
+hasNo: false } %}
 {% endblock modals %}
 
 {% block content %}  
@@ -48,13 +58,15 @@ hasNo: false } %}
 id:"alert-disabled-account", alert: "danger", content: "You can not __type__ this account. Maybe it's your ?"|trans } %}
 {% include "WaldoOpenIdConnectAdminBundle:Bootstrap:alert.js.twig" with {
 id:"success-disabled-account", alert: "success", content: "This account has been __type__"|trans } %}
-    
+{% include "WaldoOpenIdConnectAdminBundle:Bootstrap:alert.js.twig" with {
+id:"email-send", alert: "success", content: "The email for __type__ has been well send to user"|trans } %}
+{% include "WaldoOpenIdConnectAdminBundle:Bootstrap:alert.js.twig" with {
+id:"email-send-errors", alert: "danger", content: "__errors__"} %}
     
 <script type="text/javascript">
 $(document).ready(function(){
-
+    {# Enabled / disabled user account #}
     $('#dta-account_wrapper').on('click', 'button[data-ref="enabled"]',function(event) {
-
         if($(event.currentTarget).data('value') === true) {
             $("#disabledAccount").modal('show');
             $("#disabledAccount").data('identifier', $(event.currentTarget).data('identifier'));
@@ -88,7 +100,44 @@ $(document).ready(function(){
             $("#disabledAccount").modal('hide');
         });
     });
-
+    
+    
+    {# Send email for validating account #}
+    $('#dta-account_wrapper').on('click', 'button[data-active-account]',function(event) {
+        $("#activeAccountEmail").modal('show');
+        $("#activeAccountEmail").data('link', $(event.currentTarget).data('active-account'));
+    });
+    $('button[data-modal-action-yes="activeAccountEmail"]').on('click', function() {
+        $('div[role="alert-box"]').empty();
+        $.post($("#activeAccountEmail").data('link'))
+         .done(function() {
+            $('div[role="alert-box"]').append($('#tpl-email-send').template({type: "validating account"}));
+            $("#activeAccountEmail").modal('hide');
+        })
+        .fail(function(event) {
+            $('div[role="alert-box"]').append(jQuery('#tpl-email-send-errors').template({errors:event.responseJSON.errors}));
+            $("#activeAccountEmail").modal('hide');
+        });
+    });
+    
+    {# Send email for retrieving password #}
+    $('#dta-account_wrapper').on('click', 'button[data-recover-password]',function(event) {
+        $('div[role="alert-box"]').empty();
+        $("#retrievePasswordEmail").modal('show');
+        $("#retrievePasswordEmail").data('link', $(event.currentTarget).data('recover-password'));
+    });
+    $('button[data-modal-action-yes="retrievePasswordEmail"]').on('click', function() {
+        $.post($("#retrievePasswordEmail").data('link'))
+         .done(function() {
+            $('div[role="alert-box"]').append($('#tpl-email-send').template({type: "retrieving password"}));
+            $("#retrievePasswordEmail").modal('hide');
+        })
+        .fail(function(event) {
+            $('div[role="alert-box"]').append(jQuery('#tpl-email-send-errors').template({errors:event.responseJSON.errors}));
+            $("#retrievePasswordEmail").modal('hide');
+        });
+    });
+    
 });
 </script>
 {% endblock javascripts %}

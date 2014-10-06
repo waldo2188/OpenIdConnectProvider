@@ -1,5 +1,27 @@
 {% extends "WaldoOpenIdConnectAdminBundle::base.html.twig" %}
 
+{% macro clientName(client) %}
+    {% if client.clientUri is not null %}
+        <a href="{{ client.clientUri }}" title="{% trans with {'%clientName%': client.clientName}%}Go to %clientName%'s web site{% endtrans %}">{{ client.clientName }}</a>
+    {% else %}
+        {{ client.clientName }}
+    {% endif %}
+{% endmacro %}
+
+{% macro scopes(scopes) %}
+    {% set scope_meaning = {
+        'profile' : {link: 'profile', title: 'profile data'},
+        'email' :  {link: 'account', title: 'email'},
+        'address' :  {link: 'address', title: 'address'},
+        'phone' :  {link: 'profile', title: 'phone number'}
+    } %}
+    {% for scope in scopes %}
+        {% if scope != "openid" %}
+        <span title="{% trans with {'%scope%': scope_meaning[scope].title} %}Read %scope%{% endtrans %}" data-toggle="tooltip">{{ scope }}</span>{% if loop.last != true %},{% endif %}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
 {% block pageTitle %}Enduser{% endblock pageTitle %}
 {% block pageTitleSub %}Profil{% endblock pageTitleSub %}
 
@@ -12,9 +34,9 @@
                     <h3 class="box-title">
                         {% trans %}Account{% endtrans %}
                         {% if account.enabled %}
-                            <i class="text-green glyphicon glyphicon-check" title="{% trans %}Enabled{% endtrans %}"></i>
+                            <i class="text-green glyphicon glyphicon-check" title="{% trans %}User account is enabled{% endtrans %}" data-toggle="tooltip"></i>
                         {% else %}
-                            <i class="text-red glyphicon glyphicon-ban-circle" title="{% trans %}Disabled{% endtrans %}"></i>
+                            <i class="text-red glyphicon glyphicon-ban-circle" title="{% trans %}User account is disabled{% endtrans %}" data-toggle="tooltip"></i>
                         {% endif %}
                     </h3>
                 </div>
@@ -27,9 +49,9 @@
                         <p>
                             <span class="param-label">{% trans %}Email{% endtrans %} :</span>
                             {% if account.emailVerified %}
-                                <i class="text-green glyphicon glyphicon-check" title="{% trans %}Email verified{% endtrans %}"></i>
+                                <i class="text-green glyphicon glyphicon-check" title="{% trans %}Email verified{% endtrans %}" data-toggle="tooltip"></i>
                             {% else %}
-                                <i class="text-red glyphicon glyphicon-ban-circle" title="{% trans %}Email not verified{% endtrans %}"></i>
+                                <i class="text-red glyphicon glyphicon-ban-circle" title="{% trans %}Email not verified{% endtrans %}" data-toggle="tooltip"></i>
                             {% endif %}
                              <span class="param-value">{{ account.email }}</span>
                         </p>
@@ -52,7 +74,6 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="active"><a href="#profile" role="tab" data-toggle="tab">{% trans %}Profile{% endtrans %}</a></li>
                             <li><a href="#address" role="tab" data-toggle="tab">{% trans %}Address{% endtrans %}</a></li>
-                            <li><a href="#applicationAccesslist" role="tab" data-toggle="tab">{% trans %}Application list{% endtrans %}</a></li>
                         </ul>
 
                         <div class="tab-content">
@@ -97,9 +118,7 @@
                                     {% if account.phoneNumber %}<p><span class="param-label">{% trans %}Telephone number{% endtrans %} :</span> <span class="param-value">
                                         {{ account.phoneNumber }}</span></p>{% endif %}
 
-
                             </div>
-
                             <div class="tab-pane" id="address">
                                 {% if account.address %}
 
@@ -123,13 +142,29 @@
                                 {% endif %}
                             </div>
                         </div>
-                        </div>
+                    </div>
                 
                 </div>
             </div>
         </div>
     </div>
+                            
+    <h2 class="page-header">{% trans %}Applications list{% endtrans %}</h2>
+    <div class="box">
+        <div class="box-body">
+            <p>{% trans %}The user have granted the following applications to access to his account informations.{% endtrans %}</p>
 
+            <ul class="token-list">
+                {% for token in account.tokenList %}
+                    <li>
+                        {{ _self.clientName(token.client) }} — <span class="scope">{{ _self.scopes(token.scope) }}</span> <span class="update-on pull-right">{% trans %}Last used on{% endtrans %} {{ token.issuedAt|date() }}</span>
+                    </li>
+                {% else %}
+                    <li>{% trans %}Nothing for the moment{% endtrans %}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 {% endblock content %}
 
 {% block javascripts %}

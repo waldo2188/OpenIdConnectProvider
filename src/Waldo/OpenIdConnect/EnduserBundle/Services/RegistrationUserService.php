@@ -89,11 +89,14 @@ class RegistrationUserService
         
         $isValid = false;
         
-        if($token->getIssuedAt() < new \DateTime('now')) {
+        if($token->getIssuedAt() > new \DateTime('now')) {
             $token->getAccount()
-                    ->setEmailVerified(true)
-                    ->setRoles(array("USER_ROLE"))
-                    ;
+                    ->setEmailVerified(true);
+            
+            if(count($token->getAccount()->getRoles()) <= 0) {
+                $token->getAccount()->setRoles(array("USER_ROLE"));
+            }
+            
             $this->em->persist($token->getAccount());
             return true;
         }
