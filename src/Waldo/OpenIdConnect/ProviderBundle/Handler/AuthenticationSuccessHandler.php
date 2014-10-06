@@ -34,7 +34,6 @@ class AuthenticationSuccessHandler implements AuthenticationSuccessHandlerInterf
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
-
         if ($request->query->has('client_id')) {
             return $this->httpUtils->createRedirectResponse(
                             new Request(array(), array(), array('clientId' => $request->query->get('client_id'))), "oicp_authentication_scope"

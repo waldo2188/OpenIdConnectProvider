@@ -46,7 +46,17 @@ class UserinfoHelperTest extends \PHPUnit_Framework_TestCase
         $jwkProvider->expects($this->never())
                 ->method("getPrivateKey");
         
+        $userinfoExention = $this->getMock("Waldo\OpenIdConnect\ProviderBundle\Extension\UserinfoExtension");
+        $userinfoExention->expects($this->once())
+                ->method('run')
+                ->with($this->callback(function($v) {
+                    return $v instanceof \Waldo\OpenIdConnect\ModelBundle\Entity\Token;
+                    
+                }))
+                ->will($this->returnValue(array('roles' => array('role1', 'role2'))));
+        
         $userinfoHelper = new UserinfoHelper(array("issuer" => "anIssuer"), $jwkProvider);
+        $userinfoHelper->setUserinfoExtension($userinfoExention);
         
         $token = $this->getToken();
         $token->getClient()->setUserinfoSignedResponseAlg(null);
@@ -56,7 +66,8 @@ class UserinfoHelperTest extends \PHPUnit_Framework_TestCase
         $expected = array(
             "sub" => "7a1e9db5a4629cf6867eb58f50ddfc5df79d1992672d028bed2053c02e5cc337",
             "family_name" => "account Family name",
-            "birthdate" => (new \DateTime("1961-02-14"))->getTimestamp()
+            "birthdate" => (new \DateTime("1961-02-14"))->getTimestamp(),
+            'roles' => array('role1', 'role2')
         );
         $this->assertEquals($expected, $userinfo);            
     }
