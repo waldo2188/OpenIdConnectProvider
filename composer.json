@@ -52,6 +52,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
             "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install",
+            "mkdir app/Resources/public",
+            "mkdir app/Resources/public/datatable",
             "cp -R vendor/datatables/datatables/media/* app/Resources/public/datatable",
             "rm -rf app/Resources/public/datatable/unit_testing"
         ],
@@ -63,6 +65,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
             "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install",
+            "mkdir app/Resources/public",
+            "mkdir app/Resources/public/datatable",
             "cp -R vendor/datatables/datatables/media/* app/Resources/public/datatable",
             "rm -rf app/Resources/public/datatable/unit_testing"
         ]
