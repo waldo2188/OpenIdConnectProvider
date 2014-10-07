@@ -26,9 +26,10 @@ class UserAccountData extends ContainerAware implements FixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        if ($this->container->getParameter('kernel.environment') == 'dev') {
+        if ($this->container->getParameter('kernel.environment') == 'dev' ||
+                $this->container->getParameter('kernel.environment') == 'test') {
 
-            for ($x = 0; $x < 20; $x++) {
+            for ($x = 0; $x < 2; $x++) {
 
                 $user = new Account();
 
