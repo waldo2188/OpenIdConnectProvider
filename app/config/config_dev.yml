@@ -32,5 +32,11 @@ monolog:
 assetic:
     use_controller: "%use_assetic_controller%"
 
-#swiftmailer:
-#    delivery_address: me@example.com
+braincrafted_bootstrap:
+    customize:
+        variables_file: %kernel.root_dir%/Resources/less/variables.less
+        bootstrap_output: %kernel.root_dir%/Resources/less/bootstrap.less
+
+swiftmailer:
+    host: smtp.educagri.fr
+    delivery_address: waldo2188@gmail.com

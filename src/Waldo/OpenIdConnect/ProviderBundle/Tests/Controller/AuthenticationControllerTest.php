@@ -79,6 +79,26 @@ class AuthenticationControllerTest extends WebTestCase
         $this->assertEquals(1, $crawler->filter('span[class="user-email"]:contains("user@exemple.com")')->count());
     }
     
+        
+    public function testShouldFaildAtShowingApprovalScope()
+    {
+        $crawler = $this->client->request('GET', '/');
+
+        $this->assertEquals(1, $crawler->filter('h2:contains("Sign in with your OIC account")')->count());
+
+        $form = $crawler->selectButton('signin')->form();
+
+        $form['_username'] = 'user';
+        $form['_password'] = 'user';
+
+        $this->client->submit($form);
+        $crawler = $this->client->followRedirect();
+        
+        $crawler = $this->client->request('GET', '/authentication/scope/my_client_id');
+
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+    }
+    
     public function testShouldFailedAtLoginCauseUserIsDisabled()
     {
         $user = $this->entityManager->getRepository("WaldoOpenIdConnectModelBundle:Account")->findOneByUsername('user');
