@@ -37,11 +37,13 @@ class IdTokenHelperTest extends \PHPUnit_Framework_TestCase
         $iat = new \DateTime();
         $iat->modify("-3 seconds");
         
+        $now = new \DateTime("2014-02-14");
+        
         $this->assertEquals($idTokenDecode->iss, "anIssuer");
         $this->assertEquals($idTokenDecode->sub, '7a1e9db5a4629cf6867eb58f50ddfc5df79d1992672d028bed2053c02e5cc337');
         $this->assertEquals($idTokenDecode->aud, "a_client_id");
-        $this->assertEquals($idTokenDecode->auth_time, (new \DateTime("2014-02-14"))->getTimestamp());
-        $this->assertGreaterThan((new \DateTime())->getTimestamp(), $idTokenDecode->exp);
+        $this->assertEquals($idTokenDecode->auth_time, $now->getTimestamp());
+        $this->assertGreaterThan($now->getTimestamp(), $idTokenDecode->exp);
         $this->assertGreaterThanOrEqual($iat->getTimestamp(), $idTokenDecode->iat);
     }
     
@@ -85,11 +87,13 @@ class IdTokenHelperTest extends \PHPUnit_Framework_TestCase
         $iat = new \DateTime();
         $iat->modify("-3 seconds");
         
+        $now = new \DateTime("2014-02-14");
+        
         $this->assertEquals($jws->claims['iss'], "anIssuer");
         $this->assertEquals($jws->claims['sub'], '7a1e9db5a4629cf6867eb58f50ddfc5df79d1992672d028bed2053c02e5cc337');
         $this->assertEquals($jws->claims['aud'], "a_client_id");
-        $this->assertEquals($jws->claims['auth_time'], (new \DateTime("2014-02-14"))->getTimestamp());
-        $this->assertGreaterThan((new \DateTime())->getTimestamp(), $jws->claims['exp']);
+        $this->assertEquals($jws->claims['auth_time'], $now->getTimestamp());
+        $this->assertGreaterThan($now->getTimestamp(), $jws->claims['exp']);
         $this->assertGreaterThanOrEqual($iat->getTimestamp(), $jws->claims['iat']);
     }
    

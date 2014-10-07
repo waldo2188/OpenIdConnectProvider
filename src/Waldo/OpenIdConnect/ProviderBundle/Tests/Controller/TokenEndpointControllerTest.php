@@ -53,6 +53,7 @@ class TokenEndpointControllerTest extends WebTestCase
     
     public function testShouldLoginAndGetToken()
     {
+        restoreDatabase();
         $postParameters = array(
             'grant_type' => 'authorization_code',
             'code' => "code_token",
