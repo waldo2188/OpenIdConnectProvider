@@ -13,7 +13,7 @@ use Waldo\OpenIdConnect\ProviderBundle\Tests\WebTestCase;
 class JwkControllerTest extends WebTestCase
 {
 
-    public function testShouldFailLogin()
+    public function testDownloadJWKFile()
     {
         $this->client->request('GET', '/jwk/oicp.jwk');
 
