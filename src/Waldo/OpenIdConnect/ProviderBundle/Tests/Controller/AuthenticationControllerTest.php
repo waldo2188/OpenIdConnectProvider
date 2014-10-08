@@ -101,7 +101,14 @@ class AuthenticationControllerTest extends WebTestCase
     
     public function testShouldFailedAtLoginCauseUserIsDisabled()
     {
-        $user = $this->entityManager->getRepository("WaldoOpenIdConnectModelBundle:Account")->findOneByUsername('user');
+//        $user = $this->entityManager->getRepository("WaldoOpenIdConnectModelBundle:Account")->findOneByUsername('user');
+        $user = $this->entityManager->getRepository("WaldoOpenIdConnectModelBundle:Account")->findAll();
+        
+        print_r($user);
+        echo "\n";
+
+
+
         $user->setEnabled(false);
         
         $this->entityManager->persist($user);
