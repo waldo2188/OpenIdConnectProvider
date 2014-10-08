@@ -1,6 +1,10 @@
 imports:
     - { resource: config_dev.yml }
 
+security:
+    encoders:
+        Waldo\OpenIdConnect\ModelBundle\Entity\Account: sha512
+
 framework:
     test: ~
     session:
