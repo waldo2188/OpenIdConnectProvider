@@ -95,7 +95,8 @@ class AuthenticationCodeFlowTest extends \PHPUnit_Framework_TestCase
                 $callbacks = array($callbacks);
             }
             foreach($callbacks as $callback) {
-                $callback($this);
+                $me = $this;
+                $callback($me);
             }
         }
         
