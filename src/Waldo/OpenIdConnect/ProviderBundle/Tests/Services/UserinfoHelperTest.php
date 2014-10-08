@@ -87,7 +87,7 @@ class UserinfoHelperTest extends \PHPUnit_Framework_TestCase
         $account = new Account();
         $account->setUsername("account username")
                 ->setFamilyName("account Family name")
-                ->setBirthdate(new \DateTime("1961-02-14"))
+                ->setBirthdate($birthdate)
                 ;
         
         $client = new Client();
