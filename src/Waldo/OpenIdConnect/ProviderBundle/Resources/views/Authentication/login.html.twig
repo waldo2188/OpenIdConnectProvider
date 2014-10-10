@@ -41,6 +41,7 @@
             {% else %}
             <input class="form-control" type="text" id="username" placeholder="{% trans %}Username{% endtrans %}" name="_username" value="{{ last_username }}" />
             {% endif %}
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
             <input class="form-control" type="password" id="password" placeholder="{% trans %}Password{% endtrans %}" name="_password" />
             
             {% if error %}
@@ -53,6 +54,7 @@
             {% endif %}
             
             <br />
+            
             <button class="btn btn-lg btn-primary btn-block" type="submit" name="signin">Sign in</button>
 
         </form>
