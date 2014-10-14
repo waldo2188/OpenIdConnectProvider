@@ -52,10 +52,7 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
             "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install",
-            "mkdir app/Resources/public",
-            "mkdir app/Resources/public/datatable",
-            "cp -R vendor/datatables/datatables/media/* app/Resources/public/datatable",
-            "rm -rf app/Resources/public/datatable/unit_testing"
+            "Waldo\\OpenIdConnect\\ProviderBundle\\Composer\\ScriptHandler::install"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -65,10 +62,7 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
             "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install",
-            "mkdir app/Resources/public",
-            "mkdir app/Resources/public/datatable",
-            "cp -R vendor/datatables/datatables/media/* app/Resources/public/datatable",
-            "rm -rf app/Resources/public/datatable/unit_testing"
+            "Waldo\\OpenIdConnect\\ProviderBundle\\Composer\\ScriptHandler::install"
         ]
     },
     "config": {
@@ -77,6 +71,7 @@
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
+        "symfony-assets-install": "symlink",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         },

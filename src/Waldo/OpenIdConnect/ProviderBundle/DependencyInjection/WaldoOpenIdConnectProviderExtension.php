@@ -33,7 +33,7 @@ class WaldoOpenIdConnectProviderExtension extends Extension
         foreach($needConfig as $service) {
             $container->getDefinition($service)
                     ->replaceArgument(0, $config);
-        }        
+        }
     }
     
     /**
