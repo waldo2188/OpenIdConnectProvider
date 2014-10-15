@@ -72,13 +72,16 @@ class RegistrationUserService
      * Handle the token for validate an account
      * 
      * @param \Waldo\OpenIdConnect\ModelBundle\Entity\AccountAction $token
-     * @return boolean
+     * @return Account
      */
     public function handleValidationToken($token)
     {
+        
+        $user = null;
+        
         /* @var $token AccountAction */
         $token = $this->em->getRepository("WaldoOpenIdConnectModelBundle:AccountAction")
-                ->findOneBy(array('token' => $token, 'type' => AccountAction::ACTION_EMAIL_VALIDATION));
+                ->findOneAccountActionByToken($token, AccountAction::ACTION_EMAIL_VALIDATION);
         
         if($token === null)
         {
@@ -86,25 +89,23 @@ class RegistrationUserService
         }
 
         $token->getIssuedAt()->modify("+1 hour");
-        
-        $isValid = false;
-        
+                
         if($token->getIssuedAt() > new \DateTime('now')) {
-            $token->getAccount()
-                    ->setEmailVerified(true);
+            $user = $token->getAccount();
+            $user->setEmailVerified(true);
             
-            if(count($token->getAccount()->getRoles()) <= 0) {
-                $token->getAccount()->setRoles(array("USER_ROLE"));
+            if(count($user->getRoles()) <= 0) {
+                $user->setRoles(array("ROLE_USER"));
             }
             
-            $this->em->persist($token->getAccount());
-            return true;
+            $this->em->persist($user);   
         }
         
+
         $this->em->remove($token);
         
         $this->em->flush();
-        return $isValid;    
+        return $user;    
     }
     
     /**

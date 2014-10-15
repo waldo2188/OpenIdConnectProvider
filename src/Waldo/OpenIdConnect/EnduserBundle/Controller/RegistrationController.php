@@ -71,9 +71,9 @@ class RegistrationController extends Controller
      */
     public function accountValidationAction($token)
     {
-        $isValid = $this->get("waldo_oic_enduser.registration")->handleValidationToken($token);
+        $user = $this->get("waldo_oic_enduser.registration")->handleValidationToken($token);
         
-        return array("isValid" => $isValid);
+        return array("user" => $user);
     }
 
     /**

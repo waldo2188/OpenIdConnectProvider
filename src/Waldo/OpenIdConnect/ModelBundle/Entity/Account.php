@@ -35,6 +35,20 @@ class Account implements AccountInterface, \Serializable
      * @ORM\Column(name="id", type="integer", nullable=false, unique=true)
      */
     protected $id;
+    
+    /**
+     * @ORM\Column(name="external_id", type="string", length=255, nullable=true, unique=true)
+     * 
+     * @var string
+     */
+    protected $externalId;
+    
+    /**
+     * @ORM\Column(name="provider_name", type="string", length=255, nullable=false)
+     *
+     * @var string
+     */
+    protected $providerName = "self";
 
     /**
      * @ORM\OneToMany(targetEntity="Token", mappedBy="account", cascade={"persist", "remove", "merge"})
@@ -360,6 +374,26 @@ class Account implements AccountInterface, \Serializable
     }
 
     /**
+     * getExternalId
+     * 
+     * @return string
+     */
+    public function getExternalId()
+    {
+        return $this->externalId;
+    }
+
+    /**
+     * getProviderName
+     * 
+     * @return string
+     */
+    public function getProviderName()
+    {
+        return $this->providerName;
+    }
+    
+    /**
      * getUsername
      * 
      * @return string
@@ -629,6 +663,31 @@ class Account implements AccountInterface, \Serializable
         return $this;
     }
 
+    /**
+     * setExternalId
+     * 
+     * @param string $externalId
+     * @return \Waldo\OpenIdConnect\ModelBundle\Entity\Account
+     */
+    public function setExternalId($externalId)
+    {
+        $this->externalId = $externalId;
+        return $this;
+    }
+
+    /**
+     * setProviderName
+     * 
+     * @param string $providerName
+     * @return \Waldo\OpenIdConnect\ModelBundle\Entity\Account
+     */
+    public function setProviderName($providerName)
+    {
+        $this->providerName = $providerName;
+        return $this;
+    }
+
+        
     /**
      * setUsername
      * 

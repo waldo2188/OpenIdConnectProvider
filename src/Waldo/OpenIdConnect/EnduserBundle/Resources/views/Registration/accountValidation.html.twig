@@ -3,10 +3,9 @@
 {% block title %}{% trans %}Account validation{% endtrans %}{% endblock title %}
 
 {% block bodyContent %}
-
-{% if isValid %}
+{% if user != null %}
 {% trans %}Your email is valid.{% endtrans %}<br/>
-{% if app.user.enabled == false %}
+{% if user.enabled == false %}
 {% trans %}An administrator will soon activate your account. 
     An email will be sent after the validation or revocation of your account.{% endtrans %}<br/>
 {% trans %}Please, remember to check your Spam box.{% endtrans %}<br />

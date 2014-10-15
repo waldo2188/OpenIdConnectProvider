@@ -1,3 +1,8 @@
+waldo_open_id_connect_ldap_provider:
+    resource: "@WaldoOpenIdConnectLdapProviderBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 waldo_open_id_connect_admin:
     resource: "@WaldoOpenIdConnectAdminBundle/Controller/"
     type:     annotation

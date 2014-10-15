@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    
+    <parameters>
+        <parameter key="waldo_oic_ldap.security.user.provider.class">Waldo\OpenIdConnect\LdapProviderBundle\Provider\LdapUserProvider</parameter>
+        <parameter key="waldo_oic_ldap.ldap_connection.class">Waldo\OpenIdConnect\LdapProviderBundle\Manager\LdapConnection</parameter>
+        <parameter key="waldo_oic_ldap.ldap_manager.class">Waldo\OpenIdConnect\LdapProviderBundle\Manager\LdapManagerUser</parameter>
+        <parameter key="waldo_oic_ldap.security.authentication.provider.class">Waldo\OpenIdConnect\LdapProviderBundle\Provider\LdapAuthenticationProvider</parameter>
+        <parameter key="waldo_oic_ldap.security.authentication.listener.class">Waldo\OpenIdConnect\LdapProviderBundle\EventListener\LdapListener</parameter>
+        <parameter key="waldo_oic_ldap.security.authentication.form_entry_point.class">Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint</parameter>
+    </parameters>
+
+    <services>
+        
+        <service id="waldo_oic_ldap.security.authentication.form_entry_point" class="%waldo_oic_ldap.security.authentication.form_entry_point.class%" public="false" abstract="true">
+            <argument type="service" id="http_kernel" />
+        </service>
+
+        <service id="waldo_oic_ldap.security.user.provider" class="%waldo_oic_ldap.security.user.provider.class%">
+            <argument type="service" id="waldo_oic_ldap.ldap_manager" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument>%waldo_oic_ldap.model.user_class%</argument>
+        </service>
+
+        <service id="waldo_oic_ldap.ldap_connection" class="%waldo_oic_ldap.ldap_connection.class%" public="false">
+            <argument>%waldo_oic_ldap.ldap_connection.params%</argument>
+            <tag name="monolog.logger" channel="ldap_connection" />
+            <argument type="service" id="logger" />
+        </service>
+
+        <service id="waldo_oic_ldap.ldap_manager" class="%waldo_oic_ldap.ldap_manager.class%">
+            <argument type="service" id="waldo_oic_ldap.ldap_connection" />
+        </service>
+
+        <service id="waldo_oic_ldap.security.authentication.provider" class="%waldo_oic_ldap.security.authentication.provider.class%">
+            <argument /> <!-- User Provider -->
+            <argument /> <!-- Dao Provider -->
+            <argument type="service" id="waldo_oic_ldap.ldap_manager" />
+            <argument type="service" id="event_dispatcher" on-invalid="null" />
+            <argument /> <!-- Provider-key -->
+            <argument>%security.authentication.hide_user_not_found%</argument>
+        </service>
+
+        <service id="waldo_oic_ldap.security.authentication.listener" class="%waldo_oic_ldap.security.authentication.listener.class%" public="false">
+            <tag name="monolog.logger" channel="security" />
+            <argument type="service" id="security.context" />
+            <argument type="service" id="security.authentication.manager" />
+            <argument type="service" id="security.authentication.session_strategy" />
+            <argument type="service" id="security.http_utils" />
+            <argument />
+            <argument type="service" id="ldap.authentication.success_handler" on-invalid="null" />
+            <argument type="service" id="ldap.authentication.failure_handler" on-invalid="null" />
+            <argument type="collection"></argument>
+            <argument type="service" id="logger" on-invalid="null" />
+            <argument type="service" id="event_dispatcher" on-invalid="null" />
+        </service>
+
+        <service id="ldap.authentication.success_handler" parent="security.authentication.success_handler"/>
+        <service id="ldap.authentication.failure_handler" parent="security.authentication.failure_handler"/>
+    </services>
+</container>

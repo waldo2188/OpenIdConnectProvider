@@ -10,8 +10,13 @@ security:
         ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
 
     providers:
+        multiples:
+            chain:
+                providers: [accounts, ldap]
         accounts:
             entity: { class: WaldoOpenIdConnectModelBundle:Account, property: username }
+        ldap:
+            id: waldo_oic_ldap.security.user.provider
         clients:
             entity: { class: WaldoOpenIdConnectModelBundle:Client, property: clientId }
 
@@ -30,7 +35,9 @@ security:
         authenticationArea:
             pattern:   ^/
             anonymous: ~
-            provider: accounts
+#            provider: accounts
+            provider: multiples
+            waldo_oic_ldap: ~
             form_login:
                 login_path: login
                 check_path: login_check
@@ -48,3 +55,27 @@ security:
         - { path: ^/authentication/, roles: ROLE_USER }
         - { path: ^/account/, roles: ROLE_USER }
         - { path: ^/admin/, roles: ROLE_ADMIN }
+
+waldo_oic_ldap:
+    client:
+        host: %ldap_host%
+        port: 389
+        
+    user:
+        base_dn: ou=people,dc=nyu,dc=org
+        
+    roles:
+        classic:
+            base_dn: ou=people,dc=nyu,dc=org
+            filter: (givenName=me)
+            name_attribute: cn
+            user_attribute: uid
+            user_id: username
+            roles: [ROLE_USER, ROLE_LDAP]
+        plo:
+            base_dn: ou=people,dc=nyu,dc=org
+            filter: (givenName=me)
+            name_attribute: cn
+            user_attribute: uid
+            user_id: username
+            roles: [ROLE_USERXXXX]
