@@ -41,7 +41,7 @@ class LdapFactory extends AbstractFactory
             ->setDefinition($provider, new DefinitionDecorator('waldo_oic_ldap.security.authentication.provider'))
             ->replaceArgument(0, new Reference($userProviderId))
             ->replaceArgument(1, new Reference($dao))
-            ->replaceArgument(4, $id)
+            ->replaceArgument(2, $id)
             ;
 
         return $provider;

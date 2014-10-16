@@ -59,7 +59,7 @@ class AccountRepository extends EntityRepository
                 ->setParameter("accout", $accountExcluded)
                 ;
         }
-        
+
         return $qb->getQuery()->getOneOrNullResult();
     }
     

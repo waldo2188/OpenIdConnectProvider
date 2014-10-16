@@ -70,7 +70,6 @@ class AccountController extends Controller
         $account = $this->get('security.context')->getToken()->getUser();
 
         $form = $this->createForm(new AccountFormType(), $account, array(
-            'hasUsernameField' => false,
             'hasPasswordField' => false,
             'validation_groups' => array('edit'),
         ));

@@ -10,6 +10,7 @@ class LdapManagerUser implements LdapManagerUserInterface
 {
     private $ldapConnection;
     private $username;
+    private $email;
     private $password;
     private $params;
     private $ldapUser;
@@ -29,6 +30,19 @@ class LdapManagerUser implements LdapManagerUserInterface
         $this
             ->setUsername($username)
             ->retrieveLdapUser()
+            ;
+        
+        return $this->ldapUser !== null;
+    }
+
+    /**
+     * @throws inherit
+     */
+    public function existsEmail($username)
+    {
+        $this
+            ->setEmail($username)
+            ->retrieveLdapUserByEmail()
             ;
         
         return $this->ldapUser !== null;
@@ -144,6 +158,17 @@ class LdapManagerUser implements LdapManagerUserInterface
 
         return $this;
     }
+    
+    public function setEmail($email)
+    {
+        if ($email === "*") {
+            throw new \InvalidArgumentException("Invalid email given.");
+        }
+
+        $this->email = $email;
+
+        return $this;
+    }
 
     public function setPassword($password)
     {
@@ -152,6 +177,45 @@ class LdapManagerUser implements LdapManagerUserInterface
         return $this;
     }
 
+    /**
+     * @return mixed $this
+     * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException | Username not found
+     * @throws \RuntimeException | Inconsistent Fails
+     * @throws \Waldo\OpenIdConnect\LdapProviderBundle\Exception\ConnectionException | Connection error
+     */
+    private function retrieveLdapUserByEmail()
+    {
+        if (!$this->email) {
+            throw new \InvalidArgumentException('Email is not defined, please use setEmail');
+        }
+
+        $filter = isset($this->params['user']['filter'])
+            ? $this->params['user']['filter']
+            : '';
+
+        $entries = $this->ldapConnection
+            ->search(array(
+                'base_dn' => $this->params['user']['base_dn'],
+                'filter' => sprintf('(&%s(%s=%s))',
+                                    $filter,
+                                    $this->params['user']['email_attribute'],
+                                    $this->ldapConnection->escape($this->email)
+                )
+            ));
+        
+        if ($entries['count'] > 1) {
+            throw new \RuntimeException("This search can only return a single user");
+        }
+
+        if ($entries['count'] == 0) {
+            throw new UsernameNotFoundException(sprintf('Email "%s" doesn\'t exists', $this->username));
+        }
+
+        $this->ldapUser = $entries[0];
+
+        return $this;
+    }
+    
     /**
      * @return mixed $this
      * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException | Username not found

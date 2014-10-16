@@ -18,6 +18,15 @@ class AccountFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+                ->add('name', 'text', array(
+                    'label' => 'Name',
+                    'required' => false
+                    ))
+                ->add('givenName', 'text', array(
+                    'label' => 'First name',
+                    'required' => false
+                    ))
+                
                 ->add('email', 'email', array(
                     'label' => 'Email',
                     'required' => true
@@ -28,14 +37,6 @@ class AccountFormType extends AbstractType
         
         if($options['hasProfileField'] === true) {
             $builder
-                    ->add('name', 'text', array(
-                    'label' => 'Name',
-                    'required' => false
-                    ))
-                ->add('givenName', 'text', array(
-                    'label' => 'Given name',
-                    'required' => false
-                    ))
                 ->add('familyName', 'text', array(
                     'label' => 'Family name',
                     'required' => false
@@ -52,7 +53,7 @@ class AccountFormType extends AbstractType
                     'label' => 'Prefered username',
                     'required' => false
                     ))
-                ->add('picture', 'url', array(
+                ->add('picture', 'text', array(
                     'label' => 'Picture', 
                     'required' => false
                     ))
@@ -97,7 +98,7 @@ class AccountFormType extends AbstractType
                 ;
         }
         
-        if($options['hasUsernameField'] === true) {
+        if($options['hasPasswordField'] === true) {
             $builder
                     ->add('password', 'repeated', array(
                     'type' => 'password',
@@ -108,15 +109,7 @@ class AccountFormType extends AbstractType
                 ))
                     ;
         }
-        
-        if($options['hasPasswordField'] === true) {
-            $builder
-                    ->add('username', 'text', array(
-                    'label' => 'Username',
-                    'required' => true
-                    ))
-                    ;
-        }
+
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -124,7 +117,6 @@ class AccountFormType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => "\Waldo\OpenIdConnect\ModelBundle\Entity\Account",
             'validation_groups' => array('registration'),
-            'hasUsernameField' => true,
             'hasPasswordField' => true,
             'hasProfileField' => true
         ));

@@ -13,6 +13,7 @@ interface UniqueUsernameValidatorInterface
 {
     /**
      * Check if user with this username exist
+     * $account is used to exclude the actual user of the request if it was allredy stored
      * 
      * @param string $username
      * @param Account $account

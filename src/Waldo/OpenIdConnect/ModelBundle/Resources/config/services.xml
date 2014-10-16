@@ -16,7 +16,6 @@
     <services>
         
         <service id="waldo_oic_model.constraint.account" class="%waldo_oic_model.constraint.account.class%">
-            <argument type="service" id="doctrine.orm.default_entity_manager" />
             <tag name="validator.constraint_validator" alias="constraint_account" />
         </service>
         

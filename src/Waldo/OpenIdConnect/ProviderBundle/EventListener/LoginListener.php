@@ -41,7 +41,7 @@ class LoginListener implements EventSubscriberInterface
             
             $user = $event->getAuthenticationToken()->getUser();
             $user->setLastLoginAt(new \DateTime('now'));
-            
+
             $this->em->persist($user);
             $this->em->flush();
             

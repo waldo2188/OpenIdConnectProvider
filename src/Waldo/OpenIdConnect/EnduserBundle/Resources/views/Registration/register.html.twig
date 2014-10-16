@@ -16,10 +16,20 @@
         {{ form_start(form, { 'style': 'horizontal' }) }}
 
         <p class="mandatory">{% trans %}All fields bellow are mandatory{% endtrans %}</p>
-                
-        <div class="form-group {{ _self.has_errors(form.username) }}">
-            {{ form_widget(form.username, {attr:{placeholder:form.username.vars.label}}) }}
-            {{ form_errors(form.username) }}
+                        
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group {{ _self.has_errors(form.name) }}">
+                    {{ form_widget(form.name, {attr:{placeholder:form.name.vars.label}}) }}
+                    {{ form_errors(form.name) }}
+                </div>
+            </div>
+            <div class="col-md-offset-1 col-md-6">
+                <div class="form-group {{ _self.has_errors(form.givenName) }}">
+                    {{ form_widget(form.givenName, {attr:{placeholder:form.givenName.vars.label}}) }}
+                    {{ form_errors(form.givenName) }}
+                </div>
+            </div>
         </div>
 
         <div class="form-group {{ _self.has_errors(form.email) }}">

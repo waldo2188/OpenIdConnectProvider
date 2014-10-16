@@ -12,7 +12,6 @@ use Symfony\Component\Validator\Constraint;
 class ConstraintAccount extends Constraint
 {
 
-    public $existingUsername = "This username is already in use, please choose another one.";
     public $existingEmail = "This email is already in use.";
 
     public function validatedBy()

@@ -58,11 +58,31 @@ class Account implements AccountInterface, \Serializable
     protected $tokenList;
 
     /**
+     * @ORM\Column(name="sub", type="string", length=255, nullable=false, unique=true)
+     * 
+     * @var string $sub Sub part for generating unique sub for each Account Client couple
+     */
+    protected $sub;
+    
+     /**
      * @ORM\Column(name="username", type="string", length=255, nullable=true)
      * 
      * @var string $username Username used by enduser to log in
      */
     protected $username;
+    
+     /**
+     * Scope: email
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = false,
+     *     groups={"registration", "edit"}
+     * )
+     * @ORM\Column(name="email", type="string", length=255, nullable=true, unique=true)
+     * 
+     * @var string $email Preferred e-mail address use to log in.
+     */
+    protected $email;
 
     /**
      * @ORM\Column(name="salt", type="string", length=255, nullable=true)
@@ -260,19 +280,6 @@ class Account implements AccountInterface, \Serializable
 
     /**
      * Scope: email
-     * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email.",
-     *     checkMX = false,
-     *     groups={"registration", "edit"}
-     * )
-     * @ORM\Column(name="email", type="string", length=255, nullable=true)
-     * 
-     * @var string $email Preferred e-mail address 
-     */
-    protected $email;
-
-    /**
-     * Scope: email
      * 
      * @ORM\Column(name="email_verified", type="boolean", nullable=true)
      * 
@@ -382,7 +389,18 @@ class Account implements AccountInterface, \Serializable
     {
         return $this->externalId;
     }
+    
+    /**
+     * getSub
+     * 
+     * @return string
+     */
+    public function getSub()
+    {
+        return $this->sub;
+    }
 
+        
     /**
      * getProviderName
      * 
@@ -500,6 +518,19 @@ class Account implements AccountInterface, \Serializable
      */
     public function getPreferedUsername()
     {
+        if(empty($this->preferedUsername)) {
+            if($this->middleName !== null) {
+                return sprintf("%s %s %s",
+                        $this->givenName,
+                        $this->middleName,
+                        $this->name);
+            } else {
+                return sprintf("%s %s",
+                        $this->givenName,
+                        $this->name);
+            }
+        }
+        
         return $this->preferedUsername;
     }
 
@@ -672,6 +703,18 @@ class Account implements AccountInterface, \Serializable
     public function setExternalId($externalId)
     {
         $this->externalId = $externalId;
+        return $this;
+    }
+    
+    /**
+     * setSub
+     * 
+     * @param string $sub
+     * @return \Waldo\OpenIdConnect\ModelBundle\Entity\Account
+     */
+    public function setSub($sub)
+    {
+        $this->sub = $sub;
         return $this;
     }
 
@@ -1164,7 +1207,7 @@ class Account implements AccountInterface, \Serializable
     
     public function __toString()
     {
-        return $this->username;
+        return $this->getPreferedUsername() ? $this->getPreferedUsername() : $this->username;
     }
 
     /**
@@ -1174,7 +1217,7 @@ class Account implements AccountInterface, \Serializable
     {
         return serialize(array(
             $this->id,
-            $this->username,
+            $this->email,
             $this->enabled,
             $this->locked
         ));
@@ -1187,7 +1230,7 @@ class Account implements AccountInterface, \Serializable
     {
         list (
                 $this->id,
-                $this->username,
+                $this->email,
                 $this->enabled,
                 $this->locked
                 ) = unserialize($serialized);

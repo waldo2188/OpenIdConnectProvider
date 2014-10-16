@@ -33,7 +33,8 @@ class UserAccountData extends ContainerAware implements FixtureInterface
 
                 $user = new Account();
 
-                $user->setUsername('user' . $this->getSuffix($x))
+                $user->setUsername(sprintf('user%s@exemple.com', $this->getSuffix($x)))
+                        ->setSub(sprintf('user%s@exemple.com', $this->getSuffix($x)))
                         ->setGivenName(sprintf('user given name %s', $this->getSuffix($x)))
                         ->setName(sprintf('user name %s', $this->getSuffix($x)))
                         ->setFamilyName(sprintf('user family name %s', $this->getSuffix($x)))
@@ -64,7 +65,8 @@ class UserAccountData extends ContainerAware implements FixtureInterface
             }
             
             $user = new Account();
-            $user->setUsername('admin')
+            $user->setUsername('admin@exemple.com')
+                    ->setSub('admin@exemple.com')
                     ->setGivenName("ADMIN")
                     ->setEmail("admin@exemple.com")
                     ->setEnabled(true)
@@ -78,6 +80,7 @@ class UserAccountData extends ContainerAware implements FixtureInterface
             
             $user = new Account();
             $user->setUsername('super.admin')
+                    ->setSub('superadmin@exemple.com')
                     ->setGivenName("SUPER ADMIN")
                     ->setEmail("super.adminadmin@exemple.com")
                     ->setEnabled(true)

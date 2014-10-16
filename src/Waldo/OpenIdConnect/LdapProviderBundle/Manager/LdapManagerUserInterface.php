@@ -13,6 +13,8 @@ interface LdapManagerUserInterface
     public function __construct(LdapConnectionInterface $conn);
 
     public function exists($username);
+    
+    public function existsEmail($username);
 
     public function auth();
 

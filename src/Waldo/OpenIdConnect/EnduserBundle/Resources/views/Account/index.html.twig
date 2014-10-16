@@ -34,8 +34,8 @@
             <div class="tab-pane" id="account">
                 {% if app.user.picture %}<img class="pull-right" src="{{ app.user.picture }}" alt="{% trans %}Account picture{% endtrans %}" />{% endif %}
                 <dl>
-                    <dt>{% trans %}Username{% endtrans %}</dt>
-                        <dd>{{ app.user.username }}</dd>
+                    {#<dt>{% trans %}Username{% endtrans %}</dt>
+                        <dd>{{ app.user.username }}</dd>#}
 
 
                     {% if app.user.email %}<dt>{% trans %}Email{% endtrans %}</dt>

@@ -2,6 +2,8 @@
 
 namespace Waldo\OpenIdConnect\LdapProviderBundle\Exception;
 
-class DuplicateUsernameException extends \Exception
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+
+class DuplicateUsernameException extends BadCredentialsException
 {
 }

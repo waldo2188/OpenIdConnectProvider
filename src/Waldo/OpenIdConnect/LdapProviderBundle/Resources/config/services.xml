@@ -13,6 +13,8 @@
         <parameter key="waldo_oic_ldap.security.authentication.form_entry_point.class">Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint</parameter>
         
         <parameter key="waldo_oic_ldap.checker.unique_username.class">Waldo\OpenIdConnect\LdapProviderBundle\Validator\Checker\UniqueUsernameValidator</parameter>
+        
+        <parameter key="waldo_oic_ldap.user_manager.class">Waldo\OpenIdConnect\LdapProviderBundle\Manager\UserManager</parameter>
     </parameters>
 
     <services>
@@ -23,6 +25,10 @@
 
         <service id="waldo_oic_ldap.security.user.provider" class="%waldo_oic_ldap.security.user.provider.class%">
             <argument type="service" id="waldo_oic_ldap.ldap_manager" />
+            <argument>%waldo_oic_ldap.model.user_class%</argument>
+        </service>
+        
+        <service id="waldo_oic_ldap.user_manager" class="%waldo_oic_ldap.user_manager.class%">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="validator" />
             <argument>%waldo_oic_ldap.model.user_class%</argument>
@@ -40,10 +46,11 @@
 
         <service id="waldo_oic_ldap.security.authentication.provider" class="%waldo_oic_ldap.security.authentication.provider.class%">
             <argument /> <!-- User Provider -->
-            <argument /> <!-- Dao Provider -->
-            <argument type="service" id="waldo_oic_ldap.ldap_manager" />
-            <argument type="service" id="event_dispatcher" on-invalid="null" />
+            <argument />  <!-- Dao Provider  -->
             <argument /> <!-- Provider-key -->
+            <argument type="service" id="waldo_oic_ldap.ldap_manager" />
+            <argument type="service" id="waldo_oic_ldap.user_manager" />
+            <argument type="service" id="event_dispatcher" on-invalid="null" />
             <argument>%security.authentication.hide_user_not_found%</argument>
         </service>
 

@@ -33,6 +33,7 @@ class RegistrationController extends Controller
 
         if ('POST' === $request->getMethod()) {
             if ($form->isValid()) {
+                $userRegistration->handleRegistration($user);
                 $userRegistration->encodePassword($user);
 
                 $em = $this->getDoctrine()->getManager();

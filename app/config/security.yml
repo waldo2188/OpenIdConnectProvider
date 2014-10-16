@@ -14,7 +14,7 @@ security:
             chain:
                 providers: [ldap, accounts]
         accounts:
-            entity: { class: WaldoOpenIdConnectModelBundle:Account, property: username }
+            entity: { class: WaldoOpenIdConnectModelBundle:Account, property: email }
         ldap:
             id: waldo_oic_ldap.security.user.provider
         clients:
@@ -63,6 +63,7 @@ waldo_oic_ldap:
         
     user:
         base_dn: ou=people,dc=nyu,dc=org
+        email_attribute: mail
         
     roles:
         classic:

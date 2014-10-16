@@ -28,7 +28,11 @@ class UniqueUsernameValidator implements UniqueUsernameValidatorInterface
     public function exist($username, Account $account)
     {
         try {
-            return $this->ldap->exists($username);
+            
+            if($this->ldap->existsEmail($username)) {
+                return $this->ldap->getDn() !== $account->getExternalId();               
+            }
+                
         } catch (\RuntimeException $e) {
             return false;
         } catch (UsernameNotFoundException $e) {

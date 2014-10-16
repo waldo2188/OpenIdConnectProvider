@@ -23,12 +23,18 @@ class UniqueUsernameValidator implements UniqueUsernameValidatorInterface
     {
         $this->em = $em;
     }
-    
+    /**
+     * Check if username (email) existe in database
+     * 
+     * @param type $username
+     * @param Account $account
+     * @return boolean
+     */
     public function exist($username, Account $account)
     {
         try {
         return null !== $this->em->getRepository("WaldoOpenIdConnectModelBundle:Account")
-                ->findOneByUsername($username, $account);
+                ->findOneByEmail($username, $account);
         } catch (NonUniqueResultException $e) {
             return true;
         }

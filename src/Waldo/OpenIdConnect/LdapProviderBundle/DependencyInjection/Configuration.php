@@ -70,6 +70,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('base_dn')->isRequired()->cannotBeEmpty()->end()
                     ->scalarNode('filter')->end()
                     ->scalarNode('name_attribute')->defaultValue('uid')->end()
+                    ->scalarNode('email_attribute')->defaultValue('mail')->end()
                     ->variableNode('attributes')->defaultValue(array())->end()
                 ->end()
         ;

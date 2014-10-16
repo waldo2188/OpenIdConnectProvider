@@ -14,21 +14,43 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\ChainUserProvider;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Waldo\OpenIdConnect\LdapProviderBundle\Manager\LdapManagerUserInterface;
+use Waldo\OpenIdConnect\LdapProviderBundle\Manager\UserManager;
 use Waldo\OpenIdConnect\LdapProviderBundle\Event\LdapUserEvent;
 use Waldo\OpenIdConnect\LdapProviderBundle\Event\LdapEvents;
 use Waldo\OpenIdConnect\ModelBundle\Entity\Account;
 
+
 class LdapAuthenticationProvider implements AuthenticationProviderInterface
 {
-
-    private
-            $userProvider,
-            $ldapManager,
-            $dispatcher,
-            $providerKey,
-            $hideUserNotFoundExceptions
-
-    ;
+    /**
+     * @var UserProviderInterface 
+     */
+    private $userProvider;
+    
+    /**
+     * @var LdapManagerUserInterface
+     */
+    private $ldapManager;
+    
+    /**
+     * @var UserManager
+     */
+    private $userManager;
+    
+    /**
+     * @var EventDispatcherInterface 
+     */
+    private $dispatcher;
+    
+    /**
+     * @var string
+     */
+    private $providerKey;
+    
+    /**
+     * @var boolean
+     */
+    private $hideUserNotFoundExceptions;
 
     /**
      * Constructor
@@ -38,21 +60,30 @@ class LdapAuthenticationProvider implements AuthenticationProviderInterface
      *
      * @param UserProviderInterface $userProvider
      * @param AuthenticationProviderInterface $daoAuthenticationProvider
-     * @param LdapManagerUserInterface $ldapManager
-     * @param EventDispatcherInterface $dispatcher
      * @param string $providerKey
+     * @param LdapManagerUserInterface $ldapManager
+     * @param UserManager $userManager
+     * @param EventDispatcherInterface $dispatcher
      * @param boolean $hideUserNotFoundExceptions
      */
     public function __construct(
-    UserProviderInterface $userProvider, AuthenticationProviderInterface $daoAuthenticationProvider, LdapManagerUserInterface $ldapManager, EventDispatcherInterface $dispatcher = null, $providerKey, $hideUserNotFoundExceptions = true
+        UserProviderInterface $userProvider, 
+        AuthenticationProviderInterface $daoAuthenticationProvider, 
+        $providerKey, 
+        LdapManagerUserInterface $ldapManager, 
+        UserManager $userManager, 
+        EventDispatcherInterface $dispatcher = null,        
+        $hideUserNotFoundExceptions = true
     )
     {
         $this->userProvider = $userProvider;
         $this->daoAuthenticationProvider = $daoAuthenticationProvider;
         $this->ldapManager = $ldapManager;
+        $this->userManager = $userManager;
         $this->dispatcher = $dispatcher;
         $this->providerKey = $providerKey;
         $this->hideUserNotFoundExceptions = $hideUserNotFoundExceptions;
+
     }
 
     /**
@@ -69,6 +100,7 @@ class LdapAuthenticationProvider implements AuthenticationProviderInterface
                     ->loadUserByUsername($token->getUsername());
 
             if ($user instanceof Account) {
+                
                 return $this->ldapAuthenticate($user, $token);
             }
         } catch (\Exception $e) {
@@ -80,7 +112,7 @@ class LdapAuthenticationProvider implements AuthenticationProviderInterface
 
             throw $e;
         }
-
+        
         if ($user instanceof UserInterface) {
             return $this->daoAuthenticationProvider->authenticate($token);
         }
@@ -111,7 +143,7 @@ class LdapAuthenticationProvider implements AuthenticationProviderInterface
 
         $this->bind($user, $token);
 
-        $this->manageDatabaseUser($user);
+        $user = $this->manageDatabaseUser($user);
         
         if (null === $user->getExternalId()) {
             $user = $this->reloadUser($user);
@@ -129,7 +161,7 @@ class LdapAuthenticationProvider implements AuthenticationProviderInterface
             }
         }
 
-        $token = new UsernamePasswordToken($userEvent->getUser(), null, $this->providerKey, $userEvent->getUser()->getRoles());
+        $token = new UsernamePasswordToken($user, null, $this->providerKey, $user->getRoles());
         $token->setAttributes($token->getAttributes());
 
         return $token;
@@ -192,18 +224,20 @@ class LdapAuthenticationProvider implements AuthenticationProviderInterface
     
     private function manageDatabaseUser(Account $user)
     {
-
+        
         if($this->userProvider instanceof ChainUserProvider) {
             
             foreach($this->userProvider->getProviders() as $userProvider) {
                 if($userProvider instanceof LdapUserProvider) {
-                    $userProvider->manageDatabaseUser($user);
+                    $user = $this->userManager->registerUser($user);
                 }
             }
             
         } elseif($this->userProvider instanceof LdapUserProvider) {
-            $userProvider->manageDatabaseUser($user);
+            $user = $this->userManager->registerUser($user);
         }
+        
+        return $user;
     }
 
 }

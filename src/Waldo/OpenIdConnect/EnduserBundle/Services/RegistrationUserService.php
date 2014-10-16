@@ -53,6 +53,14 @@ class RegistrationUserService
         return new AccountFormType();
     }
     
+    public function handleRegistration(Account $account)
+    {       
+        $account->setUsername($account->getEmail());
+        $account->setPreferedUsername(sprintf("%s %s", $account->getGivenName(), $account->getName()));
+        
+        $account->setSub(hash("sha512",sprintf( '%s%s', $account->getUsername(), time() )));
+    }
+    
     /**
      * Helper for encoding password
      * 
