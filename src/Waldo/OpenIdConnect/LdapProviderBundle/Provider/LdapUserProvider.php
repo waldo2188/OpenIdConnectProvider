@@ -8,6 +8,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Waldo\OpenIdConnect\LdapProviderBundle\Manager\LdapManagerUserInterface;
 use Waldo\OpenIdConnect\ModelBundle\Entity\Account;
+use Waldo\OpenIdConnect\LdapProviderBundle\Exception\DuplicateUsernameException;
 use Doctrine\ORM\EntityManager;
 
 /**
@@ -28,6 +29,8 @@ class LdapUserProvider implements UserProviderInterface
      */
     private $em;
 
+    
+    private $validator;
 
     /**
      * The class name of the User model
@@ -41,10 +44,12 @@ class LdapUserProvider implements UserProviderInterface
      * @param LdapManagerUserInterface $ldapManager
      * @param string $userClass
      */
-    public function __construct(LdapManagerUserInterface $ldapManager, EntityManager $em, $userClass)
+    public function __construct(LdapManagerUserInterface $ldapManager, EntityManager $em, $validator, $userClass)
     {
         $this->ldapManager = $ldapManager;
         $this->em = $em;
+        $this->validator = $validator;
+
         $this->userClass = $userClass;
     }
 
@@ -121,50 +126,63 @@ class LdapUserProvider implements UserProviderInterface
     
     public function manageDatabaseUser($ldapUser)
     {
-        
         $dbUser = $this->em->getRepository($this->userClass)
                 ->findOneBy(array(
-                    'externalId' => $ldapUser->getExternalId(),
-                    'providerName' => 'OIC-LDAP'
-                ));
-        
-        if($dbUser === null) {
+            'externalId' => $ldapUser->getExternalId(),
+            'providerName' => 'OIC-LDAP'
+        ));
+
+        /* @var $errors \Symfony\Component\Validator\ConstraintViolationList */
+        $errors = $this->validator->validate($ldapUser, array('uniqueUsername'));
+
+        if($errors->count() > 0) {
+            throw new DuplicateUsernameException(sprintf('The username "%s" is already in use', $ldapUser->getUsername()));
+        }
+
+        if ($dbUser === null) {
             $this->em->persist($ldapUser);
             $this->em->flush();
             
             return $dbUser;
-        } else {
-            $this->manageUserUpdate($ldapUser, $dbUser);
         }
         
-        // Check if the properties are equal
-        $isEqual = $ldapUser->getUsername() !== $dbUser->getUsername()
-                || $ldapUser->getEmail() !== $dbUser->getEmail()
-                || $ldapUser->getRoles() !== $dbUser->getRoles()
-                || $ldapUser->getExternalId() !== $dbUser->getExternalId()
-                || $ldapUser->getName() !== $dbUser->getName()
-                || $ldapUser->getGivenName() !== $dbUser->getGivenName()
-                || $ldapUser->getNickname() !== $dbUser->getNickname()
-                || $ldapUser->getPreferedUsername() !== $dbUser->getPreferedUsername()
-                ;
-        
-        if($isEqual) {
-            $dbUser
-            ->setUsername($ldapUser->getUsername())
-            ->setEmail($ldapUser->getEmail())
-            ->setRoles($ldapUser->getRoles())
-            ->setExternalId($ldapUser->getExternalId())
-            ->setName($ldapUser->getName())
-            ->setGivenName($ldapUser->getGivenName())
-            ->setNickname($ldapUser->getNickname())
-            ->setPreferedUsername($ldapUser->getPreferedUsername())
-            ;
-            
-            $this->em->persist($dbUser);
-            $this->em->flush();
-        }
+        $this->updateUser($dbUser, $ldapUser);
         
         return $dbUser;
     }
-
+    
+    
+    public function updateUser($persisted, $newUser)
+    {
+        // Check if the properties are equal
+        $isEqual = $this->areEquals($newUser, $persisted);
+        
+        if($isEqual) {
+            $persisted
+            ->setUsername($newUser->getUsername())
+            ->setEmail($newUser->getEmail())
+            ->setRoles($newUser->getRoles())
+            ->setExternalId($newUser->getExternalId())
+            ->setName($newUser->getName())
+            ->setGivenName($newUser->getGivenName())
+            ->setNickname($newUser->getNickname())
+            ->setPreferedUsername($newUser->getPreferedUsername())
+            ;
+            
+            $this->em->persist($persisted);
+            $this->em->flush();
+        }
+    }
+    
+    private function areEquals($user1, $user2) {
+        return $user1->getUsername() !== $user2->getUsername()
+                || $user1->getEmail() !== $user2->getEmail()
+                || $user1->getRoles() !== $user2->getRoles()
+                || $user1->getExternalId() !== $user2->getExternalId()
+                || $user1->getName() !== $user2->getName()
+                || $user1->getGivenName() !== $user2->getGivenName()
+                || $user1->getNickname() !== $user2->getNickname()
+                || $user1->getPreferedUsername() !== $user2->getPreferedUsername()
+                ;
+    }
 }

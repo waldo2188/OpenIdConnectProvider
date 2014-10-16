@@ -12,7 +12,7 @@ security:
     providers:
         multiples:
             chain:
-                providers: [accounts, ldap]
+                providers: [ldap, accounts]
         accounts:
             entity: { class: WaldoOpenIdConnectModelBundle:Account, property: username }
         ldap:

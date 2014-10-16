@@ -8,13 +8,12 @@ use Waldo\OpenIdConnect\LdapProviderBundle\Exception\ConnectionException;
 
 class LdapManagerUser implements LdapManagerUserInterface
 {
-    private
-        $ldapConnection,
-        $username,
-        $password,
-        $params,
-        $ldapUser
-        ;
+    private $ldapConnection;
+    private $username;
+    private $password;
+    private $params;
+    private $ldapUser;
+    
 
     public function __construct(LdapConnectionInterface $conn)
     {
@@ -29,8 +28,10 @@ class LdapManagerUser implements LdapManagerUserInterface
     {
         $this
             ->setUsername($username)
-            ->addLdapUser()
+            ->retrieveLdapUser()
             ;
+        
+        return $this->ldapUser !== null;
     }
 
     /**
@@ -57,7 +58,7 @@ class LdapManagerUser implements LdapManagerUserInterface
     public function doPass()
     {
         $this
-            ->addLdapUser()
+            ->retrieveLdapUser()
             ->addLdapRoles()
             ;
 
@@ -157,7 +158,7 @@ class LdapManagerUser implements LdapManagerUserInterface
      * @throws \RuntimeException | Inconsistent Fails
      * @throws \Waldo\OpenIdConnect\LdapProviderBundle\Exception\ConnectionException | Connection error
      */
-    private function addLdapUser()
+    private function retrieveLdapUser()
     {
         if (!$this->username) {
             throw new \InvalidArgumentException('User is not defined, please use setUsername');

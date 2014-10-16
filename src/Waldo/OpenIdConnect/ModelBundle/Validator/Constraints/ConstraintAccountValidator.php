@@ -4,6 +4,8 @@ namespace Waldo\OpenIdConnect\ModelBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Constraint;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Account;
+use Waldo\OpenIdConnect\ModelBundle\Validator\UniqueUsernameValidatorInterface;
 use Doctrine\ORM\EntityManager;
 
 /**
@@ -24,11 +26,9 @@ class ConstraintAccountValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint)
     {
-        // TODO check if username Exist in other user provider
-        $username = $this->em->getRepository(get_class($value))
-                ->findOneByUsername($value->getUsername(), $value);
+        $isUsernameUnique = $this->isUsernameUnique($value->getUsername(), $value);
 
-        if ($username !== null) {
+        if ($isUsernameUnique === false) {
 
             $this->context->addViolationAt("username", $constraint->existingUsername);
         }
@@ -40,6 +40,23 @@ class ConstraintAccountValidator extends ConstraintValidator
 
             $this->context->addViolationAt("email", $constraint->existingEmail);
         }
+    }
+
+    public function addUniqueUsernameChecker(UniqueUsernameValidatorInterface $uniqueUsername)
+    {
+        $this->uniqueUsernameChecker[get_class($uniqueUsername)] = $uniqueUsername;
+    }
+
+    private function isUsernameUnique($username, Account $account)
+    {
+        $isUnique = true;
+
+        /* @var $checker UniqueUsernameValidatorInterface */
+        foreach ($this->uniqueUsernameChecker as $checker) {
+            $isUnique &=!$checker->exist($username, $account);
+        }
+
+        return (bool) $isUnique;
     }
 
 }

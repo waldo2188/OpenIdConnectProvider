@@ -11,6 +11,8 @@
         <parameter key="waldo_oic_ldap.security.authentication.provider.class">Waldo\OpenIdConnect\LdapProviderBundle\Provider\LdapAuthenticationProvider</parameter>
         <parameter key="waldo_oic_ldap.security.authentication.listener.class">Waldo\OpenIdConnect\LdapProviderBundle\EventListener\LdapListener</parameter>
         <parameter key="waldo_oic_ldap.security.authentication.form_entry_point.class">Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint</parameter>
+        
+        <parameter key="waldo_oic_ldap.checker.unique_username.class">Waldo\OpenIdConnect\LdapProviderBundle\Validator\Checker\UniqueUsernameValidator</parameter>
     </parameters>
 
     <services>
@@ -22,6 +24,7 @@
         <service id="waldo_oic_ldap.security.user.provider" class="%waldo_oic_ldap.security.user.provider.class%">
             <argument type="service" id="waldo_oic_ldap.ldap_manager" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="validator" />
             <argument>%waldo_oic_ldap.model.user_class%</argument>
         </service>
 
@@ -60,5 +63,11 @@
 
         <service id="ldap.authentication.success_handler" parent="security.authentication.success_handler"/>
         <service id="ldap.authentication.failure_handler" parent="security.authentication.failure_handler"/>
+        
+        <service id="waldo_oic_ldap.checker.unique_username" class="%waldo_oic_ldap.checker.unique_username.class%">
+            <argument type="service" id="waldo_oic_ldap.ldap_manager" />
+            <tag name="waldo_oic_model.checker.unique_username" />
+        </service>
+        
     </services>
 </container>

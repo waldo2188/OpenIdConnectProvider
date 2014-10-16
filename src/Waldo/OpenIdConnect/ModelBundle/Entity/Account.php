@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Waldo\OpenIdConnect\ModelBundle\EntityRepository\AccountRepository")
  * @ORM\Table(name="account")
  * @ORM\HasLifecycleCallbacks
- * @OICConstraint\ConstraintAccount(groups={"registration", "edit"})
+ * @OICConstraint\ConstraintAccount(groups={"registration", "edit", "uniqueUsername"})
  * @OICConstraint\ConstraintAccountPassword(groups={"registration", "change_password"})
  */
 class Account implements AccountInterface, \Serializable

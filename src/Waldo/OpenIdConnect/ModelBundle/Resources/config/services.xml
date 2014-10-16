@@ -7,6 +7,8 @@
     
     <parameters>
                 
+        <parameter key="waldo_oic_model.checker.unique_username.class">Waldo\OpenIdConnect\ModelBundle\Validator\Checker\UniqueUsernameValidator</parameter>
+        
         <parameter key="waldo_oic_model.constraint.account.class">Waldo\OpenIdConnect\ModelBundle\Validator\Constraints\ConstraintAccountValidator</parameter>
         
     </parameters>
@@ -16,6 +18,11 @@
         <service id="waldo_oic_model.constraint.account" class="%waldo_oic_model.constraint.account.class%">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <tag name="validator.constraint_validator" alias="constraint_account" />
+        </service>
+        
+        <service id="waldo_oic_model.checker.unique_username" class="%waldo_oic_model.checker.unique_username.class%">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <tag name="waldo_oic_model.checker.unique_username" />
         </service>
         
     </services>
