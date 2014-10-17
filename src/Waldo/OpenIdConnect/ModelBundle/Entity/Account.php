@@ -519,15 +519,15 @@ class Account implements AccountInterface, \Serializable
     public function getPreferedUsername()
     {
         if(empty($this->preferedUsername)) {
-            if($this->middleName !== null) {
+            if(!empty($this->middleName)) {
                 return sprintf("%s %s %s",
                         $this->givenName,
                         $this->middleName,
-                        $this->name);
+                        $this->familyName);
             } else {
                 return sprintf("%s %s",
                         $this->givenName,
-                        $this->name);
+                        $this->familyName);
             }
         }
         

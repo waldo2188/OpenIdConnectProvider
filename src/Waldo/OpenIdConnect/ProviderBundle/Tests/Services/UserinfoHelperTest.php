@@ -31,10 +31,16 @@ class UserinfoHelperTest extends \PHPUnit_Framework_TestCase
                 
         $userinfoSigned = $userinfoHelper->makeUserinfo($this->getToken());
 
-        $expected = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI3YTFlOWRiNWE0NjI5Y2Y2ODY3ZWI1OGY1MGRkZmM1ZGY3OWQxOTkyNjcyZDAyOGJlZDIwNTNjMDJlNWNjMzM3IiwiZmFtaWx5X25hbWUiOiJhY2NvdW50IEZhbWlseSBuYW1lIiwiYmlydGhkYXRlIjotMjgwMTk4ODAwfQ.aQDqqso_sWiagoW_YV5kdtG2jLVuztt9B56r0lBK2IatYO81rh7EUMVQmEvdNn1l-fGYLY3akD8XVx6VDPBuH-dpHfVgpbn0N5RYEY2z2QGnkTr7sLkvWdaRE_66UCV0Z99u-03-PJiyp0VDEIdSR_YZlSw7-ccz7zivnOgWXvdpLHvTmCMsOpCNDeCe-u9ZvX8C3OJR5sG44T2-8elUqBTUNkZ6g6ggogU1fem5OAAxQbZ9VnMATv6kkDF2vW3gk0Pk3_Lq3uu_kF3qre9VpN2rDOe7PiAU3PkZ8QBxIKvehF3WLKeve-5auk9ZhqEEvmjnknME9okkpMG-ZUecWA";
-
-        $this->assertEquals($expected, $userinfoSigned);
-            
+        $jwt = new \JOSE_JWT();
+        $jws = $jwt->decode($userinfoSigned);
+        
+        $this->assertNotEmpty($jws->header, $jws);
+        $this->assertNotEmpty($jws->claims, $jws);
+        $this->assertArrayHasKey("sub", $jws->claims);
+        $this->assertArrayHasKey("birthdate", $jws->claims);
+        $this->assertNotEmpty($jws->signature, $jws);
+        $this->assertNotEmpty($jws->raw, $jws);
+                
     }
     
     public function testShouldMakeUserinfo()
@@ -72,6 +78,7 @@ class UserinfoHelperTest extends \PHPUnit_Framework_TestCase
             "sub" => "7a1e9db5a4629cf6867eb58f50ddfc5df79d1992672d028bed2053c02e5cc337",
             "family_name" => "account Family name",
             "birthdate" => $birthdate->getTimestamp(),
+            'prefered_username' => ' account Family name',
             'roles' => array('role1', 'role2')
         );
         $this->assertEquals($expected, $userinfo);            

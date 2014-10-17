@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
  */
 class AccountActionsService
 {
-
+    
     /**
      * @var Doctrine\ORM\EntityManager
      */
@@ -126,13 +126,27 @@ class AccountActionsService
     {
         $isSameEmail = $this->em->getRepository("WaldoOpenIdConnectModelBundle:Account")
                 ->isSameEmailForThisAccount($account->getEmail(), $account);
-
-        if ($isSameEmail === false) {
-            $account->setEmailVerified(false);
+        
+        
+        if ($isSameEmail !== true) {
+            
+            $extendedData = array("newEmail" => $account->getEmail());
+            
+            $account->setEmailVerified(false)
+                    ->setEmail($isSameEmail);
+                                    
             $this->sendMailWithToken(
-                    $account, "oicp_registration_account_new_email", AccountAction::ACTION_EMAIL_CHANGE_VALIDATION, "email_verification"
+                    $account,
+                    "oicp_registration_account_new_email",
+                    AccountAction::ACTION_EMAIL_CHANGE_VALIDATION,
+                    "email_verification",
+                    $extendedData
             );
+            
+            return 'email_has_changed';
         }
+        
+        return;
     }
 
     /**
@@ -143,7 +157,7 @@ class AccountActionsService
      * @param type $actionType
      * @param type $templateEmail
      */
-    protected function sendMailWithToken(Account $account, $routeName, $actionType, $templateEmail)
+    protected function sendMailWithToken(Account $account, $routeName, $actionType, $templateEmail, $extendedData = array())
     {
         $token = TokenCodeGenerator::generateCode();
         
@@ -152,13 +166,15 @@ class AccountActionsService
         
         $link = $this->httpUtils->generateUri($request, $routeName);
 
+        /* @var $accountAction AccountAction */
         $accountAction = $this->em->getRepository("WaldoOpenIdConnectModelBundle:AccountAction")
                 ->findOneOrGetNewAccountAction($account, $actionType);
         
         $accountAction
                 ->setType($actionType)
                 ->setAccount($account)
-                ->setToken($token);
+                ->setToken($token)
+                ->setExtendedData($extendedData);
         
         $this->em->persist($accountAction);
         $this->em->flush();

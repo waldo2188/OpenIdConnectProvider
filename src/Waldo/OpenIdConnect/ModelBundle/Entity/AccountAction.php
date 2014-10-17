@@ -54,10 +54,17 @@ class AccountAction
      * @var string $token token
      */
     protected $token;
+    
+    /**
+     * @ORM\Column(name="extended_data", type="array", nullable=false)
+     * 
+     * @var string $token token
+     */
+    protected $extendedData;
 
     public function __construct()
     {
-        
+        $this->extendedData = array();
     }
 
     /**
@@ -108,7 +115,25 @@ class AccountAction
     {
         return $this->type;
     }
+    
+    /**
+     * 
+     * @return array
+     */
+    public function getExtendedData($key = null)
+    {
+        if($key === null) {
+            return $this->extendedData;
+        }
+        
+        if(array_key_exists($key, $this->extendedData)) {
+            return $this->extendedData[$key];
+        }
+        
+        return null;
+    }
 
+    
     /**
      * @param integer $id
      * @return \Waldo\OpenIdConnect\ModelBundle\Entity\AccountAction
@@ -159,5 +184,27 @@ class AccountAction
         $this->type = $type;
         return $this;
     }
+
+    public function addExtendedData($key, $value)
+    {
+        if(!in_array($value, $this->extendedData)) {
+            $this->extendedData[$key] = $value;
+        }
+        return $this;
+    }
+
+    public function setExtendedData($extendedData = null)
+    {
+        foreach($extendedData as $key => $value) {
+            $this->addExtendedData($key, $value);
+        }
+        
+        if($extendedData === null) {
+            $this->extendedData = array();
+        }
+        
+        return $this;
+    }
+
 
 }

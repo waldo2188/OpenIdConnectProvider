@@ -131,8 +131,9 @@ class RegistrationUserService
         if($token === null) {
             return false;
         }
-        
+     
         $token->getAccount()
+                ->setEmail($token->getExtendedData('newEmail'))
                 ->setEmailVerified(true)
         ;
         $this->em->persist($token->getAccount());

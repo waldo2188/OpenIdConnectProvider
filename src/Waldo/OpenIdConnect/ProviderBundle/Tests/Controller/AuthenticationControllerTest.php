@@ -38,8 +38,8 @@ class AuthenticationControllerTest extends WebTestCase
 
         $form = $crawler->selectButton('signin')->form();
 
-        $form['_username'] = 'user';
-        $form['_password'] = 'user';
+        $form['_username'] = 'user@exemple.com';
+        $form['_password'] = 'user@exemple.com';
 
         $this->client->submit($form);
         $crawler = $this->client->followRedirect();
@@ -55,8 +55,8 @@ class AuthenticationControllerTest extends WebTestCase
 
         $form = $crawler->selectButton('signin')->form();
 
-        $form['_username'] = 'user';
-        $form['_password'] = 'user';
+        $form['_username'] = 'user@exemple.com';
+        $form['_password'] = 'user@exemple.com';
 
         $this->client->submit($form);
         $crawler = $this->client->followRedirect();
@@ -88,8 +88,8 @@ class AuthenticationControllerTest extends WebTestCase
 
         $form = $crawler->selectButton('signin')->form();
 
-        $form['_username'] = 'user';
-        $form['_password'] = 'user';
+        $form['_username'] = 'user@exemple.com';
+        $form['_password'] = 'user@exemple.com';
 
         $this->client->submit($form);
         $crawler = $this->client->followRedirect();
@@ -101,7 +101,7 @@ class AuthenticationControllerTest extends WebTestCase
     
     public function testShouldFailedAtLoginCauseUserIsDisabled()
     {
-        $user = $this->entityManager->getRepository("WaldoOpenIdConnectModelBundle:Account")->findOneByUsername('user');
+        $user = $this->entityManager->getRepository("WaldoOpenIdConnectModelBundle:Account")->findOneByUsername('user@exemple.com');
 
         $user->setEnabled(false);
         
@@ -114,8 +114,8 @@ class AuthenticationControllerTest extends WebTestCase
 
         $form = $crawler->selectButton('signin')->form();
 
-        $form['_username'] = 'user';
-        $form['_password'] = 'user';
+        $form['_username'] = 'user@exemple.com';
+        $form['_password'] = 'user@exemple.com';
 
         $this->client->submit($form);
         $crawler = $this->client->followRedirect();

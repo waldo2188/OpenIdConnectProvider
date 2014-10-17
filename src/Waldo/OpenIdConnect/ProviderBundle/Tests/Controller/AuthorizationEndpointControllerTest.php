@@ -24,8 +24,8 @@ class AuthorizationEndpointControllerTest extends WebTestCase
 
         $form = $crawler->selectButton('signin')->form();
 
-        $form['_username'] = 'user';
-        $form['_password'] = 'user';
+        $form['_username'] = 'user@exemple.com';
+        $form['_password'] = 'user@exemple.com';
 
         $this->client->submit($form);
         
@@ -52,8 +52,8 @@ class AuthorizationEndpointControllerTest extends WebTestCase
 
         $form = $crawler->selectButton('signin')->form();
 
-        $form['_username'] = 'user';
-        $form['_password'] = 'user';
+        $form['_username'] = 'user@exemple.com';
+        $form['_password'] = 'user@exemple.com';
 
         $this->client->submit($form);
         

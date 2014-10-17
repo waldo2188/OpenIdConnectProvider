@@ -60,7 +60,7 @@ class TokenEndpointControllerTest extends WebTestCase
             'redirect_uri' => 'http://localhost/OIC-RP/web/app_dev.php/login_check'
         );
         
-        $user = $this->entityManager->getRepository("WaldoOpenIdConnectModelBundle:Account")->findOneByUsername('user');
+        $user = $this->entityManager->getRepository("WaldoOpenIdConnectModelBundle:Account")->findOneByUsername('user@exemple.com');
         $client = $this->entityManager->getRepository("WaldoOpenIdConnectModelBundle:client")->findOneByClientId('my_client_id');
         
         $token = new \Waldo\OpenIdConnect\ModelBundle\Entity\Token();

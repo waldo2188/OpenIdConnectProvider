@@ -76,20 +76,21 @@ class AccountController extends Controller
 
         $form->handleRequest($request);
 
-        if ($request->isMethod("POST")) {
-            if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
+            $warning = $this->get('waldo_oic_p.account_actions')->handleEditProfile($account);
 
-                $this->get('waldo_oic_p.account_actions')->handleEditProfile($account);
-
-                $em = $this->getDoctrine()->getManager();
-                $em->merge($account);
-                $em->flush();
-
-
-                $this->get('session')->getFlashBag()->add('notice', 'Your profile has been changed');
-
-                return $this->redirect($this->generateUrl("oicp_account_edit_profile"));
+            if ($warning == 'email_has_changed') {
+                $this->get('session')->getFlashBag()->add('warning', 'Your new email will be validated once you have used the validation link that was sent to the new email address you entered. Without this action your previous email address will be kept.');
             }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->merge($account);
+            $em->flush();
+
+
+            $this->get('session')->getFlashBag()->add('notice', 'Your profile has been changed');
+
+            return $this->redirect($this->generateUrl("oicp_account_edit_profile"));
         }
 
         return array('form' => $form->createView());
