@@ -11,7 +11,5 @@ use Symfony\Component\Validator\Constraint;
  */
 class ConstraintExpressionLanguage extends Constraint
 {
-   
     public $values = array();
-
 }

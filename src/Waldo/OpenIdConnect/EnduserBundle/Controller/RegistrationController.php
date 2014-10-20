@@ -4,7 +4,6 @@ namespace Waldo\OpenIdConnect\EnduserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Waldo\OpenIdConnect\EnduserBundle\Events\OICProviderEvent;
 use Waldo\OpenIdConnect\EnduserBundle\Events\AccountEvent;
@@ -18,7 +17,6 @@ class RegistrationController extends Controller
     /**
      * @Route("/new-account/", name="oicp_registration_new_account")
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @Template
      */
     public function registerAction(Request $request)
     {
@@ -50,37 +48,34 @@ class RegistrationController extends Controller
             }
         }
 
-        return array(
-            'form' => $form->createView()
-        );
+        return $this->render("WaldoOpenIdConnectEnduserBundle:Registration:register.html.twig", array(
+                    'form' => $form->createView()
+        ));
     }
 
     /**
      * @Route("/created-account/", name="oicp_registration_done")
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @Template
      */
     public function registrationDoneAction()
     {
-        return array();
+        return $this->render("WaldoOpenIdConnectEnduserBundle:Registration:registrationDone.html.twig");
     }
 
     /**
      * @Route("/valid-account/{token}", name="oicp_registration_account_validation")
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @Template
      */
     public function accountValidationAction($token)
     {
         $user = $this->get("waldo_oic_enduser.registration")->handleValidationToken($token);
         
-        return array("user" => $user);
+        return $this->render("WaldoOpenIdConnectEnduserBundle:Registration:accountValidation.html.twig", array("user" => $user));
     }
 
     /**
      * @Route("/valid-new-email/{token}", name="oicp_registration_account_new_email")
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @Template
      */
     public function accountNewEmailAction($token)
     {
@@ -90,7 +85,7 @@ class RegistrationController extends Controller
             throw $this->createNotFoundException();
         }
         
-        return array("isValid" => $isValid);
+        return $this->render("WaldoOpenIdConnectEnduserBundle:Registration:accountNewEmail.html.twig", array("isValid" => $isValid));
     }
 
 }

@@ -31,6 +31,7 @@
         
         
         <parameter key="waldo_oic_p.success_handler.auth.class">Waldo\OpenIdConnect\ProviderBundle\Handler\AuthenticationSuccessHandler</parameter>
+        <parameter key="waldo_oic_p.failure_handler.auth.class">Waldo\OpenIdConnect\ProviderBundle\Handler\AuthenticationFailureHandler</parameter>
         <parameter key="waldo_oic_p.success_handler.logout.class">Waldo\OpenIdConnect\ProviderBundle\Handler\LogoutSuccessHandler</parameter>
         
     </parameters>
@@ -92,6 +93,11 @@
         <service id="waldo_oic_p.success_handler.auth" class="%waldo_oic_p.success_handler.auth.class%">
             <argument type="service" id="security.context" />
             <argument type="service" id="security.http_utils" />
+        </service>
+        
+        <service id="waldo_oic_p.failure_handler.auth"
+                 class="%waldo_oic_p.failure_handler.auth.class%"
+                 parent="security.authentication.failure_handler">
         </service>
         
         <service id="waldo_oic_p.success_handler.logout" class="%waldo_oic_p.success_handler.logout.class%">

@@ -42,6 +42,7 @@ security:
                 login_path: login
                 check_path: login_check
                 success_handler: waldo_oic_p.success_handler.auth
+                failure_handler: waldo_oic_p.failure_handler.auth
                 csrf_provider: form.csrf_provider
             logout:
                 path: logout

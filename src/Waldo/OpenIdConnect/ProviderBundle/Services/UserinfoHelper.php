@@ -69,6 +69,4 @@ class UserinfoHelper extends AbstractTokenHelper
 
         return $claimedValues;
     }
-
-   
 }

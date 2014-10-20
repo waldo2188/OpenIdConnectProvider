@@ -1,18 +1,18 @@
 {% extends ":default:base.html.twig" %}
 
-{% block title %}{% trans %}Scope Approval{% endtrans %}{% endblock title %}
+{% block title %}{% trans %}useragent.title.scope_approval{% endtrans %}{% endblock title %}
 
 {% block bodyContent %}
     <div class="auth-page">
         
         {% if client.logoUri is not null %}
-            <img src="{{ client.logoUri }}" alt="{% trans %}logo of application{% endtrans %}" />
+            <img src="{{ client.logoUri }}" alt="{% trans %}label.logo_of_application{% endtrans %}" />
         {% endif %}
         <h2 {% if client.logoUri is not null %}class="logo-align"{% endif %}>{{ client.clientName }}</h2>
         
-        <h3>{% trans %}Informations claimed{% endtrans %}</h3>
+        <h3>{% trans %}sub.title.informations_claimed{% endtrans %}</h3>
         {% if userinfos.picture is defined and userinfos.picture is not null  %}
-            <img class="pull-right" alt="{% trans %}Account picture{% endtrans %}" src="{{ userinfos.picture }}" />
+            <img class="pull-right" alt="{% trans %}label.account_picture{% endtrans %}" src="{{ userinfos.picture }}" />
         {% endif %}
         <ul class="claims">
             {% for key, info in userinfos %}

@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Waldo\OpenIdConnect\ModelBundle\Entity\Client;
 use Waldo\OpenIdConnect\AdminBundle\Form\Type\ClientFormType;
@@ -20,13 +19,12 @@ class ClientController extends Controller
 
     /**
      * @Route("/", name="oicp_admin_client_index")
-     * @Template()
      */
     public function indexAction()
     {
         $this->buildAccountDatatable();
 
-        return array();
+        return $this->render("WaldoOpenIdConnectAdminBundle:Client:index.html.twig");
     }
 
     /**
@@ -41,7 +39,6 @@ class ClientController extends Controller
      * @Route("/edit", name="oicp_admin_client_new", defaults={"client":null})
      * @Route("/edit/{client}", name="oicp_admin_client_edit", defaults={"client":null})
      * 
-     * @Template()
      */
     public function editAction(Request $request, Client $client = null)
     {
@@ -63,24 +60,23 @@ class ClientController extends Controller
                 return $this->redirect($this->generateUrl('oicp_admin_client_edit', array('client' => $client->getId())));
             }
         }
-        
-        return array(
-            "form" => $form->createView(),
-            "client" => $client
-                );
+
+        return $this->render("WaldoOpenIdConnectAdminBundle:Client:edit.html.twig", array(
+                    "form" => $form->createView(),
+                    "client" => $client
+        ));
     }
-        
+
     /**
      * @Route("/record/{client}", name="oicp_admin_client_record", defaults={"client":null})
-     * @Template()
      */
     public function clientRecordAction(Client $client)
     {
         if($client === null) {
             throw $this->createNotFoundException("This client does not exist");
         }
-        
-        return array("client" => $client);
+     
+        return $this->render("WaldoOpenIdConnectAdminBundle:Client:clientRecord.html.twig", array("client" => $client));
     }
         
     /**

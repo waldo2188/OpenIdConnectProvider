@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>Your password must have at least %length% character</source>
+                <target>Your password must have at least %length% character</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>Your password must have at least %length% uppercase character</source>
+                <target>Your password must have at least %length% uppercase character</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>Your password must have at least %length% lowercase character</source>
+                <target>Your password must have at least %length% lowercase character</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>Your password must have at least %length% number</source>
+                <target>Your password must have at least %length% number</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>Your password must have at least %length% special character</source>
+                <target>Your password must have at least %length% special character</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>Please, don't use your username as password</source>
+                <target>Please, don't use your username as password</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>Please, don't use your username in your password</source>
+                <target>Please, don't use your username in your password</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

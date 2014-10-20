@@ -16,8 +16,8 @@ class ScopeApprovalType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('accept', 'submit', array('label' => 'Accept'))
-                ->add('cancel', 'submit', array('label' => 'Cancel'))
+                ->add('accept', 'submit', array('label' => 'label.accept'))
+                ->add('cancel', 'submit', array('label' => 'label.cancel'))
             ;
     }
 

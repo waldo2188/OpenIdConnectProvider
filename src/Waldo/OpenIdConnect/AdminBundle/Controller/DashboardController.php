@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 
@@ -18,14 +17,10 @@ class DashboardController extends Controller
 {
     /**
      * @Route("/", name="oicp_admin_index")
-     * 
-     * @Template()
      */
     public function indexAction()
     {
-       
-        
-        return array();
+        return $this->render("WaldoOpenIdConnectAdminBundle:Dashboard:index.html.twig");
     }
     
 }

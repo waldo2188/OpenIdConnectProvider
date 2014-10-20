@@ -2,7 +2,6 @@
 
 namespace Waldo\OpenIdConnect\ProviderBundle\Controller;
 
-use Waldo\OpenIdConnect\ProviderBundle\Form\Type\ScopeApprovalType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;

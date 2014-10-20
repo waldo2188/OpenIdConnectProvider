@@ -13,9 +13,12 @@ This link is valid for 1 hour. Beyond this time, you need to recreate an account
 {% block email_verification_body %}
 Hey there !<br />
 You recently changed your email.<br />
+<p>Your email is an important thing for us, because you use it to login.
 <br />
-Please, follow the link below to verify this new email :<br />
-<a href="{{ link }}">{{ link }}</a><br />
+So, please, follow the link below to verify this new email :<br />
+<a href="{{ link }}">{{ link }}</a></p>
+<p>You must follow this link if you want to valid this new email address. <br />
+If you don't do, you always can use your old email address to log in.</p>
 {% endblock %}
 
 

@@ -1,72 +1,67 @@
 {% extends ":default:base.html.twig" %}
 
-{% block title %}{% trans %}Login{% endtrans %}{% endblock title %}
+{% block title %}{% trans %}useragent.title.login{% endtrans %}{% endblock title %}
 
 {% block bodyContent %}
     <div class="auth-page">
         <div>
-            <h1>{% trans %}Welcome to the OIC login page{% endtrans %}</h1>
+            <h1>{% trans %}main.title.welcome_login_page{% endtrans %}</h1>
             {% if client is null %}
-                <h2>{% trans %}Sign in with your OIC account{% endtrans %}</h2>
+                <h2>{% trans %}sub.title.sign_with_your_account_informations{% endtrans %}</h2>
             {% else %}
                 {% if client.logoUri is not null %}
-                    <img class="logo" src="{{ client.logoUri }}" alt="{% trans %}logo of application{% endtrans %}" />
+                    <img class="logo" src="{{ client.logoUri }}" alt="{% trans %}label.logo_of_application{% endtrans %}" />
                 {% endif %}
-                <h2>{% trans with {'%appname%': client.clientName} %}%appname% required you to be authenticated{% endtrans %}</h2>
+                <h2>{% trans with {'%appname%': client.clientName} %}sub.title.sign_with_your_account_informations_for_client_application{% endtrans %}</h2>
                 {% if client.tosUri is not null %}
                     <a href="{{ client.tosUri }}">
-                        {% trans with {'%appname%': client.clientName} %}Term of service for %appname%{% endtrans %}
+                        {% trans with {'%appname%': client.clientName} %}label.term_of_service_for_application{% endtrans %}
                     </a>
                 {% endif %}
                 {% if client.policyUri is not null %}
                     <a href="{{ client.policyUri }}">
-                        {% trans with {'%appname%': client.clientName} %}Policy %appname%{% endtrans %}
+                        {% trans with {'%appname%': client.clientName} %}label.policy_for_application{% endtrans %}
                     </a>
                 {% endif %}
             {% endif %}
         </div>
 
-        <form class="form-signin" action="{{ path('login_check') }}{% if client is not null %}?client_id={{ client.clientId }}{% endif %}" method="post" role="form">
-
-            
+        <form class="form-signin" action="{{ path('login_check') }}{% if client is not null %}?client_id={{ client.clientId }}{% endif %}" method="post" role="form">            
             {% if user is not null %}
                 <div class="user-profile">
                 {% if user.picture is not null %}
-                    <img class="user-picture" src="{{ user.picture }}" alt="" />
+                    <img class="user-picture" src="{{ user.picture }}" alt="{% trans %}label.account_picture{% endtrans %}" />
                 {% endif %}
                     <span class="user-name">{{ user.username }}</span>
                     <span class="user-email">{{ user.email }}</span>
                 </div>
                 <input type="hidden" id="username" name="_username" value="{{ user.username }}" />
             {% else %}
-            <input class="form-control" type="text" id="username" placeholder="{% trans %}Username{% endtrans %}" name="_username" value="{{ last_username }}" />
+            <input class="form-control" type="text" id="username" placeholder="{% trans %}label.username{% endtrans %}" name="_username" value="{{ last_username }}" />
             {% endif %}
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
-            <input class="form-control" type="password" id="password" placeholder="{% trans %}Password{% endtrans %}" name="_password" />
+            <input class="form-control" type="password" id="password" placeholder="{% trans %}label.password{% endtrans %}" name="_password" />
             
             {% if error %}
                 <div class="alert alert-danger">{{ error.message|trans }}
                 {% if error.message == "User account is disabled." %}
-                    {% trans %}Maybe your account have not been yet validated by an administrator ?{% endtrans %}
-                    {% trans %}Please, wait until you receive a confirmation email.{% endtrans %}
+                    {% trans %}error.user_account_is_disabled{% endtrans %}
                 {% endif %}
                 </div>
             {% endif %}
             
             <br />
             
-            <button class="btn btn-lg btn-primary btn-block" type="submit" name="signin">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" name="signin">{% trans %}label.sign_in{% endtrans %}</button>
 
         </form>
         <div class="actions-link">
             {% if user is not null %}
-                <a class="logout" href="{{ path("logout") }}">{% trans %}Sign in with a different account{% endtrans %}</a>
+                <a class="logout" href="{{ path("logout") }}">{% trans %}label.sign_in_with_different_account{% endtrans %}</a>
             {% else %}
-            <a href="{{ path("oicp_lost_account_search") }}">{% trans %}Forgot your password ?{% endtrans %}</a>
-            <a class="pull-right" href="{{ path("oicp_registration_new_account") }}">{% trans %}Create an account{% endtrans %}</a>
+            <a href="{{ path("oicp_lost_account_search") }}">{% trans %}label.forgot_your_password{% endtrans %}</a>
+            <a class="pull-right" href="{{ path("oicp_registration_new_account") }}">{% trans %}label.create_an_account{% endtrans %}</a>
             {% endif %}
         </div>
-
-        
     </div>
 {% endblock bodyContent %}

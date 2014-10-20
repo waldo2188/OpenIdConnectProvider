@@ -4,7 +4,6 @@ namespace Waldo\OpenIdConnect\EnduserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Waldo\OpenIdConnect\EnduserBundle\Form\Type\LostAccountFormType;
 use Waldo\OpenIdConnect\EnduserBundle\Form\Type\PasswordFormType;
@@ -19,7 +18,6 @@ class LostAccountController extends Controller
     /**
      * @Route("/", name="oicp_lost_account_search")
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @Template
      */
     public function searchAction(Request $request)
     {
@@ -47,27 +45,24 @@ class LostAccountController extends Controller
             }
         }
         
-        return array(
+        return $this->render("WaldoOpenIdConnectEnduserBundle:LostAccount:search.html.twig", array(
             'form' => $form->createView(),
             'isFound' => $isFound
-        );
+        ));
     }
 
 
     /**
      * @Route("/email-sent/", name="oicp_lost_account_email_sent")
-     * 
-     * @Template
      */
     public function emailSentAction()
     {
-        return array();
+        return $this->render("WaldoOpenIdConnectEnduserBundle:LostAccount:emailSent.html.twig");
     }
 
     /**
      * @Route("/change-password/{token}", name="oicp_lost_account_change_password")
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @Template
      */
     public function changePasswordAction(Request $request, $token)
     {
@@ -92,19 +87,18 @@ class LostAccountController extends Controller
             }
         }
 
-        return array(
+        return $this->render("WaldoOpenIdConnectEnduserBundle:LostAccount:changePassword.html.twig",  array(
             'form' => $form->createView(),
             "isValid" => $accountAction
-            );
+            ));
     }
     
     /**
      * @Route("/password-changed/", name="oicp_lost_account_password_changed")
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @Template
      */
     public function passwordChangedAction()
     {
-        return array();
+        return $this->render("WaldoOpenIdConnectEnduserBundle:LostAccount:passwordChanged.html.twig");
     }
 }

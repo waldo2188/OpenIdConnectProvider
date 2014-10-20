@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Waldo\OpenIdConnect\ModelBundle\Security\Authorization\Voter\AccountVoter;
 use Waldo\OpenIdConnect\ModelBundle\Entity\Account;
@@ -20,13 +19,12 @@ class AccountController extends Controller
 
     /**
      * @Route("/", name="oicp_admin_account_index")
-     * @Template()
      */
     public function indexAction()
     {
         $this->buildAccountDatatable();
 
-        return array();
+        return $this->render("WaldoOpenIdConnectAdminBundle:Account:index.html.twig");
     }
 
     /**
@@ -67,12 +65,10 @@ class AccountController extends Controller
     
     /**
      * @Route("/profil/{account}", name="oicp_admin_account_profile", defaults={"account":null})
-     * 
-     * @Template()
      */
     public function profileAction(Account $account)
     {
-        return array("account" => $account);
+        return $this->render("WaldoOpenIdConnectAdminBundle:Account:profile.html.twig", array("account" => $account));
     }
     
     /**

@@ -4,7 +4,6 @@ namespace Waldo\OpenIdConnect\ProviderBundle\Controller;
 
 use Waldo\OpenIdConnect\ProviderBundle\Form\Type\ScopeApprovalType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +17,6 @@ class AuthenticationController extends Controller
 {
     /** 
      * @Route("/login/{clientId}", name="login", defaults={"clientId": null})
-     * @Template()
      */
     public function loginAction(Request $request, $clientId = null)
     {
@@ -52,41 +50,17 @@ class AuthenticationController extends Controller
                     ->findOneByClientId($clientId);
         }
 
-        return array(
+        return $this->render("WaldoOpenIdConnectProviderBundle:Authentication:login.html.twig", array(
             // last username entered by the user
             'client' => $client,
             'user' => $this->getTokenUser(),
             'last_username' => $lastUsername,
             'error' => $error,
-        );
-    }
-    
-    private function getTokenUser()
-    {
-        if ($this->get('security.context')->getToken() !== null) {
-            if ($this->get('security.context')->isGranted(AuthenticatedVoter::IS_AUTHENTICATED_FULLY)
-                || $this->get('security.context')->isGranted(AuthenticatedVoter::IS_AUTHENTICATED_REMEMBERED)) {
-                
-                $user = $this->get('security.context')->getToken()->getUser();
-                
-                $this->get('session')->set('oic.login.auth.user', $user->getId());
-                
-                return $user;
-            }
-        }
-        
-        if($this->get('session')->has('oic.login.auth.user')) {
-                        
-            return $this->getDoctrine()->getManager()->getRepository("WaldoOpenIdConnectModelBundle:Account")
-                    ->findOneById($this->get('session')->get('oic.login.auth.user'));
-        }
-        
-        return null;
+        ));    
     }
     
     /**
      * @Route("/scope/{clientId}", name="oicp_authentication_scope")
-     * @Template()
      */
     public function scopeApprovalAction(Request $request, $clientId)
     {
@@ -124,12 +98,34 @@ class AuthenticationController extends Controller
                 
             }                   
         }
-        
-        return array(
+        return $this->render("WaldoOpenIdConnectProviderBundle:Authentication:scopeApproval.html.twig", array(
             'userinfos' => $userInfo,
             'client' => $client,
             'form' => $form->createView()
-        );
+        ));
     }
 
+        
+    private function getTokenUser()
+    {
+        if ($this->get('security.context')->getToken() !== null) {
+            if ($this->get('security.context')->isGranted(AuthenticatedVoter::IS_AUTHENTICATED_FULLY)
+                || $this->get('security.context')->isGranted(AuthenticatedVoter::IS_AUTHENTICATED_REMEMBERED)) {
+                
+                $user = $this->get('security.context')->getToken()->getUser();
+                
+                $this->get('session')->set('oic.login.auth.user', $user->getId());
+                
+                return $user;
+            }
+        }
+        
+        if($this->get('session')->has('oic.login.auth.user')) {
+                        
+            return $this->getDoctrine()->getManager()->getRepository("WaldoOpenIdConnectModelBundle:Account")
+                    ->findOneById($this->get('session')->get('oic.login.auth.user'));
+        }
+        
+        return null;
+    }
 }

@@ -11,8 +11,8 @@ use Symfony\Component\Validator\Constraint;
  */
 class ConstraintAccountPassword extends Constraint
 {
-    public $usernameSameAsPassword = "Please, don't use your username as password.";
-    public $usernameInPassword = "Please, don't use your username in your password.";
+    public $usernameSameAsPassword = "Please, don't use your username as password";
+    public $usernameInPassword = "Please, don't use your username in your password";
     
     public function getTargets()
     {

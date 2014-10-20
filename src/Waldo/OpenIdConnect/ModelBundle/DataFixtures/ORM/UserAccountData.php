@@ -34,12 +34,12 @@ class UserAccountData extends ContainerAware implements FixtureInterface
                 $user = new Account();
 
                 $user->setUsername(sprintf('user%s@exemple.com', $this->getSuffix($x)))
+                        ->setEmail(sprintf('user%s@exemple.com', $this->getSuffix($x)))
                         ->setSub(sprintf('user%s@exemple.com', $this->getSuffix($x)))
                         ->setGivenName(sprintf('user given name %s', $this->getSuffix($x)))
                         ->setName(sprintf('user name %s', $this->getSuffix($x)))
                         ->setFamilyName(sprintf('user family name %s', $this->getSuffix($x)))
                         ->setMiddleName(sprintf('user middle name %s', $this->getSuffix($x)))
-                        ->setEmail(sprintf('user%s@exemple.com', $this->getSuffix($x)))
                         ->setEmailVerified(true)
                         ->setPhoneNumber(sprintf('user phone number %s', $this->getSuffix($x)))
                         ->setBirthdate(\DateTime::createFromFormat('Y/m/d', '1982/02/' . (11 + $x) ))
@@ -79,10 +79,10 @@ class UserAccountData extends ContainerAware implements FixtureInterface
             $manager->persist($user);
             
             $user = new Account();
-            $user->setUsername('super.admin')
-                    ->setSub('superadmin@exemple.com')
+            $user->setUsername('super.admin@exemple.com')
+                    ->setSub('super.admin@exemple.com')
                     ->setGivenName("SUPER ADMIN")
-                    ->setEmail("super.adminadmin@exemple.com")
+                    ->setEmail("super.admin@exemple.com")
                     ->setEnabled(true)
                     ->setLocked(false)
                     ->setRoles(array("ROLE_SUPER_ADMIN"))

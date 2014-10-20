@@ -28,7 +28,5 @@ class ConstraintExpressionLanguageValidator extends ConstraintValidator
         }  catch (SyntaxError $e) {
             $this->context->addViolation($e->getMessage());
         }
-
     }
-
 }

@@ -4,7 +4,6 @@ namespace Waldo\OpenIdConnect\EnduserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Waldo\OpenIdConnect\EnduserBundle\Form\Type\PasswordFormType;
 use Waldo\OpenIdConnect\EnduserBundle\Form\Type\AccountFormType;
@@ -16,13 +15,11 @@ class AccountController extends Controller
 {
 
     /**
-     * 
      * @Route("/", name="oicp_account_index")
-     * @Template
      */
     public function indexAction()
     {
-        return array();
+        return $this->render("WaldoOpenIdConnectEnduserBundle:Account:index.html.twig");
     }
 
     /**
@@ -30,7 +27,6 @@ class AccountController extends Controller
      * 
      * @Route("/change-password/", name="oicp_account_change_password")
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @Template
      */
     public function changePasswordAction(Request $request)
     {
@@ -55,7 +51,10 @@ class AccountController extends Controller
             }
         }
 
-        return array('form' => $form->createView());
+        return $this->render("WaldoOpenIdConnectEnduserBundle:Account:.html.twig",
+                array(
+                    'form' => $form->createView()
+                ));
     }
 
     /**
@@ -63,7 +62,6 @@ class AccountController extends Controller
      * 
      * @Route("/edit-profile/", name="oicp_account_edit_profile")
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @Template
      */
     public function editProfileAction(Request $request)
     {
@@ -93,7 +91,10 @@ class AccountController extends Controller
             return $this->redirect($this->generateUrl("oicp_account_edit_profile"));
         }
 
-        return array('form' => $form->createView());
+        return $this->render("WaldoOpenIdConnectEnduserBundle:Account:.html.twig", 
+                array(
+                    'form' => $form->createView())
+                );
     }
 
     /**
@@ -101,14 +102,16 @@ class AccountController extends Controller
      * 
      * @Route("/application-access-liste/", name="oicp_account_application_access_list")
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @Template
      */
     public function applicationsAccessListAction(Request $request)
     {
         /* @var $account \Waldo\OpenIdConnect\ModelBundle\Entity\Account */
         $account = $this->get('security.context')->getToken()->getUser();
 
-        return array('tokenList' => $account->getTokenList());
+        return $this->render("WaldoOpenIdConnectEnduserBundle:Account:.html.twig", 
+                array(
+                    'tokenList' => $account->getTokenList())
+                );
     }
 
 }

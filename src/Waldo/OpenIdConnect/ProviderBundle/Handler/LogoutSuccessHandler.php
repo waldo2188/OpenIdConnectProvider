@@ -31,7 +31,6 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
     public function onLogoutSuccess(Request $request)
     {
         $request->getSession()->remove("oic.login.auth.user");
-        
 
         return $this->httpUtils->createRedirectResponse($request, $this->targetUrl);
     }
