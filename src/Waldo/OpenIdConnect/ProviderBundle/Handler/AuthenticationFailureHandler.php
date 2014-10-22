@@ -2,7 +2,6 @@
 
 namespace Waldo\OpenIdConnect\ProviderBundle\Handler;
 
-//use security.authentication.failure_handler.class
 use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,9 +20,10 @@ class AuthenticationFailureHandler extends DefaultAuthenticationFailureHandler
         
         if($request->query->has('client_id')) {
             $request->attributes->set('clientId', $request->query->get('client_id'));
-            $redirectResponse->setTargetUrl($this->httpUtils->createRedirectResponse($request, "login")->getTargetUrl());
         }
-
+        
+        $redirectResponse->setTargetUrl($this->httpUtils->createRedirectResponse($request, "login")->getTargetUrl());
+        
         return $redirectResponse;
     }
 }

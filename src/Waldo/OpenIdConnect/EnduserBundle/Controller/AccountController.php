@@ -45,13 +45,13 @@ class AccountController extends Controller
                 $em->merge($account);
                 $em->flush();
 
-                $this->get('session')->getFlashBag()->add('notice', 'Your password has been changed');
+                $this->get('session')->getFlashBag()->add('notice', 'label.your_password_has_been_changed');
 
                 return $this->redirect($this->generateUrl("oicp_account_change_password"));
             }
         }
 
-        return $this->render("WaldoOpenIdConnectEnduserBundle:Account:.html.twig",
+        return $this->render("WaldoOpenIdConnectEnduserBundle:Account:changePassword.html.twig",
                 array(
                     'form' => $form->createView()
                 ));
@@ -78,7 +78,7 @@ class AccountController extends Controller
             $warning = $this->get('waldo_oic_p.account_actions')->handleEditProfile($account);
 
             if ($warning == 'email_has_changed') {
-                $this->get('session')->getFlashBag()->add('warning', 'Your new email will be validated once you have used the validation link that was sent to the new email address you entered. Without this action your previous email address will be kept.');
+                $this->get('session')->getFlashBag()->add('warning', 'label.email_validation_instruction');
             }
 
             $em = $this->getDoctrine()->getManager();
@@ -86,12 +86,12 @@ class AccountController extends Controller
             $em->flush();
 
 
-            $this->get('session')->getFlashBag()->add('notice', 'Your profile has been changed');
+            $this->get('session')->getFlashBag()->add('notice', 'label.your_profile_has_been_changed');
 
             return $this->redirect($this->generateUrl("oicp_account_edit_profile"));
         }
 
-        return $this->render("WaldoOpenIdConnectEnduserBundle:Account:.html.twig", 
+        return $this->render("WaldoOpenIdConnectEnduserBundle:Account:editProfile.html.twig", 
                 array(
                     'form' => $form->createView())
                 );
@@ -108,7 +108,7 @@ class AccountController extends Controller
         /* @var $account \Waldo\OpenIdConnect\ModelBundle\Entity\Account */
         $account = $this->get('security.context')->getToken()->getUser();
 
-        return $this->render("WaldoOpenIdConnectEnduserBundle:Account:.html.twig", 
+        return $this->render("WaldoOpenIdConnectEnduserBundle:Account:applicationsAccessList.html.twig", 
                 array(
                     'tokenList' => $account->getTokenList())
                 );

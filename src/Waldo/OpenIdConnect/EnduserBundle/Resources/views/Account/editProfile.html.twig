@@ -16,12 +16,12 @@
 
     {% for flashMessage in app.session.flashbag.get('warning') %}
         <div class="alert alert-warning" role="alert">
-            {{ flashMessage }}
+            {{ flashMessage|trans }}
         </div>
     {% endfor %}
     {% for flashMessage in app.session.flashbag.get('notice') %}
         <div class="alert alert-success" role="alert">
-            {{ flashMessage }}
+            {{ flashMessage|trans }}
         </div>
     {% endfor %}
 

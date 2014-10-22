@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraint;
 class ConstraintAccount extends Constraint
 {
 
-    public $existingEmail = "This email is already in use.";
+    public $existingEmail = "This email is already in use";
 
     public function validatedBy()
     {

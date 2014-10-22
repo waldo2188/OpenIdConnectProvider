@@ -54,10 +54,6 @@
                 <source>label.Other</source>
                 <target>Other</target>
             </trans-unit>
-            <trans-unit id="14">
-                <source>label.the_password_fields_must_match</source>
-                <target>The password fields must match</target>
-            </trans-unit>
             <trans-unit id="15">
                 <source>label.create_a_password</source>
                 <target>Create a password</target>
@@ -127,10 +123,6 @@
                 <source>label.feel_free_to_retry</source>
                 <target>Please, feel free to retry </target>
             </trans-unit>
-            <trans-unit id="32">
-                <source>label.forgot_your_password</source>
-                <target>forgot your password ?</target>
-            </trans-unit>
             <trans-unit id="33">
                 <source>title.registration_done</source>
                 <target>Registration done</target>
@@ -182,6 +174,20 @@
             <trans-unit id="43">
                 <source>label.your_profile_data</source>
                 <target>Your profile data</target>
+            </trans-unit>
+            <trans-unit id="44">
+                <source>label.your_profile_has_been_changed</source>
+                <target>Your profile has been changed</target>
+            </trans-unit>
+            <trans-unit id="45">
+                <source>label.email_validation_instruction</source>
+                <target>Your new email will be validated once you have used 
+                    the validation link that was sent to the new email address you entered.
+                    Without this action your previous email address will be kept.</target>
+            </trans-unit>
+            <trans-unit id="46">
+                <source>label.your_password_has_been_changed</source>
+                <target>Your password has been changed</target>
             </trans-unit>
         </body>
     </file>
