@@ -6,18 +6,18 @@
 {% block modals %}
 {% include "WaldoOpenIdConnectAdminBundle:Bootstrap:modal.html.twig" with {
 id: "disabledAccount", 
-title: "Disabled Account", 
-body:"Are you sure you want to disabled this account ?",
+title: "title.disabled_account", 
+body:"label.are_you_sure_you_want_to_disabled_this_account",
 hasNo: false } %}
 {% include "WaldoOpenIdConnectAdminBundle:Bootstrap:modal.html.twig" with {
 id: "activeAccountEmail", 
-title: "Send email", 
-body:"Are you sure you want to send the email for validating account ?",
+title: "title.send_email", 
+body:"label.are_you_sure_you_want_to_send_the_email_for_validating_account",
 hasNo: false } %}
 {% include "WaldoOpenIdConnectAdminBundle:Bootstrap:modal.html.twig" with {
 id: "retrievePasswordEmail", 
-title: "Send email", 
-body:"Are you sure you want to send the email for retrieving passord ?",
+title: "title.send_email", 
+body:"label.are_you_sure_you_want_to_send_the_email_for_retrieving_passord",
 hasNo: false } %}
 {% endblock modals %}
 
@@ -26,7 +26,7 @@ hasNo: false } %}
     <div class="box">
 
         <div class="box-header">
-            <h3 class="box-title">{% trans %}Enduser account{% endtrans %}</h3>
+            <h3 class="box-title">{% trans %}tilte.enduser_account{% endtrans %}</h3>
         </div>
 
         <div class="box-body">
@@ -55,11 +55,11 @@ hasNo: false } %}
     }}
     
 {% include "WaldoOpenIdConnectAdminBundle:Bootstrap:alert.js.twig" with {
-id:"alert-disabled-account", alert: "danger", content: "You can not __type__ this account. Maybe it's your ?"|trans } %}
+id:"alert-disabled-account", alert: "danger", content: "label.you_can_not__action__this_account"|trans } %}
 {% include "WaldoOpenIdConnectAdminBundle:Bootstrap:alert.js.twig" with {
-id:"success-disabled-account", alert: "success", content: "This account has been __type__"|trans } %}
+id:"success-disabled-account", alert: "success", content: "label.this_account_has_been__action__"|trans } %}
 {% include "WaldoOpenIdConnectAdminBundle:Bootstrap:alert.js.twig" with {
-id:"email-send", alert: "success", content: "The email for __type__ has been well send to user"|trans } %}
+id:"email-send", alert: "success", content: "label.the_email_for__action__hasbeen_well_sendt_to_user"|trans } %}
 {% include "WaldoOpenIdConnectAdminBundle:Bootstrap:alert.js.twig" with {
 id:"email-send-errors", alert: "danger", content: "__errors__"} %}
     
@@ -74,11 +74,11 @@ $(document).ready(function(){
             $.post('{{ path("oicp_admin_account_enabled") }}', {account:$(event.currentTarget).data('identifier')})
             .done(function() {
                $('#dta-account').dataTable().fnDraw();
-               $('div[role="alert-box"]').append($('#tpl-success-disabled-account').template({type:'{% trans %}enabled{% endtrans %}'}));
+               $('div[role="alert-box"]').append($('#tpl-success-disabled-account').template({type:'{% trans %}label.enabled{% endtrans %}'}));
                $("#disabledAccount").modal('hide');
            })
            .fail(function() {
-               $('div[role="alert-box"]').append($('#tpl-alert-disabled-account').template({type:'{% trans %}enabled{% endtrans %}'}));
+               $('div[role="alert-box"]').append($('#tpl-alert-disabled-account').template({type:'{% trans %}label.enabled{% endtrans %}'}));
                $("#disabledAccount").modal('hide');
            });
         }
@@ -90,13 +90,13 @@ $(document).ready(function(){
         $.post('{{ path("oicp_admin_account_disabled") }}', {account:$("#disabledAccount").data('identifier')})
          .done(function() {
             $('#dta-account').dataTable().fnDraw();
-            $('div[role="alert-box"]').append($('#tpl-success-disabled-account').template({type:'{% trans %}disabled{% endtrans %}'}));
+            $('div[role="alert-box"]').append($('#tpl-success-disabled-account').template({type:'{% trans %}label.disabled{% endtrans %}'}));
             $("#disabledAccount").modal('hide');
 
         })
         .fail(function() {
 
-            $('div[role="alert-box"]').append(jQuery('#tpl-alert-disabled-account').template({type:'{% trans %}disabled{% endtrans %}'}));
+            $('div[role="alert-box"]').append(jQuery('#tpl-alert-disabled-account').template({type:'{% trans %}label.disabled{% endtrans %}'}));
             $("#disabledAccount").modal('hide');
         });
     });

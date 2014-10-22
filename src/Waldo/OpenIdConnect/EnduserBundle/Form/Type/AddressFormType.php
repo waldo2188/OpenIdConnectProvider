@@ -18,42 +18,42 @@ class AddressFormType extends AbstractType
     {
         $builder
                 ->add('formatted', 'textarea', array(
-                    'label' => 'Full mailing address',
+                    'label' => 'label.Full_mailing_address',
                     'required' => false,
                     'attr' => array(
                         'placeholder' => "221B Baker Street\nLONDON NW1 6XE\nEngland",
                         )
                     ))
                 ->add('streetAddress', 'text', array(
-                    'label' => 'Street address',
+                    'label' => 'label.Full_street_address',
                     'required' => false,
                     'attr' => array(
                         'placeholder' => "221B Baker Street\nLONDON NW1 6XE\nEngland",
                         )
                     ))
                 ->add('locality', 'text', array(
-                    'label' => 'City or locality',
+                    'label' => 'label.City_or_locality',
                     'required' => false,
                     'attr' => array(
                         'placeholder' => "LONDON",
                         )
                     ))
                 ->add('region', 'text', array(
-                    'label' => 'State, province, prefecture, or region',
+                    'label' => 'label.State_province_prefecture_or_region',
                     'required' => false,
                     'attr' => array(
                         'placeholder' => "LONDON",
                         )
                     ))
                 ->add('postalCode', 'text', array(
-                    'label' => 'Postal Code',
+                    'label' => 'label.Zip_code_or_postal_code',
                     'required' => false,
                     'attr' => array(
                         'placeholder' => "NW1 6XE",
                         )
                     ))
                 ->add('country', 'country', array(
-                    'label' => 'Country', 
+                    'label' => 'label.Country_name', 
                     'empty_value' => 'Choose an option',
                     'required' => false,
                     'attr' => array(

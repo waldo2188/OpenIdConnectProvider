@@ -233,12 +233,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/DataTables/DataTables.git",
-                "reference": "50d1466cfe9dd5f382282dac2baa852099bceaa4"
+                "reference": "5c77a02f294d133b738a7787577981f6110d6b49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DataTables/DataTables/zipball/50d1466cfe9dd5f382282dac2baa852099bceaa4",
-                "reference": "50d1466cfe9dd5f382282dac2baa852099bceaa4",
+                "url": "https://api.github.com/repos/DataTables/DataTables/zipball/5c77a02f294d133b738a7787577981f6110d6b49",
+                "reference": "5c77a02f294d133b738a7787577981f6110d6b49",
                 "shasum": ""
             },
             "type": "library",
@@ -248,7 +248,7 @@
             ],
             "description": "DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, which will add advanced interaction controls to any HTML table.",
             "homepage": "http://www.datatables.net/",
-            "time": "2014-10-16 09:50:33"
+            "time": "2014-10-21 15:35:48"
         },
         {
             "name": "doctrine/annotations",
@@ -2860,16 +2860,16 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "6288ebbf6fa3ed2b2ff2d69c356fbaaf4f0971a7"
+                "reference": "0d9bf79554d2a999da194a60416c15cf461eb67d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/6288ebbf6fa3ed2b2ff2d69c356fbaaf4f0971a7",
-                "reference": "6288ebbf6fa3ed2b2ff2d69c356fbaaf4f0971a7",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/0d9bf79554d2a999da194a60416c15cf461eb67d",
+                "reference": "0d9bf79554d2a999da194a60416c15cf461eb67d",
                 "shasum": ""
             },
             "require": {
@@ -2881,7 +2881,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -2906,7 +2906,7 @@
                 "environment",
                 "hhvm"
             ],
-            "time": "2014-10-07 09:23:16"
+            "time": "2014-10-22 06:38:05"
         },
         {
             "name": "sebastian/exporter",

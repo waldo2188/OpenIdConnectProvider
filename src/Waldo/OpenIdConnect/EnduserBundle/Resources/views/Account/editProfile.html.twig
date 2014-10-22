@@ -1,18 +1,18 @@
 {% extends "WaldoOpenIdConnectEnduserBundle:Account:index.html.twig" %}
 
-{% block title %}{{ parent() }} - {% trans %}Edit your profile{% endtrans %}{% endblock title %}
+{% block title %}{{ parent() }} - {% trans %}label.edit_your_profile{% endtrans %}{% endblock title %}
 
 {% macro has_errors_in_tab(form, form_fields) %}
     {% set errors_count = 0 %}
     {% for field in form_fields %}
         {% if form[field].vars.errors.count > 0 %}{% set errors_count = errors_count + form[field].vars.errors.count %}{% endif %}
     {% endfor %}
-    {% if errors_count > 0 %}<span class="text-danger">{{ badge(errors_count) }} {% trans %}Error(s){% endtrans %}</span>{% endif %}
+    {% if errors_count > 0 %}<span class="text-danger">{{ badge(errors_count) }} {% trans %}label.Errors{% endtrans %}</span>{% endif %}
 {% endmacro %}
 
 {% block accountContent %}
 
-    <h1>{% trans %}Edit your profile{% endtrans %}</h1>
+    <h1>{% trans %}label.edit_your_profile{% endtrans %}</h1>
 
     {% for flashMessage in app.session.flashbag.get('warning') %}
         <div class="alert alert-warning" role="alert">
@@ -27,16 +27,16 @@
 
     <ul class="nav nav-tabs" role="tablist">
         {% set form_fields_account = ['email', 'picture'] %}
-        <li class="active"><a href="#account" role="tab" data-toggle="tab">{% trans %}Account{% endtrans %}{{ _self.has_errors_in_tab(form, form_fields_account) }}</a></li>
+        <li class="active"><a href="#account" role="tab" data-toggle="tab">{% trans %}label.Account{% endtrans %}{{ _self.has_errors_in_tab(form, form_fields_account) }}</a></li>
         {% set form_fields_profile = ['name', 'givenName', 'familyName', 'middleName', 'nickname', 'preferedUsername', 'gender', 'birthdate', 'zoneInfo', 'locale', 'website', 'phoneNumber'] %}
-        <li><a href="#profile" role="tab" data-toggle="tab">{% trans %}Profile{% endtrans %}{{ _self.has_errors_in_tab(form, form_fields_profile) }}</a></li>
+        <li><a href="#profile" role="tab" data-toggle="tab">{% trans %}label.Profile{% endtrans %}{{ _self.has_errors_in_tab(form, form_fields_profile) }}</a></li>
         {% set form_fields_address = ['formatted', 'streetAddress', 'locality', 'region', 'postalCode', 'country'] %}
-        <li><a href="#address" role="tab" data-toggle="tab">{% trans %}Address{% endtrans %}{{ _self.has_errors_in_tab(form.address, form_fields_address) }}</a></li>
+        <li><a href="#address" role="tab" data-toggle="tab">{% trans %}label.Address{% endtrans %}{{ _self.has_errors_in_tab(form.address, form_fields_address) }}</a></li>
     </ul>
 
     {{ form_start(form, { 'style': 'horizontal' }) }}
     <div class="tab-content">
-        <p class="mandatory">{% trans %}All fields marked with the little red stars are mandatory{% endtrans %}</p>
+        <p class="mandatory">{% trans %}label.all_fields_marked_with_the_little_red_stars_are_mandatory{% endtrans %}</p>
         
         <div class="tab-pane active" id="account">
             <div class="row">

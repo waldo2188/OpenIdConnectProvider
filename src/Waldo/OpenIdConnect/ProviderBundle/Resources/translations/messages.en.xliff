@@ -63,84 +63,92 @@
                 <target>Email</target>
             </trans-unit>
             <trans-unit id="16">
+                <source>address</source>
+                <target>Adresse</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>phone</source>
+                <target>Phone</target>
+            </trans-unit>
+            <trans-unit id="18">
                 <source>phoneNumber</source>
                 <target>Phone number</target>
             </trans-unit>
-            <trans-unit id="17">
+            <trans-unit id="19">
                 <source>useragent.title.login</source>
                 <target>Login</target>
             </trans-unit>
-            <trans-unit id="18">
+            <trans-unit id="20">
                 <source>error.user_account_is_disabled</source>
                 <target><![CDATA[Maybe your account have not been yet validated by an administrator ?<br />
                     Please, wait until you receive a confirmation email.]]>
                 </target>
             </trans-unit>
-            <trans-unit id="19">
+            <trans-unit id="21">
                 <source>label.sign_in_with_different_account</source>
                 <target>Sign in with a different account</target>
             </trans-unit>
-            <trans-unit id="20">
+            <trans-unit id="22">
                 <source>main.title.welcome_login_page</source>
                 <target>Welcome to the OIC login page</target>
             </trans-unit>
-            <trans-unit id="21">
+            <trans-unit id="23">
                 <source>sub.title.sign_with_your_account_informations</source>
                 <target>Sign in with your OIC account</target>
             </trans-unit>
-            <trans-unit id="22">
+            <trans-unit id="24">
                 <source>label.logo_of_application</source>
                 <target>logo of application</target>
             </trans-unit>
-            <trans-unit id="23">
+            <trans-unit id="25">
                 <source>sub.title.sign_with_your_account_informations_for_client_application</source>
                 <target>%appname% required you to be authenticated</target>
             </trans-unit>
-            <trans-unit id="24">
+            <trans-unit id="26">
                 <source>label.term_of_service_for_application</source>
                 <target>Term of service for %appname%</target>
             </trans-unit>
-            <trans-unit id="25">
+            <trans-unit id="27">
                 <source>label.policy_for_application</source>
                 <target>Policy %appname%</target>
             </trans-unit>
-            <trans-unit id="26">
+            <trans-unit id="28">
                 <source>label.username</source>
                 <target>Username</target>
             </trans-unit>
-            <trans-unit id="27">
+            <trans-unit id="29">
                 <source>label.password</source>
                 <target>Password</target>
             </trans-unit>
-            <trans-unit id="28">
+            <trans-unit id="30">
                 <source>label.sign_in</source>
                 <target>Sign in</target>
             </trans-unit>
-            <trans-unit id="29">
+            <trans-unit id="31">
                 <source>label.forgot_your_password</source>
                 <target>Forgot your password ?</target>
             </trans-unit>
-            <trans-unit id="30">
+            <trans-unit id="32">
                 <source>label.create_an_account</source>
                 <target>Create an account</target>
             </trans-unit>
-            <trans-unit id="31">
+            <trans-unit id="33">
                 <source>useragent.title.scope_approval</source>
                 <target>Scope Approval</target>
             </trans-unit>
-            <trans-unit id="32">
+            <trans-unit id="34">
                 <source>sub.title.informations_claimed</source>
                 <target>Informations claimed</target>
             </trans-unit>
-            <trans-unit id="33">
+            <trans-unit id="35">
                 <source>label.account_picture</source>
                 <target>Account picture</target>
             </trans-unit>
-            <trans-unit id="34">
+            <trans-unit id="36">
                 <source>label.accept</source>
                 <target>Accept</target>
             </trans-unit>
-            <trans-unit id="35">
+            <trans-unit id="37">
                 <source>label.cancel</source>
                 <target>Cancel</target>
             </trans-unit>

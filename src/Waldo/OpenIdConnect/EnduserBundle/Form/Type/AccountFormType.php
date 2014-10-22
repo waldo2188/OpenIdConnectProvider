@@ -19,16 +19,16 @@ class AccountFormType extends AbstractType
     {
         $builder
                 ->add('name', 'text', array(
-                    'label' => 'Name',
+                    'label' => 'label.Name',
                     'required' => false
                     ))
                 ->add('givenName', 'text', array(
-                    'label' => 'First name',
+                    'label' => 'label.First_name',
                     'required' => false
                     ))
                 
                 ->add('email', 'email', array(
-                    'label' => 'Email',
+                    'label' => 'label.Email',
                     'required' => true
                     ))
                 
@@ -38,61 +38,61 @@ class AccountFormType extends AbstractType
         if($options['hasProfileField'] === true) {
             $builder
                 ->add('familyName', 'text', array(
-                    'label' => 'Family name',
+                    'label' => 'label.Family_name',
                     'required' => false
                     ))
                 ->add('middleName', 'text', array(
-                    'label' => 'Middle name', 
+                    'label' => 'label.Middle_name', 
                     'required' => false
                     ))
                 ->add('nickname', 'text', array(
-                    'label' => 'Nickname', 
+                    'label' => 'label.Nickname', 
                     'required' => false
                     ))
                 ->add('preferedUsername', 'text', array(
-                    'label' => 'Prefered username',
+                    'label' => 'label.Prefered_username',
                     'required' => false
                     ))
                 ->add('picture', 'text', array(
-                    'label' => 'Picture', 
+                    'label' => 'label.Picture', 
                     'required' => false
                     ))
                 ->add('website', 'url', array(
-                    'label' => 'Website', 
+                    'label' => 'label.Web_site', 
                     'required' => false
                     ))
                 ->add('gender', 'choice', array(
-                    'label' => 'Gender', 
-                    'empty_value' => 'Choose an option',
+                    'label' => 'label.Gender', 
+                    'empty_value' => 'label.choose_an_option',
                     'choices' => array(
-                        'Female',
-                        'Male',
-                        'Other...'
+                        'label.Female',
+                        'label.Male',
+                        'label.Other...'
                     ),
                     'required' => false
                     ))
                 ->add('birthdate', 'date', array(
-                    'label' => 'Birthdate',
+                    'label' => 'label.Birthdate',
                     'widget' => 'single_text',
                     'format' => 'yyyy-MM-dd',
                     'required' => false
                     ))
                 ->add('zoneInfo', 'timezone', array(
-                    'label' => 'Time zone', 
-                    'empty_value' => 'Choose an option',
+                    'label' => 'label.Time_zone', 
+                    'empty_value' => 'label.choose_an_option',
                     'required' => false
                     ))
                 ->add('locale', 'locale', array(
-                    'label' => 'Local', 
-                    'empty_value' => 'Choose an option',
+                    'label' => 'label.Locale', 
+                    'empty_value' => 'label.choose_an_option',
                     'required' => false
                     ))
                 ->add('phoneNumber', 'text', array(
-                    'label' => 'Phone number', 
+                    'label' => 'label.Telephone_number', 
                     'required' => false
                     ))
                 ->add('address', new AddressFormType(), array(
-                    'label' => 'Address', 
+                    'label' => 'label.Address', 
                     'required' => false
                     ))
                 ;
@@ -102,9 +102,9 @@ class AccountFormType extends AbstractType
             $builder
                     ->add('password', 'repeated', array(
                     'type' => 'password',
-                    'invalid_message' => 'The password fields must match.',
-                    'first_options' => array('label' => 'Create a password'),
-                    'second_options' => array('label' => 'Confirm your Password'),
+                    'invalid_message' => 'label.the_password_fields_must_match',
+                    'first_options' => array('label' => 'label.create_a_password'),
+                    'second_options' => array('label' => 'label.confirm_your_Password'),
                     'required' => true
                 ))
                     ;

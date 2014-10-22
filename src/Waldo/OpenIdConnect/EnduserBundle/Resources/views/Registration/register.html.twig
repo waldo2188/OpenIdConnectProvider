@@ -1,6 +1,6 @@
 {% extends ":default:base.html.twig" %}
 
-{% block title %}{% trans %}Register{% endtrans %}{% endblock title %}
+{% block title %}{% trans %}label.Register{% endtrans %}{% endblock title %}
 
 {% macro has_errors(form) %}
     {% if form.vars.errors.count > 0 %}
@@ -11,11 +11,11 @@
 
 {% block bodyContent %}
     <div class="register-page">
-        <h1>{% trans %}Create your account{% endtrans %}</h1>
+        <h1>{% trans %}label.create_your_account{% endtrans %}</h1>
 
         {{ form_start(form, { 'style': 'horizontal' }) }}
 
-        <p class="mandatory">{% trans %}All fields bellow are mandatory{% endtrans %}</p>
+        <p class="mandatory">{% trans %}label.all_fields_bellow_are_mandatory{% endtrans %}</p>
                         
         <div class="row">
             <div class="col-md-5">

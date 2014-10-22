@@ -1,14 +1,14 @@
 {% extends ":default:base.html.twig" %}
 
-{% block title %}{% trans %}Find Your Account{% endtrans %}{% endblock title %}
+{% block title %}{% trans %}label.find_your_account{% endtrans %}{% endblock title %}
 
 {% block bodyContent %}
     <div class="auth-page">
-        <h1>{% trans %}Find Your Account{% endtrans %}</h1>
+        <h1>{% trans %}label.find_your_account{% endtrans %}</h1>
 
         {% if isFound is not null and isFound == false %}
             <div class="alert alert-danger" role="alert">
-            {% trans %}Sorry, we can not found your account with the given username or email.{% endtrans %}
+            {% trans %}label.sorry_we_can_not_found_your_account_with_the_given_username_or_email{% endtrans %}
             </div>
         {% endif %}    
 

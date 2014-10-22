@@ -6,6 +6,6 @@
 } %}
 {% for scope in dt_item %}
 {% if scope != "openid" %}
-<span title="{% trans with {'%scope%': scope_meaning[scope]} %}Read your %scope%{% endtrans %}" data-toggle="tooltip">{{ scope }}</span>{% if loop.last != true %}, {% endif %}
+<span title="{% trans with {'%scope%': scope_meaning[scope]} %}label.read_your_scope{% endtrans %}" data-toggle="tooltip">{{ scope }}</span>{% if loop.last != true %}, {% endif %}
 {% endif %}
 {% endfor %}

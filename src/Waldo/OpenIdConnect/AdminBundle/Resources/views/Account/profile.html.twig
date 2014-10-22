@@ -2,7 +2,7 @@
 
 {% macro clientName(client) %}
     {% if client.clientUri is not null %}
-        <a href="{{ client.clientUri }}" title="{% trans with {'%clientName%': client.clientName}%}Go to %clientName%'s web site{% endtrans %}">{{ client.clientName }}</a>
+        <a href="{{ client.clientUri }}" title="{% trans with {'%clientName%': client.clientName}%}label.go_to_client_web_site{% endtrans %}">{{ client.clientName }}</a>
     {% else %}
         {{ client.clientName }}
     {% endif %}
@@ -17,13 +17,13 @@
     } %}
     {% for scope in scopes %}
         {% if scope != "openid" %}
-        <span title="{% trans with {'%scope%': scope_meaning[scope].title} %}Read %scope%{% endtrans %}" data-toggle="tooltip">{{ scope }}</span>{% if loop.last != true %},{% endif %}
+        <span title="{% trans with {'%scope%': scope_meaning[scope].title} %}label.read_scope_name{% endtrans %}" data-toggle="tooltip">{{ scope }}</span>{% if loop.last != true %},{% endif %}
         {% endif %}
     {% endfor %}
 {% endmacro %}
 
-{% block pageTitle %}Enduser{% endblock pageTitle %}
-{% block pageTitleSub %}Profil{% endblock pageTitleSub %}
+{% block pageTitle %}label.Enduser{% endblock pageTitle %}
+{% block pageTitleSub %}label.Profile{% endblock pageTitleSub %}
 
 {% block content %}  
 
@@ -32,33 +32,33 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">
-                        {% trans %}Account{% endtrans %}
+                        {% trans %}label.Account{% endtrans %}
                         {% if account.enabled %}
-                            <i class="text-green glyphicon glyphicon-check" title="{% trans %}User account is enabled{% endtrans %}" data-toggle="tooltip"></i>
+                            <i class="text-green glyphicon glyphicon-check" title="{% trans %}label.user_account_is_enabled{% endtrans %}" data-toggle="tooltip"></i>
                         {% else %}
-                            <i class="text-red glyphicon glyphicon-ban-circle" title="{% trans %}User account is disabled{% endtrans %}" data-toggle="tooltip"></i>
+                            <i class="text-red glyphicon glyphicon-ban-circle" title="{% trans %}label.user_account_is_disabled{% endtrans %}" data-toggle="tooltip"></i>
                         {% endif %}
                     </h3>
                 </div>
                 <div class="box-body">
-                    {% if account.picture %}<img class="pull-right" src="{{ account.picture }}" alt="{% trans %}Account picture{% endtrans %}" />{% endif %}
+                    {% if account.picture %}<img class="pull-right" src="{{ account.picture }}" alt="{% trans %}label.account_picture{% endtrans %}" />{% endif %}
 
-                    <p><span class="param-label">{% trans %}Username{% endtrans %} :</span> <span class="param-value">{{ account.username }}</span></p>
+                    <p><span class="param-label">{% trans %}label.Username{% endtrans %} :</span> <span class="param-value">{{ account.username }}</span></p>
 
                     {% if account.email %}
                         <p>
-                            <span class="param-label">{% trans %}Email{% endtrans %} :</span>
+                            <span class="param-label">{% trans %}label.Email{% endtrans %} :</span>
                             {% if account.emailVerified %}
-                                <i class="text-green glyphicon glyphicon-check" title="{% trans %}Email verified{% endtrans %}" data-toggle="tooltip"></i>
+                                <i class="text-green glyphicon glyphicon-check" title="{% trans %}label.email_verified{% endtrans %}" data-toggle="tooltip"></i>
                             {% else %}
-                                <i class="text-red glyphicon glyphicon-ban-circle" title="{% trans %}Email not verified{% endtrans %}" data-toggle="tooltip"></i>
+                                <i class="text-red glyphicon glyphicon-ban-circle" title="{% trans %}label.email_not_verified{% endtrans %}" data-toggle="tooltip"></i>
                             {% endif %}
                              <span class="param-value">{{ account.email }}</span>
                         </p>
                     {% endif %}
 
                     {% if account.lastLoginAt %}
-                        <p><span class="param-label">{% trans %}Last login at{% endtrans %} :</span> <span class="param-value">{{ account.lastLoginAt|date() }}</span></p>
+                        <p><span class="param-label">{% trans %}label.last_login_at{% endtrans %} :</span> <span class="param-value">{{ account.lastLoginAt|date() }}</span></p>
                     {% endif %}
                 </div>
             </div>
@@ -66,78 +66,78 @@
         <div class="col-md-6">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">{% trans %}User profile{% endtrans %}</h3>
+                    <h3 class="box-title">{% trans %}label.user_profile{% endtrans %}</h3>
                 </div>
                 <div class="box-body">        
                     <div class="box-body nav-tabs-custom">
 
                         <ul class="nav nav-tabs" role="tablist">
-                            <li class="active"><a href="#profile" role="tab" data-toggle="tab">{% trans %}Profile{% endtrans %}</a></li>
-                            <li><a href="#address" role="tab" data-toggle="tab">{% trans %}Address{% endtrans %}</a></li>
+                            <li class="active"><a href="#profile" role="tab" data-toggle="tab">{% trans %}label.Profile{% endtrans %}</a></li>
+                            <li><a href="#address" role="tab" data-toggle="tab">{% trans %}label.Address{% endtrans %}</a></li>
                         </ul>
 
                         <div class="tab-content">
                             <div class="tab-pane active" id="profile">
-                                    {% if account.name %}<p><span class="param-label">{% trans %}Name{% endtrans %} :</span> <span class="param-value">
+                                    {% if account.name %}<p><span class="param-label">{% trans %}label.Name{% endtrans %} :</span> <span class="param-value">
                                         {{ account.name }}</span></p>{% endif %}
 
-                                    {% if account.givenName %}<p><span class="param-label">{% trans %}First name{% endtrans %} :</span> <span class="param-value">
+                                    {% if account.givenName %}<p><span class="param-label">{% trans %}label.First_name{% endtrans %} :</span> <span class="param-value">
                                         {{ account.givenName }}</span></p>{% endif %}
 
-                                    {% if account.familyName %}<p><span class="param-label">{% trans %}Last name{% endtrans %} :</span> <span class="param-value">
+                                    {% if account.familyName %}<p><span class="param-label">{% trans %}label.Last_name{% endtrans %} :</span> <span class="param-value">
                                         {{ account.familyName }}</span></p>{% endif %}
 
-                                    {% if account.middleName %}<p><span class="param-label">{% trans %}Middle name{% endtrans %} :</span> <span class="param-value">
+                                    {% if account.middleName %}<p><span class="param-label">{% trans %}label.Middle_name{% endtrans %} :</span> <span class="param-value">
                                         {{ account.middleName }}</span></p>{% endif %}
 
-                                    {% if account.nickname %}<p><span class="param-label">{% trans %}Nickname, casual name{% endtrans %} :</span> <span class="param-value">
+                                    {% if account.nickname %}<p><span class="param-label">{% trans %}label.Nickname{% endtrans %} :</span> <span class="param-value">
                                         {{ account.nickname }}</span></p>{% endif %}
 
-                                    {% if account.preferedUsername %}<p><span class="param-label">{% trans %}Prefered username{% endtrans %} :</span> <span class="param-value">
+                                    {% if account.preferedUsername %}<p><span class="param-label">{% trans %}label.Prefered_username{% endtrans %} :</span> <span class="param-value">
                                         {{ account.preferedUsername }}</span></p>{% endif %}
 
-                                    {% if account.profile %}<p><span class="param-label">{% trans %}Profile{% endtrans %} :</span> <span class="param-value">
+                                    {% if account.profile %}<p><span class="param-label">{% trans %}label.Profile{% endtrans %} :</span> <span class="param-value">
                                         {{ account.profile }}</span></p>{% endif %}
 
-                                    {% if account.website %}<p><span class="param-label">{% trans %}Web site{% endtrans %} :</span> <span class="param-value">
+                                    {% if account.website %}<p><span class="param-label">{% trans %}label.Web_site{% endtrans %} :</span> <span class="param-value">
                                         {{ account.website }}</span></p>{% endif %}
 
-                                    {% if account.gender %}<p><span class="param-label">{% trans %}Gender{% endtrans %} :</span> <span class="param-value">
+                                    {% if account.gender %}<p><span class="param-label">{% trans %}label.Gender{% endtrans %} :</span> <span class="param-value">
                                         {{ account.gender }}</span></p>{% endif %}
 
-                                    {% if account.birthdate %}<p><span class="param-label">{% trans %}birthdate{% endtrans %} :</span> <span class="param-value">
+                                    {% if account.birthdate %}<p><span class="param-label">{% trans %}label.Birthdate{% endtrans %} :</span> <span class="param-value">
                                         {{ account.birthdate|date() }}</span></p>{% endif %}
 
-                                    {% if account.zoneInfo %}<p><span class="param-label">{% trans %}Time zone{% endtrans %} :</span> <span class="param-value">
+                                    {% if account.zoneInfo %}<p><span class="param-label">{% trans %}label.Time_zone{% endtrans %} :</span> <span class="param-value">
                                         {{ account.zoneInfo }}</span></p>{% endif %}
 
-                                    {% if account.locale %}<p><span class="param-label">{% trans %}Locale{% endtrans %} :</span> <span class="param-value">
+                                    {% if account.locale %}<p><span class="param-label">{% trans %}label.Locale{% endtrans %} :</span> <span class="param-value">
                                         {{ account.locale }}</span></p>{% endif %}
 
 
-                                    {% if account.phoneNumber %}<p><span class="param-label">{% trans %}Telephone number{% endtrans %} :</span> <span class="param-value">
+                                    {% if account.phoneNumber %}<p><span class="param-label">{% trans %}label.Telephone_number{% endtrans %} :</span> <span class="param-value">
                                         {{ account.phoneNumber }}</span></p>{% endif %}
 
                             </div>
                             <div class="tab-pane" id="address">
                                 {% if account.address %}
 
-                                    {% if account.address.formatted %}<p><span class="param-label">{% trans %}Full mailing address{% endtrans %} :</span> <span class="param-value">
+                                    {% if account.address.formatted %}<p><span class="param-label">{% trans %}label.Full_mailing_address{% endtrans %} :</span> <span class="param-value">
                                         {{ account.address.formatted|nl2br }}</span></p>{% endif %}
 
-                                    {% if account.address.streetAddress %}<p><span class="param-label">{% trans %}Full street address{% endtrans %} :</span> <span class="param-value">
+                                    {% if account.address.streetAddress %}<p><span class="param-label">{% trans %}label.Full_street_address{% endtrans %} :</span> <span class="param-value">
                                         {{ account.address.streetAddress }}</span></p>{% endif %}
 
-                                    {% if account.address.locality %}<p><span class="param-label">{% trans %}City or locality{% endtrans %} :</span> <span class="param-value">
+                                    {% if account.address.locality %}<p><span class="param-label">{% trans %}label.City_or_locality{% endtrans %} :</span> <span class="param-value">
                                         {{ account.address.locality }}</span></p>{% endif %}
 
-                                    {% if account.address.region %}<p><span class="param-label">{% trans %}State, province, prefecture, or region{% endtrans %} :</span> <span class="param-value">
+                                    {% if account.address.region %}<p><span class="param-label">{% trans %}label.State_province_prefecture_or_region{% endtrans %} :</span> <span class="param-value">
                                         {{ account.address.region }}</span></p>{% endif %}
 
-                                    {% if account.address.postalCode %}<p><span class="param-label">{% trans %}Zip code or postal code{% endtrans %} :</span> <span class="param-value">
+                                    {% if account.address.postalCode %}<p><span class="param-label">{% trans %}label.Zip_code_or_postal_code{% endtrans %} :</span> <span class="param-value">
                                         {{ account.address.postalCode }}</span></p>{% endif %}
 
-                                    {% if account.address.country %}<p><span class="param-label">{% trans %}Country name{% endtrans %} :</span> <span class="param-value">
+                                    {% if account.address.country %}<p><span class="param-label">{% trans %}label.Country_name{% endtrans %} :</span> <span class="param-value">
                                         {{ account.address.country }}</span></p>{% endif %}
                                 {% endif %}
                             </div>
@@ -149,18 +149,18 @@
         </div>
     </div>
                             
-    <h2 class="page-header">{% trans %}Applications list{% endtrans %}</h2>
+    <h2 class="page-header">{% trans %}label.Applications_list{% endtrans %}</h2>
     <div class="box">
         <div class="box-body">
-            <p>{% trans %}The user have granted the following applications to access to his account informations.{% endtrans %}</p>
+            <p>{% trans %}label.the_user_have_granted_the_following_applications_to_access_to_his_account_informations{% endtrans %}</p>
 
             <ul class="token-list">
                 {% for token in account.tokenList %}
                     <li>
-                        {{ _self.clientName(token.client) }} — <span class="scope">{{ _self.scopes(token.scope) }}</span> <span class="update-on pull-right">{% trans %}Last used on{% endtrans %} {{ token.issuedAt|date() }}</span>
+                        {{ _self.clientName(token.client) }} — <span class="scope">{{ _self.scopes(token.scope) }}</span> <span class="update-on pull-right">{% trans %}label.Last_used_on{% endtrans %} {{ token.issuedAt|date() }}</span>
                     </li>
                 {% else %}
-                    <li>{% trans %}Nothing for the moment{% endtrans %}</li>
+                    <li>{% trans %}label.Nothing_for_the_moment{% endtrans %}</li>
                 {% endfor %}
             </ul>
         </div>

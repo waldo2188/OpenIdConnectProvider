@@ -17,7 +17,7 @@ class LostAccountFormType extends AbstractType
     {
         $builder
                 ->add('username', 'text', array(
-                    'label' => 'Email, Username',
+                    'label' => 'label.email_or_username',
                     'required' => false
                     ))               
                 ->add('search', 'submit')

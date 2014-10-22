@@ -1,18 +1,15 @@
 {% extends ":default:base.html.twig" %}
 
-{% block title %}{% trans %}Account validation{% endtrans %}{% endblock title %}
+{% block title %}{% trans %}label.account_validation{% endtrans %}{% endblock title %}
 
 {% block bodyContent %}
 {% if user != null %}
-{% trans %}Your email is valid.{% endtrans %}<br/>
+{% trans %}label.your_email_is_valid{% endtrans %}<br/>
 {% if user.enabled == false %}
-{% trans %}An administrator will soon activate your account. 
-    An email will be sent after the validation or revocation of your account.{% endtrans %}<br/>
-{% trans %}Please, remember to check your Spam box.{% endtrans %}<br />
+{% trans %}label.activation_account_instruction{% endtrans %}<br />
 {% endif %}
 {% else %}
-{% trans %}Sorry, the link you have used to validate your account is invalid.{% endtrans %}<br />
-{% trans %}Maybe you have waiting too much time to validate your account. Please, try to create another account or feel free to contact an administrator.{% endtrans %}<br />
+{% trans %}label.activation_account_fail_due_to_unknown_link{% endtrans %}<br />
 {% endif %}
     
 {% endblock bodyContent %}

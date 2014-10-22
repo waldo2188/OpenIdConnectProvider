@@ -1,7 +1,7 @@
 {% extends "WaldoOpenIdConnectAdminBundle::base.html.twig" %}
 
-{% block pageTitle %}Client{% endblock pageTitle %}
-{% block pageTitleSub %}Client management{% endblock pageTitleSub %}
+{% block pageTitle %}label.Client{% endblock pageTitle %}
+{% block pageTitleSub %}label.Client_management{% endblock pageTitleSub %}
 
 
 {% block content %}  
@@ -10,29 +10,29 @@
         <div class="col-md-6">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">{% trans %}Client ID{% endtrans %}</h3>
+                    <h3 class="box-title">{% trans %}label.Client_ID{% endtrans %}</h3>
                 </div>
                 <div class="box-body">
-                    {% if client.logoUri %}<img class="pull-right" src="{{ client.logoUri }}" alt="{% trans %}Client logo{% endtrans %}" />{% endif %}
+                    {% if client.logoUri %}<img class="pull-right" src="{{ client.logoUri }}" alt="{% trans %}label.Client_logo{% endtrans %}" />{% endif %}
                     
-                    <p><span class="param-label">{% trans %}Client Name{% endtrans %} :</span> <span class="param-value">{{ client.clientName }}</span></p>
+                    <p><span class="param-label">{% trans %}label.Client_name{% endtrans %} :</span> <span class="param-value">{{ client.clientName }}</span></p>
 
-                    <p><span class="param-label">{% trans %}Client ID{% endtrans %} :</span> <span class="param-value">{{ client.clientID }}</span></p>
+                    <p><span class="param-label">{% trans %}label.Client_ID{% endtrans %} :</span> <span class="param-value">{{ client.clientID }}</span></p>
 
-                    <p><span class="param-label">{% trans %}Client URI{% endtrans %} :</span> <span class="param-value">{{ client.clientUri }}</span></p>
+                    <p><span class="param-label">{% trans %}label.Client_URI{% endtrans %} :</span> <span class="param-value">{{ client.clientUri }}</span></p>
 
-                    <p><span class="param-label">{% trans %}Issued at{% endtrans %} :</span> <span class="param-value">{{ client.clientIdIssuedAt|date() }}</span></p>
+                    <p><span class="param-label">{% trans %}label.Issued_at{% endtrans %} :</span> <span class="param-value">{{ client.clientIdIssuedAt|date() }}</span></p>
 
                     {% if client.tosUri %}
-                    <p><span class="param-label">{% trans %}Term of Service{% endtrans %} :</span> <span class="param-value"><a href="{{ client.tosUri }}">{{ client.tosUri }}</a></span></p>
+                    <p><span class="param-label">{% trans %}label.term_of_service{% endtrans %} :</span> <span class="param-value"><a href="{{ client.tosUri }}">{{ client.tosUri }}</a></span></p>
                     {% endif %}
 
                     {% if client.policyUri %}
-                    <p><span class="param-label">{% trans %}Polyci{% endtrans %} :</span> <span class="param-value"><a href="{{ client.policyUri }}">{{ client.policyUri }}</a></span></p>
+                    <p><span class="param-label">{% trans %}label.Policy{% endtrans %} :</span> <span class="param-value"><a href="{{ client.policyUri }}">{{ client.policyUri }}</a></span></p>
                     {% endif %}
                     
                     <ul class="list-inline">
-                        <li><span class="param-label">{% trans %}Scopes{% endtrans %} :</span></li>
+                        <li><span class="param-label">{% trans %}label.scopes{% endtrans %} :</span></li>
                         {% for scope in client.scope %}
                             <li><span class="param-value">{{ scope }}</span></li>
                         {% endfor %}
@@ -43,30 +43,30 @@
         <div class="col-md-6">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">{% trans %}Client record{% endtrans %}</h3>
+                    <h3 class="box-title">{% trans %}label.Client_record{% endtrans %}</h3>
                 </div>
                 <div class="box-body">
                     
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs" role="tablist">
-                            <li class="active"><a href="#secret" role="tab" data-toggle="tab">{% trans %}Secret{% endtrans %}</a></li>
-                            <li><a href="#uris" role="tab" data-toggle="tab">{% trans %}URIs{% endtrans %}</a></li>
-                            <li><a href="#contact" role="tab" data-toggle="tab">{% trans %}Contacts{% endtrans %}</a></li>
-                            <li><a href="#security" role="tab" data-toggle="tab">{% trans %}Security{% endtrans %}</a></li>
+                            <li class="active"><a href="#secret" role="tab" data-toggle="tab">{% trans %}label.Secret{% endtrans %}</a></li>
+                            <li><a href="#uris" role="tab" data-toggle="tab">{% trans %}label.URIs{% endtrans %}</a></li>
+                            <li><a href="#contact" role="tab" data-toggle="tab">{% trans %}label.Contacts{% endtrans %}</a></li>
+                            <li><a href="#security" role="tab" data-toggle="tab">{% trans %}label.Security{% endtrans %}</a></li>
                         </ul>
 
                         <div class="tab-content">
                             <div class="tab-pane active" id="secret">
                                 
-                                <p><span class="param-label">{% trans %}Client secret{% endtrans %} :</span> <span class="param-value">{{ client.clientSecret }}</span></p>
+                                <p><span class="param-label">{% trans %}label.Client_secret{% endtrans %} :</span> <span class="param-value">{{ client.clientSecret }}</span></p>
 
                                 {% if client.clientSecretExpiresAt %}
-                                    <p><span class="param-label">{% trans %}Client secret{% endtrans %} :</span> <span class="param-value">{{ client.clientSecret }}</span></p>
+                                    <p><span class="param-label">{% trans %}label.Client_secret_expires_at{% endtrans %} :</span> <span class="param-value">{{ client.clientSecretExpiresAt|date() }}</span></p>
                                 {% endif %}
 
                             </div>
                             <div class="tab-pane" id="uris">
-                                <span class="param-label">{% trans %}Redirect URIs{% endtrans %} :</span>
+                                <span class="param-label">{% trans %}label.redirect_URIs{% endtrans %} :</span>
                                 <ul>                                   
                                     {% for uri in client.redirectUris %}
                                     <li><span class="param-value">{{ uri }}</span></li>
@@ -74,23 +74,23 @@
                                 </ul>
 
                                 {% if client.postLogoutRedirectUri %}
-                                    <p><span class="param-label">{% trans %}Post logout redirect URI{% endtrans %} :</span> <span class="param-value">{{ client.postLogoutRedirectUri }}</span></p>
+                                    <p><span class="param-label">{% trans %}label.post_logout_redirect_URIs{% endtrans %} :</span> <span class="param-value">{{ client.postLogoutRedirectUri }}</span></p>
                                 {% endif %}
 
                                 {% if client.jwksUri %}
-                                    <p><span class="param-label">{% trans %}JWKS URI{% endtrans %} :</span> <span class="param-value">{{ client.jwksUri }}</span></p>
+                                    <p><span class="param-label">{% trans %}label.jwks_URI{% endtrans %} :</span> <span class="param-value">{{ client.jwksUri }}</span></p>
                                 {% endif %}
 
                                 {% if client.jwkEncryptionUri %}
-                                    <p><span class="param-label">{% trans %}JWKS encryption URI{% endtrans %} :</span> <span class="param-value">{{ client.jwkEncryptionUri }}</span></p>
+                                    <p><span class="param-label">{% trans %}label.jwks_encryption_URI{% endtrans %} :</span> <span class="param-value">{{ client.jwkEncryptionUri }}</span></p>
                                 {% endif %}
 
                                 {% if client.x509Uri %}
-                                    <p><span class="param-label">{% trans %}x509 certificat URI{% endtrans %} :</span> <span class="param-value">{{ client.x509Uri }}</span></p>
+                                    <p><span class="param-label">{% trans %}label.X509_certificat_URI{% endtrans %} :</span> <span class="param-value">{{ client.x509Uri }}</span></p>
                                 {% endif %}
 
                                 {% if client.x509EncryptionUri %}
-                                    <p><span class="param-label">{% trans %}x509 encryption certificat URI{% endtrans %} :</span> <span class="param-value">{{ client.x509EncryptionUri }}</span></p>
+                                    <p><span class="param-label">{% trans %}label.X509_encryption_certificat_URI{% endtrans %} :</span> <span class="param-value">{{ client.x509EncryptionUri }}</span></p>
                                 {% endif %}
                             </div>
                             <div class="tab-pane" id="contact">
@@ -102,47 +102,47 @@
                             </div>
                             <div class="tab-pane" id="security">
                                 {% if client.tokenEndpointAuthMethod %}
-                                    <p><span class="param-label">{% trans %}Token endpoint authentication method{% endtrans %} :</span> <span class="param-value">{{ client.tokenEndpointAuthMethod }}</span></p>
+                                    <p><span class="param-label">{% trans %}label.token_endpoint_authentication_method{% endtrans %} :</span> <span class="param-value">{{ client.tokenEndpointAuthMethod }}</span></p>
                                 {% endif %}
 
                                 {% if client.tokenEndpointAuthSigningAlg %}
-                                    <p><span class="param-label">{% trans %}Token endpoint signing algorithm{% endtrans %} :</span> <span class="param-value">{{ client.tokenEndpointAuthMethod }}</span></p>
+                                    <p><span class="param-label">{% trans %}label.token_endpoint_authentication_signing_algorithm{% endtrans %} :</span> <span class="param-value">{{ client.tokenEndpointAuthMethod }}</span></p>
                                 {% endif %}
 
                                 {% if client.requestObjectSigningAlg %}
-                                    <p><span class="param-label">{% trans %}Request object signing algorithm{% endtrans %} :</span> <span class="param-value">{{ client.requestObjectSigningAlg }}</span></p>
+                                    <p><span class="param-label">{% trans %}label.request_object_signing_algorithm{% endtrans %} :</span> <span class="param-value">{{ client.requestObjectSigningAlg }}</span></p>
                                 {% endif %}
 
                                 {% if client.idTokenSignedResponseAlg %}
-                                    <p><span class="param-label">{% trans %}ID Token response signing algorithm{% endtrans %} :</span> <span class="param-value">{{ client.idTokenSignedResponseAlg }}</span></p>
+                                    <p><span class="param-label">{% trans %}label.id_token_signined_response_algorithm{% endtrans %} :</span> <span class="param-value">{{ client.idTokenSignedResponseAlg }}</span></p>
                                 {% endif %}
 
                                 {% if client.idTokenEncryptedResponseAlg %}
-                                    <p><span class="param-label">{% trans %}ID Token response encryption algorithm{% endtrans %} :</span> <span class="param-value">{{ client.idTokenEncryptedResponseAlg }}</span></p>
+                                    <p><span class="param-label">{% trans %}label.id_token_encrypted_response_algorithm{% endtrans %} :</span> <span class="param-value">{{ client.idTokenEncryptedResponseAlg }}</span></p>
                                 {% endif %}
 
                                 {% if client.idTokenEncryptedResponseEnc %}
-                                    <p><span class="param-label">{% trans %}ID Token response encryption encoder{% endtrans %} :</span> <span class="param-value">{{ client.idTokenEncryptedResponseEnc }}</span></p>
+                                    <p><span class="param-label">{% trans %}label.id_token_encrypted_response_encoder{% endtrans %} :</span> <span class="param-value">{{ client.idTokenEncryptedResponseEnc }}</span></p>
                                 {% endif %}
 
                                 {% if client.userinfoSignedResponseAlg %}
-                                    <p><span class="param-label">{% trans %}Userinfo response signing algorithm{% endtrans %} :</span> <span class="param-value">{{ client.userinfoSignedResponseAlg }}</span></p>
+                                    <p><span class="param-label">{% trans %}label.userinfo_object_signing_algorithm{% endtrans %} :</span> <span class="param-value">{{ client.userinfoSignedResponseAlg }}</span></p>
                                 {% endif %}
 
                                 {% if client.userinfoEncryptedResponseAlg %}
-                                    <p><span class="param-label">{% trans %}Userinfo response encryption algorithm{% endtrans %} :</span> <span class="param-value">{{ client.userinfoEncryptedResponseAlg }}</span></p>
+                                    <p><span class="param-label">{% trans %}label.userinfo_encrypted_response_algorithm{% endtrans %} :</span> <span class="param-value">{{ client.userinfoEncryptedResponseAlg }}</span></p>
                                 {% endif %}
 
                                 {% if client.userinfoEncryptedResponseEnc %}
-                                    <p><span class="param-label">{% trans %}Userinfo response encryption encoder{% endtrans %} :</span> <span class="param-value">{{ client.userinfoEncryptedResponseEnc }}</span></p>
+                                    <p><span class="param-label">{% trans %}label.userinfo_encrypted_response_encoder{% endtrans %} :</span> <span class="param-value">{{ client.userinfoEncryptedResponseEnc }}</span></p>
                                 {% endif %}
 
                                 {% if client.defaultMaxAge %}
-                                    <p><span class="param-label">{% trans %}Default max age{% endtrans %} :</span> <span class="param-value">{{ client.defaultMaxAge }}</span></p>
+                                    <p><span class="param-label">{% trans %}label.default_max_age{% endtrans %} :</span> <span class="param-value">{{ client.defaultMaxAge }}</span></p>
                                 {% endif %}
 
                                 {% if client.requireAuthTime %}
-                                    <p><span class="param-label">{% trans %}Require authentication time{% endtrans %} :</span> <span class="param-value">{{ client.requireAuthTime }}</span></p>
+                                    <p><span class="param-label">{% trans %}label.require_authentication_time{% endtrans %} :</span> <span class="param-value">{{ client.requireAuthTime }}</span></p>
                                 {% endif %}
                             </div>
 

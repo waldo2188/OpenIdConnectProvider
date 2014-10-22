@@ -1,10 +1,10 @@
 {% extends "WaldoOpenIdConnectEnduserBundle:Account:index.html.twig" %}
 
-{% block title %}{{ parent() }} - {% trans %}Applications access list{% endtrans %}{% endblock title %}
+{% block title %}{{ parent() }} - {% trans %}label.applications_access_list{% endtrans %}{% endblock title %}
 
 {% macro clientName(client) %}
     {% if client.clientUri is not null %}
-        <a href="{{ client.clientUri }}" title="{% trans with {'%clientName%': client.clientName}%}Go to %clientName%'s web site{% endtrans %}">{{ client.clientName }}</a>
+        <a href="{{ client.clientUri }}" title="{% trans with {'%clientName%': client.clientName}%}label.go_to_client_web_site{% endtrans %}">{{ client.clientName }}</a>
     {% else %}
         {{ client.clientName }}
     {% endif %}
@@ -19,7 +19,7 @@
     } %}
     {% for scope in scopes %}
         {% if scope != "openid" %}
-        <a href="{{ path("oicp_account_index") }}#{{ scope_meaning[scope].link }}" title="{% trans with {'%scope%': scope_meaning[scope].title} %}Read your %scope%{% endtrans %}" data-toggle="tooltip">{{ scope }}</a>{% if loop.last != true %},{% endif %}
+        <a href="{{ path("oicp_account_index") }}#{{ scope_meaning[scope].link }}" title="{% trans with {'%scope%': scope_meaning[scope].title} %}label.read_your_scope{% endtrans %}" data-toggle="tooltip">{{ scope }}</a>{% if loop.last != true %},{% endif %}
         {% endif %}
     {% endfor %}
 {% endmacro %}
@@ -27,17 +27,17 @@
 
 {% block accountContent %}
 
-    <h1>{% trans %}Applications access list{% endtrans %}</h1>
+    <h1>{% trans %}label.applications_access_list{% endtrans %}</h1>
     
-    <p>{% trans %}You have granted the following applications to access to your account informations.{% endtrans %}</p>
+    <p>{% trans %}label.you_have_granted_the_following_applications_to_access_to_your_account_informations{% endtrans %}</p>
 
     <ul class="token-list">
         {% for token in tokenList %}
             <li>
-                {{ _self.clientName(token.client) }} — <span class="scope">{{ _self.scopes(token.scope) }}</span> <span class="update-on pull-right">{% trans %}Last used on{% endtrans %} {{ token.issuedAt|date() }}</span>
+                {{ _self.clientName(token.client) }} — <span class="scope">{{ _self.scopes(token.scope) }}</span> <span class="update-on pull-right">{% trans %}label.Last_used_on{% endtrans %} {{ token.issuedAt|date() }}</span>
             </li>
         {% else %}
-            <li>{% trans %}Nothing for the moment{% endtrans %}</li>
+            <li>{% trans %}label.Nothing_for_the_moment{% endtrans %}</li>
         {% endfor %}
     </ul>
     

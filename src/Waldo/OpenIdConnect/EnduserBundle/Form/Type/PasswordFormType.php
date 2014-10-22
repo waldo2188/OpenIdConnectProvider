@@ -20,9 +20,9 @@ class PasswordFormType extends AbstractType
         $builder
                 ->add('password', 'repeated', array(
                     'type' => 'password',
-                    'invalid_message' => 'The password fields must match.',
-                    'first_options' => array('label' => 'Create a password'),
-                    'second_options' => array('label' => 'Confirm your Password'),
+                    'invalid_message' => 'label.the_password_fields_must_match',
+                    'first_options' => array('label' => 'label.create_a_password'),
+                    'second_options' => array('label' => 'label.confirm_your_Password'),
                     'required' => true
                 ))
                 
@@ -32,7 +32,7 @@ class PasswordFormType extends AbstractType
         if($options['hasOldpassword']) {
             $builder
                     ->add('currentpassword', 'password', array(
-                        'label'=>'Current password',
+                        'label'=>'label.current_password',
                         'mapped' => false,
                         'constraints' => new UserPassword(),
                         'validation_groups' => array('Default')

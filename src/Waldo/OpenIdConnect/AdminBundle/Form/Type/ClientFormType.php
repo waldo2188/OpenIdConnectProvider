@@ -37,67 +37,67 @@ class ClientFormType extends AbstractType
         
         $builder
                 ->add('clientName', 'text', array(
-                    'label' => 'Application name',
+                    'label' => 'label.application_name',
                     'required' => true
                     ))
                 
                 ->add('clientUri', 'url', array(
-                    'label' => 'Homepage URI',
+                    'label' => 'label.homepage_URI',
                     'required' => true
                     ))
                 
                 ->add('contacts', 'bootstrap_collection', array(
-                    'label' => 'Contacts',
+                    'label' => 'label.Contacts',
                     'type'   => 'text',
                     'allow_add' => true,
                     'allow_delete' => true,
                     'prototype' => true,
-                    'add_button_text'    => 'Add',
-                    'delete_button_text' => 'Delete',
+                    'add_button_text'    => 'label.add',
+                    'delete_button_text' => 'label.delete',
                     'required' => false
                     ))
                 
                 ->add('applicationType', 'choice', array(
-                    'label' => 'Application type',
-                    'choices' => array('web' => 'web', 'native' => 'native'),
+                    'label' => 'label.application_type',
+                    'choices' => array('web' => 'label.web', 'native' => 'label.native'),
                     'expanded' => true,
                     'multiple' => false,
                     'required' => true
                     ))
                 
                 ->add('logoUri', 'url', array(
-                    'label' => 'Application logo URI',
+                    'label' => 'label.application_logo_URI',
                     'required' => false
                     ))
                 
                 ->add('tosUri', 'url', array(
-                    'label' => 'Terms of service URI',
+                    'label' => 'label.terms_of_service_URI',
                     'required' => false
                     ))
                 
                 ->add('policyUri', 'url', array(
-                    'label' => 'Policy URI',
+                    'label' => 'label.policy_URI',
                     'required' => false
                     ))
                 
                 ->add('redirectUris', 'bootstrap_collection', array(
-                    'label' => 'Redirect URIs',
+                    'label' => 'label.redirect_URIs',
                     'type' => 'url',
                     'allow_add' => true,
                     'allow_delete' => true,
                     'prototype' => true,
-                    'add_button_text'    => 'Add',
-                    'delete_button_text' => 'Delete',
+                    'add_button_text'    => 'label.add',
+                    'delete_button_text' => 'label.delete',
                     'required' => true
                     ))
                 
                 ->add('postLogoutRedirectUri', 'url', array(
-                    'label' => 'Post logout redirect URIs',
+                    'label' => 'label.post_logout_redirect_URIs',
                     'required' => false
                     ))
                 
                 ->add('tokenEndpointAuthMethod', 'choice', array(
-                    'label' => 'Token endpoint authentication method',
+                    'label' => 'label.token_endpoint_authentication_method',
                     'choices' => array(
                         'client_secret_basic' => 'client_secret_basic',
                         'client_secret_post' => 'client_secret_post',
@@ -108,7 +108,7 @@ class ClientFormType extends AbstractType
                     ))
                 
                 ->add('tokenEndpointAuthSigningAlg', 'choice', array(
-                    'label' => 'Token endpoint authentication signing algorithm',
+                    'label' => 'label.token_endpoint_authentication_signing_algorithm',
                     'choices' => $sigalgs,
                     'expanded' => false,
                     'multiple' => false,
@@ -116,34 +116,34 @@ class ClientFormType extends AbstractType
                     ))
                 
                 ->add('jwksUri', 'url', array(
-                    'label' => 'Jwks URI',
+                    'label' => 'label.jwks_URI',
                     'required' => false
                     ))
                 
                 ->add('jwkEncryptionUri', 'url', array(
-                    'label' => 'Jwks encryption URI',
+                    'label' => 'label.jwks_encryption_URI',
                     'required' => false
                     ))
                 
                 ->add('x509Uri', 'url', array(
-                    'label' => 'X509 certificat URI',
+                    'label' => 'label.X509_certificat_URI',
                     'required' => false
                     ))
                 
                 ->add('x509EncryptionUri', 'url', array(
-                    'label' => 'X509 encryption certificat URI',
+                    'label' => 'label.X509_encryption_certificat_URI',
                     'required' => false
                     ))
                 
                 ->add('requestObjectSigningAlg', 'choice', array(
-                    'label' => 'Request object signing algorithm',
+                    'label' => 'label.request_object_signing_algorithm',
                     'choices' => $sigalgs,
                     'expanded' => false,
                     'multiple' => false,
                     'required' => false
                     ))
                 ->add('requestObjectEncryptionAlg', 'choice', array(
-                    'label' => 'Request object encryption algorithm',
+                    'label' => 'label.request_object_encryption_algorithm',
                     'choices' => $encCEKAlgs,
                     'expanded' => false,
                     'multiple' => false,
@@ -151,7 +151,7 @@ class ClientFormType extends AbstractType
                     ))
                 
                 ->add('requestObjectEncryptionEnc', 'choice', array(
-                    'label' => 'Request object encryption encoder',
+                    'label' => 'label.request_object_encryption_encoder',
                     'choices' => $encryptionPlaintextAlgs,
                     'expanded' => false,
                     'multiple' => false,
@@ -159,7 +159,7 @@ class ClientFormType extends AbstractType
                     ))
                 
                 ->add('userinfoSignedResponseAlg', 'choice', array(
-                    'label' => 'Userinfo object signing algorithm',
+                    'label' => 'label.userinfo_object_signing_algorithm',
                     'choices' => $sigalgs,
                     'expanded' => false,
                     'multiple' => false,
@@ -167,7 +167,7 @@ class ClientFormType extends AbstractType
                     ))
                 
                 ->add('userinfoEncryptedResponseAlg', 'choice', array(
-                    'label' => 'Userinfo encrypted response algorithm',
+                    'label' => 'label.userinfo_encrypted_response_algorithm',
                     'choices' => $encCEKAlgs,
                     'expanded' => false,
                     'multiple' => false,
@@ -175,7 +175,7 @@ class ClientFormType extends AbstractType
                     ))
                 
                 ->add('userinfoEncryptedResponseEnc', 'choice', array(
-                    'label' => 'Userinfo encrypted response encoder',
+                    'label' => 'label.userinfo_encrypted_response_encoder',
                     'choices' => $encryptionPlaintextAlgs,
                     'expanded' => false,
                     'multiple' => false,
@@ -183,7 +183,7 @@ class ClientFormType extends AbstractType
                     ))
                 
                 ->add('idTokenSignedResponseAlg', 'choice', array(
-                    'label' => 'ID token signined response algorithm',
+                    'label' => 'label.id_token_signined_response_algorithm',
                     'choices' => $sigalgs,
                     'expanded' => false,
                     'multiple' => false,
@@ -191,7 +191,7 @@ class ClientFormType extends AbstractType
                     ))
                 
                 ->add('idTokenEncryptedResponseAlg', 'choice', array(
-                    'label' => 'ID token encrypted response algorithm',
+                    'label' => 'label.id_token_encrypted_response_algorithm',
                     'choices' => $encCEKAlgs,
                     'expanded' => false,
                     'multiple' => false,
@@ -199,7 +199,7 @@ class ClientFormType extends AbstractType
                     ))
                 
                 ->add('idTokenEncryptedResponseEnc', 'choice', array(
-                    'label' => 'ID token encrypted response encoder',
+                    'label' => 'label.id_token_encrypted_response_encoder',
                     'choices' => $encryptionPlaintextAlgs,
                     'expanded' => false,
                     'multiple' => false,
@@ -207,7 +207,7 @@ class ClientFormType extends AbstractType
                     ))
                 
                 ->add('defaultMaxAge', 'integer', array(
-                    'label' => 'Default max age',
+                    'label' => 'label.default_max_age',
                     'required' => false,
                     'attr' => array(
                         'help_text' => 'The value is time in second'
@@ -215,15 +215,15 @@ class ClientFormType extends AbstractType
                     ))
                 
                 ->add('requireAuthTime', 'choice', array(
-                    'label' => 'Require authentication time',
-                    'choices'   => array(true => 'Yes', false => 'No'),
+                    'label' => 'label.require_authentication_time',
+                    'choices'   => array(true => 'label.Yes', false => 'label.No'),
                     'expanded' => true,
                     'multiple' => false,
                     'required' => true
                     ))
                 
                 ->add('scope', 'choice', array(
-                    'label' => 'Scopes',
+                    'label' => 'label.scopes',
                     'choices'   => array(
                         Account::SCOPE_PROFILE => Account::SCOPE_PROFILE,
                         Account::SCOPE_EMAIL => Account::SCOPE_EMAIL,
@@ -241,8 +241,8 @@ class ClientFormType extends AbstractType
                         'allow_add' => true,
                         'allow_delete' => true,
                         'prototype' => true,
-                        'add_button_text'    => 'Add',
-                        'delete_button_text' => 'Delete'
+                        'add_button_text'    => 'label.add',
+                        'delete_button_text' => 'label.delete'
                     ))
                 
                 

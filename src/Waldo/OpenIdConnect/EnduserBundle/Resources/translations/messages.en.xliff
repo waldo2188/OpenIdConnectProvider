@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>title.your_account</source>
+                <target>Your account</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>label.edit_your_profile</source>
+                <target>Edit your profile</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>label.change_password</source>
+                <target>Change password</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>label.applications_access_list</source>
+                <target>Applications access list</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>label.Account</source>
+                <target>Account</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>label.edit_your_profile</source>
+                <target>Edit your profile</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>label.all_fields_marked_with_the_little_red_stars_are_mandatory</source>
+                <target>All fields marked with the little red stars are mandatory</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>label.Family_name</source>
+                <target>Family name</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>label.Picture</source>
+                <target>Picture</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>label.choose_an_option</source>
+                <target>Choose an option</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>label.Female</source>
+                <target>Female</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>label.Male</source>
+                <target>Male</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>label.Other</source>
+                <target>Other</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>label.the_password_fields_must_match</source>
+                <target>The password fields must match</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>label.create_a_password</source>
+                <target>Create a password</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>label.confirm_your_Password</source>
+                <target>Confirm your Password</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>label.current_password</source>
+                <target>Current password</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>label.email_or_username</source>
+                <target>Email, Username</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>label.change_password</source>
+                <target>Change password</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>label.you_have_granted_the_following_applications_to_access_to_your_account_informations</source>
+                <target>You have granted the following applications to access to your account informations.</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>label.find_your_account</source>
+                <target>Find your account</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>label.sorry_we_can_not_found_your_account_with_the_given_username_or_email</source>
+                <target>Sorry, we can not found your account with the given username or email.</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>label.password_changed</source>
+                <target>Password changed</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>label.your_password_has_been_changed</source>
+                <target>Your password has been changed</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>label.you_can_now_perform_your_login</source>
+                <target>You can now perform your login.</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>label.an_email_was_sent_to_you</source>
+                <target>An email was sent to you !</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>label.Email_sent</source>
+                <target>Email sent</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>label.instruction_for_reset_your_password</source>
+                <target>In your mail box you would find an email with all the instruction for reset your password.</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>label.change_your_password</source>
+                <target>Change your password</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>label.link_you_have_followed_is_not_valid</source>
+                <target><![CDATA[Sorry, the link you have followed is not valid.<br />
+                You have maybe waiting to long for following it.]]></target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>label.feel_free_to_retry</source>
+                <target>Please, feel free to retry </target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>label.forgot_your_password</source>
+                <target>forgot your password ?</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>title.registration_done</source>
+                <target>Registration done</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>message.registration_done</source>
+                <target><![CDATA[Your account have been created.<br />
+                You will receive an email with a link for activating your account.<br />
+                Please, remember to check your Spam box.]]></target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>label.Register</source>
+                <target>Register</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>label.create_your_account</source>
+                <target>Create your account</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>label.all_fields_bellow_are_mandatory</source>
+                <target>All fields bellow are mandatory</target>
+            </trans-unit>
+            <trans-unit id="38">
+                <source>label.account_validation</source>
+                <target>Account validation</target>
+            </trans-unit>
+            <trans-unit id="39">
+                <source>label.your_email_is_valid</source>
+                <target>Your email is valid</target>
+            </trans-unit>
+            <trans-unit id="40">
+                <source>label.activation_account_instruction</source>
+                <target><![CDATA[An administrator will soon activate your account. 
+                An email will be sent after the validation or revocation of your account.<br/>
+                Please, remember to check your Spam box.]]></target>
+            </trans-unit>
+            <trans-unit id="41">
+                <source>label.activation_account_fail_due_to_unknown_link</source>
+                <target><![CDATA[Sorry, the link you have used to validate your account is invalid.<br />
+                Maybe you have waiting too much time to validate your account.
+                Please, try to create another account or feel free to contact an administrator.]]></target>
+            </trans-unit>
+            <trans-unit id="42">
+                <source>label.activation_account_success</source>
+                <target><![CDATA[Your email is valid.<br/>
+                Thank you to have proceed to this validation.<br />
+                You can now use the validation email as login.]]></target>
+            </trans-unit>
+            <trans-unit id="43">
+                <source>label.your_profile_data</source>
+                <target>Your profile data</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

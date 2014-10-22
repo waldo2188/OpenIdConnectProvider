@@ -1,13 +1,13 @@
 {% extends "WaldoOpenIdConnectAdminBundle::base.html.twig" %}
 
-{% block pageTitle %}Client{% endblock pageTitle %}
-{% block pageTitleSub %}Client management{% endblock pageTitleSub %}
+{% block pageTitle %}title.Client{% endblock pageTitle %}
+{% block pageTitleSub %}label.Client_management{% endblock pageTitleSub %}
 
 {% block modals %}
 {% include "WaldoOpenIdConnectAdminBundle:Bootstrap:modal.html.twig" with {
 id: "deleteClient", 
-title: "Delete client application", 
-body:"Are you sure you want to delete this client application ?",
+title: "label.Delete_client_application", 
+body: "label.are_you_sure_you_want_to_delete_this_client_application",
 hasNo: false } %}
 {% endblock modals %}
 
@@ -16,7 +16,7 @@ hasNo: false } %}
     <div class="box">
 
         <div class="box-header">
-            <h3 class="box-title">{% trans %}Client management{% endtrans %}</h3>
+            <h3 class="box-title">{% trans %}label.Client_management{% endtrans %}</h3>
         </div>
 
         <div class="box-body">
@@ -46,7 +46,7 @@ hasNo: false } %}
     }}
     
 {% include "WaldoOpenIdConnectAdminBundle:Bootstrap:alert.js.twig" with {
-id:"success-deleted-client", alert: "success", content: "This client application has been deleted"|trans } %}
+id:"success-deleted-client", alert: "success", content: "label.this_client_application_has_been_deleted"|trans } %}
 {% include "WaldoOpenIdConnectAdminBundle:Bootstrap:alert.js.twig" with {
 id:"errors-deleted-client", alert: "danger", content: "__errors__"} %}
 

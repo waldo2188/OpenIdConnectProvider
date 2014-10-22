@@ -1,7 +1,7 @@
 {% extends "WaldoOpenIdConnectAdminBundle::base.html.twig" %}
 
-{% block pageTitle %}Client{% endblock pageTitle %}
-{% block pageTitleSub %}Client management{% endblock pageTitleSub %}
+{% block pageTitle %}title.Client{% endblock pageTitle %}
+{% block pageTitleSub %}label.Client_management{% endblock pageTitleSub %}
 
 {% macro has_errors_in_userrolesrules(form, form_fields) %}
     {% set errors_count = 0 %}
@@ -9,13 +9,13 @@
         {% for children in form.children %}
             {% if children.vars.valid == false %}{% set errors_count = errors_count + 1 %}{% endif %}
         {% endfor %}
-        {% if errors_count > 0 %}<span class="text-danger">{{ badge(errors_count) }} {% trans %}Error(s){% endtrans %}</span>{% endif %}
+        {% if errors_count > 0 %}<span class="text-danger">{{ badge(errors_count) }} {% trans %}label.Errors{% endtrans %}</span>{% endif %}
     {% endif %}
 {% endmacro %}
 
 {% block content %}  
 
-    <h2 class="page-header">{% trans %}Edit client application{% endtrans %}</h2>
+    <h2 class="page-header">{% trans %}label.edit_client_application{% endtrans %}</h2>
     
     <div class="box">
 
@@ -32,11 +32,11 @@
             <div class="box-body nav-tabs-custom">
 
                 <ul class="nav nav-tabs" role="tablist">
-                    <li class="active"><a href="#application" role="tab" data-toggle="tab">{% trans %}Application{% endtrans %}</a></li>
-                    <li><a href="#request" role="tab" data-toggle="tab">{% trans %}Request options{% endtrans %}</a></li>
-                    <li><a href="#response" role="tab" data-toggle="tab">{% trans %}Response options{% endtrans %}</a></li>
-                    <li><a href="#contact" role="tab" data-toggle="tab">{% trans %}Contacts{% endtrans %}</a></li>
-                    <li><a href="#userroles" role="tab" data-toggle="tab">{% trans %}User roles{% endtrans %} {{ _self.has_errors_in_userrolesrules(form.userRolesRulesList, ['expression']) }}</a></li>
+                    <li class="active"><a href="#application" role="tab" data-toggle="tab">{% trans %}label.Application{% endtrans %}</a></li>
+                    <li><a href="#request" role="tab" data-toggle="tab">{% trans %}label.Request_options{% endtrans %}</a></li>
+                    <li><a href="#response" role="tab" data-toggle="tab">{% trans %}label.Response_options{% endtrans %}</a></li>
+                    <li><a href="#contact" role="tab" data-toggle="tab">{% trans %}label.Contacts{% endtrans %}</a></li>
+                    <li><a href="#userroles" role="tab" data-toggle="tab">{% trans %}label.User_roles{% endtrans %} {{ _self.has_errors_in_userrolesrules(form.userRolesRulesList, ['expression']) }}</a></li>
                 </ul>
                 
                 <div class="tab-content">
@@ -120,7 +120,7 @@
                             </div>
                             <div class="col-md-offset-1 col-md-5">
                                 <div class="callout callout-info">
-                                    <p>{% trans %}Available user properties :{% endtrans %}</p>
+                                    <p>{% trans %}label.available_user_properties{% endtrans %} :</p>
                                     <ul>
                                         <li>username</li>
                                         <li>email</li>
@@ -133,10 +133,10 @@
                                     </ul>
                                 </div>
                                 <div class="callout callout-info">
-                                    <p>{% trans %}Filter exemple : username == "amy.pond"{% endtrans %}</p>
+                                    <p>{% trans %}label.filter_exemple{% endtrans %} : username == "amy.pond"</p>
                                 </div>
                                 <div class="callout callout-info">
-                                    <p>{% trans %}Separate the roles with commas ","{% endtrans %}</p>
+                                    <p>{% trans %}label.separate_the_roles_with_commas{% endtrans %}</p>
                                 </div>
                             </div>
                         </div>
