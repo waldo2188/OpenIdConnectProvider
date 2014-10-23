@@ -18,4 +18,4 @@ parameters:
     debug_redirects:        false
     use_assetic_controller: true
     issuer: http://localhost/OIC-P/web/app_dev.php
-    ldap_host: ~
+    ldap_host: 127.0.0.1
