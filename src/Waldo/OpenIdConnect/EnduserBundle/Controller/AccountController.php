@@ -3,8 +3,9 @@
 namespace Waldo\OpenIdConnect\EnduserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Waldo\OpenIdConnect\EnduserBundle\Form\Type\PasswordFormType;
 use Waldo\OpenIdConnect\EnduserBundle\Form\Type\AccountFormType;
 
@@ -26,6 +27,7 @@ class AccountController extends Controller
      * Allow the enduser to change his password
      * 
      * @Route("/change-password/", name="oicp_account_change_password")
+     * @Security("user.getProviderName() == 'self'")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
     public function changePasswordAction(Request $request)

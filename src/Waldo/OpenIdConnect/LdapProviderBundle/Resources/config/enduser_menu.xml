@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+   
+    <parameters>
+        
+        <parameter key="ldap.menu" type="collection">
+            <parameter key="edit_profile" type="string">oicp_ldap_account_edit_profile</parameter>
+            <parameter key="change_password" type="string">oic_ldap_account_change_password</parameter>
+        </parameter>
+
+    </parameters>
+
+    
+    <services>
+        
+        <service class="Waldo\OpenIdConnect\EnduserBundle\Menu\MenuExtender" public="false">
+            <argument type="string">OIC-LDAP</argument>
+            <argument type="string">%ldap.menu%</argument>
+            <tag name="oic_enduser.menu"/>
+        </service>
+       
+    </services>
+</container>

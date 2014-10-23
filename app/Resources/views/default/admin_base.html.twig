@@ -29,7 +29,7 @@
             <nav class="navbar navbar-static-top" role="navigation">
                 {# Sidebar toggle button#}
                 <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Toggle navigation</span>
+                    <span class="sr-only">{% trans %}label.toggle_navigation{% endtrans %}</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -46,7 +46,7 @@
                                 {# User image #}
                                 <li class="user-header bg-light-blue">
                                     {% if app.user.picture is not null %}
-                                        <img src="{{ app.user.picture }}" class="img-circle" alt="User Image" />
+                                        <img src="{{ app.user.picture }}" class="img-circle" alt="{% trans %}label.account_picture{% endtrans %}" />
                                     {% endif %}
                                     <p>
                                         {{ app.user.username }}
@@ -58,7 +58,7 @@
                                     </div>
                                     <div class="pull-right">
                                         <a class="btn btn-default btn-flat" href="{% if is_granted('ROLE_PREVIOUS_ADMIN') %}?_switch_user=_exit{% else %}{{ path("logout") }}{% endif %}">
-                                            <i class="glyphicon glyphicon-log-out"></i> {% if is_granted('ROLE_PREVIOUS_ADMIN') %}{% trans %}Un switch{% endtrans %}{% else %}{% trans %}Sign out{% endtrans %}{% endif %}
+                                            <i class="glyphicon glyphicon-log-out"></i> {% if is_granted('ROLE_PREVIOUS_ADMIN') %}{% trans %}label.un_switch{% endtrans %}{% else %}{% trans %}label.logout{% endtrans %}{% endif %}
                                         </a>
                                     </div>
                                 </li>
@@ -77,7 +77,7 @@
                     <div class="user-panel">
                         {% if app.user.picture is not null %}
                             <div class="pull-left image">
-                                <img src="{{ app.user.picture }}" class="img-circle" alt="User Image" />
+                                <img src="{{ app.user.picture }}" class="img-circle" alt="{% trans %}label.toggle_navigation{% endtrans %}" />
                             </div>
                         {% endif %}
                         <div class="pull-left info">

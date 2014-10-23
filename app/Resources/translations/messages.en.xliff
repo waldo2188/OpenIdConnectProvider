@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>label.toggle_navigation</source>
+                <target>Toggle navigation</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>label.Dear_username</source>
+                <target>Dear %username%</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>label.switched</source>
+                <target>switched</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>label.un_switch</source>
+                <target>Un switch</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>label.logout</source>
+                <target>Logout</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

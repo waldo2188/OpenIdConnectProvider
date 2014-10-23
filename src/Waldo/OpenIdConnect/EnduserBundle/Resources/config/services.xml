@@ -8,6 +8,8 @@
     <parameters>
         
         <parameter key="waldo_oic_p.account_actions.class">Waldo\OpenIdConnect\EnduserBundle\Services\AccountActionsService</parameter>
+        
+        <parameter key="oic_enduser.menu_builder.class">Waldo\OpenIdConnect\EnduserBundle\Menu\Builder</parameter>
 
     </parameters>
 
@@ -18,6 +20,20 @@
             <argument type="service" id="security.http_utils" />
             <argument type="service" id="waldo_oic.mailing" />
             <argument type="service" id="logger" on-invalid="null" />
+        </service>
+        
+        <service id="oic_enduser.menu_builder" class="%oic_enduser.menu_builder.class%">
+            <argument type="service" id="knp_menu.factory" />
+            <argument type="service" id="security.context" />
+        </service>
+        
+        <service id="oic_enduser.main_menu"
+                 class="Knp\Menu\MenuItem"
+                 factory-service="oic_enduser.menu_builder"
+                 factory-method="mainMenu" 
+                 scope="request">           
+            <argument type="service" id="request" />
+            <tag name="knp_menu.menu" alias="enduser.mainmenu" />
         </service>
         
     </services>

@@ -1219,7 +1219,8 @@ class Account implements AccountInterface, \Serializable
             $this->id,
             $this->email,
             $this->enabled,
-            $this->locked
+            $this->locked,
+            $this->providerName
         ));
     }
 
@@ -1232,7 +1233,8 @@ class Account implements AccountInterface, \Serializable
                 $this->id,
                 $this->email,
                 $this->enabled,
-                $this->locked
+                $this->locked,
+                $this->providerName
                 ) = unserialize($serialized);
     }
 

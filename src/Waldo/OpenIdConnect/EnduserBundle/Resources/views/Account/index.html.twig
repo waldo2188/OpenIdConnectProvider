@@ -11,13 +11,11 @@
         <div class="row">
             <div class="col-md-3">
                 <nav>
-                    <ul class="nav nav-pills nav-stacked">
-                        <li class="{{ _self.is_active("oicp_account_index") }}"><a href="{{ path("oicp_account_index") }}">{% trans %}label.Profile{% endtrans %}</a></li>
-                        <li class="{{ _self.is_active("oicp_account_edit_profile") }}"><a href="{{ path("oicp_account_edit_profile") }}">{% trans %}label.edit_your_profile{% endtrans %}</a></li>
-                        <li class="{{ _self.is_active("oicp_account_change_password") }}"><a href="{{ path("oicp_account_change_password") }}">{% trans %}label.change_password{% endtrans %}</a></li>
-                        <li class="{{ _self.is_active("oicp_account_application_access_list") }}"><a href="{{ path("oicp_account_application_access_list") }}">{% trans %}label.applications_access_list{% endtrans %}</a></li>
-                    </ul>
+                    {{ knp_menu_render('enduser.mainmenu',
+                             {template: 'WaldoOpenIdConnectEnduserBundle:Menu:knp_menu.html.twig',
+                              style: 'stacked-pills'}) }}
                 </nav>
+                    
             </div>
 
             <div class="col-md-9">

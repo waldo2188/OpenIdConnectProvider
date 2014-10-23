@@ -24,6 +24,7 @@ class WaldoOpenIdConnectLdapProviderExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+        $loader->load('enduser_menu.xml');
         
         $container->setParameter('waldo_oic_ldap.ldap_connection.params', $config);
         $container->setParameter('waldo_oic_ldap.model.user_class', $config["user_class"]);
