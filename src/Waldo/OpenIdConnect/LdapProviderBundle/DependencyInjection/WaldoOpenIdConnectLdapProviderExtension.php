@@ -28,6 +28,7 @@ class WaldoOpenIdConnectLdapProviderExtension extends Extension
         
         $container->setParameter('waldo_oic_ldap.ldap_connection.params', $config);
         $container->setParameter('waldo_oic_ldap.model.user_class', $config["user_class"]);
+        $container->setParameter('waldo_oic_ldap.enabled', $config["enabled"]);
     }
     
         

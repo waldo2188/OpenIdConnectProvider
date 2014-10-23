@@ -28,6 +28,8 @@ class LdapUserProvider implements UserProviderInterface
      * @var string
      */
     private $userClass;
+    
+    private $enabled;
 
     /**
      * Constructor
@@ -35,10 +37,11 @@ class LdapUserProvider implements UserProviderInterface
      * @param LdapManagerUserInterface $ldapManager
      * @param string $userClass
      */
-    public function __construct(LdapManagerUserInterface $ldapManager, $userClass)
+    public function __construct(LdapManagerUserInterface $ldapManager, $userClass, $enabled)
     {
         $this->ldapManager = $ldapManager;
         $this->userClass = $userClass;
+        $this->enabled = $enabled;
     }
 
     /**
@@ -47,7 +50,7 @@ class LdapUserProvider implements UserProviderInterface
     public function loadUserByUsername($username)
     {
         // Throw the exception if the username is not provided.
-        if (empty($username)) {
+        if ($this->enabled === false || empty($username)) {
             throw new UsernameNotFoundException('The username is not provided.');
         }
 
@@ -77,7 +80,7 @@ class LdapUserProvider implements UserProviderInterface
     }
 
     private function searchByUsername($username)
-    {
+    {        
         $this->ldapManager->exists($username);
 
         $lm = $this->ldapManager

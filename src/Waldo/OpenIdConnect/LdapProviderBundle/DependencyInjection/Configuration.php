@@ -24,6 +24,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
                 ->children()
+                    ->scalarNode("enabled")->defaultTrue()->end()
                     ->append($this->addClientNode())
                     ->append($this->addUserNode())
                     ->scalarNode('user_class')

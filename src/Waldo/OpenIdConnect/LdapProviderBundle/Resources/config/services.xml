@@ -26,6 +26,7 @@
         <service id="waldo_oic_ldap.security.user.provider" class="%waldo_oic_ldap.security.user.provider.class%">
             <argument type="service" id="waldo_oic_ldap.ldap_manager" />
             <argument>%waldo_oic_ldap.model.user_class%</argument>
+            <argument>%waldo_oic_ldap.enabled%</argument>
         </service>
         
         <service id="waldo_oic_ldap.user_manager" class="%waldo_oic_ldap.user_manager.class%">

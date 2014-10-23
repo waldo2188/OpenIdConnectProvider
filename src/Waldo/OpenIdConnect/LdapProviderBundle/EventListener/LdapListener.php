@@ -66,7 +66,7 @@ class LdapListener extends AbstractAuthenticationListener
     }
 
     public function attemptAuthentication(Request $request)
-    {
+    {        
         if ($this->options['post_only'] && 'post' !== strtolower($request->getMethod())) {
             if (null !== $this->logger) {
                 $this->logger->debug(sprintf('Authentication method not supported: %s.', $request->getMethod()));

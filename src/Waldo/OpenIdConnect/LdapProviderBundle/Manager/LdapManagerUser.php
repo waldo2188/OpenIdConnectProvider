@@ -185,6 +185,7 @@ class LdapManagerUser implements LdapManagerUserInterface
      */
     private function retrieveLdapUserByEmail()
     {
+        
         if (!$this->email) {
             throw new \InvalidArgumentException('Email is not defined, please use setEmail');
         }

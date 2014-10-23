@@ -35,13 +35,20 @@ class LdapConnection implements LdapConnectionInterface
 
         $this->info(
                 sprintf(
-                        'ldap_search base_dn %s, filter %s', print_r($params['base_dn'], true), print_r($params['filter'], true)
+                        'ldap_search base_dn %s, filter %s',
+                        print_r($params['base_dn'], true),
+                        print_r($params['filter'], true)
                 )
         );
 
-        $search = ldap_search(
-                        $this->ress, $params['base_dn'], $params['filter'], $attrs
-        );
+        try {
+            $search = ldap_search(
+                    $this->ress, $params['base_dn'], $params['filter'], $attrs
+            );
+        } catch (\Exception $e) {
+            
+        }
+        
         $this->checkLdapError();
 
         if ($search) {
@@ -78,9 +85,9 @@ class LdapConnection implements LdapConnectionInterface
             ldap_bind($ress, $user_dn, $password);
         } catch (\Exception $e) {
             $this->err('LDAP returned an error with code ' . $e->getCode() . ' : ' . $e->getMessage());
-            throw new ConnectionException($e->getMessage(), $e->getCode());    
+            throw new ConnectionException($e->getMessage(), $e->getCode());
         }
-        
+
         $this->checkLdapError();
 
         return true;

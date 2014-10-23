@@ -91,6 +91,7 @@ class LdapAuthenticationProvider implements AuthenticationProviderInterface
      */
     public function authenticate(TokenInterface $token)
     {
+          
         if (!$this->supports($token)) {
             throw new AuthenticationException('Unsupported token');
         }
@@ -104,15 +105,16 @@ class LdapAuthenticationProvider implements AuthenticationProviderInterface
                 return $this->ldapAuthenticate($user, $token);
             }
         } catch (\Exception $e) {
+      
             if ($e instanceof ConnectionException || $e instanceof UsernameNotFoundException) {
                 if ($this->hideUserNotFoundExceptions) {
                     throw new BadCredentialsException('Bad credentials', 0, $e);
                 }
             }
-
+            
             throw $e;
         }
-        
+      
         if ($user instanceof UserInterface) {
             return $this->daoAuthenticationProvider->authenticate($token);
         }

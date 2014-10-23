@@ -60,7 +60,6 @@ waldo_oic_ldap:
     client:
         host: %ldap_host%
         port: 389
-        
     user:
         base_dn: ou=people,dc=nyu,dc=org
         email_attribute: mail

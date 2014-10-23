@@ -4,7 +4,8 @@ imports:
 security:
     encoders:
         Waldo\OpenIdConnect\ModelBundle\Entity\Account: sha512
-
+    
+                
 framework:
     test: ~
     session:
@@ -24,3 +25,6 @@ doctrine:
         driver: pdo_sqlite 
         path: %kernel.cache_dir%/test.db 
         charset: UTF8
+
+waldo_oic_ldap:
+    enabled: false
