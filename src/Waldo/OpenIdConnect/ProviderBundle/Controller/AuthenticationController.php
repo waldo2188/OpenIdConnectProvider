@@ -79,8 +79,15 @@ class AuthenticationController extends Controller
         $client = $this->getDoctrine()->getManager()->getRepository("WaldoOpenIdConnectModelBundle:Client")
                 ->findOneByClientId($authentication->getClientId());
         
+        
+        if(!$this->get('waldo_oic_p.utils.scope')->needToValideScope($user, $authentication)) {
+            return $authenticationFlowManager->handleAccept($authentication);
+        }
+        
         $userInfo = $this->get('waldo_oic_p.utils.scope')
                 ->getUserinfoForScopes($user, $authentication);
+
+        
         
         $form = $this->createForm(new ScopeApprovalType());
 

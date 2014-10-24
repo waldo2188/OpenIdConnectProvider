@@ -478,19 +478,19 @@
                 <source>label.Admin</source>
                 <target>Admin</target>
             </trans-unit>
-<!--            <trans-unit id="121">
-                <source>label.</source>
-                <target></target>
+            <trans-unit id="121">
+                <source>label.Manage</source>
+                <target>Manage</target>
             </trans-unit>
             <trans-unit id="122">
-                <source>label.</source>
-                <target></target>
+                <source>label.New</source>
+                <target>New</target>
             </trans-unit>
             <trans-unit id="123">
-                <source>label.</source>
-                <target></target>
+                <source>label.Edit</source>
+                <target>Edit</target>
             </trans-unit>
-            <trans-unit id="124">
+            <!--            <trans-unit id="124">
                 <source>label.</source>
                 <target></target>
             </trans-unit>

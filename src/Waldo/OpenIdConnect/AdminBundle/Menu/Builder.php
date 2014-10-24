@@ -18,17 +18,17 @@ class Builder extends ContainerAware
         $menu = $factory->createItem('root');
         $menu->addChild('Account')
                 ->setLabelAttribute('icon', 'fa fa-fw fa-users');
-        $menu['Account']->addChild('Enduser', array('route' => 'oicp_admin_account_index'));
-        $menu['Account']['Enduser']->addChild('Profile', array('route' => 'oicp_admin_account_profile'))
+        $menu['Account']->addChild('Enduser', array('route' => 'oicp_admin_account_index', 'label' => "label.Enduser"));
+        $menu['Account']['Enduser']->addChild('Profile', array('route' => 'oicp_admin_account_profile', 'label' => "label.Profile"))
                         ->setDisplay(false);
         
         $menu->addChild('Client')
                 ->setLabelAttribute('icon', 'fa fa-fw fa-desktop');
-        $menu['Client']->addChild('Manage', array('route' => 'oicp_admin_client_index'));
-        $menu['Client']['Manage']->addChild('Client record', array('route' => 'oicp_admin_client_record'))
+        $menu['Client']->addChild('Manage', array('route' => 'oicp_admin_client_index', 'label' => "label.Manage"));
+        $menu['Client']['Manage']->addChild('Client record', array('route' => 'oicp_admin_client_record', 'label' => "label.Client_record"))
                 ->setDisplay(false);
-        $menu['Client']->addChild('New', array('route' => 'oicp_admin_client_new'));
-        $menu['Client']['Manage']->addChild('Edit', array('route' => 'oicp_admin_client_edit'))
+        $menu['Client']->addChild('New', array('route' => 'oicp_admin_client_new', 'label' => "label.New"));
+        $menu['Client']['Manage']->addChild('Edit', array('route' => 'oicp_admin_client_edit', 'label' => "label.Edit"))
                 ->setDisplay(false);
         return $menu;
     }

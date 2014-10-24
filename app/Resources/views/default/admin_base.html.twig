@@ -40,7 +40,7 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span>{{ app.user.username }} <i class="caret"></i></span>
+                                <span>{{ app.user.preferedUsername }} <i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 {# User image #}
@@ -49,7 +49,7 @@
                                         <img src="{{ app.user.picture }}" class="img-circle" alt="{% trans %}label.account_picture{% endtrans %}" />
                                     {% endif %}
                                     <p>
-                                        {{ app.user.username }}
+                                        {{ app.user.preferedUsername }}
                                     </p>
                                 </li>
                                 <li class="user-footer">
@@ -81,7 +81,7 @@
                             </div>
                         {% endif %}
                         <div class="pull-left info">
-                            <p>Hello, {{ app.user.username }}</p>
+                            <p>Hello, {{ app.user.preferedUsername }}</p>
                         </div>
                     </div>
 

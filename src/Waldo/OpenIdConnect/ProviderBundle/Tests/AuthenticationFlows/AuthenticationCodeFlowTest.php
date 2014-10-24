@@ -24,6 +24,7 @@ class AuthenticationCodeFlowTest extends \PHPUnit_Framework_TestCase
     private $httpUtils;
     private $securityContext;
     private $session;
+    private $scopeUtils;
     
     protected function tearDown()
     {
@@ -35,6 +36,7 @@ class AuthenticationCodeFlowTest extends \PHPUnit_Framework_TestCase
         $this->securityContext = null;
         $this->securityToken = null;
         $this->session = null;
+        $this->scopeUtils = null;
     }
     
     
@@ -48,7 +50,7 @@ class AuthenticationCodeFlowTest extends \PHPUnit_Framework_TestCase
 
         $account = new Account();
         $account->setId(2);
-        $this->securityToken->expects($this->once())
+        $this->securityToken->expects($this->exactly(2))
                     ->method("getUser")
                     ->will($this->returnValue($account));
         
@@ -141,11 +143,16 @@ class AuthenticationCodeFlowTest extends \PHPUnit_Framework_TestCase
             $me->securityToken->expects($me->any())
                     ->method('isAuthenticated')
                     ->will($me->returnValue(false));
+
         };
         
         $callback2 = function($me) {
             $me->prepareSecurityContextPass();
             $me->prepareSecurityTokenIssuedAt(new \DateTime('now'));
+            
+            $me->securityToken->expects($this->any())
+                    ->method("getUser")
+                    ->will($me->returnValue(new Account()));
             
         };
         $authentication2 = clone $authentication;
@@ -175,6 +182,46 @@ class AuthenticationCodeFlowTest extends \PHPUnit_Framework_TestCase
         );
     }
     
+    
+    
+    public function testShouldNeedScopeValidation()
+    {
+        $acf = $this->getAuthenticationCodeFlow();
+        
+        $this->prepareSecurityContextPass();
+        $this->prepareSecurityTokenIssuedAt(new \DateTime('now'));
+        
+
+        $account = new Account();
+        $account->setId(2);
+        $this->securityToken->expects($this->once())
+                    ->method("getUser")
+                    ->will($this->returnValue($account));
+        
+       
+        $authentication = new Authentication();
+        $authentication->setMaxAge(3600)
+                ->setRedirectUri("/redirect_uri/")
+                ->setNonce("aNonce")
+                ->setState("aState")
+                ;
+        
+        $this->httpUtils->expects($this->any())
+                ->method('createRedirectResponse')
+                ->with($this->anything(), $this->equalTo('oicp_authentication_scope'))
+                ->will($this->returnValue(new RedirectResponse('url')));
+
+        
+        $this->scopeUtils->expects($this->once())
+                ->method("needToValideScope")
+                ->with($this->equalTo($account), $this->equalTo($authentication))
+                ->will($this->returnValue(true));
+        
+        /* @var $result RedirectResponse */
+        $result = $acf->handle($authentication);
+        
+        $this->assertEquals(302, $result->getStatusCode());
+    }
     
     public function testSouldReturnDataFromSession()
     {
@@ -241,7 +288,7 @@ class AuthenticationCodeFlowTest extends \PHPUnit_Framework_TestCase
     {
         $this->mockSecurityToken();
         return new AuthenticationCodeFlow(
-                $this->mockSecurityContext(), $this->mockSession(), $this->mockEm(), $this->mockHttpUtils()
+                $this->mockSecurityContext(), $this->mockSession(), $this->mockEm(), $this->mockHttpUtils(), $this->mockScopeUtils()
         );
     }
 
@@ -278,6 +325,13 @@ class AuthenticationCodeFlowTest extends \PHPUnit_Framework_TestCase
         return $this->em = ($this->em === null)
                 ? $this->getMockBuilder("Doctrine\ORM\EntityManager")->disableOriginalConstructor()->getMock()
                 : $this->em;
+    }
+
+    private function mockScopeUtils()
+    {
+        return $this->scopeUtils = ($this->scopeUtils === null)
+                ? $this->getMockBuilder("Waldo\OpenIdConnect\ProviderBundle\Services\ScopeUtils")->disableOriginalConstructor()->getMock()
+                : $this->scopeUtils;
     }
     
     private function mockEntityRepository()

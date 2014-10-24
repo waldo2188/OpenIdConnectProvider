@@ -67,7 +67,7 @@ class AccountFormType extends AbstractType
                     'choices' => array(
                         'label.Female',
                         'label.Male',
-                        'label.Other...'
+                        'label.Other'
                     ),
                     'required' => false
                     ))

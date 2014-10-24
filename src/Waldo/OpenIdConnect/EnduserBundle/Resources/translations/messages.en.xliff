@@ -189,6 +189,10 @@
                 <source>label.your_password_has_been_changed</source>
                 <target>Your password has been changed</target>
             </trans-unit>
+            <trans-unit id="47">
+                <source>label.Other</source>
+                <target>Other</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

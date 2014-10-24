@@ -13,7 +13,16 @@ use Waldo\OpenIdConnect\ProviderBundle\Services\ScopeUtils;
  * @author valérian Girard <valerian.girard@educagri.fr>
  */
 class ScopeUtilsTest extends \PHPUnit_Framework_TestCase
-{
+{    
+    
+    private $em;
+    
+    public function setUp()
+    {
+        parent::setUp();
+        
+        $this->em = null;
+    }
     
     public function testUserInfoForScope()
     {
@@ -52,7 +61,7 @@ class ScopeUtilsTest extends \PHPUnit_Framework_TestCase
                 )
                 );
         
-        $scopeUtils = new ScopeUtils();
+        $scopeUtils = new ScopeUtils($this->mockEm());
         
         $result = $scopeUtils->getUserinfoForScopes($account, $authentication);
 
@@ -80,4 +89,10 @@ class ScopeUtilsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
+    private function mockEm()
+    {
+        return $this->em = ($this->em === null)
+                ? $this->getMockBuilder("Doctrine\ORM\EntityManager")->disableOriginalConstructor()->getMock()
+                : $this->em;
+    }
 }

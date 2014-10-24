@@ -4,12 +4,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h1>Dear user,</h1>
+        <h1>{% trans %}title.Dear_user{% endtrans %}</h1>
         <div>
-            {{ body|raw }}
+            {{ body|trans|raw }}
         </div>
         
-        <p>Best regard,<br />
-        The OIC team</p>
+        <p>{{ "label.email.signature"|trans|nl2br }}</p>
     </body>
 </html>

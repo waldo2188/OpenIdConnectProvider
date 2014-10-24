@@ -59,6 +59,7 @@
             <argument type="service" id="session" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="security.http_utils" />
+            <argument type="service" id="waldo_oic_p.utils.scope" />
         </service>
         
         <service id="waldo_oic_p.validator.authentication" class="%waldo_oic_p.validator.authentication.class%">
@@ -71,7 +72,9 @@
             <tag name="kernel.event_subscriber" />
         </service>
         
-        <service id="waldo_oic_p.utils.scope" class="%waldo_oic_p.utils.scope.class%"></service>
+        <service id="waldo_oic_p.utils.scope" class="%waldo_oic_p.utils.scope.class%">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+        </service>
         
         <service id="waldo_oic_p.helper.abstracttoken" class="%waldo_oic_p.helper.abstracttoken.class%" abstract="true" >
             <argument />

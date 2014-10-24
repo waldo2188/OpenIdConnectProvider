@@ -1,33 +1,9 @@
-{% block registration_confirmation_object %}Welcome to OIC{% endblock %}
-{% block registration_confirmation_body %}
-Hey there !<br />
-Thanks for signing up.<br />
-<br />
-To complete your registration, you must use the link below to verify your account :<br />
-<a href="{{ link }}">{{ link }}</a><br />
-<br />
-This link is valid for 1 hour. Beyond this time, you need to recreate an account.
-{% endblock %}
+{% block registration_confirmation_object %}{% trans %}subject.welcome_to_OIC{% endtrans %}{% endblock %}
+{% block registration_confirmation_body %}{% trans with {'%link%': link} %}object.welcome_to_OIC{% endtrans %}{% endblock %}
 
-{% block email_verification_object %}You have change your email{% endblock %}
-{% block email_verification_body %}
-Hey there !<br />
-You recently changed your email.<br />
-<p>Your email is an important thing for us, because you use it to login.
-<br />
-So, please, follow the link below to verify this new email :<br />
-<a href="{{ link }}">{{ link }}</a></p>
-<p>You must follow this link if you want to valid this new email address. <br />
-If you don't do, you always can use your old email address to log in.</p>
-{% endblock %}
+{% block email_verification_object %}{% trans %}subject.you_have_change_your_email{% endtrans %}{% endblock %}
+{% block email_verification_body %}{% trans with {'%link%': link} %}object.you_have_change_your_email{% endtrans %}{% endblock %}
 
+{% block lost_account_object %}{% trans %}subject.someone_requested_a_new_password_for_your_account{% endtrans %}{% endblock %}
+{% block lost_account_body %}{% trans with {'%link%': link} %}object.someone_requested_a_new_password_for_your_account{% endtrans %}{% endblock %}
 
-{% block lost_account_object %}Someone requested a new password for your account{% endblock %}
-{% block lost_account_body %}
-Someone recently asked to reset your password.<br />
-Use the link below to reset your password : <br />
-<a href="{{ link }}">{{ link }}</a><br />
-<br />
-<strong>You did not ask for this change ?</strong><br />
-<strong>Please forget this email. Your account is safe !</strong>
-{% endblock %}

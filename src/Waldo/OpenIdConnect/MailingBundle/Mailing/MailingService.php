@@ -104,8 +104,12 @@ class MailingService
                 throw new \RuntimeException('invalid email');
             }
             
-            $message->setBody($this->templating->render( $this->config['template'] . ':Mails:' . $data['template'] . '.html.twig', $data), "text/html");            
-            $message->addPart($this->templating->render($this->config['template'] . ':Mails:' . $data['template'] . '.txt.twig', $this->getRaw($data)), "text/plain");
+            $templateHtml = $this->templating->loadTemplate($this->config['template'] . ':Mails:' . $data['template'] . '.html.twig');
+            $templateTxt = $this->templating->loadTemplate($this->config['template'] . ':Mails:' . $data['template'] . '.txt.twig');
+
+
+            $message->setBody($templateHtml->render($data), "text/html");            
+            $message->addPart($templateTxt->render($this->getRaw($data)), "text/plain");
 
             $numSent += $mailerForSend->send($message, $failedRecipients);
         }

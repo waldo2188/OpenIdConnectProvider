@@ -1,7 +1,7 @@
 {% extends "WaldoOpenIdConnectAdminBundle::base.html.twig" %}
 
-{% block pageTitle %}title.Client{% endblock pageTitle %}
-{% block pageTitleSub %}label.Client_management{% endblock pageTitleSub %}
+{% block pageTitle %}{% trans %}title.Client{% endtrans %}{% endblock pageTitle %}
+{% block pageTitleSub %}{% trans %}label.Client_management{% endtrans %}{% endblock pageTitleSub %}
 
 {% macro has_errors_in_userrolesrules(form, form_fields) %}
     {% set errors_count = 0 %}

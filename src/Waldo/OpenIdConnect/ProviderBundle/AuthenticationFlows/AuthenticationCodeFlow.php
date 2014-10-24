@@ -5,6 +5,7 @@ namespace Waldo\OpenIdConnect\ProviderBundle\AuthenticationFlows;
 use Waldo\OpenIdConnect\ModelBundle\Entity\Request\Authentication;
 use Waldo\OpenIdConnect\ProviderBundle\Utils\TokenCodeGenerator;
 use Waldo\OpenIdConnect\ProviderBundle\Exception\AuthenticationRequestException;
+use Waldo\OpenIdConnect\ProviderBundle\Services\ScopeUtils;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -41,14 +42,20 @@ class AuthenticationCodeFlow
      */
     protected $httpUtils;
 
+    /**
+     * @var ScopeUtils 
+     */
+    protected $scopeUtils;
+
     public function __construct(SecurityContextInterface $securityContext,
             Session $session, EntityManager $em,
-            HttpUtils $httpUtils)
+            HttpUtils $httpUtils, ScopeUtils $scopeUtils)
     {
         $this->securityContext = $securityContext;
         $this->session = $session;
         $this->em = $em;
         $this->httpUtils = $httpUtils;
+        $this->scopeUtils = $scopeUtils;
     }
 
     /**
@@ -159,14 +166,13 @@ class AuthenticationCodeFlow
      */
     protected function checkUser(Authentication $authentication)
     {
-
         $needAuthent = false;
         
         if($this->securityContext->getToken() == null)
         {
             return $this->needAuthRequest($authentication);
         }
-        
+                
         // Check if user is well authenticated
         if(!$this->securityContext->getToken()->isAuthenticated() 
                 || !$this->securityContext->isGranted(AuthenticatedVoter::IS_AUTHENTICATED_FULLY)) {
@@ -205,6 +211,13 @@ class AuthenticationCodeFlow
             return $this->httpUtils->createRedirectResponse(new Request(), "oicp_authentication_scope");
         }
         
+        if($this->scopeUtils->needToValideScope(
+                $this->securityContext->getToken()->getUser(),
+                $authentication
+                )) {
+            return $this->needScopeRequest($authentication);
+        }
+        
         if($needAuthent === true) {
             return $this->needAuthRequest($authentication);
         }
@@ -227,6 +240,21 @@ class AuthenticationCodeFlow
         
         $request = new Request(array(), array(), array('clientId' => $authentication->getClientId()));
         return $this->httpUtils->createRedirectResponse($request, "login");
+    }
+
+    /**
+     * Create a redirect response to the scope form
+     * 
+     * @param \Waldo\OpenIdConnect\ModelBundle\Entity\Request\Authentication $authentication
+     * @return RedirectResponse
+     */
+    private function needScopeRequest(Authentication $authentication)
+    {
+        $this->session->set('oicp.authentication.flow.code.' . $authentication->getClientId(), $authentication);
+        $this->session->set('oicp.authentication.flow.manager.' . $authentication->getClientId(), $this->getName());
+        
+        $request = new Request(array(), array(), array('clientId' => $authentication->getClientId()));
+        return $this->httpUtils->createRedirectResponse($request, "oicp_authentication_scope");
     }
 
 }

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+	<trans-unit id="1">
+        	<source>title.Dear_user</source>
+                <target>Dear user,</target>
+        </trans-unit>
+	<trans-unit id="2">
+        	<source>label.email.signature</source>
+                <target><![CDATA[Best regard,
+The OIC team]]></target>
+        </trans-unit>
+	<trans-unit id="3">
+        	<source>subject.welcome_to_OIC</source>
+                <target>Welcome to OIC</target>
+        </trans-unit>
+	<trans-unit id="4">
+        	<source>object.welcome_to_OIC</source>
+                <target><![CDATA[Hey there !<br />
+Thanks for signing up.<br />
+<br />
+To complete your registration, you must use the link below to verify your account :<br />
+<a href="%link%">%link%</a><br />
+<br />
+This link is valid for 1 hour. Beyond this time, you need to recreate an account.
+]]></target>
+        </trans-unit>
+	<trans-unit id="5">
+        	<source>subject.someone_requested_a_new_password_for_your_account</source>
+                <target>Someone requested a new password for your account</target>
+        </trans-unit>
+	<trans-unit id="6">
+        	<source>object.someone_requested_a_new_password_for_your_account</source>
+                <target><![CDATA[Someone recently asked to reset your password.<br />
+Use the link below to reset your password : <br />
+<a href="%link%">%link%</a><br />
+<br />
+<strong>You did not ask for this change ?</strong><br />
+<strong>Please forget this email. Your account is safe !</strong>
+]]></target>
+        </trans-unit>
+	<trans-unit id="7">
+        	<source>subject.you_have_change_your_email</source>
+                <target>You have change your email</target>
+        </trans-unit>
+	<trans-unit id="8">
+        	<source>object.you_have_change_your_email</source>
+                <target><![CDATA[Hey there !<br />
+You recently changed your email.<br />
+<p>Your email is an important thing for us, because you use it to login.
+<br />
+So, please, follow the link below to verify this new email :<br />
+<a href="%link%">%link%</a></p>
+<p>You must follow this link if you want to valid this new email address. <br />
+If you don't do, you always can use your old email address to log in.</p>]]>
+</target>
+        </trans-unit>
+	<trans-unit id="9">
+        	<source></source>
+                <target></target>
+        </trans-unit>
+	<trans-unit id="10">
+        	<source></source>
+                <target></target>
+        </trans-unit>
+	<trans-unit id="11">
+        	<source></source>
+                <target></target>
+        </trans-unit>
+	<trans-unit id="12">
+        	<source></source>
+                <target></target>
+        </trans-unit>
+	
+        </body>
+    </file>
+</xliff>

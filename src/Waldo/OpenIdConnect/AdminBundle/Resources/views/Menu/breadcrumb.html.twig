@@ -2,8 +2,8 @@
     
 <ol class="breadcrumb"> 
 {% for item in items %}
-    {% if not loop.last %}<li><a href="{{ item.uri }}">{{ item.label }}</a></li>
-    {% else %}<li class="active">{{ item.label }}</li>{% endif %}
+    {% if not loop.last %}<li><a href="{{ item.uri }}">{{ item.label|trans(item.item.getExtra('translation_params', {}), item.item.getExtra('translation_domain', 'messages')) }}</a></li>
+    {% else %}<li class="active">{{ item.label|trans(item.item.getExtra('translation_params', {}), item.item.getExtra('translation_domain', 'messages')) }}</li>{% endif %}
 {% endfor %}
 </ol>
 {% endblock root %}

@@ -38,8 +38,8 @@ class AuthorizationEndpoint
     public function handleRequest(Request $request)
     {
         $authentication = $this->extractAutenticationFromRequest($request);
-        
-        try{
+
+        try {
             $this->authenticationRequestValidator->validate($authentication);
             
             switch ($authentication->getFlowType()) {
