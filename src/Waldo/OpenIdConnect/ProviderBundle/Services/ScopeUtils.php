@@ -91,8 +91,9 @@ class ScopeUtils
         $clientScopes = $client->getScope();
         $clientScopes[] = 'openid';
         
-        return !($this->hasSameScope($token->getScope(), $authentication->getScope())
-                && $this->hasSameScope($token->getScope(), $clientScopes));
+        return !($this->hasSameScope($token->getScope(), $authentication->getScope()));
+        // Add this line below for check if claimed scopes are the same as defined in the client application account
+//                && $this->hasSameScope($token->getScope(), $clientScopes));
     }
 
     private function hasSameScope($scopeRef, $scopeCompare)
