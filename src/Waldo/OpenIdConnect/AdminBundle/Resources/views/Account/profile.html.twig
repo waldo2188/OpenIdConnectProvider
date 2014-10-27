@@ -17,7 +17,7 @@
     } %}
     {% for scope in scopes %}
         {% if scope != "openid" %}
-        <span title="{% trans with {'%scope%': scope_meaning[scope].title} %}label.read_scope_name{% endtrans %}" data-toggle="tooltip">{{ scope }}</span>{% if loop.last != true %},{% endif %}
+        <span title="{% trans with {'%scope%': scope_meaning[scope].title|default(scope)} %}label.read_scope_name{% endtrans %}" data-toggle="tooltip">{{ scope }}</span>{% if loop.last != true %},{% endif %}
         {% endif %}
     {% endfor %}
 {% endmacro %}

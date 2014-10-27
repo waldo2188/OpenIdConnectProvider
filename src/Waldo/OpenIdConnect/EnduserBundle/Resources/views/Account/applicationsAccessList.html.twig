@@ -19,7 +19,7 @@
     } %}
     {% for scope in scopes %}
         {% if scope != "openid" %}
-        <a href="{{ path("oicp_account_index") }}#{{ scope_meaning[scope].link }}" title="{% trans with {'%scope%': scope_meaning[scope].title} %}label.read_your_scope{% endtrans %}" data-toggle="tooltip">{{ scope }}</a>{% if loop.last != true %},{% endif %}
+        <a href="{{ path("oicp_account_index") }}#{{ scope_meaning[scope].link|default('profile') }}" title="{% trans with {'%scope%': scope_meaning[scope].title|default(scope)} %}label.read_your_scope{% endtrans %}" data-toggle="tooltip">{{ scope }}</a>{% if loop.last != true %},{% endif %}
         {% endif %}
     {% endfor %}
 {% endmacro %}
