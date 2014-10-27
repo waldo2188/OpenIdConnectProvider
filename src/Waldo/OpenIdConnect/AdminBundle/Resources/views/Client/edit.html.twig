@@ -44,6 +44,16 @@
                         <div class="row">
                             <div class="col-md-6">
                                 {{ form_row(form.clientName) }}
+                                {% if client.clientId != null%}
+                                <div class="form-group">
+                                    <label for="oic_client_clientID" class="control-label required">{% trans %}label.Client_ID{% endtrans %}</label>
+                                    <input id="oic_client_clientID" type="text" value="{{ client.clientID }}" class="form-control" readonly="readonly" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="oic_client_secret" class="control-label required">{% trans %}label.Client_secret{% endtrans %}</label>
+                                    <textarea id="oic_client_secret" class="form-control" readonly="readonly">{{ client.clientSecret }}</textarea>
+                                </div>
+                                {% endif %}
                                 {{ form_row(form.clientUri) }}
                                 {{ form_row(form.redirectUris) }}
                                 {{ form_row(form.postLogoutRedirectUri) }}
