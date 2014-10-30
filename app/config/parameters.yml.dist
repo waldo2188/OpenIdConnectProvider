@@ -12,7 +12,7 @@ parameters:
     mailer_password:   ~
 
     locale:            en
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            "/Gm2>o?T745=*2{MOW~34+;7Y0n1H90n90p7SRre0;7MB%<*2}"
 
     debug_toolbar:          true
     debug_redirects:        false
