@@ -13,6 +13,5 @@
 /bin/
 /composer.phar
 /nbproject/
-/app/config/myparameters.yml
 /app/config/config_dev.yml
 /app/Resources/public/datatable/*
