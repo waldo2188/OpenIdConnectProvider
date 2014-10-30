@@ -13,6 +13,12 @@ use Waldo\OpenIdConnect\ProviderBundle\Tests\WebTestCase;
 class AuthorizationEndpointControllerTest extends WebTestCase
 {
 
+    public function setUp()
+    {
+        parent::setUp();
+        restoreDatabase();
+    }
+    
     public function testShouldRedirectToTheOriginalApp()
     {
         $url = "/authorize/?client_id=my_client_id&display=page&max_age=50000&nonce=aNonceValue&redirect_uri=http%3A%2F%2Flocalhost%2FOIC-RP%2Fweb%2Fapp_dev.php%2Flogin_check&response_type=code&scope=openid%20profile%20email%20phone&state=aStateValue";
