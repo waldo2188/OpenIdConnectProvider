@@ -46,7 +46,8 @@ class LdapConnection implements LdapConnectionInterface
                     $this->ress, $params['base_dn'], $params['filter'], $attrs
             );
         } catch (\Exception $e) {
-            
+            $this->logger->addCritical($e->getMessage(), $e->getTrace());
+            return false;
         }
         
         $this->checkLdapError();
