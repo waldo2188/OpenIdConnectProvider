@@ -46,9 +46,9 @@ hasNo: false } %}
     }}
     
 {% include "WaldoOpenIdConnectAdminBundle:Bootstrap:alert.js.twig" with {
-id:"success-deleted-client", alert: "success", content: "label.this_client_application_has_been_deleted"|trans } %}
+id:"success_deleted_client", alert: "success", content: "label.this_client_application_has_been_deleted"|trans } %}
 {% include "WaldoOpenIdConnectAdminBundle:Bootstrap:alert.js.twig" with {
-id:"errors-deleted-client", alert: "danger", content: "__errors__"} %}
+id:"errors_deleted_client", alert: "danger", content: "__errors__"} %}
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -63,12 +63,12 @@ $(document).ready(function() {
         $.post($("#deleteClient").data('identifier'))
          .done(function() {
             $('#dta-client').dataTable().fnDraw();
-            $('div[role="alert-box"]').append($('#tpl-success-deleted-client').template());
+            $('div[role="alert-box"]').append($('#tpl-success_deleted_client').template());
             $("#deleteClient").modal('hide');
 
         })
         .fail(function(e) {
-            $('div[role="alert-box"]').append(jQuery('#tpl-errors-deleted-client').template({errors:e.responseJSON.errors}));
+            $('div[role="alert-box"]').append(jQuery('#tpl-errors_deleted_client').template({errors:e.responseJSON.errors}));
             $("#deleteClient").modal('hide');
         });
     });

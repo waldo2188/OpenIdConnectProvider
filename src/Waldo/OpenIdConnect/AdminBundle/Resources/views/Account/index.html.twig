@@ -55,13 +55,13 @@ hasNo: false } %}
     }}
     
 {% include "WaldoOpenIdConnectAdminBundle:Bootstrap:alert.js.twig" with {
-id:"alert-disabled-account", alert: "danger", content: "label.you_can_not__action__this_account"|trans } %}
+id:"alert_disabled_account", alert: "danger", content: "label.you_can_not__action__this_account"|trans } %}
 {% include "WaldoOpenIdConnectAdminBundle:Bootstrap:alert.js.twig" with {
-id:"success-disabled-account", alert: "success", content: "label.this_account_has_been__action__"|trans } %}
+id:"success_disabled_account", alert: "success", content: "label.this_account_has_been__action__"|trans } %}
 {% include "WaldoOpenIdConnectAdminBundle:Bootstrap:alert.js.twig" with {
-id:"email-send", alert: "success", content: "label.the_email_for__action__hasbeen_well_sendt_to_user"|trans } %}
+id:"email_send", alert: "success", content: "label.the_email_for__action__hasbeen_well_sendt_to_user"|trans } %}
 {% include "WaldoOpenIdConnectAdminBundle:Bootstrap:alert.js.twig" with {
-id:"email-send-errors", alert: "danger", content: "__errors__"} %}
+id:"email_send_errors", alert: "danger", content: "__errors__"} %}
     
 <script type="text/javascript">
 $(document).ready(function(){
@@ -74,11 +74,11 @@ $(document).ready(function(){
             $.post('{{ path("oicp_admin_account_enabled") }}', {account:$(event.currentTarget).data('identifier')})
             .done(function() {
                $('#dta-account').dataTable().fnDraw();
-               $('div[role="alert-box"]').append($('#tpl-success-disabled-account').template({type:'{% trans %}label.enabled{% endtrans %}'}));
+               $('div[role="alert-box"]').append($('#tpl-success_disabled_account').template({type:'{% trans %}label.enabled{% endtrans %}'}));
                $("#disabledAccount").modal('hide');
            })
            .fail(function() {
-               $('div[role="alert-box"]').append($('#tpl-alert-disabled-account').template({type:'{% trans %}label.enabled{% endtrans %}'}));
+               $('div[role="alert-box"]').append($('#tpl-alert_disabled_account').template({type:'{% trans %}label.enabled{% endtrans %}'}));
                $("#disabledAccount").modal('hide');
            });
         }
@@ -90,13 +90,13 @@ $(document).ready(function(){
         $.post('{{ path("oicp_admin_account_disabled") }}', {account:$("#disabledAccount").data('identifier')})
          .done(function() {
             $('#dta-account').dataTable().fnDraw();
-            $('div[role="alert-box"]').append($('#tpl-success-disabled-account').template({type:'{% trans %}label.disabled{% endtrans %}'}));
+            $('div[role="alert-box"]').append($('#tpl-success_disabled_account').template({type:'{% trans %}label.disabled{% endtrans %}'}));
             $("#disabledAccount").modal('hide');
 
         })
         .fail(function() {
 
-            $('div[role="alert-box"]').append(jQuery('#tpl-alert-disabled-account').template({type:'{% trans %}label.disabled{% endtrans %}'}));
+            $('div[role="alert-box"]').append(jQuery('#tpl-alert_disabled_account').template({type:'{% trans %}label.disabled{% endtrans %}'}));
             $("#disabledAccount").modal('hide');
         });
     });
@@ -111,11 +111,11 @@ $(document).ready(function(){
         $('div[role="alert-box"]').empty();
         $.post($("#activeAccountEmail").data('link'))
          .done(function() {
-            $('div[role="alert-box"]').append($('#tpl-email-send').template({type: "validating account"}));
+            $('div[role="alert-box"]').append($('#tpl-email_send').template({type: "validating account"}));
             $("#activeAccountEmail").modal('hide');
         })
         .fail(function(event) {
-            $('div[role="alert-box"]').append(jQuery('#tpl-email-send-errors').template({errors:event.responseJSON.errors}));
+            $('div[role="alert-box"]').append(jQuery('#tpl-email_send_errors').template({errors:event.responseJSON.errors}));
             $("#activeAccountEmail").modal('hide');
         });
     });
@@ -129,11 +129,11 @@ $(document).ready(function(){
     $('button[data-modal-action-yes="retrievePasswordEmail"]').on('click', function() {
         $.post($("#retrievePasswordEmail").data('link'))
          .done(function() {
-            $('div[role="alert-box"]').append($('#tpl-email-send').template({type: "retrieving password"}));
+            $('div[role="alert-box"]').append($('#tpl-email_send').template({type: "retrieving password"}));
             $("#retrievePasswordEmail").modal('hide');
         })
         .fail(function(event) {
-            $('div[role="alert-box"]').append(jQuery('#tpl-email-send-errors').template({errors:event.responseJSON.errors}));
+            $('div[role="alert-box"]').append(jQuery('#tpl-email_send_errors').template({errors:event.responseJSON.errors}));
             $("#retrievePasswordEmail").modal('hide');
         });
     });
