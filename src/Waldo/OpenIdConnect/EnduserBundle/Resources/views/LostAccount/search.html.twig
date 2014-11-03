@@ -12,10 +12,12 @@
             </div>
         {% endif %}    
 
-        {{ form_start(form) }}
+        <form  name="oic_lost_account" method="post" action="{{ path('oicp_lost_account_search') }}" role="form">
         {{ form_row(form.username) }}
         {{ form_row(form.search) }}
         {{ form_row(form.cancel) }}
-        {{ form_end(form) }}
+        {{ form_widget(form._token) }}
+        {{ form_errors(form) }}
+        </form>
     </div>
 {% endblock bodyContent %}
