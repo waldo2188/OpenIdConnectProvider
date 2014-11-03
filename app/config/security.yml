@@ -79,3 +79,4 @@ waldo_oic_ldap:
             user_attribute: uid
             user_id: username
             roles: [ROLE_USERXXXX]
+            
