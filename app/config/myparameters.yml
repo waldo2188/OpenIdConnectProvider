@@ -1,0 +1,19 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: oic-p
+    database_user: root
+    database_password: laureline
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: ThisTokenIsNotSoSecretChangeIt
+    debug_toolbar: true
+    debug_redirects: false
+    use_assetic_controller: true
+    issuer: http://172.16.15.218/OIC-P/web/app_dev.php
+    ldap_host: 172.16.129.9
