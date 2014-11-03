@@ -1,9 +1,9 @@
 {% block registration_confirmation_object %}{% trans %}subject.welcome_to_OIC{% endtrans %}{% endblock %}
-{% block registration_confirmation_body %}{% trans with {'%link%': link} %}object.welcome_to_OIC{% endtrans %}{% endblock %}
+{% block registration_confirmation_body %}{% trans with {'%link%': link, '%token_time_validity%':tokenTimeValidity} %}object.welcome_to_OIC{% endtrans %}{% endblock %}
 
 {% block email_verification_object %}{% trans %}subject.you_have_change_your_email{% endtrans %}{% endblock %}
 {% block email_verification_body %}{% trans with {'%link%': link} %}object.you_have_change_your_email{% endtrans %}{% endblock %}
 
 {% block lost_account_object %}{% trans %}subject.someone_requested_a_new_password_for_your_account{% endtrans %}{% endblock %}
-{% block lost_account_body %}{% trans with {'%link%': link} %}object.someone_requested_a_new_password_for_your_account{% endtrans %}{% endblock %}
+{% block lost_account_body %}{% trans with {'%link%': link, '%token_time_validity%':tokenTimeValidity} %}object.someone_requested_a_new_password_for_your_account{% endtrans %}{% endblock %}
 

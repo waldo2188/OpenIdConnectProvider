@@ -36,16 +36,25 @@ class MailingService
     public function __construct($config, Twig_Environment $templating, Swift_Mailer $mailer, Logger $logger)
     {
         $this->config = $config;
-        
-        //TODO add config resolver
-        $this->config['template'] = "WaldoOpenIdConnectMailingBundle";
-        $this->config['from'] = array("email" => "no-reply@exemple.com", "name" => "OIC Provider");
-        
+                
         $this->templating = $templating;
         $this->mailer = $mailer;
         $this->logger = $logger;
+        
+        $this->init();
     }
-
+    
+    public function init()
+    {
+        $this->config['template'] = "WaldoOpenIdConnectMailingBundle";
+        $this->config['from'] = array("email" => "no-reply@exemple.com", "name" => "OIC Provider");
+    }
+    
+    public function setTemplateBlock($template)
+    {
+        $this->config['template'] = $template;
+    }
+    
     /**
      * Envoie de mail simple
      *
@@ -113,6 +122,9 @@ class MailingService
 
             $numSent += $mailerForSend->send($message, $failedRecipients);
         }
+        
+        $this->init();
+        
         return $numSent;
     }
 
@@ -139,5 +151,4 @@ class MailingService
         $data['body'] = strip_tags($data['body']);
         return $data;
     }
-
 }

@@ -65,59 +65,6 @@ class AccountActionsService
     }
     
     /**
-     * send an email to the end user to provide him the opportunity to regenerate password
-     * 
-     * @param string $username Username or Email
-     */
-    public function handleLostPassword($username)
-    {
-        /* @var $account Account */
-        $account = $this->em->getRepository("WaldoOpenIdConnectModelBundle:Account")
-                ->findByEmailOrUsername($username);
-        
-        if($account === null) {
-            return false;
-        }
-        
-        $this->sendMailWithToken(
-                $account,
-                "oicp_lost_account_change_password",
-                AccountAction::ACTION_ACCOUNT_LOST,
-                "lost_account"
-                );
-        
-        return true;
-    }
-    
-    /**
-     * Check if the token is a valid one
-     * 
-     * @param string $token
-     * @return false|Account
-     */
-    public function isValidLostPasswordToken($token)
-    {
-        /* @var $accountAction AccountAction */
-        $accountAction = $this->em->getRepository("WaldoOpenIdConnectModelBundle:AccountAction")
-                ->findOneBy(array('token' => $token, 'type' => AccountAction::ACTION_ACCOUNT_LOST));
-        
-        if($accountAction === null)
-        {
-            return false;
-        }
-
-        $accountAction->getIssuedAt()->modify("+1 hour");
-        
-        $isValid = false;
-        
-        if($accountAction->getIssuedAt() > new \DateTime('now')) {
-            $isValid = $accountAction;
-        }
-        
-        return $isValid;    
-    }
-    
-    /**
      * Handle account after modification.
      * 
      * @param \Waldo\OpenIdConnect\ModelBundle\Entity\Account $account
@@ -174,13 +121,15 @@ class AccountActionsService
                 ->setType($actionType)
                 ->setAccount($account)
                 ->setToken($token)
+                ->setIssuedAt(new \DateTime('now'))
                 ->setExtendedData($extendedData);
         
         $this->em->persist($accountAction);
         $this->em->flush();
         
         $mailParams = new MailParameters();
-        $mailParams->addBodyParameters("link", $link);
+        $mailParams->addBodyParameters("link", $link)
+                ->addBodyParameters('tokenTimeValidity', AccountAction::TOKEN_VALIDITY);
         
         $this->mailingService->sendEmail(
                 array($account->getEmail()),

@@ -8,6 +8,7 @@
     <parameters>
         
         <parameter key="waldo_oic_p.account_actions.class">Waldo\OpenIdConnect\EnduserBundle\Services\AccountActionsService</parameter>
+        <parameter key="waldo_oic_p.lostpassword.class">Waldo\OpenIdConnect\EnduserBundle\Services\LostPasswordService</parameter>
         
         <parameter key="oic_enduser.menu_builder.class">Waldo\OpenIdConnect\EnduserBundle\Menu\Builder</parameter>
 
@@ -20,6 +21,9 @@
             <argument type="service" id="security.http_utils" />
             <argument type="service" id="waldo_oic.mailing" />
             <argument type="service" id="logger" on-invalid="null" />
+        </service>
+        
+        <service id="oicp.lostpassword" class="%waldo_oic_p.lostpassword.class%" parent="waldo_oic_p.account_actions">
         </service>
         
         <service id="oic_enduser.menu_builder" class="%oic_enduser.menu_builder.class%">

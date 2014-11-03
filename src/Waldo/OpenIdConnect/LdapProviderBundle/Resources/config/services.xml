@@ -15,6 +15,8 @@
         <parameter key="waldo_oic_ldap.checker.unique_username.class">Waldo\OpenIdConnect\LdapProviderBundle\Validator\Checker\UniqueUsernameValidator</parameter>
         
         <parameter key="waldo_oic_ldap.user_manager.class">Waldo\OpenIdConnect\LdapProviderBundle\Manager\UserManager</parameter>
+        
+        <parameter key="waldo_oic_ldap.lost_password.class">Waldo\OpenIdConnect\LdapProviderBundle\Services\LostPasswordService</parameter>
     </parameters>
 
     <services>
@@ -75,6 +77,12 @@
         <service id="waldo_oic_ldap.checker.unique_username" class="%waldo_oic_ldap.checker.unique_username.class%">
             <argument type="service" id="waldo_oic_ldap.ldap_manager" />
             <tag name="waldo_oic_model.checker.unique_username" />
+        </service>
+        
+        <service id="waldo_oic_ldap.lost_password" class="%waldo_oic_ldap.lost_password.class%">
+            <argument type="service" id="waldo_oic_ldap.ldap_manager" />
+            <argument type="service" id="waldo_oic.mailing" />
+            <tag name="enduser.lostpassword" />
         </service>
         
     </services>

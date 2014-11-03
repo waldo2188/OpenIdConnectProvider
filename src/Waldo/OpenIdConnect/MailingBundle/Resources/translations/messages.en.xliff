@@ -23,7 +23,7 @@ Thanks for signing up.<br />
 To complete your registration, you must use the link below to verify your account :<br />
 <a href="%link%">%link%</a><br />
 <br />
-This link is valid for 1 hour. Beyond this time, you need to recreate an account.
+This link is valid for %token_time_validity% hour(s). Beyond this time, you need to recreate an account.
 ]]></target>
         </trans-unit>
 	<trans-unit id="5">
@@ -35,6 +35,8 @@ This link is valid for 1 hour. Beyond this time, you need to recreate an account
                 <target><![CDATA[Someone recently asked to reset your password.<br />
 Use the link below to reset your password : <br />
 <a href="%link%">%link%</a><br />
+<br />
+This link is valid for %token_time_validity% hour(s). Beyond this time, you need to recreate an account.
 <br />
 <strong>You did not ask for this change ?</strong><br />
 <strong>Please forget this email. Your account is safe !</strong>

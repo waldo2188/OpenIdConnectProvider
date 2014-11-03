@@ -33,7 +33,7 @@ class LostAccountController extends Controller
                 }
                 
                 if($form->get('username')->getData() !== null) {
-                    $isFound = $this->get('waldo_oic_p.account_actions')->handleLostPassword($form->get('username')->getData());
+                    $isFound = $this->get('oicp.lostpassword')->handleLostPassword($form->get('username')->getData());
                 
                     if($isFound === true) {
                         return $this->redirect($this->generateUrl("oicp_lost_account_email_sent"));
@@ -66,7 +66,7 @@ class LostAccountController extends Controller
      */
     public function changePasswordAction(Request $request, $token)
     {
-        $accountAction = $this->get("waldo_oic_p.account_actions")->isValidLostPasswordToken($token);
+        $accountAction = $this->get("oicp.lostpassword")->isValidLostPasswordToken($token);
         
         $account = $accountAction ? $accountAction->getAccount() : null;
         
