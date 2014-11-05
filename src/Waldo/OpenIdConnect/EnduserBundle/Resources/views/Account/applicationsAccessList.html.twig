@@ -24,6 +24,17 @@
     {% endfor %}
 {% endmacro %}
 
+{% block modals %}
+{% include "WaldoOpenIdConnectEnduserBundle:Bootstrap:modal.html.twig" with {
+id: "modal_revoke", 
+title: "label.are_you_sure_you_want_to_revoke_authorization", 
+body:"label.are_you_sure_you_want_to_revoke_authorization_explanation",
+hasYes: false,
+hasNo: false,
+hasCustomDanger: true,
+labelForCustomDanger: "label.i_understant_revoke_authorization" }
+%}
+{% endblock modals %}
 
 {% block accountContent %}
 
@@ -31,10 +42,14 @@
     
     <p>{% trans %}label.you_have_granted_the_following_applications_to_access_to_your_account_informations{% endtrans %}</p>
 
+    <div role="alert-box"></div>
+    
     <ul class="token-list">
         {% for token in tokenList %}
-            <li>
-                {{ _self.clientName(token.client) }} — <span class="scope">{{ _self.scopes(token.scope) }}</span> <span class="update-on pull-right">{% trans %}label.Last_used_on{% endtrans %} {{ token.issuedAt|date() }}</span>
+            <li class="clearfix" data-rel="{{ token.account.id }}-{{ token.client.id }}">
+                <div class="pull-right button-group"><button type="button" class="btn btn-sm btn-danger" data-action-revoke="{{ token.account.id }}-{{ token.client.id }}">{% trans %}label.revoke{% endtrans %}</button></div>
+                <div class="update-on pull-right">{% trans %}label.Last_used_on{% endtrans %} {{ token.issuedAt|date() }}</div>
+                {{ _self.clientName(token.client) }} — <span class="scope">{{ _self.scopes(token.scope) }}</span>
             </li>
         {% else %}
             <li>{% trans %}label.Nothing_for_the_moment{% endtrans %}</li>
@@ -45,9 +60,40 @@
 
 {% block javascripts %}
     {{ parent() }}
-<script type="text/javascript">   
+    
+{% include "WaldoOpenIdConnectEnduserBundle:Bootstrap:alert.js.twig" with {
+id:"alert_revoke_fail", alert: "danger", content: "label.an_error_has_occurred_please_try_later"|trans } %}
+{% include "WaldoOpenIdConnectEnduserBundle:Bootstrap:alert.js.twig" with {
+id:"alert_revoke_ok", alert: "success", content: "label.this_application_has_well_been_revoked"|trans } %}
+
+<script type="text/javascript">
 $(document).ready(function(){
     $('ul.token-list li a[data-toggle="tooltip"]').tooltip({placement:'bottom'});
+    
+    
+    $('ul[class="token-list"]').on('click', 'button[data-action-revoke]',function(event) {
+        $("#modal_revoke").data('identifier', $(event.currentTarget).data('action-revoke'));        
+        $("#modal_revoke").modal('show');
+    });
+    
+    $('button[data-modal-action-danger="modal_revoke"]').on('click', function() {
+        
+       var query = $("#modal_revoke").data('identifier');
+        
+       $('div[role="alert-box"]').empty();
+
+       $.post('{{ path("oicp_account_revoke_authorization", {account: null, client: null}) }}/' + query)
+         .done(function() {
+            $('li[data-rel="' + query + '"]').remove()
+            $('div[role="alert-box"]').append(jQuery('#tpl-alert_revoke_ok').template());
+            $("#modal_revoke").modal('hide');
+        })
+        .fail(function() {
+            $('div[role="alert-box"]').append(jQuery('#tpl-alert_revoke_fail').template());
+            $("#modal_revoke").modal('hide');
+        });
+        
+    });
 });
 </script>
 {% endblock %}

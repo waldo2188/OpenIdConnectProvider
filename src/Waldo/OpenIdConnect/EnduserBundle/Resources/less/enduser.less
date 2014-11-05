@@ -34,8 +34,21 @@ div.enduser-account-page {
         margin: 0px;
         
         li {
+
+            &:before {
+                content: "";
+                display: table;
+            }
+
+            .clearfix:after {
+                clear: both;
+                content: "";
+                display: table;
+            }
+
             padding: 0.3em 0.2em;
             border-bottom: 1px solid #D7E2EA;
+            line-height: 32px;
             
             &:first-child {
                 border-top: 1px solid #D7E2EA;
@@ -59,3 +72,20 @@ div.enduser-account-page {
   color: red;
 }
 
+
+.button-group {
+    &:before {
+        content: "";
+        display: table;
+    }
+
+    &:after {
+        clear: both;
+        content: "";
+        display: table;
+    }
+
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0 0 .5em;
+}

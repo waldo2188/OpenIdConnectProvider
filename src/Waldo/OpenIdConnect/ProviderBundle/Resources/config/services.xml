@@ -34,6 +34,8 @@
         <parameter key="waldo_oic_p.failure_handler.auth.class">Waldo\OpenIdConnect\ProviderBundle\Handler\AuthenticationFailureHandler</parameter>
         <parameter key="waldo_oic_p.success_handler.logout.class">Waldo\OpenIdConnect\ProviderBundle\Handler\LogoutSuccessHandler</parameter>
         
+        <parameter key="waldo_oic_p.revoke_authorization.class">Waldo\OpenIdConnect\ProviderBundle\Services\RevokeAuthorization</parameter>
+                
     </parameters>
 
     <services>
@@ -107,7 +109,12 @@
             <argument type="service" id="security.http_utils" />
             <argument>/</argument>
         </service>
-                
+        
+        <service id="waldo_oic_p.revoke_authorization" class="%waldo_oic_p.revoke_authorization.class%">
+            <argument type="service" id="security.context" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+        </service> 
+        
     </services>
     
 </container>

@@ -4,10 +4,16 @@ namespace Waldo\OpenIdConnect\EnduserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Waldo\OpenIdConnect\EnduserBundle\Form\Type\PasswordFormType;
 use Waldo\OpenIdConnect\EnduserBundle\Form\Type\AccountFormType;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Account;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Client;
 
 /**
  * @Route("/account", name="oicp_account")
@@ -53,10 +59,9 @@ class AccountController extends Controller
             }
         }
 
-        return $this->render("WaldoOpenIdConnectEnduserBundle:Account:changePassword.html.twig",
-                array(
+        return $this->render("WaldoOpenIdConnectEnduserBundle:Account:changePassword.html.twig", array(
                     'form' => $form->createView()
-                ));
+        ));
     }
 
     /**
@@ -93,10 +98,9 @@ class AccountController extends Controller
             return $this->redirect($this->generateUrl("oicp_account_edit_profile"));
         }
 
-        return $this->render("WaldoOpenIdConnectEnduserBundle:Account:editProfile.html.twig", 
-                array(
+        return $this->render("WaldoOpenIdConnectEnduserBundle:Account:editProfile.html.twig", array(
                     'form' => $form->createView())
-                );
+        );
     }
 
     /**
@@ -110,10 +114,28 @@ class AccountController extends Controller
         /* @var $account \Waldo\OpenIdConnect\ModelBundle\Entity\Account */
         $account = $this->get('security.context')->getToken()->getUser();
 
-        return $this->render("WaldoOpenIdConnectEnduserBundle:Account:applicationsAccessList.html.twig", 
-                array(
+        return $this->render("WaldoOpenIdConnectEnduserBundle:Account:applicationsAccessList.html.twig", array(
                     'tokenList' => $account->getTokenList())
-                );
+        );
+    }
+
+    /**
+     * @Route("/revoke-authorization/{account}-{client}",
+     *  name="oicp_account_revoke_authorization",
+     *  defaults={"account":null, "client":null})
+     * @Method({"POST"})
+     */
+    public function revokeAutorizationAction(Account $account, Client $client)
+    {
+        try {
+            $this->get('waldo_oic_p.revoke_authorization')->revoke($account, $client);
+        } catch (AccessDeniedException $e) {
+            return new JsonResponse($e->getMessage(), Response::HTTP_UNAUTHORIZED);
+        } catch (\Exception $e) {
+            return new JsonResponse($e->getMessage(), Response::HTTP_BAD_REQUEST);
+        }
+
+        return new JsonResponse("ok");
     }
 
 }

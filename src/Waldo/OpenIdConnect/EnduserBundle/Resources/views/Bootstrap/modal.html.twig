@@ -1,0 +1,28 @@
+
+<div class="modal fade" id="{{ id|default('someModal') }}" tabindex="-1" role="dialog" aria-labelledby="{{ title|trans }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans %}label.Close{% endtrans %}</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{ title|trans }}</h4>
+            </div>
+            <div class="modal-body">
+                {{ body|trans }}
+            </div>
+            <div class="modal-footer">
+                {% if hasCustomDanger|default(false) == true %}
+                    <button type="button" data-modal-action-danger="{{ id|default('someModal') }}" class="btn btn-danger">{{ labelForCustomDanger|trans }}</button>
+                {% endif %}
+                {% if hasYes is not defined or hasYes == true %}
+                    <button type="button" data-modal-action-yes="{{ id|default('someModal') }}" class="btn btn-primary">{% trans %}label.Yes{% endtrans %}</button>
+                {% endif %}
+                {% if hasNo is not defined or hasNo == true %}
+                    <button type="button" data-modal-action-no="{{ id|default('someModal') }}" class="btn btn-primary">{% trans %}label.No{% endtrans %}</button>
+                {% endif %}
+                {% if hasCancel is not defined or hasCancel == true %}
+                    <button type="button" data-modal-action-cancel="{{ id|default('someModal') }}" class="btn btn-default" data-dismiss="modal">{% trans %}label.Cancel{% endtrans %}</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

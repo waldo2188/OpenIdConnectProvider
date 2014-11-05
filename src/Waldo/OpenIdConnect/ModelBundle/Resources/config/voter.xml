@@ -8,12 +8,17 @@
     <parameters>
                 
         <parameter key="waldo_oic_model.voter.account.class">Waldo\OpenIdConnect\ModelBundle\Security\Authorization\Voter\AccountVoter</parameter>
+        <parameter key="waldo_oic_model.voter.token.class">Waldo\OpenIdConnect\ModelBundle\Security\Authorization\Voter\TokenVoter</parameter>
         
     </parameters>
 
     <services>
         
         <service id="waldo_oic_model.voter.account" class="%waldo_oic_model.voter.account.class%" public="false">
+            <tag name="security.voter" />
+        </service>
+        
+        <service id="waldo_oic_model.voter.token" class="%waldo_oic_model.voter.token.class%" public="false">
             <tag name="security.voter" />
         </service>
         

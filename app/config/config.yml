@@ -91,13 +91,13 @@ assetic:
             inputs:
                 - %kernel.root_dir%/../vendor/jquery/jquery/jquery-1.11.1.js
         other_js:
-            inputs: ~                
+            inputs: 
+                - %kernel.root_dir%/Resources/public/js/templating.js
         admin_js:
             inputs:
                 - %kernel.root_dir%/../vendor/almasaeed2010/AdminLTE/js/AdminLTE/app.js
                 - %kernel.root_dir%/../web/bundles/datatable/js/jquery.dataTables.js
                 - %kernel.root_dir%/../vendor/DataTables/Plugins/integration/bootstrap/3/dataTables.bootstrap.js
-                - @WaldoOpenIdConnectAdminBundle/Resources/js/templating.js
 
 braincrafted_bootstrap:
     less_filter: less

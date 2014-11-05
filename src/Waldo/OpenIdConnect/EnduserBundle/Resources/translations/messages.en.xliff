@@ -193,6 +193,30 @@
                 <source>label.Other</source>
                 <target>Other</target>
             </trans-unit>
+            <trans-unit id="48">
+                <source>label.revoke</source>
+                <target>Revoke</target>
+            </trans-unit>
+            <trans-unit id="49">
+                <source>label.are_you_sure_you_want_to_revoke_authorization</source>
+                <target>Are you sure you want to revoke authorization?</target>
+            </trans-unit>
+            <trans-unit id="50">
+                <source>label.are_you_sure_you_want_to_revoke_authorization_explanation</source>
+                <target>You are about to revoke access to this application to your account.</target>
+            </trans-unit>
+            <trans-unit id="51">
+                <source>label.i_understant_revoke_authorization</source>
+                <target>I understand, revoke access</target>
+            </trans-unit>
+            <trans-unit id="52">
+                <source>label.an_error_has_occurred_please_try_later</source>
+                <target>An error has occurred, please try later</target>
+            </trans-unit>
+            <trans-unit id="53">
+                <source>label.this_application_has_well_been_revoked</source>
+                <target>This application has well been revoked</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

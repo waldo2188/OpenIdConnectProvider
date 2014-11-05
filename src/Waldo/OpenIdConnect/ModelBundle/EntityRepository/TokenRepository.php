@@ -4,6 +4,7 @@ namespace Waldo\OpenIdConnect\ModelBundle\EntityRepository;
 
 use Waldo\OpenIdConnect\ModelBundle\Entity\Token;
 use Waldo\OpenIdConnect\ModelBundle\Entity\Client;
+use Waldo\OpenIdConnect\ModelBundle\Entity\Account;
 use Doctrine\ORM\EntityRepository;
 
 class TokenRepository extends EntityRepository
@@ -100,5 +101,25 @@ class TokenRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
     
-
+    /**
+     * 
+     * @param Client $client
+     * @param Account $account
+     * @return Token
+     */
+    public function getTokenByClientAndAccount(Client $client, Account $account)
+    {
+        $qb = $this->createQueryBuilder("Token");
+            
+        $qb->select("Token")
+                ->where($qb->expr()->andX(
+                        $qb->expr()->eq("Token.client", ":client"),
+                        $qb->expr()->eq("Token.account", ":account")
+                        ))
+                ->setParameter("client", $client)
+                ->setParameter("account", $account)
+                ;
+        
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 }
