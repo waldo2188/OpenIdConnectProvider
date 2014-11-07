@@ -41,7 +41,6 @@ class ClientRelyingParty extends ContainerAware implements FixtureInterface
                 ->setRedirectUris(
                         array(
                             'http://localhost/OIC-RP/web/app_dev.php/login_check',
-                            'http://localhost/OpenIdConnectRelyingParty/web/app_dev.php/login_check',
                             sprintf('http://%s/OIC-RP/web/app_dev.php/login_check', $hostsipaddress)
                             )
                         )
@@ -49,10 +48,6 @@ class ClientRelyingParty extends ContainerAware implements FixtureInterface
                 ->setApplicationType("web")
                 ->setUserinfoEncryptedResponseAlg("RS256")
                 ->setIdTokenEncryptedResponseAlg("RS512")
-                ->setTokenEndpointAuthSigningAlg("RS256")
-                ->setIdTokenSignedResponseAlg("RS256")
-                ->setUserinfoSignedResponseAlg("RS256")
-                ->setRequestObjectSigningAlg("RS256")
                 ->setLogoUri("http://www.gravatar.com/avatar/9529e3f30dbf81d584eed66b2183cc9d?s=128")
                 ->setClientUri("https://github.com/waldo2188")
                 ->setScope(array(Account::SCOPE_PROFILE, Account::SCOPE_PHONE, Account::SCOPE_EMAIL, Account::SCOPE_ADDRESS))

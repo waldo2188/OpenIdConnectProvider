@@ -29,6 +29,8 @@ Userinfo endpoint
 For retrieving the enduser's info, the access/refresh token must be set in the 
 header as Authorization's parameter.
 
+The Apache2's `mod_rewrite` MUST be active !
+
 ```http
 Authorization: Bearer Nhs-Xzf01s
 ```
