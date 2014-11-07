@@ -1,7 +1,7 @@
 
 Relying Party
 -------------
-One of the Reliyin Party mage for this OpenID Connect provider is 
+One of the Reliyin Party who work for this OpenID Connect provider is 
 (OpenID Connect Relying Party Bundle)[https://github.com/waldo2188/OpenIdConnectRelyingPartyBundle]
 
 URIs
