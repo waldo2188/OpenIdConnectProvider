@@ -4,7 +4,7 @@
         <body>
             <trans-unit id="1">
                 <source>label.toggle_navigation</source>
-                <target>Toggle navigation</target>
+                <target>Toggle menu</target>
             </trans-unit>
             <trans-unit id="2">
                 <source>label.Dear_username</source>
@@ -16,7 +16,7 @@
             </trans-unit>
             <trans-unit id="4">
                 <source>label.un_switch</source>
-                <target>Un switch</target>
+                <target>Switch back</target>
             </trans-unit>
             <trans-unit id="5">
                 <source>label.logout</source>

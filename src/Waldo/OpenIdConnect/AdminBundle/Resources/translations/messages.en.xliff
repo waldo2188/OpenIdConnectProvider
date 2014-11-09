@@ -16,11 +16,11 @@
             </trans-unit>
             <trans-unit id="4">
                 <source>label.are_you_sure_you_want_to_send_the_email_for_validating_account</source>
-                <target>Are you sure you want to send the email for validating account ?</target>
+                <target>Are you sure you want to send the account validation email ?</target>
             </trans-unit>
             <trans-unit id="5">
                 <source>label.are_you_sure_you_want_to_send_the_email_for_retrieving_passord</source>
-                <target>Are you sure you want to send the email for retrieving passord ?</target>
+                <target>Are you sure you want to send the password retrieval email ?</target>
             </trans-unit>
             <trans-unit id="6">
                 <source>tilte.enduser_account</source>
@@ -28,15 +28,15 @@
             </trans-unit>
             <trans-unit id="7">
                 <source>label.you_can_not__action__this_account</source>
-                <target>You can not __type__ this account. Maybe it's your ?</target>
+                <target>You can not __type__ this account. Maybe it's yours ?</target>
             </trans-unit>
             <trans-unit id="8">
                 <source>label.this_account_has_been__action__</source>
                 <target>This account has been __type__</target>
             </trans-unit>
             <trans-unit id="9">
-                <source>label.the_email_for__action__hasbeen_well_sendt_to_user</source>
-                <target>The email for __type__ has been well send to user</target>
+                <source>label.the_email_for__action__has_been_well_sent_to_user</source>
+                <target>The email for __type__ has been well send to the user</target>
             </trans-unit>
             <trans-unit id="10">
                 <source>label.enabled</source>
@@ -144,11 +144,11 @@
             </trans-unit>
             <trans-unit id="36">
                 <source>label.Locale</source>
-                <target>Locale</target>
+                <target>Language</target>
             </trans-unit>
             <trans-unit id="37">
                 <source>label.Telephone_number</source>
-                <target>Telephone number</target>
+                <target>Phone number</target>
             </trans-unit>
             <trans-unit id="38">
                 <source>label.Address</source>
@@ -156,7 +156,7 @@
             </trans-unit>
             <trans-unit id="39">
                 <source>label.Full_mailing_address</source>
-                <target>Full mailing address</target>
+                <target>Full postal address</target>
             </trans-unit>
             <trans-unit id="40">
                 <source>label.Full_street_address</source>
@@ -180,11 +180,11 @@
             </trans-unit>
             <trans-unit id="45">
                 <source>label.Applications_list</source>
-                <target>Applications list</target>
+                <target>Application list</target>
             </trans-unit>
             <trans-unit id="46">
                 <source>label.the_user_have_granted_the_following_applications_to_access_to_his_account_informations</source>
-                <target>The user have granted the following applications to access to his account informations.</target>
+                <target>The user has granted the following applications to access to his account information.</target>
             </trans-unit>
             <trans-unit id="47">
                 <source>label.Last_used_on</source>
@@ -192,7 +192,7 @@
             </trans-unit>
             <trans-unit id="48">
                 <source>label.Nothing_for_the_moment</source>
-                <target>Nothing for the moment</target>
+                <target>Nothing at the moment</target>
             </trans-unit>
             <trans-unit id="49">
                 <source>label.Close</source>
@@ -212,11 +212,11 @@
             </trans-unit>
             <trans-unit id="53">
                 <source>label.Delete_client_application</source>
-                <target>Delete client application</target>
+                <target>Delete client</target>
             </trans-unit>
             <trans-unit id="54">
                 <source>label.are_you_sure_you_want_to_delete_this_client_application</source>
-                <target>Are you sure you want to delete this client application ?</target>
+                <target>Are you sure you want to delete this client ?</target>
             </trans-unit>
             <trans-unit id="55">
                 <source>title.Client</source>
@@ -228,7 +228,7 @@
             </trans-unit>
             <trans-unit id="57">
                 <source>label.this_client_application_has_been_deleted</source>
-                <target>This client application has been deleted</target>
+                <target>This client has been deleted</target>
             </trans-unit>
             <trans-unit id="58">
                 <source>label.Errors</source>
@@ -236,7 +236,7 @@
             </trans-unit>
             <trans-unit id="59">
                 <source>label.edit_client_application</source>
-                <target>Edit client application</target>
+                <target>Edit client</target>
             </trans-unit>
             <trans-unit id="60">
                 <source>label.Application</source>
@@ -264,7 +264,7 @@
             </trans-unit>
             <trans-unit id="66">
                 <source>label.filter_exemple</source>
-                <target>Filter exemple</target>
+                <target>Filter sample</target>
             </trans-unit>
             <trans-unit id="67">
                 <source>label.separate_the_roles_with_commas</source>
@@ -277,10 +277,6 @@
             <trans-unit id="69">
                 <source>label.application_name</source>
                 <target>Application name</target>
-            </trans-unit>
-            <trans-unit id="70">
-                <source>label.Contacts</source>
-                <target>Contacts</target>
             </trans-unit>
             <trans-unit id="71">
                 <source>label.application_type</source>
@@ -300,11 +296,11 @@
             </trans-unit>
             <trans-unit id="75">
                 <source>label.redirect_URIs</source>
-                <target>Redirect URIs</target>
+                <target>Allowed redirection URIs</target>
             </trans-unit>
             <trans-unit id="76">
                 <source>label.post_logout_redirect_URIs</source>
-                <target>Post logout redirect URIs</target>
+                <target>Post logout redirection URI</target>
             </trans-unit>
             <trans-unit id="77">
                 <source>label.token_endpoint_authentication_method</source>
@@ -324,11 +320,11 @@
             </trans-unit>
             <trans-unit id="81">
                 <source>label.X509_certificat_URI</source>
-                <target>X509 certificat URI</target>
+                <target>X509 certificate URI</target>
             </trans-unit>
             <trans-unit id="82">
                 <source>label.X509_encryption_certificat_URI</source>
-                <target>X509 encryption certificat URI</target>
+                <target>X509 encryption certificate URI</target>
             </trans-unit>
             <trans-unit id="83">
                 <source>label.request_object_signing_algorithm</source>
@@ -356,7 +352,7 @@
             </trans-unit>
             <trans-unit id="90">
                 <source>label.id_token_signined_response_algorithm</source>
-                <target>ID token signined response algorithm</target>
+                <target>ID token signed response algorithm</target>
             </trans-unit>
             <trans-unit id="91">
                 <source>label.id_token_encrypted_response_algorithm</source>
@@ -368,7 +364,7 @@
             </trans-unit>
             <trans-unit id="93">
                 <source>label.default_max_age</source>
-                <target>Default max age</target>
+                <target>Token time to live</target>
             </trans-unit>
             <trans-unit id="94">
                 <source>label.require_authentication_time</source>
@@ -416,7 +412,7 @@
             </trans-unit>
             <trans-unit id="105">
                 <source>label.term_of_service</source>
-                <target>Term of Service</target>
+                <target>Terms of Service</target>
             </trans-unit>
             <trans-unit id="106">
                 <source>label.Policy</source>
@@ -424,7 +420,7 @@
             </trans-unit>
             <trans-unit id="107">
                 <source>label.Client_record</source>
-                <target>Client record</target>
+                <target>Client settings</target>
             </trans-unit>
             <trans-unit id="108">
                 <source>label.Secret</source>
@@ -468,11 +464,11 @@
             </trans-unit>
             <trans-unit id="118">
                 <source>label.send_email_for_validating_account</source>
-                <target>Send email for validating account</target>
+                <target>Send account validation email</target>
             </trans-unit>
             <trans-unit id="119">
                 <source>label.send_email_for_recovering_password</source>
-                <target>Send email for recovering password</target>
+                <target>Send password retrieval email</target>
             </trans-unit>
             <trans-unit id="120">
                 <source>label.Admin</source>

@@ -48,15 +48,15 @@
             </trans-unit>
             <trans-unit id="12">
                 <source>zoneInfo</source>
-                <target>Zone info</target>
+                <target>Time zone</target>
             </trans-unit>
             <trans-unit id="13">
                 <source>locale</source>
-                <target>Locale</target>
+                <target>Language</target>
             </trans-unit>
             <trans-unit id="14">
                 <source>updateAt</source>
-                <target>Update at</target>
+                <target>Last update at</target>
             </trans-unit>
             <trans-unit id="15">
                 <source>email</source>
@@ -64,7 +64,7 @@
             </trans-unit>
             <trans-unit id="16">
                 <source>address</source>
-                <target>Adresse</target>
+                <target>Address</target>
             </trans-unit>
             <trans-unit id="17">
                 <source>phone</source>
@@ -80,7 +80,7 @@
             </trans-unit>
             <trans-unit id="20">
                 <source>error.user_account_is_disabled</source>
-                <target><![CDATA[Maybe your account have not been yet validated by an administrator ?<br />
+                <target><![CDATA[Maybe your account has not been validated yet by an administrator ?<br />
                     Please, wait until you receive a confirmation email.]]>
                 </target>
             </trans-unit>
@@ -106,11 +106,11 @@
             </trans-unit>
             <trans-unit id="26">
                 <source>label.term_of_service_for_application</source>
-                <target>Term of service for %appname%</target>
+                <target>Terms of service for %appname%</target>
             </trans-unit>
             <trans-unit id="27">
                 <source>label.policy_for_application</source>
-                <target>Policy %appname%</target>
+                <target>%appname% policy</target>
             </trans-unit>
             <trans-unit id="28">
                 <source>label.username</source>
@@ -134,11 +134,11 @@
             </trans-unit>
             <trans-unit id="33">
                 <source>useragent.title.scope_approval</source>
-                <target>Scope Approval</target>
+                <target>Scope aproval</target>
             </trans-unit>
             <trans-unit id="34">
                 <source>sub.title.informations_claimed</source>
-                <target>Informations claimed</target>
+                <target>Claimed informations</target>
             </trans-unit>
             <trans-unit id="35">
                 <source>label.account_picture</source>

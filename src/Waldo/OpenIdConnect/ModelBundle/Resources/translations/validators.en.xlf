@@ -8,23 +8,23 @@
             </trans-unit>
             <trans-unit id="2">
                 <source>Your password must have at least %length% character</source>
-                <target>Your password must have at least %length% charactermlml</target>
+                <target>Your password must have at least %length% character(s)</target>
             </trans-unit>
             <trans-unit id="3">
                 <source>Your password must have at least %length% uppercase character</source>
-                <target>Your password must have at least %length% uppercase character</target>
+                <target>Your password must have at least %length% uppercase character(s)</target>
             </trans-unit>
             <trans-unit id="4">
                 <source>Your password must have at least %length% lowercase character</source>
-                <target>Your password must have at least %length% lowercase character</target>
+                <target>Your password must have at least %length% lowercase character(s)</target>
             </trans-unit>
             <trans-unit id="5">
                 <source>Your password must have at least %length% number</source>
-                <target>Your password must have at least %length% number</target>
+                <target>Your password must have at least %length% number(s)</target>
             </trans-unit>
             <trans-unit id="6">
                 <source>Your password must have at least %length% special character</source>
-                <target>Your password must have at least %length% special character</target>
+                <target>Your password must have at least %length% special character(s)</target>
             </trans-unit>
             <trans-unit id="7">
                 <source>Please, don't use your username as password</source>
@@ -34,17 +34,9 @@
                 <source>Please, don't use your username in your password</source>
                 <target>Please, don't use your username in your password</target>
             </trans-unit>
-            <trans-unit id="9">
-                <source>Please, don't use your username as password</source>
-                <target>Please, don't use your username as password</target>
-            </trans-unit>
-            <trans-unit id="10">
-                <source>Please, don't use your username in your password</source>
-                <target>Please, don't use your username in your password</target>
-            </trans-unit>
             <trans-unit id="11">
                 <source>This email is already in use</source>
-                <target>This email is already in use</target>
+                <target>This email is already used in an other account</target>
             </trans-unit>
         </body>
     </file>
