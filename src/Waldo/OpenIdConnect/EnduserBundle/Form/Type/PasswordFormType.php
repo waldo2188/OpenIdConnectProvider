@@ -26,7 +26,7 @@ class PasswordFormType extends AbstractType
                     'required' => true
                 ))
                 
-                ->add('save', 'submit')
+                ->add('save', 'submit', array('label' => "label.Save"))
             ;
         
         if($options['hasOldpassword']) {

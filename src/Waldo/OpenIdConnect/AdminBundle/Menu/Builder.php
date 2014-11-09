@@ -16,13 +16,13 @@ class Builder extends ContainerAware
     public function mainMenu(FactoryInterface $factory, array $options)
     {
         $menu = $factory->createItem('root');
-        $menu->addChild('Account')
+        $menu->addChild('Account', array('label' => "label.Account"))
                 ->setLabelAttribute('icon', 'fa fa-fw fa-users');
         $menu['Account']->addChild('Enduser', array('route' => 'oicp_admin_account_index', 'label' => "label.Enduser"));
         $menu['Account']['Enduser']->addChild('Profile', array('route' => 'oicp_admin_account_profile', 'label' => "label.Profile"))
                         ->setDisplay(false);
         
-        $menu->addChild('Client')
+            $menu->addChild('Client', array('label' => "label.Client"))
                 ->setLabelAttribute('icon', 'fa fa-fw fa-desktop');
         $menu['Client']->addChild('Manage', array('route' => 'oicp_admin_client_index', 'label' => "label.Manage"));
         $menu['Client']['Manage']->addChild('Client record', array('route' => 'oicp_admin_client_record', 'label' => "label.Client_record"))

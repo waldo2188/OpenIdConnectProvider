@@ -27,7 +27,6 @@
             <li><a href="#profile" role="tab" data-toggle="tab">{% trans %}label.Profile{% endtrans %}</a></li>
             <li><a href="#address" role="tab" data-toggle="tab">{% trans %}label.Address{% endtrans %}</a></li>
         </ul>
-
         <div class="tab-content">
             <div class="tab-pane" id="account">
                 {% if app.user.picture %}<img class="pull-right" src="{{ app.user.picture }}" alt="{% trans %}label.account_picture{% endtrans %}" />{% endif %}
@@ -41,7 +40,7 @@
 
 
                     {% if app.user.lastLoginAt %}<dt>{% trans %}label.last_login_at{% endtrans %}</dt>
-                        <dd>{{ app.user.lastLoginAt|date() }}</dd>{% endif %}
+                        <dd>{{ app.user.lastLoginAt|localizeddate('full', 'medium') }}</dd>{% endif %}
                 </dl>
             </div>
 
@@ -75,7 +74,7 @@
                         <dd>{{ app.user.gender }}</dd>{% endif %}
 
                     {% if app.user.birthdate %}<dt>{% trans %}label.Birthdate{% endtrans %}</dt>
-                        <dd>{{ app.user.birthdate|date() }}</dd>{% endif %}
+                        <dd>{{ app.user.birthdate|localizeddate('medium', 'none') }}</dd>{% endif %}
 
                     {% if app.user.zoneInfo %}<dt>{% trans %}label.Time_zone{% endtrans %}</dt>
                         <dd>{{ app.user.zoneInfo }}</dd>{% endif %}

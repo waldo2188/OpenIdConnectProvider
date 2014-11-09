@@ -1,237 +1,225 @@
 <?xml version="1.0"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="1">
                 <source>title.your_account</source>
-                <target>Your account</target>
+                <target>Votre compte</target>
             </trans-unit>
             <trans-unit id="2">
                 <source>label.edit_your_profile</source>
-                <target>Edit your profile</target>
+                <target>Éditer votre profil</target>
             </trans-unit>
             <trans-unit id="3">
                 <source>label.change_password</source>
-                <target>Change password</target>
+                <target>Modifier le mot de passe</target>
             </trans-unit>
             <trans-unit id="4">
                 <source>label.applications_access_list</source>
-                <target>Applications access list</target>
+                <target>Liste des applications autorisé</target>
             </trans-unit>
             <trans-unit id="5">
                 <source>label.Account</source>
-                <target>Account</target>
-            </trans-unit>
-            <trans-unit id="6">
-                <source>label.edit_your_profile</source>
-                <target>Edit your profile</target>
+                <target>Compte</target>
             </trans-unit>
             <trans-unit id="7">
                 <source>label.all_fields_marked_with_the_little_red_stars_are_mandatory</source>
-                <target>All fields marked with the little red stars are mandatory</target>
+                <target>Tout les champs marqué d'une petite étoile rouge sont obligatoires</target>
             </trans-unit>
             <trans-unit id="8">
                 <source>label.Family_name</source>
-                <target>Family name</target>
+                <target>Nom de famille</target>
             </trans-unit>
             <trans-unit id="9">
                 <source>label.Picture</source>
-                <target>Picture</target>
+                <target>Photo</target>
             </trans-unit>
             <trans-unit id="10">
                 <source>label.choose_an_option</source>
-                <target>Choose an option</target>
+                <target>Faite un choix</target>
             </trans-unit>
             <trans-unit id="11">
                 <source>label.Female</source>
-                <target>Female</target>
+                <target>Femme</target>
             </trans-unit>
             <trans-unit id="12">
                 <source>label.Male</source>
-                <target>Male</target>
+                <target>Homme</target>
             </trans-unit>
             <trans-unit id="13">
                 <source>label.Other</source>
-                <target>Other</target>
+                <target>Autre</target>
             </trans-unit>
             <trans-unit id="15">
                 <source>label.create_a_password</source>
-                <target>Create a password</target>
+                <target>Créer un mot de passe</target>
             </trans-unit>
             <trans-unit id="16">
                 <source>label.confirm_your_Password</source>
-                <target>Confirm your Password</target>
+                <target>Confirmer votre mot de passe</target>
             </trans-unit>
             <trans-unit id="17">
                 <source>label.current_password</source>
-                <target>Current password</target>
+                <target>Mot de passe actuel</target>
             </trans-unit>
             <trans-unit id="18">
                 <source>label.email_or_username</source>
-                <target>Email, Username</target>
-            </trans-unit>
-            <trans-unit id="19">
-                <source>label.change_password</source>
-                <target>Change password</target>
+                <target>Email, nom d'utilisateur</target>
             </trans-unit>
             <trans-unit id="20">
                 <source>label.you_have_granted_the_following_applications_to_access_to_your_account_informations</source>
-                <target>You have granted the following applications to access to your account informations.</target>
+                <target>Vous avez donné l'accès aux informations de votre compte aux applications suivante.</target>
             </trans-unit>
             <trans-unit id="21">
                 <source>label.find_your_account</source>
-                <target>Find your account</target>
+                <target>Trouvez votre compte</target>
             </trans-unit>
             <trans-unit id="22">
                 <source>label.sorry_we_can_not_found_your_account_with_the_given_username_or_email</source>
-                <target>Sorry, we can not found your account with the given username or email.</target>
+                <target>Désolé, nous ne trouvons pas votre compte avec les informations saisies.</target>
             </trans-unit>
             <trans-unit id="23">
                 <source>label.password_changed</source>
-                <target>Password changed</target>
+                <target>Mot de passe modifié</target>
             </trans-unit>
             <trans-unit id="24">
                 <source>label.your_password_has_been_changed</source>
-                <target>Your password has been changed</target>
+                <target>Votre mot de passe a bien été modifié</target>
             </trans-unit>
             <trans-unit id="25">
                 <source>label.you_can_now_perform_your_login</source>
-                <target>You can now perform your login.</target>
+                <target>Vous pouvez maitenant vous connecter.</target>
             </trans-unit>
             <trans-unit id="26">
                 <source>label.an_email_was_sent_to_you</source>
-                <target>An email was sent to you !</target>
+                <target>Un email vous a été envoyé !</target>
             </trans-unit>
             <trans-unit id="27">
                 <source>label.Email_sent</source>
-                <target>Email sent</target>
+                <target>Email envoyé</target>
             </trans-unit>
             <trans-unit id="28">
                 <source>label.instruction_for_reset_your_password</source>
-                <target>In your mail box you would find an email with all the instruction for reset your password.</target>
+                <target>Vous trouverez dans votre boite email la procédure pour changer votre mot de passe.</target>
             </trans-unit>
             <trans-unit id="29">
                 <source>label.change_your_password</source>
-                <target>Change your password</target>
+                <target>Modifier votre mot de passe</target>
             </trans-unit>
             <trans-unit id="30">
                 <source>label.link_you_have_followed_is_not_valid</source>
-                <target><![CDATA[Sorry, the link you have followed is not valid.<br />
-                You have maybe waiting to long for following it.]]></target>
+                <target><![CDATA[Désolé, le lien que vous avez suivit n'est pas valid.<br />
+                Vous avez peut-être attendut trop lontemp avant de l'utiliser.]]></target>
             </trans-unit>
             <trans-unit id="31">
                 <source>label.feel_free_to_retry</source>
-                <target>Please, feel free to retry </target>
+                <target>S'il vous plait, veuillez ré-essayer </target>
             </trans-unit>
             <trans-unit id="33">
                 <source>title.registration_done</source>
-                <target>Registration done</target>
+                <target>Enregistrement effectué</target>
             </trans-unit>
             <trans-unit id="34">
                 <source>message.registration_done</source>
-                <target><![CDATA[Your account have been created.<br />
-                You will receive an email with a link for activating your account.<br />
-                Please, remember to check your Spam box.]]></target>
+                <target><![CDATA[Votre compte a bien été créé.<br />
+                Vous allez recevoir un email avec un lien  pour activer votre compte.<br />
+                S'il vous plait, pensez à vérifier votre boite email de Spam.]]></target>
             </trans-unit>
             <trans-unit id="35">
                 <source>label.Register</source>
-                <target>Register</target>
+                <target>Enregistrement</target>
             </trans-unit>
             <trans-unit id="36">
                 <source>label.create_your_account</source>
-                <target>Create your account</target>
+                <target>Créer votre compte</target>
             </trans-unit>
             <trans-unit id="37">
                 <source>label.all_fields_bellow_are_mandatory</source>
-                <target>All fields bellow are mandatory</target>
+                <target>Les champs ci-dessous sont tous obligatoires</target>
             </trans-unit>
             <trans-unit id="38">
                 <source>label.account_validation</source>
-                <target>Account validation</target>
+                <target>Validation du compte</target>
             </trans-unit>
             <trans-unit id="39">
                 <source>label.your_email_is_valid</source>
-                <target>Your email is valid</target>
+                <target>Votre email est valid</target>
             </trans-unit>
             <trans-unit id="40">
                 <source>label.activation_account_instruction</source>
-                <target><![CDATA[An administrator will soon activate your account. 
-                An email will be sent after the validation or revocation of your account.<br/>
-                Please, remember to check your Spam box.]]></target>
+                <target><![CDATA[Un administrateur va bientôt valider votre compte. 
+                Un email vous informera de la validation ou révocation de votre compte.<br/>
+                S'il vous plait, pensez à vérifier votre boite email de Spam.]]></target>
             </trans-unit>
             <trans-unit id="41">
                 <source>label.activation_account_fail_due_to_unknown_link</source>
-                <target><![CDATA[Sorry, the link you have used to validate your account is invalid.<br />
-                Maybe you have waiting too much time to validate your account.
-                Please, try to create another account or feel free to contact an administrator.]]></target>
+                <target><![CDATA[Désolé, le lien que vous avez suivi pour valider votre compte est invalid.<br />
+                Peut-être que vous avez attendu trop lontemps pour activer votre compte.
+                Veuillez, s'il vous plait, re-créer un compte ou contactez un administrateur.]]></target>
             </trans-unit>
             <trans-unit id="42">
                 <source>label.activation_account_success</source>
-                <target><![CDATA[Your email is valid.<br/>
-                Thank you to have proceed to this validation.<br />
-                You can now use the validation email as login.]]></target>
+                <target><![CDATA[Votre email est valid.<br/>
+                Merci d'avoir effectué cette vérification.<br />
+                Vous pouvez maintenant utiliser cet email pour vous connecter.]]></target>
             </trans-unit>
             <trans-unit id="43">
                 <source>label.your_profile_data</source>
-                <target>Your profile data</target>
+                <target>Votre profil</target>
             </trans-unit>
             <trans-unit id="44">
                 <source>label.your_profile_has_been_changed</source>
-                <target>Your profile has been changed</target>
+                <target>Votre profil a bien été modifié</target>
             </trans-unit>
             <trans-unit id="45">
                 <source>label.email_validation_instruction</source>
-                <target>Your new email will be validated once you have used 
-                    the validation link that was sent to the new email address you entered.
-                    Without this action your previous email address will be kept.</target>
+                <target>Votre adresse email sera validé une fois que vous aurrez suivit 
+                    le lien qui y a été envoyé.
+                    Sans cette action, votre adresse email précédente est concervé.</target>
             </trans-unit>
             <trans-unit id="46">
                 <source>label.your_password_has_been_changed</source>
-                <target>Your password has been changed</target>
-            </trans-unit>
-            <trans-unit id="47">
-                <source>label.Other</source>
-                <target>Other</target>
+                <target>Votre mot de passe a été changé</target>
             </trans-unit>
             <trans-unit id="48">
                 <source>label.revoke</source>
-                <target>Revoke</target>
+                <target>Révoquer</target>
             </trans-unit>
             <trans-unit id="49">
                 <source>label.are_you_sure_you_want_to_revoke_authorization</source>
-                <target>Are you sure you want to revoke authorization?</target>
+                <target>Êtes vous sur de vouloir révoquer cette autorisation ?</target>
             </trans-unit>
             <trans-unit id="50">
                 <source>label.are_you_sure_you_want_to_revoke_authorization_explanation</source>
-                <target>You are about to revoke access to this application to your account.</target>
+                <target>Vous êtes sur le point de révoquer l'accès de l'application aux informations de votre compte.</target>
             </trans-unit>
             <trans-unit id="51">
                 <source>label.i_understant_revoke_authorization</source>
-                <target>I understand, revoke access</target>
+                <target>Je comprend et je révoque l'accès</target>
             </trans-unit>
             <trans-unit id="52">
                 <source>label.an_error_has_occurred_please_try_later</source>
-                <target>An error has occurred, please try later</target>
+                <target>Une erreur est survenu, veuillez réésayer plus tard</target>
             </trans-unit>
             <trans-unit id="53">
                 <source>label.this_application_has_well_been_revoked</source>
-                <target>This application has well been revoked</target>
+                <target>Les accès de l'application ont bien été révoqué</target>
             </trans-unit>
             <trans-unit id="54">
                 <source>label.Search</source>
-                <target>Search</target>
+                <target>Rechercher</target>
             </trans-unit>
             <trans-unit id="55">
                 <source>label.Save</source>
-                <target>Save</target>
+                <target>Enregistrer</target>
             </trans-unit>
             <trans-unit id="56">
                 <source>label.logout</source>
-                <target>Logout</target>
+                <target>Déconnexion</target>
             </trans-unit>
             <trans-unit id="57">
                 <source>label.Dear_username</source>
-                <target>Dear</target>
+                <target>Dear %username%</target>
             </trans-unit>
         </body>
     </file>

@@ -21,7 +21,7 @@
 
                     <p><span class="param-label">{% trans %}label.Client_URI{% endtrans %} :</span> <span class="param-value">{{ client.clientUri }}</span></p>
 
-                    <p><span class="param-label">{% trans %}label.Issued_at{% endtrans %} :</span> <span class="param-value">{{ client.clientIdIssuedAt|date() }}</span></p>
+                    <p><span class="param-label">{% trans %}label.Issued_at{% endtrans %} :</span> <span class="param-value">{{ client.clientIdIssuedAt|localizeddate('full', 'medium') }}</span></p>
 
                     {% if client.tosUri %}
                     <p><span class="param-label">{% trans %}label.term_of_service{% endtrans %} :</span> <span class="param-value"><a href="{{ client.tosUri }}">{{ client.tosUri }}</a></span></p>
@@ -61,7 +61,7 @@
                                 <p><span class="param-label">{% trans %}label.Client_secret{% endtrans %} :</span> <span class="param-value">{{ client.clientSecret }}</span></p>
 
                                 {% if client.clientSecretExpiresAt %}
-                                    <p><span class="param-label">{% trans %}label.Client_secret_expires_at{% endtrans %} :</span> <span class="param-value">{{ client.clientSecretExpiresAt|date() }}</span></p>
+                                    <p><span class="param-label">{% trans %}label.Client_secret_expires_at{% endtrans %} :</span> <span class="param-value">{{ client.clientSecretExpiresAt|localizeddate('full', 'medium') }}</span></p>
                                 {% endif %}
 
                             </div>

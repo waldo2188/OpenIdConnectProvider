@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>name</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>givenName</source>
+                <target>Prénom</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>familyName</source>
+                <target>Nom de famille</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>middleName</source>
+                <target>Second prénom</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>nickname</source>
+                <target>Pseudonyme</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>preferedUsername</source>
+                <target>Nom d'utilisateur à afficher</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>profile</source>
+                <target>Profil</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>picture</source>
+                <target>Photo</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>website</source>
+                <target>Site Web</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>gender</source>
+                <target>Genre</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>birthdate</source>
+                <target>Date de naissance</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>zoneInfo</source>
+                <target>Fuseau horraire</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>locale</source>
+                <target>Langue</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>updateAt</source>
+                <target>Dernière mise à jour le </target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>address</source>
+                <target>Adresse</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>phone</source>
+                <target>Téléphone</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>phoneNumber</source>
+                <target>Numéro de téléphone</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>useragent.title.login</source>
+                <target>Login</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>error.user_account_is_disabled</source>
+                <target><![CDATA[Peut-être que votre compte utilisateur n'a pas encore été validé par un administrateur ?<br />
+                    Veuillez patienter jusqu'à la réception d'un email de confirmation.]]>
+                </target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>label.sign_in_with_different_account</source>
+                <target>Se connecter avec un autre compte</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>main.title.welcome_login_page</source>
+                <target>Bienvenu sur la page de connexion d'OIC</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>sub.title.sign_with_your_account_informations</source>
+                <target>Connectez vous avec votre compte OIC</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>label.logo_of_application</source>
+                <target>logo de l'application</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>sub.title.sign_with_your_account_informations_for_client_application</source>
+                <target>L'application %appname% requière votre authentification</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>label.term_of_service_for_application</source>
+                <target>Condition d'utilisation de %appname%</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>label.policy_for_application</source>
+                <target>Politique d'utilisation de %appname%</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>label.username</source>
+                <target>Nom d'utilisateur</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>label.password</source>
+                <target>Mot de passe</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>label.sign_in</source>
+                <target>Connexion</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>label.forgot_your_password</source>
+                <target>Mot de passe oublié ?</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>label.create_an_account</source>
+                <target>Créer un compte</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>useragent.title.scope_approval</source>
+                <target>Acceptation des données</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>sub.title.informations_claimed</source>
+                <target>Informations demandé</target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>label.account_picture</source>
+                <target>Photo du compte</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>label.accept</source>
+                <target>Accepter</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>label.cancel</source>
+                <target>Annuler</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

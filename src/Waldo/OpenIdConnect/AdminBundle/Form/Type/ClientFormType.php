@@ -236,6 +236,7 @@ class ClientFormType extends AbstractType
                     ))
                 
                 ->add('userRolesRulesList', 'bootstrap_collection', array(
+                        'label' => 'label.List_roles_filter',
                         'type' => new UserRolesRulesFormType(),
                         'by_reference' => false,
                         'allow_add' => true,
@@ -246,7 +247,7 @@ class ClientFormType extends AbstractType
                     ))
                 
                 
-                ->add('save', 'submit')
+                ->add('save', 'submit', array('label' => 'label.Save'))
             ;
        
     }

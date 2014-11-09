@@ -105,14 +105,16 @@ class AccountController extends Controller
     {
         $datatable = $this->get('datatable')->setEntity("WaldoOpenIdConnectModelBundle:Account", "Account");
 
+        $translator = $this->get('translator');
+        
         $datatable->setFields(array(
-                    "Enabled" => "Account.enabled",
-                    "Username" => "Account.username",
-                    "Email" => "Account.email",
-                    "Name" => "Account.name",
-                    "Create" => "Account.createAt",
-                    "Update" => "Account.updateAt",
-                    "Actions" => 'Account.id',
+                    $translator->trans("table.Enabled") => "Account.enabled",
+                    $translator->trans("table.Username") => "Account.username",
+                    $translator->trans("table.Email") => "Account.email",
+                    $translator->trans("table.Name") => "Account.name",
+                    $translator->trans("table.Create") => "Account.createAt",
+                    $translator->trans("table.Update") => "Account.updateAt",
+                    $translator->trans("table.Actions") => 'Account.id',
                     "_identifier_" => 'Account.id'
                 ))
                 ->setRenderers(array(

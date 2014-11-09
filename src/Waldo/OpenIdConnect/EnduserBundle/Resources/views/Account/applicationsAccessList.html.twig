@@ -48,7 +48,7 @@ labelForCustomDanger: "label.i_understant_revoke_authorization" }
         {% for token in tokenList %}
             <li class="clearfix" data-rel="{{ token.account.id }}-{{ token.client.id }}">
                 <div class="pull-right button-group"><button type="button" class="btn btn-sm btn-danger" data-action-revoke="{{ token.account.id }}-{{ token.client.id }}">{% trans %}label.revoke{% endtrans %}</button></div>
-                <div class="update-on pull-right">{% trans %}label.Last_used_on{% endtrans %} {{ token.issuedAt|date() }}</div>
+                <div class="update-on pull-right">{% trans %}label.Last_used_on{% endtrans %} {{ token.issuedAt|localizeddate('full', 'medium') }}</div>
                 {{ _self.clientName(token.client) }} — <span class="scope">{{ _self.scopes(token.scope) }}</span>
             </li>
         {% else %}

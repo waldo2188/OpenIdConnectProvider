@@ -101,13 +101,15 @@ class ClientController extends Controller
         /* @var $datatable \Ali\DatatableBundle\Util\Datatable */
         $datatable = $this->get('datatable')->setEntity("WaldoOpenIdConnectModelBundle:Client", "Client");
 
+        $translator = $this->get('translator');
+        
         $datatable->setFields(array(
-                    "Name" => "Client.clientName",
-                    "Client ID" => "Client.clientId",
-                    "Application type" => "Client.applicationType",
-                    "Scope" => "Client.scope",
-                    "Issued At" => "Client.clientIdIssuedAt",                    
-                    "Actions" => 'Client.id',
+                    $translator->trans("label.Name") => "Client.clientName",
+                    $translator->trans("label.Client_ID") => "Client.clientId",
+                    $translator->trans("label.application_type") => "Client.applicationType",
+                    $translator->trans("label.scopes") => "Client.scope",
+                    $translator->trans("label.Issued_at") => "Client.clientIdIssuedAt",                    
+                    $translator->trans("table.Actions") => 'Client.id',
                     "_identifier_" => 'Client.id',
                 ))
                 ->setRenderers(array(

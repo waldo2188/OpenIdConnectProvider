@@ -17,7 +17,7 @@
         <ul class="claims">
             {% for key, info in userinfos %}
                 {% if key != 'picture' and key != 'emailVerified' and key != 'phoneNumberVerified' %}
-                    <li><span class="claim-name">{{ key|trans }} :</span> {% if key == 'updateAt' or key == 'birthdate' %}{{ info|date("m/d/Y") }}{% else %}{{ info }}{% endif %}</li>
+                    <li><span class="claim-name">{{ key|trans }} :</span> {% if key == 'updateAt' or key == 'birthdate' %}{{ info|localizeddate('full', 'none') }}{% else %}{{ info }}{% endif %}</li>
                 {% endif %}
             {% endfor %}
         </ul>

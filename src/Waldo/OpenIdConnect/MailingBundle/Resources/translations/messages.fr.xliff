@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+	<trans-unit id="1">
+        	<source>title.Dear_user</source>
+                <target>Cher utilisateur,</target>
+        </trans-unit>
+	<trans-unit id="2">
+        	<source>label.email.signature</source>
+                <target><![CDATA[Cordialement,
+L'équipe OIC]]></target>
+        </trans-unit>
+	<trans-unit id="3">
+        	<source>subject.welcome_to_OIC</source>
+                <target>Bienvenu sur OIC</target>
+        </trans-unit>
+	<trans-unit id="4">
+        	<source>object.welcome_to_OIC</source>
+                <target><![CDATA[Salutation !<br />
+Merci de vous être enregistré.<br />
+<br />
+Pour finaliser votre enregistrement, veuillez cliquer sur le lien ci-dessous pour valider votre compte :<br />
+<a href="%link%">%link%</a><br />
+<br />
+Ce lien a une durée de validité de %token_time_validity% heure(s). Au dela de ce temps, vous devrez recréer un compte.
+]]></target>
+        </trans-unit>
+	<trans-unit id="5">
+        	<source>subject.someone_requested_a_new_password_for_your_account</source>
+                <target>Vous avez demandé un nouveau mot de passe</target>
+        </trans-unit>
+	<trans-unit id="6">
+        	<source>object.someone_requested_a_new_password_for_your_account</source>
+                <target><![CDATA[Vous avez demandé à réinitialiser votre mot  de passe.<br />
+Veuillez cliquer sur le lien ci-dessous pour réinitialiser votre mot de passe : <br />
+<a href="%link%">%link%</a><br />
+<br />
+Ce lien a une durée de validité de %token_time_validity% heure(s). Au dela de ce temps, vous devrez recommencer la procédure de réinitialisation de mot de passe.
+<br />
+<strong>Si vous n'êtes pas à l'orgine de cette demande,</strong>,<br />
+<strong>veuillez ignorer cet email. Votre compte est en sécurité.</strong>
+]]></target>
+        </trans-unit>
+	<trans-unit id="7">
+        	<source>subject.you_have_change_your_email</source>
+                <target>Vous avez changer votre adresse email</target>
+        </trans-unit>
+	<trans-unit id="8">
+        	<source>object.you_have_change_your_email</source>
+                <target><![CDATA[Salutation !<br />
+Vous avez récement changer votre adresse email.<br />
+<p>Votre adresse email est une chose importante pour nous, car elle vous sert de login.
+<br />
+Veuillez, s'il vous plait cliquer sur le lien ci-dessous pour valider cette adresse email :<br />
+<a href="%link%">%link%</a></p>
+<p>Vous devez absolument suivre ce lien si vous voulez valider cette adresse email.<br />
+Si vous ne le faite pas, l'ancienne adresse email sera concervé.</p>]]>
+</target>
+        </trans-unit>
+	
+        </body>
+    </file>
+</xliff>

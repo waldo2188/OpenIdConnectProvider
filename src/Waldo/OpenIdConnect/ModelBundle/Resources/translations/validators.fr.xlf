@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>label.the_password_fields_must_match</source>
+                <target>Les deux mot de passe doivent correspondre</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>Your password must have at least %length% character</source>
+                <target>Votre mot de passe doit avoir au moins %length% charactèr(s)</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>Your password must have at least %length% uppercase character</source>
+                <target>Votre mot de passe doit avoir au moins %length% charactèr(s) en majuscule</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>Your password must have at least %length% lowercase character</source>
+                <target>Votre mot de passe doit avoir au moins %length% charactèr(s) en minuscule</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>Your password must have at least %length% number</source>
+                <target>Votre mot de passe doit avoir au moins %length% chiffre(s)</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>Your password must have at least %length% special character</source>
+                <target>Votre mot de passe doit avoir au moins %length% charactèr(s) spécial(aux)</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>Please, don't use your username as password</source>
+                <target>S'il vous plait, n'utilisez pas votre nom d'utilisateur comme mot de passe</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>Please, don't use your username in your password</source>
+                <target>S'il vous plait, n'utilisez pas votre nom d'utilisateur dans votre mot de passe</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>This email is already in use</source>
+                <target>Cette adresse email est déjà utilisé par un autre compte</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

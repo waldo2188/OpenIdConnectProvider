@@ -19,15 +19,15 @@ class UserRolesRulesFormType extends AbstractType
     {          
         $builder
                 ->add('expression', 'textarea', array(
-                    'label' => 'Filter',
+                    'label' => 'label.Filter',
                     'required' => true
                     ))
                 ->add('roles', 'text', array(
-                    'label' => 'Roles',
+                    'label' => 'label.Roles',
                     'required' => true
                     ))
                 ->add('enabled', 'checkbox', array(
-                    'label' => 'Enabled',
+                    'label' => 'label.Enabled',
                     'required' => false
                     ))
             ;

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>subject.ldap_lost_password</source>
+                <target>Mot de passe perdu</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>object.ldap_lost_password</source>
+                <target><![CDATA[Désolé, nous ne pouvons pas vous fournir d'interface pour modifier votre mot de passe.<br />
+                S'il vous plait, contacter votre administrateur pour connaître la procédure pour modifier votre mot de passe.]]></target>
+            </trans-unit>
+            
+        </body>
+    </file>
+</xliff>

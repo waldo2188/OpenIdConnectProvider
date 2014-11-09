@@ -37,7 +37,7 @@ class AuthorizationEndpointControllerTest extends WebTestCase
         
         $crawler = $this->client->followRedirect();
 
-        $this->assertEquals(1, $crawler->filter('h3:contains("Informations claimed")')->count());
+        $this->assertEquals(1, $crawler->filter('h3:contains("Claimed informations")')->count());
         
         $form = $crawler->selectButton('scope_approval[accept]')->form();
         
@@ -65,7 +65,7 @@ class AuthorizationEndpointControllerTest extends WebTestCase
         
         $crawler = $this->client->followRedirect();
         
-        $this->assertEquals(1, $crawler->filter('h3:contains("Informations claimed")')->count());
+        $this->assertEquals(1, $crawler->filter('h3:contains("Claimed informations")')->count());
         
         $form = $crawler->selectButton('scope_approval[cancel]')->form();
         

@@ -58,7 +58,7 @@
                     {% endif %}
 
                     {% if account.lastLoginAt %}
-                        <p><span class="param-label">{% trans %}label.last_login_at{% endtrans %} :</span> <span class="param-value">{{ account.lastLoginAt|date() }}</span></p>
+                        <p><span class="param-label">{% trans %}label.last_login_at{% endtrans %} :</span> <span class="param-value">{{ account.lastLoginAt|localizeddate('full', 'medium') }}</span></p>
                     {% endif %}
                 </div>
             </div>
@@ -106,7 +106,7 @@
                                         {{ account.gender }}</span></p>{% endif %}
 
                                     {% if account.birthdate %}<p><span class="param-label">{% trans %}label.Birthdate{% endtrans %} :</span> <span class="param-value">
-                                        {{ account.birthdate|date() }}</span></p>{% endif %}
+                                        {{ account.birthdate|localizeddate('full', 'none') }}</span></p>{% endif %}
 
                                     {% if account.zoneInfo %}<p><span class="param-label">{% trans %}label.Time_zone{% endtrans %} :</span> <span class="param-value">
                                         {{ account.zoneInfo }}</span></p>{% endif %}
@@ -157,7 +157,7 @@
             <ul class="token-list">
                 {% for token in account.tokenList %}
                     <li>
-                        {{ _self.clientName(token.client) }} — <span class="scope">{{ _self.scopes(token.scope) }}</span> <span class="update-on pull-right">{% trans %}label.Last_used_on{% endtrans %} {{ token.issuedAt|date() }}</span>
+                        {{ _self.clientName(token.client) }} — <span class="scope">{{ _self.scopes(token.scope) }}</span> <span class="update-on pull-right">{% trans %}label.Last_used_on{% endtrans %} {{ token.issuedAt|localizeddate('full', 'medium') }}</span>
                     </li>
                 {% else %}
                     <li>{% trans %}label.Nothing_for_the_moment{% endtrans %}</li>

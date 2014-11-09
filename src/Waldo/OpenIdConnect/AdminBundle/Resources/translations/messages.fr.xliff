@@ -1,86 +1,86 @@
 <?xml version="1.0"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="1">
                 <source>title.disabled_account</source>
-                <target>Disabled Account</target>
+                <target>Désactiver un compte</target>
             </trans-unit>
             <trans-unit id="2">
                 <source>label.are_you_sure_you_want_to_disabled_this_account</source>
-                <target>Are you sure you want to disabled this account ?</target>
+                <target>Êtes vous sur de vouloir désactiver ce compte ?</target>
             </trans-unit>
             <trans-unit id="3">
                 <source>title.send_email</source>
-                <target>Send email</target>
+                <target>Envoyer l'email</target>
             </trans-unit>
             <trans-unit id="4">
                 <source>label.are_you_sure_you_want_to_send_the_email_for_validating_account</source>
-                <target>Are you sure you want to send the account validation email ?</target>
+                <target>Êtes vous sur de vouloir envoyer l'email de validation de compte ?</target>
             </trans-unit>
             <trans-unit id="5">
                 <source>label.are_you_sure_you_want_to_send_the_email_for_retrieving_passord</source>
-                <target>Are you sure you want to send the password retrieval email ?</target>
+                <target>Êtes vous sur de vouloir envoyer l'email de récupération de mot de passe ?</target>
             </trans-unit>
             <trans-unit id="6">
                 <source>tilte.enduser_account</source>
-                <target>Enduser account</target>
+                <target>Compte utilisateur</target>
             </trans-unit>
             <trans-unit id="7">
                 <source>label.you_can_not__action__this_account</source>
-                <target>You can not __type__ this account. Maybe it's yours ?</target>
+                <target>Vous ne pouvez pas __type__ ce compte. Peut-être est ce le votre ?</target>
             </trans-unit>
             <trans-unit id="8">
                 <source>label.this_account_has_been__action__</source>
-                <target>This account has been __type__</target>
+                <target>Ce compte a bien été __type__</target>
             </trans-unit>
             <trans-unit id="9">
                 <source>label.the_email_for__action__has_been_well_sent_to_user</source>
-                <target>The email for __type__ has been well send to the user</target>
+                <target>L'email pour __type__ a bien été envoyé à l'utilisateur</target>
             </trans-unit>
             <trans-unit id="10">
                 <source>label.enabled</source>
-                <target>enabled</target>
+                <target>activé</target>
             </trans-unit>
             <trans-unit id="11">
                 <source>label.disabled</source>
-                <target>disabled</target>
+                <target>désactivé</target>
             </trans-unit>
             <trans-unit id="12">
                 <source>label.go_to_client_web_site</source>
-                <target>Go to %clientName%'s web site</target>
+                <target>Allez au site web de %clientName%</target>
             </trans-unit>
             <trans-unit id="13">
                 <source>label.read_scope_name</source>
-                <target>Read %scope%</target>
+                <target>Lire %scope%</target>
             </trans-unit>
             <trans-unit id="14">
                 <source>label.Enduser</source>
-                <target>Enduser</target>
+                <target>Utilisateurs</target>
             </trans-unit>
             <trans-unit id="15">
                 <source>label.Profile</source>
-                <target>Profile</target>
+                <target>Profil</target>
             </trans-unit>
             <trans-unit id="16">
                 <source>label.user_account_is_enabled</source>
-                <target>User account is enabled</target>
+                <target>Le compte utilisateur est activé</target>
             </trans-unit>
             <trans-unit id="17">
                 <source>label.user_account_is_disabled</source>
-                <target>User account is disabled</target>
+                <target>Le compte utilisateur est désactivé</target>
             </trans-unit>
             <trans-unit id="18">
                 <source>label.account_picture</source>
-                <target>Account picture</target>
+                <target>Image du compte</target>
             </trans-unit>
             <trans-unit id="19">
                 <source>label.Account</source>
-                <target>Account</target>
+                <target>Compte</target>
             </trans-unit>
             <trans-unit id="20">
                 <source>label.Username</source>
-                <target>Username</target>
+                <target>Nom d'utilisateur</target>
             </trans-unit>
             <trans-unit id="21">
                 <source>label.Email</source>
@@ -88,135 +88,135 @@
             </trans-unit>
             <trans-unit id="22">
                 <source>label.email_verified</source>
-                <target>Email verified</target>
+                <target>Email verifié</target>
             </trans-unit>
             <trans-unit id="23">
                 <source>label.email_not_verified</source>
-                <target>Email not verified</target>
+                <target>Email non verifié</target>
             </trans-unit>
             <trans-unit id="24">
                 <source>label.last_login_at</source>
-                <target>Last login at</target>
+                <target>Dernière connexion le</target>
             </trans-unit>
             <trans-unit id="25">
                 <source>label.user_profile</source>
-                <target>User profile</target>
+                <target>Profil utilisateur</target>
             </trans-unit>
             <trans-unit id="26">
                 <source>label.Name</source>
-                <target>Name</target>
+                <target>Nom</target>
             </trans-unit>
             <trans-unit id="27">
                 <source>label.First_name</source>
-                <target>First name</target>
+                <target>Prénom</target>
             </trans-unit>
             <trans-unit id="28">
                 <source>label.Last_name</source>
-                <target>Last name</target>
+                <target>Nom de famile</target>
             </trans-unit>
             <trans-unit id="29">
                 <source>label.Middle_name</source>
-                <target>Middle name</target>
+                <target>Deuxième prénom</target>
             </trans-unit>
             <trans-unit id="30">
                 <source>label.Nickname</source>
-                <target>Nickname, casual name</target>
+                <target>Pseudonyme</target>
             </trans-unit>
             <trans-unit id="31">
                 <source>label.Prefered_username</source>
-                <target>Prefered username</target>
+                <target>Nom d'utilisateur à afficher</target>
             </trans-unit>
             <trans-unit id="32">
                 <source>label.Web_site</source>
-                <target>Web site</target>
+                <target>Site Web</target>
             </trans-unit>
             <trans-unit id="33">
                 <source>label.Gender</source>
-                <target>Gender</target>
+                <target>Genre</target>
             </trans-unit>
             <trans-unit id="34">
                 <source>label.Birthdate</source>
-                <target>Birthdate</target>
+                <target>Date de naissance</target>
             </trans-unit>
             <trans-unit id="35">
                 <source>label.Time_zone</source>
-                <target>Time zone</target>
+                <target>Fuseau horaire</target>
             </trans-unit>
             <trans-unit id="36">
                 <source>label.Locale</source>
-                <target>Language</target>
+                <target>Langue</target>
             </trans-unit>
             <trans-unit id="37">
                 <source>label.Telephone_number</source>
-                <target>Phone number</target>
+                <target>Numéro de téléphone</target>
             </trans-unit>
             <trans-unit id="38">
                 <source>label.Address</source>
-                <target>Address</target>
+                <target>Adresse</target>
             </trans-unit>
             <trans-unit id="39">
                 <source>label.Full_mailing_address</source>
-                <target>Full postal address</target>
+                <target>Adresse postal complète</target>
             </trans-unit>
             <trans-unit id="40">
                 <source>label.Full_street_address</source>
-                <target>Full street address</target>
+                <target>Rue et numéro de voie</target>
             </trans-unit>
             <trans-unit id="41">
                 <source>label.City_or_locality</source>
-                <target>City or locality</target>
+                <target>Ville ou localité</target>
             </trans-unit>
             <trans-unit id="42">
                 <source>label.State_province_prefecture_or_region</source>
-                <target>State, province, prefecture, or region</target>
+                <target>Région</target>
             </trans-unit>
             <trans-unit id="43">
                 <source>label.Zip_code_or_postal_code</source>
-                <target>Zip code or postal code</target>
+                <target>Code postal</target>
             </trans-unit>
             <trans-unit id="44">
                 <source>label.Country_name</source>
-                <target>Country name</target>
+                <target>Pays</target>
             </trans-unit>
             <trans-unit id="45">
                 <source>label.Applications_list</source>
-                <target>Application list</target>
+                <target>Liste des applications</target>
             </trans-unit>
             <trans-unit id="46">
                 <source>label.the_user_have_granted_the_following_applications_to_access_to_his_account_informations</source>
-                <target>The user has granted the following applications to access to his account information.</target>
+                <target>L'utilisateur a accordé l'accès aux informations de son compte aux applications suivantes.</target>
             </trans-unit>
             <trans-unit id="47">
                 <source>label.Last_used_on</source>
-                <target>Last used on</target>
+                <target>Dernière utilisation le</target>
             </trans-unit>
             <trans-unit id="48">
                 <source>label.Nothing_for_the_moment</source>
-                <target>Nothing at the moment</target>
+                <target>Rien pour le moment</target>
             </trans-unit>
             <trans-unit id="49">
                 <source>label.Close</source>
-                <target>Close</target>
+                <target>Fermer</target>
             </trans-unit>
             <trans-unit id="50">
                 <source>label.Cancel</source>
-                <target>Cancel</target>
+                <target>Annuler</target>
             </trans-unit>
             <trans-unit id="51">
                 <source>label.Yes</source>
-                <target>Yes</target>
+                <target>Oui</target>
             </trans-unit>
             <trans-unit id="52">
                 <source>label.No</source>
-                <target>No</target>
+                <target>Non</target>
             </trans-unit>
             <trans-unit id="53">
                 <source>label.Delete_client_application</source>
-                <target>Delete client</target>
+                <target>Supprimer le client</target>
             </trans-unit>
             <trans-unit id="54">
                 <source>label.are_you_sure_you_want_to_delete_this_client_application</source>
-                <target>Are you sure you want to delete this client ?</target>
+                <target>Êtes vous sur de vouloir supprimer le client ?</target>
             </trans-unit>
             <trans-unit id="55">
                 <source>title.Client</source>
@@ -224,19 +224,19 @@
             </trans-unit>
             <trans-unit id="56">
                 <source>label.Client_management</source>
-                <target>Client management</target>
+                <target>Gestion des clients</target>
             </trans-unit>
             <trans-unit id="57">
                 <source>label.this_client_application_has_been_deleted</source>
-                <target>This client has been deleted</target>
+                <target>Ce clien a été supprimé</target>
             </trans-unit>
             <trans-unit id="58">
                 <source>label.Errors</source>
-                <target>Error(s)</target>
+                <target>Erreur(s)</target>
             </trans-unit>
             <trans-unit id="59">
                 <source>label.edit_client_application</source>
-                <target>Edit client</target>
+                <target>Éditer le client</target>
             </trans-unit>
             <trans-unit id="60">
                 <source>label.Application</source>
@@ -244,11 +244,11 @@
             </trans-unit>
             <trans-unit id="61">
                 <source>label.Request_options</source>
-                <target>Request options</target>
+                <target>Options de requête</target>
             </trans-unit>
             <trans-unit id="62">
                 <source>label.Response_options</source>
-                <target>Response options</target>
+                <target>Options de réponse</target>
             </trans-unit>
             <trans-unit id="63">
                 <source>label.Contacts</source>
@@ -256,119 +256,119 @@
             </trans-unit>
             <trans-unit id="64">
                 <source>label.User_roles</source>
-                <target>User roles</target>
+                <target>Roles utilisateurs</target>
             </trans-unit>
             <trans-unit id="65">
                 <source>label.available_user_properties</source>
-                <target>Available user properties</target>
+                <target>Attribut de l'utilisateur disponibles</target>
             </trans-unit>
             <trans-unit id="66">
                 <source>label.filter_exemple</source>
-                <target>Filter sample</target>
+                <target>Exemple de filtre</target>
             </trans-unit>
             <trans-unit id="67">
                 <source>label.separate_the_roles_with_commas</source>
-                <target>Separate the roles with commas ","</target>
+                <target>Séparer les rôles aveec une virgule ","</target>
             </trans-unit>
             <trans-unit id="68">
                 <source>label.homepage_URI</source>
-                <target>Homepage URI</target>
+                <target>Page d'accueil URL</target>
             </trans-unit>
             <trans-unit id="69">
                 <source>label.application_name</source>
-                <target>Application name</target>
+                <target>Nom de l'application</target>
             </trans-unit>
             <trans-unit id="71">
                 <source>label.application_type</source>
-                <target>Application type</target>
+                <target>Type d'application</target>
             </trans-unit>
             <trans-unit id="72">
                 <source>label.application_logo_URI</source>
-                <target>Application logo URI</target>
+                <target>URL du logo</target>
             </trans-unit>
             <trans-unit id="73">
                 <source>label.terms_of_service_URI</source>
-                <target>Terms of service URI</target>
+                <target>URL des conditions d'utilisation</target>
             </trans-unit>
             <trans-unit id="74">
                 <source>label.policy_URI</source>
-                <target>Policy URI</target>
+                <target>URL de la politique d'utilisation</target>
             </trans-unit>
             <trans-unit id="75">
                 <source>label.redirect_URIs</source>
-                <target>Allowed redirection URIs</target>
+                <target>URL des redirections autorisées</target>
             </trans-unit>
             <trans-unit id="76">
                 <source>label.post_logout_redirect_URIs</source>
-                <target>Post logout redirection URI</target>
+                <target>URL de redirection après déconnexion</target>
             </trans-unit>
             <trans-unit id="77">
                 <source>label.token_endpoint_authentication_method</source>
-                <target>Token endpoint authentication method</target>
+                <target>Méthode d'authentification pour le Token</target>
             </trans-unit>
             <trans-unit id="78">
                 <source>label.token_endpoint_authentication_signing_algorithm</source>
-                <target>Token endpoint authentication signing algorithm</target>
+                <target>Algorithme de signature du Token</target>
             </trans-unit>
             <trans-unit id="79">
                 <source>label.jwks_URI</source>
-                <target>Jwks URI</target>
+                <target>URL du Jwks</target>
             </trans-unit>
             <trans-unit id="80">
                 <source>label.jwks_encryption_URI</source>
-                <target>Jwks encryption URI</target>
+                <target>URL de cryptage de Jwks</target>
             </trans-unit>
             <trans-unit id="81">
                 <source>label.X509_certificat_URI</source>
-                <target>X509 certificate URI</target>
+                <target>URL du certificat X509</target>
             </trans-unit>
             <trans-unit id="82">
                 <source>label.X509_encryption_certificat_URI</source>
-                <target>X509 encryption certificate URI</target>
+                <target>URL de cryptage du certificat X509</target>
             </trans-unit>
             <trans-unit id="83">
                 <source>label.request_object_signing_algorithm</source>
-                <target>Request object signing algorithm</target>
+                <target>Algoritme de signature de la Requête</target>
             </trans-unit>
             <trans-unit id="84">
                 <source>label.request_object_encryption_algorithm</source>
-                <target>Request object encryption algorithm</target>
+                <target>Algorithme de cryptage de l'objet de la Requête</target>
             </trans-unit>
             <trans-unit id="85">
                 <source>label.request_object_encryption_encoder</source>
-                <target>Request object encryption encoder</target>
+                <target>Encodeur pour le cryptage de l'objet de la Requête</target>
             </trans-unit>
             <trans-unit id="86">
                 <source>label.userinfo_object_signing_algorithm</source>
-                <target>Userinfo object signing algorithm</target>
+                <target>Algorithme de signature des informations utilisateur</target>
             </trans-unit>
             <trans-unit id="87">
                 <source>label.userinfo_encrypted_response_algorithm</source>
-                <target>Userinfo encrypted response algorithm</target>
+                <target>Algorithme de cryptage des informations utilisateur</target>
             </trans-unit>
             <trans-unit id="89">
                 <source>label.userinfo_encrypted_response_encoder</source>
-                <target>Userinfo encrypted response encoder</target>
+                <target>Encodeur de cryptage de la réponse des informations utilisateur</target>
             </trans-unit>
             <trans-unit id="90">
                 <source>label.id_token_signined_response_algorithm</source>
-                <target>ID token signed response algorithm</target>
+                <target>Algorithme de signature de l'ID token</target>
             </trans-unit>
             <trans-unit id="91">
                 <source>label.id_token_encrypted_response_algorithm</source>
-                <target>ID token encrypted response algorithm</target>
+                <target>Algorithme de cryptage de la réponse de l'ID token</target>
             </trans-unit>
             <trans-unit id="92">
                 <source>label.id_token_encrypted_response_encoder</source>
-                <target>ID token encrypted response encoder</target>
+                <target>Encodeur de cryptage de la réponse de l'ID token</target>
             </trans-unit>
             <trans-unit id="93">
                 <source>label.default_max_age</source>
-                <target>Token time to live</target>
+                <target>Duré de vie du Token</target>
             </trans-unit>
             <trans-unit id="94">
                 <source>label.require_authentication_time</source>
-                <target>Require authentication time</target>
+                <target>Authentication time requis</target>
             </trans-unit>
             <trans-unit id="95">
                 <source>label.scopes</source>
@@ -376,11 +376,11 @@
             </trans-unit>
             <trans-unit id="96">
                 <source>label.add</source>
-                <target>Add</target>
+                <target>Ajouter</target>
             </trans-unit>
             <trans-unit id="97">
                 <source>label.delete</source>
-                <target>Delete</target>
+                <target>Supprimer</target>
             </trans-unit>
             <trans-unit id="98">
                 <source>label.web</source>
@@ -396,31 +396,31 @@
             </trans-unit>
             <trans-unit id="101">
                 <source>label.Client_logo</source>
-                <target>Client logo</target>
+                <target>Logo client</target>
             </trans-unit>
             <trans-unit id="102">
                 <source>label.Client_name</source>
-                <target>Client name</target>
+                <target>Nom du client</target>
             </trans-unit>
             <trans-unit id="103">
                 <source>label.Client_URI</source>
-                <target>Client URI</target>
+                <target>URL du client</target>
             </trans-unit>
             <trans-unit id="104">
                 <source>label.Issued_at</source>
-                <target>Issued at</target>
+                <target>Émis le</target>
             </trans-unit>
             <trans-unit id="105">
                 <source>label.term_of_service</source>
-                <target>Terms of Service</target>
+                <target>Condition d'utilisations</target>
             </trans-unit>
             <trans-unit id="106">
                 <source>label.Policy</source>
-                <target>Policy</target>
+                <target>Politique d'utilisation</target>
             </trans-unit>
             <trans-unit id="107">
                 <source>label.Client_record</source>
-                <target>Client settings</target>
+                <target>Paramétrage du client</target>
             </trans-unit>
             <trans-unit id="108">
                 <source>label.Secret</source>
@@ -428,47 +428,47 @@
             </trans-unit>
             <trans-unit id="109">
                 <source>label.URIs</source>
-                <target>URIs</target>
+                <target>URL</target>
             </trans-unit>
             <trans-unit id="110">
                 <source>label.Security</source>
-                <target>Security</target>
+                <target>Sécurité</target>
             </trans-unit>
             <trans-unit id="111">
                 <source>label.Client_secret</source>
-                <target>Client secret</target>
+                <target>Secret du client</target>
             </trans-unit>
             <trans-unit id="112">
                 <source>label.Client_secret_expires_at</source>
-                <target>Client secret expires at</target>
+                <target>Le secret expire le</target>
             </trans-unit>
             <trans-unit id="113">
                 <source>label.Dashboard</source>
-                <target>Dashboard</target>
+                <target>Tableau de bord</target>
             </trans-unit>
             <trans-unit id="114">
                 <source>label.read_your_scope</source>
-                <target>Read your %scope%</target>
+                <target>Lit votre %scope%</target>
             </trans-unit>
             <trans-unit id="115">
                 <source>label.show_profile_of_name</source>
-                <target>Show the profile of %name%</target>
+                <target>Voir le profil de %name%</target>
             </trans-unit>
             <trans-unit id="116">
                 <source>label.Show</source>
-                <target>Show</target>
+                <target>Voir</target>
             </trans-unit>
             <trans-unit id="117">
                 <source>label.Edit</source>
-                <target>Edit</target>
+                <target>Éditer</target>
             </trans-unit>
             <trans-unit id="118">
                 <source>label.send_email_for_validating_account</source>
-                <target>Send account validation email</target>
+                <target>Envoyer l'email de validation de compte</target>
             </trans-unit>
             <trans-unit id="119">
                 <source>label.send_email_for_recovering_password</source>
-                <target>Send password retrieval email</target>
+                <target>Envoyer l'email de récupération de mot de passe</target>
             </trans-unit>
             <trans-unit id="120">
                 <source>label.Admin</source>
@@ -476,11 +476,11 @@
             </trans-unit>
             <trans-unit id="121">
                 <source>label.Manage</source>
-                <target>Manage</target>
+                <target>Gérer</target>
             </trans-unit>
             <trans-unit id="1211">
                 <source>label.Account</source>
-                <target>Account</target>
+                <target>Compte utilisateur</target>
             </trans-unit>
             <trans-unit id="1212">
                 <source>label.Client</source>
@@ -488,19 +488,19 @@
             </trans-unit>
             <trans-unit id="122">
                 <source>label.New</source>
-                <target>New</target>
+                <target>Nouveau</target>
             </trans-unit>
             <trans-unit id="123">
                 <source>label.Edit</source>
-                <target>Edit</target>
+                <target>Éditer</target>
             </trans-unit>
             <trans-unit id="124">
                 <source>table.Enabled</source>
-                <target>Enabled</target>
+                <target>Actif</target>
             </trans-unit>
             <trans-unit id="125">
                 <source>table.Username</source>
-                <target>Username</target>
+                <target>Nom d'utilisateur</target>
             </trans-unit>
             <trans-unit id="126">
                 <source>table.Email</source>
@@ -508,15 +508,15 @@
             </trans-unit>
             <trans-unit id="127">
                 <source>table.Name</source>
-                <target>Name</target>
+                <target>Nom</target>
             </trans-unit>
             <trans-unit id="128">
                 <source>table.Create</source>
-                <target>Create</target>
+                <target>Création</target>
             </trans-unit>
             <trans-unit id="129">
                 <source>table.Update</source>
-                <target>Update</target>
+                <target>M.A.J</target>
             </trans-unit>
             <trans-unit id="130">
                 <source>table.Actions</source>

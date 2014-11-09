@@ -20,8 +20,8 @@ class LostAccountFormType extends AbstractType
                     'label' => 'label.email_or_username',
                     'required' => false
                     ))               
-                ->add('search', 'submit')
-                ->add('cancel', 'submit')
+                ->add('search', 'submit', array('label' => 'label.Search'))
+                ->add('cancel', 'submit', array('label' => 'label.Cancel'))
             ;
     }
     
