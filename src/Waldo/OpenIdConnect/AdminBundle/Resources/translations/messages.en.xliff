@@ -538,6 +538,10 @@
                 <source>label.Enabled</source>
                 <target>Activé</target>
             </trans-unit>
+            <trans-unit id="135">
+                <source>label.Account_management</source>
+                <target>Account management</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

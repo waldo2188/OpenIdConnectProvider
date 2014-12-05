@@ -1,7 +1,7 @@
 {% extends "WaldoOpenIdConnectAdminBundle::base.html.twig" %}
 
-{% block pageTitle %}Enduser{% endblock pageTitle %}
-{% block pageTitleSub %}Account management{% endblock pageTitleSub %}
+{% block pageTitle %}{% trans %}label.Enduser{% endtrans %}{% endblock pageTitle %}
+{% block pageTitleSub %}{% trans %}label.Account_management{% endtrans %}{% endblock pageTitleSub %}
 
 {% block modals %}
 {% include "WaldoOpenIdConnectAdminBundle:Bootstrap:modal.html.twig" with {

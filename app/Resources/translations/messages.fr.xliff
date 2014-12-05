@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>label.toggle_navigation</source>
+                <target>Cacher le menu</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>label.Dear_username</source>
+                <target>Cher %username%</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>label.switched</source>
+                <target>simuler</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>label.un_switch</source>
+                <target>Arrêter la simulation</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>label.logout</source>
+                <target>Déconnexion</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

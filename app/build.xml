@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Cnerta" basedir="." default="build">
+
+    <property name="project_name" value="oic-p" override="false" />
+
+    <property name="build_dir" value="../../build/${project_name}" override="false" />
+
+    <property name="build_dir_tar.gz" value="${build_dir}/${project_name}.tar.gz" override="false" />
+
+    <property name="site_build_dir" value="${build_dir}/site" override="false" />
+
+    
+    <property name="app_cache" value="${site_build_dir}/app/cache" override="false" />
+    <property name="app_logs" value="${site_build_dir}/app/logs" override="false" />
+
+
+    <property name="htaccess" value="${build_dir}/site/web/.htaccess" override="true" />
+
+    <fileset dir="../" id="allowed_prod_files">
+        <include name="**" />
+        <exclude name="**/.git/**"/> <!-- git -->
+        <exclude name="**/.gitignore"/> <!-- git -->
+        <exclude name="**/nbproject/**"/> <!-- NetBeans -->
+        <exclude name="**/catalog.xml"/> <!-- NetBeans -->
+        <exclude name="app/cache/**"/>
+        <exclude name="app/logs/**"/>
+        <exclude name="app/build.xml"/>
+        <exclude name="app/check.php"/> <!-- Symfony -->
+        <exclude name="web/app_dev.php"/>  <!-- Symfony -->
+        <exclude name="web/config.php"/> <!-- PhpUnit -->
+        <exclude name="web/css/source/"/>
+        <exclude name="web/js/source/"/>
+        <exclude name="web/bootstrap/"/>
+        <exclude name="web/upload/"/>
+        <exclude name="upload/"/>
+        <exclude name="**/deploy/**"/>
+        <exclude name="LICENSE"/> <!-- Symfony -->
+        <exclude name="README.md"/> <!-- Symfony -->
+        <exclude name="UPGRADE.md"/> <!-- Symfony -->
+        <exclude name="UPGRADE-*"/> <!-- Symfony -->
+        <exclude name=".travis.yml"/> <!-- Symfony -->
+        <exclude name="composer.json"/> <!-- Symfony -->
+        <exclude name="composer.lock"/> <!-- Symfony -->
+    </fileset>
+    
+    <fileset dir="../" id="allowed_dev_files">
+        <include name="**" />
+        <exclude name="**/.git/**"/> <!-- git -->
+        <exclude name="**/.gitignore"/> <!-- git -->
+        <exclude name="**/nbproject/**"/> <!-- NetBeans -->
+        <exclude name="**/catalog.xml"/> <!-- NetBeans -->
+        <exclude name="app/cache/**"/>
+        <exclude name="app/logs/**"/>
+        <exclude name="app/build.xml"/>
+        <exclude name="web/upload/"/>
+        <exclude name="upload/"/>
+        <exclude name="LICENSE"/> <!-- Symfony -->
+        <exclude name="README.md"/> <!-- Symfony -->
+        <exclude name="UPGRADE.md"/> <!-- Symfony -->
+        <exclude name="UPGRADE-*"/> <!-- Symfony -->
+        <exclude name=".travis.yml"/> <!-- Symfony -->
+        <exclude name="composer.json"/> <!-- Symfony -->
+        <exclude name="composer.lock"/> <!-- Symfony -->
+    </fileset>
+
+  
+
+    <!-- ###################################### -->
+    <!-- TARGETS COMMUNE -->
+    <!-- ###################################### -->
+
+    <target name="preparation" description="Common step">
+
+        <echo msg="Creating build directories" />
+        <mkdir dir="${build_dir}" />
+        <mkdir dir="${site_build_dir}" />
+        <mkdir dir="${app_cache}" />
+        <mkdir dir="${app_logs}" />
+
+        <echo msg="Clear cache" />
+        <exec command="rm -rf cache/*" dir="." />
+
+        <echo msg="Install asssets" />
+        <exec command="php console assets:install --env=prod ../web" dir="." />
+
+        <echo msg="Dump CSS" />
+        <exec command="php console assetic:dump --env=prod --no-debug" dir="." />
+
+        <echo msg="Clear cache" />
+        <exec command="rm -rf cache/*" dir="." />
+        
+        <echo msg="Composer optimize" />
+        <exec command="composer dump-autoload --optimize" dir="../" />
+    </target>
+
+    <target name="compresse" description="TarGz Projet">
+        <!-- Compression -->
+        <tar destfile="${build_dir_tar.gz}" compression="gzip">
+            <fileset dir="${build_dir}">
+                <include name="**/**" />
+            </fileset>
+        </tar>
+    </target>
+
+
+    <!-- ###################################### -->
+    <!-- TARGET FOR PACKAGE CONSTRUCTION        -->
+    <!-- ###################################### -->
+
+    <target name="build" description="Prépare le package pour la mise en production">
+        <echo msg="Production build" />
+
+        <phingcall target="preparation" />
+
+        <echo msg="Copie files" />
+
+        <copy todir="${site_build_dir}">
+            <fileset refid="allowed_prod_files" />
+        </copy>
+
+        <echo msg="Création du dossier upload" />
+        <mkdir dir="${site_build_dir}/upload" />
+
+        <phingcall target="compresse" />
+
+        <echo msg="Build end of" />
+    </target>
+
+    <target name="dev" description="Prépare le package pour une build de dev">
+        <echo msg="Dev build" />
+
+        <phingcall target="preparation" />
+
+        <copy todir="${site_build_dir}">
+            <fileset refid="allowed_dev_files" />
+        </copy>
+
+        <echo msg="Création du dossier upload" />
+        <mkdir dir="${site_build_dir}/upload" />
+
+        <echo file="${htaccess}" append="false"><![CDATA[
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ app_dev.php [QSA,L]
+</IfModule>
+]]>
+        </echo>
+        
+        <phingcall target="compresse" />
+
+        <echo msg="Fin du build" />
+    </target>
+
+</project>

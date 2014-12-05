@@ -2,7 +2,7 @@
 
 {% block bodyHeader %}
 <header>
-    <nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-default{% if is_granted('ROLE_PREVIOUS_ADMIN') %} navbar-danger{% endif %}" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
