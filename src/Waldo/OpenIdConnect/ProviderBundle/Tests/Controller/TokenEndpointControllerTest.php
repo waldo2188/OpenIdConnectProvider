@@ -84,9 +84,14 @@ class TokenEndpointControllerTest extends WebTestCase
         $this->assertEquals('no-store, private', $this->client->getResponse()->headers->get('cache-control'));
         $this->assertEquals('no-cache', $this->client->getResponse()->headers->get('pragma'));
         $this->assertEquals('application/json', $this->client->getResponse()->headers->get('content-type'));
+                
+        $token = json_decode($this->client->getResponse()->getContent());
+        $this->assertObjectHasAttribute("access_token", $token);
         
-        $this->assertContains('{"access_token":"', $this->client->getResponse()->getContent());
-        $this->assertContains(',\u0022nonce\u0022:\u0022code_nonce\u0022', $this->client->getResponse()->getContent());
+        $idToken = \JOSE_JWT::decode($token->id_token);
+        
+        $this->assertArrayHasKey("nonce", $idToken->claims);
+        $this->assertEquals("code_nonce", $idToken->claims['nonce']);
     }
     
 }

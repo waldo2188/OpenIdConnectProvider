@@ -44,7 +44,9 @@ class IdTokenHelper extends AbstractTokenHelper
                     );
         }
         
-        return json_encode($idToken->__toArray());
+        $jwt = new \JOSE_JWT($idToken->__toArray());
+        
+        return $jwt->toString();
     }
         
     public function genererateSub($username)
