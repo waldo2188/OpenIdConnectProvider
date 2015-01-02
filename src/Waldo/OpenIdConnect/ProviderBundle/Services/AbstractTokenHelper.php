@@ -2,6 +2,7 @@
 
 namespace Waldo\OpenIdConnect\ProviderBundle\Services;
 
+use Waldo\OpenIdConnect\ModelBundle\Entity\Token;
 use Waldo\OpenIdConnect\ProviderBundle\Provider\JWKProvider;
 
 /**
@@ -31,13 +32,25 @@ class AbstractTokenHelper
         return hash("sha256", $this->options['issuer'] . "#" . $username);
     }
 
-    protected function sign($alg, $content)
-    {      
+    /**
+     * 
+     * @param Token $token
+     * @param type $alg
+     * @param type $content
+     * @return string
+     */
+    protected function sign(Token $token, $alg, $content)
+    {   
+        $key = null;
+                
+        if(substr($alg, 0, 2) == 'HS') {
+            $key = $token->getClient()->getClientSecret();
+        } elseif(substr($alg, 0, 2) == 'RS') {
+            $key = $this->jWKProvider->getPrivateKey();
+        }
+        
         $jwt = new \JOSE_JWT($content);
-        $jws = $jwt->sign(
-                $this->jWKProvider->getPrivateKey(),
-                $alg
-                );
+        $jws = $jwt->sign($key, $alg);
         
         return $jws->toString();
     }

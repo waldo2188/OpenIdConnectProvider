@@ -62,6 +62,7 @@ class UserinfoHelper extends AbstractTokenHelper
 
         if($token->getClient()->getUserinfoSignedResponseAlg() !== null) {
             return $this->sign(
+                    $token,
                     $token->getClient()->getUserinfoSignedResponseAlg(),
                     $claimedValues
                     );

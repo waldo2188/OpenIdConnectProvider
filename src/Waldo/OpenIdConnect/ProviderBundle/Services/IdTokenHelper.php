@@ -38,6 +38,7 @@ class IdTokenHelper extends AbstractTokenHelper
         
         if($token->getClient()->getIdTokenSignedResponseAlg() !== null) {
             return $this->sign(
+                    $token,
                     $token->getClient()->getIdTokenSignedResponseAlg(),
                     $idToken->__toArray()
                     );
