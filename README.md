@@ -10,3 +10,9 @@ If you want to join the party, be my guest !
 ##What next ?
 
 - [Read the documentation](app/Resources/doc/index.md)
+
+
+##TODO
+
+- Rebase with the original [Gree/JOSE](https://github.com/gree/jose)
+- Add the ability to the JOSE_JWKMaker class to create an array of JWK and a functionnality for adding a new key
