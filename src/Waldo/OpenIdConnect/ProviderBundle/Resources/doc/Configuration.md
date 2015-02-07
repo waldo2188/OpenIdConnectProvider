@@ -1,6 +1,6 @@
 Relying Party
 -------------
-One of the Reliyin Party working with this OpenID Connect provider is 
+One of the Relyin Party working with this OpenID Connect provider is 
 (OpenID Connect Relying Party Bundle)[https://github.com/waldo2188/OpenIdConnectRelyingPartyBundle]
 
 URIs
