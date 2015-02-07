@@ -6,7 +6,9 @@ use Waldo\OpenIdConnect\ModelBundle\Entity\Token;
 use Waldo\OpenIdConnect\ProviderBundle\Extension\UserinfoExtensionInterface;
 
 /**
- * Description of UserinfoExtention
+ * UserinfoExtension
+ * 
+ * Execute all extensions who was registered
  */
 class UserinfoExtension
 {
