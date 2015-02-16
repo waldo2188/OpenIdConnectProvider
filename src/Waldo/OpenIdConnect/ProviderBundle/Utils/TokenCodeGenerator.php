@@ -46,11 +46,11 @@ class TokenCodeGenerator
         $replaceBy = array('-','_',',');
         
         if($isBearer) {
-            $replaceBy = array_merge($replaceBy, array('.', '+', '~', '/'));
+            $replaceBy = array_merge($replaceBy, array('.', '+', '~'));
         }
         shuffle($replaceBy);
         
-        $hash = str_replace(array('+','/','='), $replaceBy, $hash);
+        $hash = str_replace(array('+','/','=','%', ','), $replaceBy, $hash);
         
         for($x = mt_rand(2, 15); $x > 0; $x--) {
             $pos = mt_rand(1, strlen($hash) - 1);
