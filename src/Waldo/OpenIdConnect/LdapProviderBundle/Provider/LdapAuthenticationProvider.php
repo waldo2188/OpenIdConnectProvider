@@ -226,7 +226,7 @@ class LdapAuthenticationProvider implements AuthenticationProviderInterface
     
     private function manageDatabaseUser(Account $user)
     {
-        
+        // do the work ONLY if LdapUserProvider is define as a user provider
         if($this->userProvider instanceof ChainUserProvider) {
             
             foreach($this->userProvider->getProviders() as $userProvider) {
