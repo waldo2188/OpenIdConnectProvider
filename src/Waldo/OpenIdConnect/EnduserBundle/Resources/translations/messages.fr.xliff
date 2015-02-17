@@ -16,7 +16,7 @@
             </trans-unit>
             <trans-unit id="4">
                 <source>label.applications_access_list</source>
-                <target>Liste des applications autorisé</target>
+                <target>Liste des applications autorisées</target>
             </trans-unit>
             <trans-unit id="5">
                 <source>label.Account</source>
@@ -68,7 +68,7 @@
             </trans-unit>
             <trans-unit id="20">
                 <source>label.you_have_granted_the_following_applications_to_access_to_your_account_informations</source>
-                <target>Vous avez donné l'accès aux informations de votre compte aux applications suivante.</target>
+                <target>Vous avez donné l'accès aux informations de votre compte aux applications suivantes.</target>
             </trans-unit>
             <trans-unit id="21">
                 <source>label.find_your_account</source>
