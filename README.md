@@ -17,3 +17,4 @@ If you want to join the party, be my guest !
 - Rebase with the original [Gree/JOSE](https://github.com/gree/jose)
 - Add the ability to the JOSE_JWKMaker class to create an array of JWK and a functionnality for adding a new key
 - When signing an ID Token or Enduserinfo with an RSA alg, we must add, in the header of JWT, the jku (uri to the OP jwk) and kid used for signing.
+- Why not https://github.com/nelmio/NelmioSecurityBundle ?
