@@ -152,6 +152,10 @@
                 <source>label.cancel</source>
                 <target>Annuler</target>
             </trans-unit>
+            <trans-unit id="38">
+                <source>Invalid CSRF token.</source>
+                <target>Un problème est survenu avec le formulaire.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
